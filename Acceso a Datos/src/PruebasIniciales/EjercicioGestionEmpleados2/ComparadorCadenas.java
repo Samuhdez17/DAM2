@@ -1,4 +1,4 @@
-package PruebasIniciales.EjercicioGestionEmpleados;
+package PruebasIniciales.EjercicioGestionEmpleados2;
 
 public class ComparadorCadenas {
 
@@ -19,15 +19,15 @@ public class ComparadorCadenas {
 
         // For iterativo para verificar las letras de los nombres, para saber si compararlas o no sin tener index out of bounds por la diferencia de letras de cada nombre
         for (int i = 0 ; i < nombreE1.length() ; i++) {
+            if (i == nombreE1.length() - 1) letraE1 = nombreE1.charAt(i);
+
             for (int j = 0 ; j < nombreE2.length() ; j++) {
-                if (nombreE1.charAt(i) == nombreE2.charAt(j)) {
-                    if (i == nombreE1.length() - 1) letraE1 = nombreE1.charAt(i);
-                    if (j == nombreE2.length() - 1) letraE2 = nombreE2.charAt(j);
-                    else continue;
+                if (nombreE1.charAt(i) != nombreE2.charAt(j)) {
+                    letraE1 = nombreE1.charAt(i);
+                    letraE2 = nombreE2.charAt(j);
                 }
 
-                letraE1 = nombreE1.charAt(i);
-                letraE2 = nombreE2.charAt(j);
+                if (j == nombreE2.length() - 1) letraE2 = nombreE2.charAt(j);
             }
         }
 
@@ -40,15 +40,15 @@ public class ComparadorCadenas {
 
         // Mismo for que los nombres pero para los apellidos
         for (int i = 0 ; i < apellidoE1.length() ; i++) {
+            if (i == apellidoE1.length() - 1) letraE1 = apellidoE1.charAt(i);
+
             for (int j = 0 ; j < apellidoE2.length() ; j++) {
-                if (apellidoE1.charAt(i) == apellidoE2.charAt(j)) {
-                    if (i == apellidoE1.length() - 1) letraE1 = apellidoE1.charAt(i);
-                    if (j == apellidoE2.length() - 1) letraE2 = apellidoE2.charAt(j);
-                    else continue;
+                if (apellidoE1.charAt(i) != apellidoE2.charAt(j)) {
+                    letraE1 = apellidoE1.charAt(i);
+                    letraE2 = apellidoE2.charAt(j);
                 }
 
-                letraE1 = apellidoE1.charAt(i);
-                letraE2 = apellidoE2.charAt(j);
+                if (j == apellidoE2.length() - 1) letraE2 = apellidoE2.charAt(j);
             }
         }
 

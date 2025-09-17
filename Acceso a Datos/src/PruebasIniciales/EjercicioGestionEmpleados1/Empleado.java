@@ -1,4 +1,4 @@
-package PruebasIniciales.EjercicioGestionEmpleados;
+package PruebasIniciales.EjercicioGestionEmpleados1;
 
 public class Empleado implements Comparable<Empleado> {
     private final String dni;
