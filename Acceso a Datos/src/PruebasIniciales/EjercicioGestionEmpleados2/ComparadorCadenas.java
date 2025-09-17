@@ -35,24 +35,7 @@ public class ComparadorCadenas {
     }
 
     public static int compararApellido(String apellidoE1, String apellidoE2) {
-        char letraE1 = ' ';
-        char letraE2 = ' ';
-
-        // Mismo for que los nombres pero para los apellidos
-        for (int i = 0 ; i < apellidoE1.length() ; i++) {
-            if (i == apellidoE1.length() - 1) letraE1 = apellidoE1.charAt(i);
-
-            for (int j = 0 ; j < apellidoE2.length() ; j++) {
-                if (apellidoE1.charAt(i) != apellidoE2.charAt(j)) {
-                    letraE1 = apellidoE1.charAt(i);
-                    letraE2 = apellidoE2.charAt(j);
-                }
-
-                if (j == apellidoE2.length() - 1) letraE2 = apellidoE2.charAt(j);
-            }
-        }
-
-        return Character.compare(letraE1, letraE2);
+        return compararNombre(apellidoE1, apellidoE2); // Al ser igual que comparar el nombre, este hace un llamado al método del nombre y asi hay menos código
     }
 
     public static int compararTelefono(float telefonoE1, float telefonoE2) {
