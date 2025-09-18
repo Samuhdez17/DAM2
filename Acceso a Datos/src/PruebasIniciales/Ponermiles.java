@@ -6,7 +6,7 @@ public class Ponermiles {
         Scanner entrada = new Scanner(System.in);
 
         System.out.print("Introduce un numero: ");
-        int nuevoNumero = entrada.nextInt();
+        Integer nuevoNumero = entrada.nextInt();
         StringBuilder numeroString = new StringBuilder(Integer.toString(nuevoNumero));
 
         if (nuevoNumero > 999) {
