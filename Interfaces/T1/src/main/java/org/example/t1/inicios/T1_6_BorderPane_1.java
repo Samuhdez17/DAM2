@@ -1,4 +1,4 @@
-package org.example.t1;
+package org.example.t1.inicios;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;

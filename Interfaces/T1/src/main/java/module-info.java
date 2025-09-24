@@ -5,6 +5,8 @@ module org.example.t1 {
     requires javafx.graphics;
 
 
-    opens org.example.t1 to javafx.fxml;
-    exports org.example.t1;
+    exports org.example.t1.ejercicios;
+    exports org.example.t1.inicios;
+    opens org.example.t1.inicios to javafx.fxml;
+    opens org.example.t1.ejercicios to javafx.fxml;
 }
