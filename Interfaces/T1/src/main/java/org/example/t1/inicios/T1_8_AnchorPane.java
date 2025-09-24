@@ -18,19 +18,30 @@ public class T1_8_AnchorPane extends Application {
         Button b2 = new Button("Boton 2");
         Button b3 = new Button("Boton 3");
         Button b4 = new Button("Boton 4");
+        Button b5 = new Button("Boton 5");
 
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.getChildren().addAll(b1,b2,b3,b4);
+        anchorPane.getChildren().addAll(b4,b2,b3,b1, b5);
 
-        AnchorPane.setTopAnchor(b1, 30.0);
-        AnchorPane.setTopAnchor(b2, 15.0);
-        AnchorPane.setTopAnchor(b3, 300.0);
-        AnchorPane.setTopAnchor(b4, 50.0);
+        // TOP
+        AnchorPane.setTopAnchor(b1, 10.0);
+        AnchorPane.setTopAnchor(b2, 50.0);
+        AnchorPane.setTopAnchor(b4, 70.0);
 
-        AnchorPane.setRightAnchor(b1, 200.0);
-        AnchorPane.setRightAnchor(b1, 308.0);
-        AnchorPane.setRightAnchor(b1, 240.0);
-        AnchorPane.setRightAnchor(b1, 300.0);
+        // DERECHA
+        AnchorPane.setRightAnchor(b1, 10.0);
+        AnchorPane.setRightAnchor(b3, 80.0);
+        AnchorPane.setRightAnchor(b4, 50.0);
+
+        //IZQUIERDA
+        AnchorPane.setLeftAnchor(b1, 10.0);
+        AnchorPane.setLeftAnchor(b2, 30.0);
+        AnchorPane.setLeftAnchor(b3, 80.0);
+        AnchorPane.setLeftAnchor(b4, 50.0);
+
+        // BOTT
+        AnchorPane.setBottomAnchor(b3, 80.0);
+        AnchorPane.setBottomAnchor(b4, 50.0);
 
         Scene scene = new Scene(anchorPane, 500, 300);
         stage.setScene(scene);

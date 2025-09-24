@@ -3,13 +3,10 @@ package org.example.t1.inicios;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-public class T1_7_TailPane extends Application {
+public class T1_7_TilePane extends Application {
 
     public static void main(String[] args) {
         launch(args);
