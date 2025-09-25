@@ -9,10 +9,11 @@ public class FicheroLecturaEscrituraObj {
 
         char opcion = ' ';
 
-        while (opcion  != 'q') {
+        while (opcion  != 'Q') {
             System.out.println("------ MENU ------");
             System.out.println("C. Crear persona");
             System.out.println("L. Leer personas");
+            System.out.println("B. Borrar personas");
             System.out.println("Q. Salir");
             System.out.println("------------------");
 
@@ -23,17 +24,22 @@ public class FicheroLecturaEscrituraObj {
             switch (opcion) {
                 case 'C'-> crearPersona(entrada);
                 case 'L'-> leerPersonas();
+                case 'B'-> borrarLista();
                 case 'Q' -> System.out.println("Saliendo.....");
                 default -> System.out.println("Opción inválida");
             }
         }
     }
 
+    private static void borrarLista() {
+        File fichero = new File("src/LecturaYEscritura/Ejercicio1/personas.dat");
+        if  (fichero.exists()) fichero.delete();
+    }
+
     private static void crearPersona(Scanner entrada) {
         System.out.print("Nombre: ");
         entrada.nextLine();
         String nombre = entrada.nextLine();
-        System.out.println();
 
         System.out.print("Edad: ");
         int edad = entrada.nextInt();
@@ -43,13 +49,20 @@ public class FicheroLecturaEscrituraObj {
 
         try {
             File fichero = new File("src/LecturaYEscritura/Ejercicio1/personas.dat");
-            FileOutputStream fos = new FileOutputStream(fichero, true);
 
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            ObjectOutputStream oos;
+
+            if (!fichero.exists()) {
+                FileOutputStream fos = new FileOutputStream(fichero);
+                oos = new ObjectOutputStream(fos);
+
+            } else {
+                FileOutputStream fos = new FileOutputStream(fichero, true);
+                oos = new ObjectOutputStream(fos);
+            }
 
             oos.writeObject(persona);
             oos.close();
-            fos.close();
             System.out.println("Persona guardada correctamente");
 
         } catch (FileNotFoundException e) {
@@ -62,7 +75,10 @@ public class FicheroLecturaEscrituraObj {
     private static void leerPersonas() {
         File fichero = new File("src/LecturaYEscritura/Ejercicio1/personas.dat");
 
-        if (!fichero.exists()) System.out.println("No existe el fichero.");
+        if (!fichero.exists()) {
+            System.out.println("No existe el fichero.");
+            return;
+        }
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichero))) {
             while (true) {

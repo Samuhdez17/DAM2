@@ -1,4 +1,4 @@
-package ejerciciosProgramacionProcesos;
+package ejerciciosProgramacionProcesos.Ej1_Ping;
 
 
 public class UtilidadesSistema {
