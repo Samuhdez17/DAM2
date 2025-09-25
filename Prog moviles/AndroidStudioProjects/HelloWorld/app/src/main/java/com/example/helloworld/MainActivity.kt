@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -67,11 +68,13 @@ fun Calculadora(modifier: Modifier = Modifier) {
             onValueChange = { texto1 = it },
             label = { Text("Primer numero") },
             placeholder = { Text("Escribe el primer numero") },
-            modifier = Modifier.weight(0.5f).padding(10.dp)
+            modifier = Modifier
+                .weight(0.5f)
+                .padding(10.dp)
         )
 
         Text(
-            "X",
+            "X",modifier = Modifier.padding(horizontal = 8.dp).align(Alignment.CenterVertically)
         )
 
         TextField(
@@ -79,7 +82,9 @@ fun Calculadora(modifier: Modifier = Modifier) {
             onValueChange = { texto2 = it },
             label = { Text("Segundo numero") },
             placeholder = { Text("Escribe el segundo numero") },
-            modifier = Modifier.weight(0.5f).padding(10.dp)
+            modifier = Modifier
+                .weight(0.5f)
+                .padding(10.dp)
         )
     }
 }
@@ -88,7 +93,7 @@ fun Calculadora(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     HelloWorldTheme {
-//        Greeting("Doble'S", modifier = Modifier.border(4.dp, Color.Gray))
+        Greeting("Doble'S", modifier = Modifier.border(4.dp, Color.Gray))
         Calculadora()
     }
 }
