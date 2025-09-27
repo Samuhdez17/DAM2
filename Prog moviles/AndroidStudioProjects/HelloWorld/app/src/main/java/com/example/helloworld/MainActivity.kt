@@ -20,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -66,10 +65,9 @@ fun Calculadora(modifier: Modifier = Modifier) {
     var texto1 by remember { mutableStateOf("") }
     var texto2 by remember { mutableStateOf("") }
     var operacionCompleta by remember { mutableStateOf("") }
-    var resultado = 0
 
-    val num1 = texto1.toIntOrNull() ?: 0
-    val num2 = texto2.toIntOrNull() ?: 0
+    val num1 = texto1.toDoubleOrNull() ?: 0.0
+    val num2 = texto2.toDoubleOrNull() ?: 0.0
 
     Column {
         Row {
@@ -77,35 +75,62 @@ fun Calculadora(modifier: Modifier = Modifier) {
                 value = texto1,
                 onValueChange = { texto1 = it },
                 label = { Text("Primer numero") },
-                placeholder = { Text("Escribe el primer numero") },
+                placeholder = { Text("Escribe el numero") },
                 modifier = Modifier
                     .weight(0.5f)
                     .padding(10.dp)
-            )
-
-            Text(
-                "X",
-                modifier = Modifier.padding(horizontal = 8.dp).align(Alignment.CenterVertically)
             )
 
             TextField(
                 value = texto2,
                 onValueChange = { texto2 = it },
                 label = { Text("Segundo numero") },
-                placeholder = { Text("Escribe el segundo numero") },
+                placeholder = { Text("Escribe el numero") },
                 modifier = Modifier
                     .weight(0.5f)
                     .padding(10.dp)
             )
         }
 
+        Row {
+            Button(modifier = Modifier.padding(10.dp), onClick = {
+                val resultado = num1 + num2
+                operacionCompleta = "$texto1 + $texto2 = $resultado"
+            }) {
+                Text("Sumar")
+            }
+
+            Button(modifier = Modifier.padding(10.dp), onClick = {
+                val resultado = num1 - num2
+                operacionCompleta = "$texto1 - $texto2 = $resultado"
+            }) {
+                Text("Restar")
+            }
+        }
+
         Spacer(modifier = Modifier.height(8.dp))
 
-        Button(modifier = Modifier.padding(10.dp), onClick = {
-            resultado = num1 * num2
-            operacionCompleta = "$texto1 x $texto2 = $resultado"
-        }) {
-            Text("Carcular")
+        Row {
+            Button(modifier = Modifier.padding(8.dp), onClick = {
+                val resultado = num1 * num2
+                operacionCompleta = "$texto1 x $texto2 = $resultado"
+            }) {
+                Text("Multiplicar")
+            }
+
+            Button(modifier = Modifier.padding(8.dp), onClick = {
+                val resultado = num1 / num2
+                operacionCompleta = "$texto1 / $texto2 = $resultado"
+                if (num2 == 0.0) operacionCompleta = "No se puede dividir entre 0"
+            }) {
+                Text("Dividir")
+            }
+
+            Button(modifier = Modifier.padding(10.dp), onClick = {
+                operacionCompleta = ""
+            }) {
+                Text("Borrar")
+            }
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -117,7 +142,6 @@ fun Calculadora(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     HelloWorldTheme {
-//        Greeting("Doble'S", modifier = Modifier.border(4.dp, Color.Gray))
         Calculadora()
     }
 }
