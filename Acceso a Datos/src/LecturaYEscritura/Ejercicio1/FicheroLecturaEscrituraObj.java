@@ -56,7 +56,6 @@ public class FicheroLecturaEscrituraObj {
             if (fichero.exists() && fichero.length() > 0) oos = new MiObjectOutputStream(fos);
             else                                          oos = new ObjectOutputStream(fos);
 
-
             oos.writeObject(persona);
             oos.close();
             System.out.println("Persona guardada correctamente");

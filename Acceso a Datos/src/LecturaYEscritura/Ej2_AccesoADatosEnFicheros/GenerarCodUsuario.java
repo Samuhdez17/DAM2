@@ -10,14 +10,12 @@ public class GenerarCodUsuario {
     }
 
     public String getCodigo() {
-        String codigoGenerado = "";
+        File usuarios = new File(ruta);
+        String codigoGenerado = "U";
         int numMasAlto = 0;
 
-        try {
-            File usuarios = new File(ruta);
-
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(usuarios))) {
             if  (!usuarios.exists()) return "U100";
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(usuarios));
 
             while (true) {
                 Usuario usuario = (Usuario) ois.readObject();
@@ -27,7 +25,6 @@ public class GenerarCodUsuario {
 
                 if (numeroUsuario > numMasAlto) numMasAlto = numeroUsuario;
             }
-
 
         } catch (EOFException e) {
             System.out.println("Código generado correctamente");

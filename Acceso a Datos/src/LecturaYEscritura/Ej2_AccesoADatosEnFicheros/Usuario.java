@@ -18,4 +18,16 @@ public class Usuario {
     public ArrayList<String> getAficiones() {
         return aficiones;
     }
+
+    public String toString() {
+        StringBuilder stringSalida = new StringBuilder();
+
+        stringSalida.append(codigo + " ");
+        for (int i = 0 ; i < aficiones.size() ; i++) {
+            stringSalida.append(aficiones.get(i));
+            if (i != aficiones.size() - 1) stringSalida.append(", ");
+        }
+
+        return stringSalida.toString();
+    }
 }
