@@ -53,10 +53,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         modifier = modifier
 
     ) {
-        Text(
-            text = "Hello $name!",
-            modifier = Modifier.padding(10.dp)
-        )
+//        Text(
+//            text = "Hello $name!",
+//            modifier = Modifier.padding(10.dp)
+//        )
     }
 }
 

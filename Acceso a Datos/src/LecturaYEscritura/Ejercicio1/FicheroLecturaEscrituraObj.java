@@ -51,15 +51,11 @@ public class FicheroLecturaEscrituraObj {
             File fichero = new File("src/LecturaYEscritura/Ejercicio1/personas.dat");
 
             ObjectOutputStream oos;
+            FileOutputStream fos = new FileOutputStream(fichero,  true);
 
-            if (!fichero.exists()) {
-                FileOutputStream fos = new FileOutputStream(fichero);
-                oos = new ObjectOutputStream(fos);
+            if (fichero.exists() && fichero.length() > 0) oos = new MiObjectOutputStream(fos);
+            else                                          oos = new ObjectOutputStream(fos);
 
-            } else {
-                FileOutputStream fos = new FileOutputStream(fichero, true);
-                oos = new ObjectOutputStream(fos);
-            }
 
             oos.writeObject(persona);
             oos.close();
@@ -81,6 +77,7 @@ public class FicheroLecturaEscrituraObj {
         }
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichero))) {
+            System.out.println("Lista de personas:");
             while (true) {
                 Persona persona = (Persona) ois.readObject();
                 System.out.println(persona);
@@ -94,5 +91,3 @@ public class FicheroLecturaEscrituraObj {
         }
     }
 }
-
-// crear con la clase sobrante hay que indicar que no meta cabezeras
