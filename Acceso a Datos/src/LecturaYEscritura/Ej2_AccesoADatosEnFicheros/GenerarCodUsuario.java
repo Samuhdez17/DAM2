@@ -11,15 +11,17 @@ public class GenerarCodUsuario {
 
     public String getCodigo() {
         File usuarios = new File(ruta);
+
+        if (!usuarios.exists()) return "U100";
+
         String codigoGenerado = "U";
         int numMasAlto = 0;
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(usuarios))) {
-            if  (!usuarios.exists()) return "U100";
+        try (BufferedReader br = new BufferedReader (new FileReader(usuarios))) {
+            String lineaUsuario;
 
-            while (true) {
-                Usuario usuario = (Usuario) ois.readObject();
-
+            while ((lineaUsuario = br.readLine()) != null) {
+                Usuario usuario = new Usuario(lineaUsuario);
                 String codigoUsuario = usuario.getCodigo();
                 int numeroUsuario = Integer.parseInt(codigoUsuario.substring(1));
 
@@ -31,12 +33,9 @@ public class GenerarCodUsuario {
         } catch (IOException e) {
             System.out.println("Error al generar el código de usuario.");
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error al leer usuarios");
-            throw new RuntimeException(e);
         }
 
-        codigoGenerado = codigoGenerado + numMasAlto;
+        codigoGenerado = codigoGenerado + (numMasAlto + 1);
 
         return codigoGenerado;
     }

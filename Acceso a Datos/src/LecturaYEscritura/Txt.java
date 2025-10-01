@@ -47,8 +47,5 @@ public class Txt {
             System.out.println();
         } catch (FileNotFoundException e) {}
         catch (IOException e) {}
-
-        File file = new File(ruta);
-        file.delete();
     }
 }
