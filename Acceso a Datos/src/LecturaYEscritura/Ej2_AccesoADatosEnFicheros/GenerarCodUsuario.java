@@ -3,21 +3,19 @@ package LecturaYEscritura.Ej2_AccesoADatosEnFicheros;
 import java.io.*;
 
 public class GenerarCodUsuario {
-    private final String ruta;
+    private final File fichero;
 
-    public GenerarCodUsuario(String ruta) {
-        this.ruta = ruta;
+    public GenerarCodUsuario(File fichero) {
+        this.fichero = fichero;
     }
 
     public String getCodigo() {
-        File usuarios = new File(ruta);
-
-        if (!usuarios.exists()) return "U100";
+        if (!fichero.exists()) return "U100";
 
         String codigoGenerado = "U";
         int numMasAlto = 0;
 
-        try (BufferedReader br = new BufferedReader (new FileReader(usuarios))) {
+        try (BufferedReader br = new BufferedReader (new FileReader(fichero))) {
             String lineaUsuario;
 
             while ((lineaUsuario = br.readLine()) != null) {

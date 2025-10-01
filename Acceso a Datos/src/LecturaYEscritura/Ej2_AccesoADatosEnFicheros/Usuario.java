@@ -31,7 +31,8 @@ public class Usuario {
 
             for (int letra = 0; letra < aficion.length(); letra++) {
                 if (aficion.charAt(letra) == ' ') {
-                    if (letra == 0 && letra == aficion.length() - 1) aficionCorregida.append('_');
+                    if (letra != 0 && letra != aficion.length() - 1) aficionCorregida.append('_');
+
 
                 } else aficionCorregida.append(aficion.charAt(letra));
             }

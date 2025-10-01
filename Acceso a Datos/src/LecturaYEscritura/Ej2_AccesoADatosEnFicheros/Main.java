@@ -18,10 +18,38 @@ public class Main {
         String nombreFicheroCorregido = corregirEspacios(nombreFichero);
         String ruta = "src/LecturaYEscritura/Ej2_AccesoADatosEnFicheros/" + nombreFicheroCorregido + ".txt";
 
+        File fichero = comprobarExistenciaFichero(entrada, ruta);
+
+        int opcion = 0;
+        while (opcion != 5) {
+            System.out.println("""
+              ------------ MENU ------------
+              1. Añadir usuario
+              2. Mostrar usuarios
+              3. Generar fichero de concordancia
+              5. Salir
+              ------------------------------
+              """);
+            System.out.print("Elige una opción: ");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+                case 1 -> aniadirUsuario(entrada, fichero);
+
+                case 2 -> leerUsuarios(fichero);
+
+                case 3 -> generarFicheroConcordancia(entrada, fichero);
+
+                case 5 -> System.out.println("Saliendo....");
+            }
+        }
+    }
+
+    public static File comprobarExistenciaFichero(Scanner entrada, String ruta) {
         File fichero = new File(ruta);
 
         if (!fichero.exists()) {
-        System.out.print("Este fichero no existe, quieres crearlo? (s/n): ");
+            System.out.print("Este fichero no existe, quieres crearlo? (s/n): ");
             char respuesta = entrada.next().charAt(0);
 
             if (respuesta != 's' && respuesta != 'n') {
@@ -36,10 +64,10 @@ public class Main {
                 while (!fichero.exists()) {
                     System.out.print("Indica el nombre del archivo: ");
                     entrada.nextLine();
-                    nombreFichero = entrada.nextLine();
+                    String nombreFichero = entrada.nextLine();
                     System.out.println();
 
-                    nombreFicheroCorregido = corregirEspacios(nombreFichero);
+                    String nombreFicheroCorregido = corregirEspacios(nombreFichero);
 
                     ruta = "src/LecturaYEscritura/Ej2_AccesoADatosEnFicheros/" + nombreFicheroCorregido + ".txt";
                     fichero = new File(ruta);
@@ -63,75 +91,31 @@ public class Main {
                         }
                     }
                 }
+
             } else System.out.println("Fichero seleccionado correctamente");
         }
 
-        int opcion = 0;
-        while (opcion != 5) {
-            System.out.println("""
-              ------------ MENU ------------
-              1. Añadir usuario
-              2. Mostrar usuarios
-              3. Generar fichero de concordancia
-              5. Salir
-              ------------------------------
-              """);
-            System.out.print("Elige una opción: ");
-            opcion = entrada.nextInt();
+        return fichero;
+    }
 
-            switch (opcion) {
-                case 1 -> aniadirUsuario(entrada, ruta, fichero);
+    private static void aniadirUsuario(Scanner entrada, File fichero) {
+        System.out.print("Indica las aficiones del usuario separado por comas: ");
+        entrada.nextLine();
+        String aficiones = entrada.nextLine().toUpperCase();
 
-                case 2 -> leerUsuarios(fichero);
+        String[] aficionesArray = aficiones.split(",");
 
-                case 3 -> {
-                    System.out.print("Ingrese el número mínimo de concordancias: ");
-                    int numConcorMin = entrada.nextInt();
-                    System.out.println();
+        GenerarCodUsuario genCod = new GenerarCodUsuario(fichero);
 
-                    ArrayList<String> lineas = new ArrayList<>();
+        Usuario usuario = new Usuario(genCod.getCodigo(), aficionesArray);
 
-                    try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
-                        String linea;
-                        while ((linea = br.readLine()) != null) lineas.add(linea);
-                    } catch (IOException e) {}
+        try (FileWriter fw = new FileWriter(fichero,  true)) {
+            fw.write(usuario + " ");
+            fw.write("\n");
 
-                    for (String linea : lineas) System.out.println(linea);
-
-                    String[] lineaEjemplo;
-
-                    for (int usuario = 1 ; usuario < lineas.size() ; usuario++) {
-                        int numConcor = 0;
-                        lineaEjemplo = lineas.getFirst().split(" ");
-
-                        String[] lineaAComparar = lineas.get(usuario).split(" ");
-
-                        ArrayList<String> comunes = new ArrayList<>();
-                        for (String usuario1 : lineaEjemplo) {
-                            for (String usuario2 : lineaAComparar) {
-                                if (usuario1.equals(usuario2)) {
-                                    comunes.add(usuario1);
-                                    numConcor++;
-                                }
-                            }
-                        }
-
-                        if (numConcor >= numConcorMin) {
-                            Collections.sort(comunes);
-
-                            try (FileWriter fw = new FileWriter(CONCORDANCIAS_TXT, true)) {
-                                fw.write(String.format("%s %s ", lineaEjemplo[0], lineaAComparar[0]));
-                                for (String aficion : comunes) fw.write(aficion + " ");
-                                fw.write("\n");
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    }
-                }
-
-                case 5 -> System.out.println("Saliendo....");
-            }
+            System.out.println("Usuario guardada correctamente");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -145,40 +129,88 @@ public class Main {
                 System.out.println("-------------------------------");
             }
 
-            System.out.println("\n\n");
-        } catch (EOFException e) {
-            System.out.println("Fin del fichero");
+            System.out.println("Fin de la lista\n");
         } catch (IOException e) {
             System.out.println("Error al leer el fichero");
             throw new RuntimeException(e);
         }
     }
 
-    private static void aniadirUsuario(Scanner entrada, String ruta, File fichero) {
-        System.out.print("Indica las aficiones del usuario separado por comas: ");
-        entrada.nextLine();
-        String aficiones = entrada.nextLine().toUpperCase();
+    private static void generarFicheroConcordancia(Scanner entrada, File fichero) {
+        int numConcorMin = pedirConcordanciasMinimas(entrada);
+        ArrayList<String> lineas = new ArrayList<>();
 
-        String[] aficionesArray = aficiones.split(",");
-        GenerarCodUsuario genCod = new GenerarCodUsuario(ruta);
+        // Creamos un arraylist con todos los usuarios y sus aficiones para posteriormente comparar
+        try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
+            String linea;
+            while ((linea = br.readLine()) != null) lineas.add(linea);
+        } catch (IOException e) {}
 
-        Usuario usuario = new Usuario(genCod.getCodigo(), aficionesArray);
+        revisarConcordancias(lineas, numConcorMin);
 
-        try (FileWriter fw = new FileWriter(fichero,  true)) {
-            fw.write(usuario + "\n");
+        System.out.println("Fichero generado correctamente");
+    }
 
-            System.out.println("Usuario guardada correctamente");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private static void revisarConcordancias(ArrayList<String> lineas, int numConcorMin) {
+        for (int i = 0; i < lineas.size() ; i++) {
+            for (int j = i + 1; j < lineas.size() ; j++) {
+
+                String[] linea1 = lineas.get(i).split(" ");
+                String[] linea2 = lineas.get(j).split(" ");
+
+                // Recorre las aficiones de la segunda persona (linea2) y las compara con las de la primera (linea1)
+                ArrayList<String> comunes = new ArrayList<>();
+                for (int aficion1 = 1 ; aficion1 < linea1.length ; aficion1++) {
+                    for (int aficion2 = 1 ; aficion2 < linea2.length ; aficion2++) {
+                        if (linea1[aficion1].equals(linea2[aficion2])) {
+                            if (!comunes.contains(linea1[aficion1])) {
+                                comunes.add(linea1[aficion1]);
+                            }
+                        }
+                    }
+                }
+
+                // Si las concordancias que ha sacado son mayor o igual al mínimo indicado por el usuario, se ordenan y se escriben en un fichero de texto plano
+                if (comunes.size() >= numConcorMin) {
+                    Collections.sort(comunes);
+
+                    try (FileWriter fw = new FileWriter(CONCORDANCIAS_TXT, true)) {
+                        fw.write(String.format("%s %s ", linea1[0], linea2[0]));
+                        for (String aficion : comunes) {
+                            fw.write(aficion + " ");
+                        }
+                        fw.write("\n");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
         }
     }
 
-    private static String corregirEspacios(String nombreFichero) {
-        StringBuilder nombreFicheroCorregido = new StringBuilder();
-        for (int i = 0; i < nombreFichero.length() ; i++) {
-            if (nombreFichero.charAt(i) == ' ') nombreFicheroCorregido.append('_');
-            else nombreFicheroCorregido.append(nombreFichero.charAt(i));
+    private static int pedirConcordanciasMinimas(Scanner entrada) {
+        System.out.print("Ingrese el número mínimo de concordancias: ");
+        int numConcorMin = entrada.nextInt();
+        System.out.println();
+
+        if (numConcorMin < 1) {
+            while (numConcorMin < 1) {
+                System.out.print("El número es demasiado pequeño, introduce un número mayor o igual a 1: ");
+                numConcorMin = entrada.nextInt();
+                System.out.println();
+            }
         }
-        return nombreFicheroCorregido.toString();
+        return numConcorMin;
+    }
+
+    private static String corregirEspacios(String nombre) {
+        StringBuilder nombreCorregido = new StringBuilder();
+        for (int i = 0; i < nombre.length() ; i++) {
+            if (nombre.charAt(i) == ' ') {
+                if (i == 0 && i == nombre.length() - 1) nombreCorregido.append('_');
+            }
+            else nombreCorregido.append(nombre.charAt(i));
+        }
+        return nombreCorregido.toString();
     }
 }
