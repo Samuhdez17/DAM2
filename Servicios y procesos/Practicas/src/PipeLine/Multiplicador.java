@@ -2,14 +2,13 @@ package PipeLine;
 
 import java.util.Scanner;
 
-public class Sumador {
-
+public class Multiplicador {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
         int numero = entrada.nextInt();
 
-        numero += numero;
+        numero *= 3;
 
         System.out.println(numero);
     }

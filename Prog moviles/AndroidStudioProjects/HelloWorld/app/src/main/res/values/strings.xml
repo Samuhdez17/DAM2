@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hello World</string>
+    <string name="title_activity_buscar_primmos">BuscarPrimmos</string>
 </resources>
