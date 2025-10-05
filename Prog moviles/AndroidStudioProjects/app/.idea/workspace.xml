@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f7e9b6ac-e59d-49f0-830f-4be1ff2108c2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/Find.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/ProcesoPipeLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/AndroidProjectSystem.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/caches/deviceStreaming.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/deploymentTargetSelector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProyectoAndroid.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/com/example/buscarprimos/ExampleInstrumentedTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/buscarprimos/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/buscarprimos/ui/theme/Color.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/buscarprimos/ui/theme/Theme.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/buscarprimos/ui/theme/Type.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/xml/backup_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/buscarprimos/ExampleUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/CrearPipeLine.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/PipeLine/Inicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/Practicas/src/PipeLine/Inicial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/EjercicioPipelines.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/EjercicioPipelines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/Inicial.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/Inicial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/Sumador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/Sumador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/erroresPipelineNumeros.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/PipeLine/erroresPipelineNumeros.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/UtilidadesSistema.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/UtilidadesSistema.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/UtilidadesSistema.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/UtilidadesSistema.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="33b6cNEHRQnlNjMqU8UxEoMfD3t" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/samuh/Desktop/tuto/git/DAM2/Prog moviles/AndroidStudioProjects/app"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f7e9b6ac-e59d-49f0-830f-4be1ff2108c2" name="Changes" comment="" />
+      <created>1759573502781</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759573502781</updated>
+    </task>
+    <servers />
+  </component>
+</project>
