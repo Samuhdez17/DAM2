@@ -1,4 +1,0 @@
-Error: Could not find or load main class PipeLine.Inicial
-Caused by: java.lang.ClassNotFoundException: PipeLine.Inicial
-Error: Could not find or load main class PipeLine.Sumador
-Caused by: java.lang.ClassNotFoundException: PipeLine.Sumador

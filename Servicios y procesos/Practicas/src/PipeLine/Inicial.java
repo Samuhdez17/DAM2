@@ -3,7 +3,6 @@ package PipeLine;
 public class Inicial {
 
     public static void main(String[] args) {
-
         try {
             int numero = Integer.parseInt(args[0]);
 
