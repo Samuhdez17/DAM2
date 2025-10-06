@@ -11,6 +11,6 @@ public class FamiliaFont {
     public static void main(String[] args) {
         List<String> fonts = Font.getFamilies();
 
-        System.out.println(fonts);
+        System.out.println(fonts.size());
     }
 }

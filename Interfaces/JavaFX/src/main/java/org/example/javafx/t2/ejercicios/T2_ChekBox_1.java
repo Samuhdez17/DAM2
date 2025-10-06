@@ -42,6 +42,8 @@ public class T2_ChekBox_1 extends Application {
         bp.setBottom(label1);
         BorderPane.setAlignment(label1, Pos.CENTER);
 
+        bp.setStyle("-fx-background-color: pink");
+
         Scene scene = new Scene(bp);
         stage.setScene(scene);
         stage.setTitle("T2_ChekBox_1");
