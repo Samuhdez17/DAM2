@@ -1,5 +1,6 @@
 package com.example.buscarprimos
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -20,6 +22,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.buscarprimos.ui.theme.BuscarPrimosTheme
+import kotlin.collections.map
+import kotlin.collections.toMutableList
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +47,8 @@ fun CalculoPrimos(name: String, modifier: Modifier = Modifier) {
     var texto by remember { mutableStateOf("") }
     val num = texto.toIntOrNull() ?: 0
 
+    var listaNumeros by remember(num) { mutableStateOf((0..num).map { true }.toMutableList()) }
+
     Column {
         TextField(
             value = texto,
@@ -53,36 +59,40 @@ fun CalculoPrimos(name: String, modifier: Modifier = Modifier) {
         LazyVerticalGrid(
             GridCells.Fixed(3)
         ) {
-            items(num) { index ->
-                if (esPrimo(index + 1)) {
+            items(listaNumeros.size) { index ->
+                var numero = (index + 1)
+                if (listaNumeros[index]) {
                     Text(
-                        text = "${ index + 1 }",
+                        text = "$numero",
                         modifier = modifier
                     )
                 }
             }
         }
+
+        Button(
+            onClick = {
+                val numeros2 = (0..listaNumeros.size).map { true }.toMutableList()
+                for (i in 0..num) numeros2[i] = esPrimo(i)
+                listaNumeros = numeros2
+            }
+        ) {
+            Text("Calcular")
+        }
     }
 }
 
-@Composable
 fun esPrimo(index: Int): Boolean {
-    if (index <= 1) return false
+    if (index < 2) return false
 
-    var esPrimo = false
-    var divisor = 2
-    val dividendo = index
-    var resultado: Int
+    var esPrimo = true
 
-    while (divisor < dividendo) {
-        resultado = dividendo % divisor
-
-        esPrimo = resultado != 0
-
-        if (!esPrimo) break
-        divisor++
+    for (divisor in 2..(index-1)) {
+        if (index % divisor == 0) {
+            esPrimo = false
+            break
+        }
     }
-
 
     return esPrimo
 }

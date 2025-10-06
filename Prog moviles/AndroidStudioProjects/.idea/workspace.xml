@@ -5,78 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d75e4006-33ac-473c-9506-6ec940199986" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/Find.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/ProcesoPipeLine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/TaskList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Acceso a Datos/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Acceso a Datos/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/migrations.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/app/BuscarPrimos.app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/.idea/libraries/Comandos.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Practicas.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProyectoAndroid.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/buscarprimos/ExampleInstrumentedTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/buscarprimos/MainActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/buscarprimos/ui/theme/Color.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/buscarprimos/ui/theme/Theme.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/buscarprimos/ui/theme/Type.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_launcher_foreground.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/backup_rules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/buscarprimos/ExampleUnitTest.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/CrearPipeLine.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/PipeLine/Inicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/PipeLine/Inicial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/EjerciciosRepaso/Ej3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/EjercicioPipelines.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/EjercicioPipelines.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/Inicial.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/Inicial.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/Sumador.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/Sumador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/erroresPipelineNumeros.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/PipeLine/erroresPipelineNumeros.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/UtilidadesSistema.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej1_Ping/UtilidadesSistema.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/UtilidadesSistema.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/out/production/Practicas/ejerciciosProgramacionProcesos/Ej2_PingConPb/UtilidadesSistema.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelloWorld/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/HelloWorld/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelloWorld/app/src/main/java/com/example/helloworld/HelloWorldTheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/HelloWorld/app/src/main/java/com/example/helloworld/HelloWorldTheme.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/Find.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/ProcesoPipeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/ProcesoPipeLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/CrearPipeLine/ContarLineas.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,12 +28,29 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="BuscarPrimos" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="33b6pSuitDihkurW9Le9sYUBVDH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -104,6 +63,7 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "android.gradle.sync.needed": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",

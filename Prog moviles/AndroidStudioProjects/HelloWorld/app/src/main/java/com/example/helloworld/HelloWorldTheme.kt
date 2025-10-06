@@ -33,7 +33,7 @@ class Calculadora : ComponentActivity() {
             HelloWorldTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "kk",
+                        name = "samu",
                         modifier = Modifier.padding(innerPadding)
                     )
 

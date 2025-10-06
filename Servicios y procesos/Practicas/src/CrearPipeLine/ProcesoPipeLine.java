@@ -8,18 +8,19 @@ public class ProcesoPipeLine {
     public static final String RUTA_CLASS = "out/production/Practicas";
 
     public static void main(String[] args) {
-        ProcessBuilder taskList = new ProcessBuilder("java", TaskList.class.getName());
-        ProcessBuilder find = new ProcessBuilder("java", Find.class.getName());
+        ProcessBuilder taskList = new ProcessBuilder("tasklist");
+        ProcessBuilder find = new ProcessBuilder("find", "chrome");
+        ProcessBuilder contarLineas = new ProcessBuilder(); // Hay que hacer el pipe line con el cmd y con la clase contarlineas meterlo en la lista y que haga lo mismo que wc -l
 
         File directorioClass = new File(RUTA_CLASS);
-        taskList.directory(directorioClass);
+        contarLineas.directory(directorioClass);
         find.directory(directorioClass);
 
-        taskList.redirectError(ProcessBuilder.Redirect.appendTo(new File("erroresPipeLine.txt")));
+        contarLineas.redirectError(ProcessBuilder.Redirect.appendTo(new File("erroresPipeLine.txt")));
         find.redirectError(ProcessBuilder.Redirect.appendTo(new File("erroresPipeLine.txt")));
 
         try {
-            List<Process> hijos = ProcessBuilder.startPipeline(Arrays.asList(taskList, find));
+            List<Process> hijos = ProcessBuilder.startPipeline(Arrays.asList(taskList, find, contarLineas));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
