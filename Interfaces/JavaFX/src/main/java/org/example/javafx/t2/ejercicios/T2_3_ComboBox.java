@@ -1,4 +1,4 @@
-package org.example.javafx.t1.ejercicios;
+package org.example.javafx.t2.ejercicios;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,7 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -41,8 +40,11 @@ public class T2_3_ComboBox extends Application {
 
         ComboBox cb3 = new ComboBox();
         List<String> fontsList = Font.getFamilies();
-        String[] fontsArray = new String[20];
-        for (int i = 0 ; i < 20 ; i++) fontsArray[i] = fontsList.get(rand.nextInt(fontsList.size()));
+        ArrayList<String > fontsArray = new ArrayList<>();
+        for (int i = 0 ; i < 20 ; i++) {
+            String fuente = fontsList.get(rand.nextInt(fontsList.size()));
+            if (!fontsArray.contains(fuente)) fontsArray.add(fuente);
+        }
 
         Label labelFonts;
 
