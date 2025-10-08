@@ -29,6 +29,6 @@ public class GestionSax extends DefaultHandler {
         String contenido = new String(ch, start, length);
         contenido = contenido.replaceAll("[\t\n]", "");
 
-        System.out.printf("\tContenido: %s\n", contenido);
+        System.out.printf("\tContenido: %s, %d\n", contenido, contenido.length());
     }
 }

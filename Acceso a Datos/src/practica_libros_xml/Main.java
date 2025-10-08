@@ -1,4 +1,4 @@
-package ficheros_sax;
+package practica_libros_xml;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -9,11 +9,13 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws SAXException, IOException {
-        XMLReader procesadorXML = XMLReaderFactory.createXMLReader();
-        GestionSax gSax = new GestionSax();
-        procesadorXML.setContentHandler(gSax);
+        String rutaFichero = "practica_libros_xml/pedidos.xml";
 
-        InputSource fileXml = new InputSource("practica_libros_xml/pedidos.xml");
-        procesadorXML.parse(fileXml);
+        XMLReader procesador = XMLReaderFactory.createXMLReader();
+        GestionSax gSax = new GestionSax();
+        procesador.setContentHandler(gSax);
+
+        InputSource ficheroXml = new InputSource(rutaFichero);
+        procesador.parse(ficheroXml);
     }
 }
