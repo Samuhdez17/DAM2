@@ -1,4 +1,4 @@
-package org.example.javafx.t2.inicios;
+package org.example.javafx.t2.enseñanzas;
 
 import javafx.application.Application;
 import javafx.scene.control.ListView;

@@ -9,7 +9,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class T2_1_RadioButton_1 extends Application {
+public class T2_1_RadioButton extends Application {
 
     public static void main(String[] args) {
         launch(args);

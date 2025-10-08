@@ -1,4 +1,4 @@
-package ficherosxml;
+package ficheros_xml;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.RandomAccessFile;
 
 public class CrearDat {
     public static void main(String[] args) {
-        String fichero = "ficherosxml/AleatorioEmple.dat";
+        String fichero = "ficheros_xml/AleatorioEmple.dat";
 
         int[] ids = {1, 2, 3, 4};
         String[] apellidos = {"Lopez", "Pérez", "Villoria", "Garcia"};

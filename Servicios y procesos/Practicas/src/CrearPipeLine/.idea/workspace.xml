@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac05565a-9ee3-408f-a091-422963220081" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../../Prog moviles/AndroidStudioProjects/.idea/modules/app/BuscarPrimos.app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Prog moviles/AndroidStudioProjects/HelloWorld/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Prog moviles/AndroidStudioProjects/HelloWorld/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Prog moviles/AndroidStudioProjects/HelloWorld/app/src/main/java/com/example/helloworld/HelloWorldTheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Prog moviles/AndroidStudioProjects/HelloWorld/app/src/main/java/com/example/helloworld/HelloWorldTheme.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Find.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProcesoPipeLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProcesoPipeLine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/ContarLineas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/ejercicios/T2_5_MenuFileIntellij.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_10_MenuBar_1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_10_MenuBar_2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/descarga.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/ejercicios/T2_1_RadioButton_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/ejercicios/T2_1_RadioButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/ejercicios/T2_2_ChekBox_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/ejercicios/T2_2_ChekBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_1_Labels.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_1_Labels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_2_Buttons.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_2_Buttons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_3_RadioButton_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_3_RadioButton_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_4_CheckBox_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_4_CheckBox_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_5_Hyperlink_MOD.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_5_Hyperlink_MOD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_6_ComboBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_6_ComboBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_7_ListView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_7_ListView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/inicios/T2_8_9_TextField_PasswordField.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Interfaces/JavaFX/src/main/java/org/example/javafx/t2/enseñanzas/T2_8_9_TextField_PasswordField.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +74,19 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="CrearPipeLine" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="CrearPipeLine" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -85,6 +106,7 @@
       <workItem from="1759492087065" duration="218000" />
       <workItem from="1759732028671" duration="429000" />
       <workItem from="1759732501246" duration="42000" />
+      <workItem from="1759909731958" duration="7000" />
     </task>
     <servers />
   </component>

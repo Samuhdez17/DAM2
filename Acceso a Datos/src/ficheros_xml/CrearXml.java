@@ -1,4 +1,4 @@
-package ficherosxml;
+package ficheros_xml;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -29,13 +29,13 @@ public class CrearXml {
             Document document = implementation.createDocument(null, "Empleados", null);
             document.setXmlVersion("1.0");
 
-            File fichero = new File("ficherosxml/AleatorioEmple.dat");
+            File fichero = new File("ficheros_xml/AleatorioEmple.dat");
             if (!fichero.exists()) {
                 System.out.println("El fichero no existe");
                 CrearDat.main(null);
             }
 
-            try (RandomAccessFile raf = new RandomAccessFile("ficherosxml/AleatorioEmple.dat", "r")){
+            try (RandomAccessFile raf = new RandomAccessFile("ficheros_xml/AleatorioEmple.dat", "r")){
                 while (raf.getFilePointer() < raf.length()) {
                     int id = raf.readInt();
                     String apellido = raf.readUTF();
@@ -59,7 +59,7 @@ public class CrearXml {
                 Transformer transformer = tf.newTransformer();
 
                 DOMSource source = new DOMSource(document);
-                StreamResult result = new StreamResult("ficherosxml/Empleados.xml");
+                StreamResult result = new StreamResult("ficheros_xml/Empleados.xml");
 
                 transformer.transform(source, result);
                 System.out.println("Archivo creado correctamente");

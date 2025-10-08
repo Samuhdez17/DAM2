@@ -1,4 +1,4 @@
-package ficherosxml;
+package ficheros_xml;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,7 +15,7 @@ import java.io.IOException;
 public class LeerXml {
     public static void main(String[] args) throws ParserConfigurationException {
         try {
-            File fichero = new File("ficherosxml/Empleados.xml");
+            File fichero = new File("ficheros_xml/Empleados.xml");
             if (!fichero.exists()) {
                 System.out.println("El fichero no existe");
                 CrearXml.main(null);
