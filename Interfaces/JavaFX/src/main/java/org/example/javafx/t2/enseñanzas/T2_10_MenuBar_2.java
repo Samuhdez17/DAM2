@@ -63,7 +63,7 @@ public class T2_10_MenuBar_2 extends Application {
 
         menuItem1_4_2.setAccelerator(KeyCombination.keyCombination("Ctrl+K"));
 
-        Image imagen = new Image("file:src/main/java/org/example/javafx/t2/inicios/descarga.png");
+        Image imagen = new Image("file:src/main/java/org/example/javafx/t2/enseñanzas/descarga.png");
         ImageView imageView = new ImageView(imagen);
         imageView.setFitHeight(15);
         imageView.setFitWidth(15);

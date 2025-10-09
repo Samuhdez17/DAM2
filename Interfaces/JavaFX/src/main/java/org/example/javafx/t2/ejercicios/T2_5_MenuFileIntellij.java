@@ -1,10 +1,14 @@
 package org.example.javafx.t2.ejercicios;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -15,7 +19,7 @@ public class T2_5_MenuFileIntellij extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
         MenuBar menuBar = new MenuBar();
         // Menu File
         Menu menuFile = new Menu("File");
@@ -169,12 +173,50 @@ public class T2_5_MenuFileIntellij extends Application {
 
         itemManageIDESettings.getItems().add(2, sep_manage);
 
+        // Agregación de atajos
+        itemSettings.setAccelerator(KeyCombination.keyCombination("Ctrl+Alt+S"));
+        itemProjectStructure.setAccelerator(KeyCombination.keyCombination("Ctrl+Alt+Shift+S"));
+        itemSaveAll.setAccelerator(KeyCombination.keyCombination("Ctrl+S"));
+        itemPrint.setAccelerator(KeyCombination.keyCombination("Ctrl+P"));
+
+        // Agregación y asignación de imágenes
+        String ruta = "file:src/main/java/org/example/javafx/t2/ejercicios/images/";
+        Image carpetaOpen = new Image(ruta + "carpeta.png");
+        Image carpetaProjectStructure = new Image(ruta + "carpeta_project_structure.png");
+        Image guardar = new Image(ruta + "guardar.png");
+        Image imprimir = new Image(ruta + "imprimir.png");
+        Image recarga = new Image(ruta + "recarga.png");
+        Image ajustes = new Image(ruta + "tuerca.png");
+        Image javaClass = new Image(ruta + "java_class.png");
+        Image kotlinClass = new Image(ruta + "kotlin_class.png");
+        Image file = new Image(ruta + "file.png");
+        Image carpeta = new Image(ruta + "package.png");
+        Image fxmlFile = new Image(ruta + "fxml.png");
+        Image jfxApp = new Image(ruta + "java_class.png");
+        Image packageInfo = new Image(ruta + "package-info.png");
+        Image moduleInfo = new Image(ruta + "module-info.png");
+        Image kotlinNotebook = new Image(ruta + "kotlin_notebook.png");
+        Image resourceBundle = new Image(ruta + "tuerca.png");
+
+        asignarImagen(itemOpen, itemSettings, itemProjectStructure, itemSaveAll, itemReloadAllFromDisk, itemPrint, itemJavaClass, itemKotlinClass_File, carpetaOpen, carpetaProjectStructure, guardar, imprimir, recarga, ajustes, javaClass, kotlinClass);
+        asignarImagen(itemFile, itemPackage, itemFXMLFile, itemJavaFXApplication, itemPackage_info_java, itemModule_info_java, itemKotlinNotebook, itemResourceBundle, file, fxmlFile, jfxApp, moduleInfo, packageInfo, carpeta, kotlinNotebook, resourceBundle);
 
         BorderPane bp = new BorderPane();
         bp.setTop(menuBar);
 
-        primaryStage.setScene(new javafx.scene.Scene(bp));
-        primaryStage.setTitle("T2_5_MenuFileIntellij");
-        primaryStage.show();
+        stage.setScene(new Scene(bp));
+        stage.setTitle("T2_5_MenuFileIntellij");
+        stage.show();
+    }
+
+    private void asignarImagen(MenuItem itemOpen, MenuItem itemSettings, MenuItem itemProjectStructure, MenuItem itemSaveAll, MenuItem itemReloadAllFromDisk, MenuItem itemPrint, MenuItem itemJavaClass, MenuItem itemKotlinClass_File, Image carpetaOpen, Image carpetaProjectStructure, Image guardar, Image imprimir, Image recarga, Image ajustes, Image javaClass, Image kotlinClass) {
+        itemOpen.setGraphic(new ImageView(carpetaOpen));
+        itemSettings.setGraphic(new ImageView(ajustes));
+        itemProjectStructure.setGraphic(new ImageView(carpetaProjectStructure));
+        itemSaveAll.setGraphic(new ImageView(guardar));
+        itemReloadAllFromDisk.setGraphic(new ImageView(recarga));
+        itemPrint.setGraphic(new ImageView(imprimir));
+        itemJavaClass.setGraphic(new ImageView(javaClass));
+        itemKotlinClass_File.setGraphic(new ImageView(kotlinClass));
     }
 }
