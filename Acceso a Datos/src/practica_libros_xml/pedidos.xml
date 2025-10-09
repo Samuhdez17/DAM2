@@ -7,7 +7,7 @@
     <libro>
         <nombre>La Regenta</nombre>
         <autor>Clarín</autor>
-        <precio>15.0</precio>
+        <precio>15.00</precio>
     </libro>
     <libro>
         <nombre>El último Secreto</nombre>
