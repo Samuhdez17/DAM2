@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/E001_MochilaGenetica/E001_MochilaGenetica.iml" filepath="$PROJECT_DIR$/E001_MochilaGenetica/E001_MochilaGenetica.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProgVid.iml" filepath="$PROJECT_DIR$/.idea/ProgVid.iml" />
+    </modules>
+  </component>
+</project>

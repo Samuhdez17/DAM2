@@ -1,6 +1,5 @@
 package com.example.buscarprimos
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,7 +46,7 @@ fun CalculoPrimos(name: String, modifier: Modifier = Modifier) {
     var texto by remember { mutableStateOf("") }
     val num = texto.toIntOrNull() ?: 0
 
-    var listaNumeros by remember(num) { mutableStateOf((0..num).map { true }.toMutableList()) }
+    var listaNumeros by remember(num) { mutableStateOf((1..num).map { true }.toMutableList()) }
 
     Column {
         TextField(
@@ -56,28 +55,27 @@ fun CalculoPrimos(name: String, modifier: Modifier = Modifier) {
             label = { Text("Cantidad") }
         )
 
-        LazyVerticalGrid(
-            GridCells.Fixed(3)
-        ) {
-            items(listaNumeros.size) { index ->
-                var numero = (index + 1)
-                if (listaNumeros[index]) {
-                    Text(
-                        text = "$numero",
-                        modifier = modifier
-                    )
-                }
-            }
-        }
-
         Button(
             onClick = {
-                val numeros2 = (0..listaNumeros.size).map { true }.toMutableList()
-                for (i in 0..num) numeros2[i] = esPrimo(i)
+                val numeros2 = (1..listaNumeros.size).map { false }.toMutableList()
+                for (i in 1..num-1) numeros2[i-1] = esPrimo(i)
                 listaNumeros = numeros2
             }
         ) {
             Text("Calcular")
+        }
+
+        LazyVerticalGrid(
+            GridCells.Fixed(3)
+        ) {
+            items(listaNumeros.size) { index ->
+                if (listaNumeros[index]) {
+                    Text(
+                        text = "${index+1}",
+                        modifier = modifier
+                    )
+                }
+            }
         }
     }
 }
