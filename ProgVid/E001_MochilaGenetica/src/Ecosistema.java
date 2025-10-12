@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ecosistema {
-    ArrayList individuos;
+    ArrayList<Individuo> individuos = new ArrayList<>();
+
     private Individuo individuo = obtenerIndividuoAleatoriamente(); // Ponderará por idoneidad, más probable cuanto más idóneo sea
 
     private Individuo obtenerIndividuoAleatoriamente() {

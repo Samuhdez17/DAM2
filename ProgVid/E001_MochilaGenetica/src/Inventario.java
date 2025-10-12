@@ -1,15 +1,27 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Inventario {
-    private int[] volumenesItems;
-    private int[] valoresItems;
+    private final ArrayList<Item> items;
 
-    public Inventario(int[] volumenesItems, int[] valoresItems) {
-        this.volumenesItems = volumenesItems;
-        this.valoresItems = valoresItems;
+    public Inventario(Item[] items) {
+        this.items = new ArrayList<>();
+        Collections.addAll(this.items, items);
+    }
 
+    void setItem(int volumen, int valor) {
+        items.add(new Item(volumen, valor));
+    }
+
+    void getVolumenItem(int pos) {
+        items.get(pos).getVolumen();
+    }
+
+    void getValorItem(int pos) {
+        items.get(pos).getValor();
     }
 
     public int getTamanio() {
-        return volumenesItems.length;
+        return items.size();
     }
-
 }
