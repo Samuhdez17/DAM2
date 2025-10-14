@@ -17,6 +17,7 @@ public class T2_11_Color_DatePicker extends Application {
         DatePicker dp = new DatePicker();
         ColorPicker cp = new ColorPicker();
 
+        dp.setValue(java.time.LocalDate.now());
         HBox hb = new HBox();
         hb.getChildren().addAll(dp, cp);
 

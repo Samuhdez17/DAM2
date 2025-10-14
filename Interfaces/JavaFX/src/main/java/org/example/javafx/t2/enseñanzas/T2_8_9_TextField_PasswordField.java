@@ -22,6 +22,7 @@ public class T2_8_9_TextField_PasswordField extends Application {
         tf.setPromptText("Type your User name");
         pf.setPromptText("Type your Password");
 
+        tf.appendText("Samu");
         VBox vBox = new VBox();
         vBox.getChildren().addAll(tf, pf);
 
