@@ -23,6 +23,8 @@ public class T2_3_RadioButton_0 extends Application {
         rb1.setToggleGroup(tg);
         rb2.setToggleGroup(tg);
 
+        rb1.setSelected(true);
+
         VBox vBox = new VBox(10);
         vBox.getChildren().addAll(rb1, rb2, rb3);
         vBox.setMinSize(300, 150);

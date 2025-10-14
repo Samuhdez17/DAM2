@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -30,8 +31,9 @@ public class T2_2_Buttons extends Application {
         Button boton4 = new Button("Boton con imagen", imageView);
 
         boton2.setWrapText(true);
-        boton3.setDisable(true);
+//        boton3.setDisable(true);
 
+        boton3.setRotate(5.9);
         VBox vbox = new VBox(10);
         vbox.getChildren().addAll(boton1, boton2, boton3, boton4);
 

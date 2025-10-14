@@ -20,7 +20,6 @@ public class T2_4_CheckBox_0 extends Application {
         HBox hbox = new HBox(7);
         hbox.getChildren().addAll(ch1, ch2);
         hbox.setMinSize(100, 100);
-
         Scene scene = new Scene(hbox);
         stage.setScene(scene);
         stage.setTitle("T2_4_CheckBox_0");
