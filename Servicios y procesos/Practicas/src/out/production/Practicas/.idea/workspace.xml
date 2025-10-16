@@ -5,9 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/programacion_hilos/HiloA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/programacion_hilos/HiloB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/programacion_hilos/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/src/main/java/Libreria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/src/main/java/Libro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/JavaXB/src/main/java/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicio_mostrar_nums_retardo/HiloA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicio_mostrar_nums_retardo/HiloB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejercicio_mostrar_nums_retardo/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Sosten/Ejercicios ODS enunciados.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +65,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.ContarLineas.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.Multiplicar.executor": "Run",
     "Application.ProcesoPipeLine.executor": "Run",
@@ -59,9 +75,10 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src",
+    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/ejercicio_mostrar_nums_retardo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,11 +90,15 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\ejercicio_mostrar_nums_retardo" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\padre_hijo" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\CrearPipeLine" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ejercicio_mostrar_nums_retardo" />
       <recent name="CrearPipeLine" />
     </key>
   </component>
@@ -102,6 +123,11 @@
       <workItem from="1760076938824" duration="402000" />
       <workItem from="1760077823629" duration="604000" />
       <workItem from="1760081608004" duration="2128000" />
+      <workItem from="1760092125097" duration="172000" />
+      <workItem from="1760422368152" duration="78000" />
+      <workItem from="1760426459931" duration="5000" />
+      <workItem from="1760607210249" duration="20000" />
+      <workItem from="1760610297499" duration="313000" />
     </task>
     <servers />
   </component>
