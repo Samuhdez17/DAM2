@@ -27,18 +27,29 @@ public class Individuo {
     int getVolumenTotal(){
         return volumenTotal;
     }
+
     int getValorTotal() {
         return valorTotal;
     }
-    double getIdoneidad() {
-        return idoneidad;
-    }
+
     boolean[] getGenoma() {
         return genoma;
     }
+
     boolean esViable() {
         return volumenTotal <= volumenMochila;
     }
+
+    public double getIdoneidad() {
+        volumenTotal = getVolumenTotal();
+        valorTotal = getValorTotal();
+
+        if (esViable()) idoneidad = valorTotal;
+        else            idoneidad = 0.0;
+
+        return idoneidad;
+    }
+
     void combinar(Individuo ind1, Individuo ind2) {
         boolean[] gen1 = ind1.getGenoma();
         boolean[] gen2 = ind2.getGenoma();
@@ -49,6 +60,7 @@ public class Individuo {
             if (random.nextInt(5) == 0) this.genoma[i] = !this.genoma[i];
         }
     }
+
     void mutar() {
         for (int i = 0; i < genoma.length; i++) {
             if (random.nextInt(5) == 0) this.genoma[i] = !this.genoma[i];
