@@ -50,15 +50,9 @@ fun Mapa(name: String, modifier: Modifier = Modifier) {
             casillas += 1
         }
     }
-    val numBombas = 5
+    var numBombas = 5
 
-    val posBombas = (0..casillas.toInt()).map { false }.toMutableList()
-    val posBotones = (0..casillas.toInt()).map { false }.toMutableList()
-
-    for (i in 0..posBotones.size) {
-        val posRandom = Random.nextInt()
-        if (!posBotones[posRandom]) posBombas[posRandom] = !posBotones[posRandom]
-    }
+    var posBombasFinal = colocarBombas(casillas, numBombas)
 
     LazyVerticalGrid(
         GridCells.Fixed(columnas),
@@ -67,7 +61,7 @@ fun Mapa(name: String, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
         items(casillas.toInt()) { index ->
-            if (posBotones[index]) {
+            if (posBombasFinal[index]) {
                 Button(
                     modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
                     shape = RectangleShape,
@@ -89,6 +83,25 @@ fun Mapa(name: String, modifier: Modifier = Modifier) {
             }
         }
     }
+}
+
+@Composable
+private fun colocarBombas(
+    casillas: Double,
+    numBombas: Int
+): MutableList<Boolean> {
+    var numBombas1 = numBombas
+    val posBombas = (0..casillas.toInt()).map { false }.toMutableList()
+
+    while (numBombas1 != 0) {
+        val posRandom = Random.nextInt()
+        if (!posBombas[posRandom]) {
+            posBombas[posRandom] = !posBombas[posRandom]
+            numBombas1 -= 1
+        }
+    }
+
+    return posBombas
 }
 
 @Preview(showBackground = true)
