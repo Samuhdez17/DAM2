@@ -8,6 +8,7 @@
       <change afterPath="$PROJECT_DIR$/Ejercicios/ejercicio_sumar_pares_impares/MiRunnable.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/ejemplo_compartir_memoria/Hilo.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/ejemplo_compartir_memoria/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ejemplo_compartir_memoria/MiRunnable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ejercicio_contador_compartido/Contador.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/ejercicio_contador_compartido/Contador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ejercicio_contador_compartido/HiloA.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/ejercicio_contador_compartido/HiloA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ejercicio_contador_compartido/HiloB.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/ejercicio_contador_compartido/HiloB.java" afterDir="false" />
@@ -18,6 +19,18 @@
       <change beforePath="$PROJECT_DIR$/ejercicio_sumar_pares_impares/HiloImpares.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/ejercicio_sumar_pares_impares/HiloImpares.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ejercicio_sumar_pares_impares/HiloPares.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/ejercicio_sumar_pares_impares/HiloPares.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ejercicio_sumar_pares_impares/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/ejercicio_sumar_pares_impares/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_contador_compartido/Contador.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_contador_compartido/HiloA.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_contador_compartido/HiloB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_contador_compartido/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_mostrar_nums_retardo/HiloA.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_mostrar_nums_retardo/HiloB.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_mostrar_nums_retardo/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_sumar_pares_impares/HiloImpares.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_sumar_pares_impares/HiloPares.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/ejercicio_sumar_pares_impares/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Sosten/Ejercicios ODS enunciados.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Sosten/Ejercicios ODS enunciados.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +138,7 @@
       <workItem from="1760426459931" duration="5000" />
       <workItem from="1760607210249" duration="20000" />
       <workItem from="1760610297499" duration="4831000" />
-      <workItem from="1760687217401" duration="679000" />
+      <workItem from="1760687217401" duration="2117000" />
     </task>
     <servers />
   </component>

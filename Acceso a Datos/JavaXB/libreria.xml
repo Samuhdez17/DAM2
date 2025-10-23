@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<libreria>
+    <libros>
+        <libro>
+            <autor>Cervantes</autor>
+            <titulo>Quijote</titulo>
+            <editorial>El barco de Vapor</editorial>
+            <precio>13.99</precio>
+            <isbn>1234</isbn>
+        </libro>
+        <libro>
+            <autor>Fernando de Rojas</autor>
+            <titulo>La Celestina</titulo>
+            <editorial>Anaya</editorial>
+            <precio>24.99</precio>
+            <isbn>1456</isbn>
+        </libro>
+    </libros>
+    <lugar>Getafe</lugar>
+    <nombre>Las Hojas</nombre>
+</libreria>
