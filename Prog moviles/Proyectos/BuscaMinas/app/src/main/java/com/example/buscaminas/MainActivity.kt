@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,18 +43,30 @@ fun Mapa() {
     ) {
         items(casillas) { index ->
             if (botonesPulsados[index]) {
-                Button(
-                    onClick = {},
-                    modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(255, 255, 255)
-                    )
-                ) { }
+                if (posBombas[index]) {
+                    Button(
+                        modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
+                        shape = RectangleShape,
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(53, 0, 0)
+                        )
+                    ) { }
+
+                } else {
+                    Button(
+                        onClick = {},
+                        modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(255, 255, 255)
+                        )
+                    ) { }
+                }
             } else {
                 Button(
                     onClick = {
-                        if (partidaSinEmpezar()) colocarBombas()
+                        if (partidaSinEmpezar(botonesPulsados)) colocarBombas(posBombas)
                         botonesPulsados[index] = true
                         },
                     modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
@@ -88,7 +101,9 @@ fun Mapa() {
     }
 }
 
-private fun partidaSinEmpezar(): Boolean {
+private fun partidaSinEmpezar(
+    botonesPulsados: SnapshotStateList<Boolean>
+): Boolean {
     for (pos in 0 until botonesPulsados.size) {
         if (botonesPulsados[pos]) return false
     }
@@ -96,7 +111,9 @@ private fun partidaSinEmpezar(): Boolean {
     return true
 }
 
-private fun colocarBombas() {
+private fun colocarBombas(
+    posBombas: SnapshotStateList<Boolean>
+) {
     var numBombas = 10
 
     while (numBombas != 0) {

@@ -40,10 +40,6 @@ public class Libreria {
         this.lugar = lugar;
     }
 
-    public void ordenarLibros() {
-        Collections.sort(this.libros);
-    }
-
     @XmlElementWrapper(name = "libros")
     @XmlElement(name = "libro")
 
@@ -53,27 +49,35 @@ public class Libreria {
 
     public void setLibros(List<Libro> libros) {
         this.libros.addAll(libros);
-        Collections.sort(this.libros);
+        for (Libro libro : libros) libro.setComparacion('t');
+        ordenarLibros();
     }
 
-    public void setLibro(Libro libro) {
-        libros.add(libro);
-        Collections.sort(this.libros);
+    public void setLibro(Libro libroNuevo) {
+        libros.add(libroNuevo);
+        for (Libro libro : libros) libro.setComparacion('t');
+        ordenarLibros();
     }
 
     public String titulosLibros() {
         StringBuilder sb = new StringBuilder();
+        for (Libro libro : libros) libro.setComparacion('t');
+        ordenarLibros();
 
         sb.append(String.format("""
                 Libreria: %s ; Lugar: %s
                 Titulos de libros:
                 
                 """, nombre, lugar));
-        for (Libro libro : libros) {
-            sb.append(libro.getTitulo()).append("\n");
+        for (int i = 0; i < libros.size(); i++) {
+            sb.append(String.format("Libro %d. ", i + 1)).append(libros.get(i).getTitulo()).append("\n");
         }
 
         return sb.toString();
+    }
+
+    public void ordenarLibros() {
+        Collections.sort(this.libros);
     }
 
     @Override

@@ -2,17 +2,15 @@
 <libreria>
     <libros>
         <libro>
-            <autor>Cervantes</autor>
-            <titulo>Quijote</titulo>
+            <autor>Quijote</autor>
+            <titulo>Cervantes</titulo>
             <editorial>El barco de Vapor</editorial>
-            <precio>13.99</precio>
             <isbn>1234</isbn>
         </libro>
         <libro>
-            <autor>Fernando de Rojas</autor>
-            <titulo>La Celestina</titulo>
+            <autor>La Celestina</autor>
+            <titulo>Fernando de Rojas</titulo>
             <editorial>Anaya</editorial>
-            <precio>24.99</precio>
             <isbn>1456</isbn>
         </libro>
     </libros>

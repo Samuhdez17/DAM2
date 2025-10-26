@@ -62,10 +62,6 @@ public class Libro implements Comparable<Libro> {
         this.precio = precio;
     }
 
-    public char getComparacion() {
-        return comparacion;
-    }
-
     public void setComparacion(char comparacion) {
         this.comparacion = comparacion;
     }
@@ -73,12 +69,12 @@ public class Libro implements Comparable<Libro> {
     @Override
     public String toString() {
         return String.format("""
-                   Título:   %s
                     Autor:   %s
+                   Título:   %s
                 Editorial:   %s
                    Precio:   %s
                      ISBN:   %s
-                """, titulo, autor, editorial, precio, isbn);
+                """, autor, titulo, editorial, precio, isbn);
     }
 
     @Override
@@ -94,17 +90,21 @@ public class Libro implements Comparable<Libro> {
     }
 
     private int compararPrecio(String precio, String precio1) {
-        return Double.compare(Double.parseDouble(precio), Double.parseDouble(precio1));
+        double precioLib1 = Double.parseDouble(String.valueOf(precio));
+        double precioLib2 = Double.parseDouble(String.valueOf(precio1));
+
+        return Double.compare(precioLib1, precioLib2);
     }
 
     private int compararEditorial(String editorial, String editorial1) {
-        return
+        return editorial.compareTo(editorial1);
     }
 
     private int compararTitulo(String titulo, String titulo1) {
+        return titulo.compareTo(titulo1);
     }
 
     private int compararAutor(String autor, String autor1) {
-
+        return autor.compareTo(autor1);
     }
 }
