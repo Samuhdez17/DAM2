@@ -8,7 +8,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,8 +33,8 @@ fun Mapa() {
         }
     }
 
-    var botonesPulsados = (0..casillas).map { false }.toMutableStateList()
-    var posBombas = (0..casillas).map { false }.toMutableStateList()
+    val botonesPulsados = (0 until casillas).map { false }.toMutableStateList()
+    val posBombas = (0 until casillas).map { false }.toMutableStateList()
 
     LazyVerticalGrid(
     GridCells.Fixed(columnas),
@@ -42,20 +44,40 @@ fun Mapa() {
     ) {
         items(casillas) { index ->
             if (botonesPulsados[index]) {
-                Button(
-                    onClick = {},
-                    modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
-                    shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(255, 255, 255)
-                    )
-                ) { }
+                if (posBombas[index]) {
+                    Button(
+                        onClick = {},
+                        modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(255, 0, 0)
+                        )
+                    ) { }
+                } else {
+                    val bombasCerca = mirarAlrededor(posBombas, index, columnas)
+
+                    Button(
+                        onClick = {},
+                        modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(255, 255, 255)
+                        )
+                    ) {
+                        if (bombasCerca > 0) {
+                            Text(
+                                text = bombasCerca.toString(),
+                                color = Color(0, 0, 128)
+                            )
+                        }
+                    }
+                }
             } else {
                 Button(
                     onClick = {
-                        if (partidaSinEmpezar()) colocarBombas()
+                        if (partidaSinEmpezar(botonesPulsados)) colocarBombas(posBombas, index)
                         botonesPulsados[index] = true
-                        },
+                    },
                     modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
                     shape = RectangleShape,
                     colors = ButtonDefaults.buttonColors(
@@ -63,32 +85,138 @@ fun Mapa() {
                     )
                 ) { }
             }
-//            if (posBombas[index]) {
-//                Button(
-//                    modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
-//                    shape = RectangleShape,
-//                    onClick = {},
-//                    colors = ButtonDefaults.buttonColors(
-//                    containerColor = Color(53, 0, 0)
-//                    )
-//                ) { }
-//
-//            }
-            //else {
-//                Button(
-//                     modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
-//                     shape = RectangleShape,
-//                     onClick = {},
-//                     colors = ButtonDefaults.buttonColors(
-//                     containerColor = Color(53, 104, 45)
-//                     )
-//                ) { }
-//            }
         }
     }
 }
 
-private fun partidaSinEmpezar(): Boolean {
+private fun mirarAlrededor(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int
+): Int {
+    var numMinas = 0
+
+    if (mirarArriba    (posBombas, index, columnas)) numMinas++
+    if (mirarAbajo     (posBombas, index, columnas)) numMinas++
+    if (mirarIzquierda (posBombas, index, columnas)) numMinas++
+    if (mirarDerecha   (posBombas, index, columnas)) numMinas++
+    if (mirarArribaIzq (posBombas, index, columnas)) numMinas++
+    if (mirarArribaDer (posBombas, index, columnas)) numMinas++
+    if (mirarAbajoIzq  (posBombas, index, columnas)) numMinas++
+    if (mirarAbajoDer  (posBombas, index, columnas)) numMinas++
+
+    return numMinas
+}
+
+private fun mirarAbajoDer(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int): Boolean {
+
+    val fila = index / columnas
+    val numFilas = posBombas.size / columnas
+    val col = index % columnas
+
+    if (fila < numFilas - 1 && col < columnas - 1) {
+        val pos = index + columnas + 1
+        return posBombas[pos]
+    }
+
+    return false
+}
+
+private fun mirarAbajoIzq(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int): Boolean {
+
+    val fila = index / columnas
+    val numFilas = posBombas.size / columnas
+    val col = index % columnas
+
+    if (fila < numFilas - 1 && col > 0) {
+        val pos = index + columnas - 1
+        return posBombas[pos]
+    }
+
+    return false
+}
+
+private fun mirarArribaDer(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int): Boolean {
+
+    val fila = index / columnas
+    val col = index % columnas
+
+    if (fila > 0 && col < columnas - 1) {
+        val pos = index - columnas + 1
+        return posBombas[pos]
+    }
+
+    return false
+}
+
+private fun mirarArribaIzq(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int): Boolean {
+
+    val fila = index / columnas
+    val col = index % columnas
+
+    if (fila > 0 && col > 0) {
+        val pos = index - columnas - 1
+        return posBombas[pos]
+    }
+
+    return false
+}
+
+private fun mirarDerecha(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int
+    ): Boolean {
+
+    if ((index + 1) % columnas == 0) return false
+    val derecha = index + 1
+    return derecha < posBombas.size && posBombas[derecha]
+}
+
+private fun mirarIzquierda(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int
+    ): Boolean {
+
+    if (index % columnas == 0) return false
+    val izquierda = index - 1
+    return izquierda >= 0 && posBombas[izquierda]
+}
+
+private fun mirarAbajo(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int): Boolean {
+
+    val abajo = index + columnas
+    return abajo < posBombas.size && posBombas[abajo]
+}
+
+private fun mirarArriba(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int,
+    columnas: Int): Boolean {
+
+    val arriba = index - columnas
+    return arriba >= 0 && posBombas[arriba]
+}
+
+private fun partidaSinEmpezar(
+    botonesPulsados: SnapshotStateList<Boolean>,
+): Boolean {
     for (pos in 0 until botonesPulsados.size) {
         if (botonesPulsados[pos]) return false
     }
@@ -96,14 +224,17 @@ private fun partidaSinEmpezar(): Boolean {
     return true
 }
 
-private fun colocarBombas() {
+private fun colocarBombas(
+    posBombas: SnapshotStateList<Boolean>,
+    index: Int
+) {
     var numBombas = 10
 
     while (numBombas != 0) {
         var posRandom: Int
         do {
-            posRandom = Random.nextInt(posBombas.size - 1)
-        } while (posBombas[posRandom])
+            posRandom = Random.nextInt(posBombas.size)
+        } while (posBombas[posRandom] && posRandom != index)
         posBombas[posRandom] = true
         numBombas--
     }
