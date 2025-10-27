@@ -10,4 +10,20 @@ public class Mensaje {
         this.estado = "Listo";
         this.descripcion = descripcion;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

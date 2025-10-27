@@ -5,17 +5,34 @@ import java.util.LinkedList;
 public class ColaMensajes {
     private final LinkedList<Mensaje> cola = new LinkedList<>();
 
-    public Mensaje leer() {
+    public ColaMensajes() {
+    }
+
+    public synchronized Mensaje getMensaje() {
+        while (cola.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         Mensaje mensaje = cola.getFirst();
         cola.removeFirst();
+        notifyAll();
         return mensaje;
     }
 
-    public void escribir(Mensaje mensaje) {
-        cola.addLast(mensaje);
-    }
+    public synchronized void agregarEnCola(Mensaje mensaje) {
+        while (cola.size() >= 5) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-    public boolean hayMensajes() {
-        return !cola.isEmpty();
+        cola.addLast(mensaje);
+        notifyAll();
     }
 }

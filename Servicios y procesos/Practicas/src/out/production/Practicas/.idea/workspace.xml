@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Ejercicios/E04carrera_100m/Atleta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E04carrera_100m/Carrera.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E04carrera_100m/Carrera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E04carrera_100m/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E04carrera_100m/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/ColaMensajes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/ColaMensajes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Consumidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Consumidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Mensaje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Productor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Productor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +73,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -94,8 +97,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
       </set>
     </attachedChunks>
   </component>
@@ -119,7 +122,12 @@
       <workItem from="1760610297499" duration="4831000" />
       <workItem from="1760687217401" duration="2117000" />
       <workItem from="1761217259246" duration="3555000" />
-      <workItem from="1761287603816" duration="1009000" />
+      <workItem from="1761287603816" duration="4412000" />
+      <workItem from="1761292343984" duration="596000" />
+      <workItem from="1761292957630" duration="84000" />
+      <workItem from="1761293053726" duration="388000" />
+      <workItem from="1761293458377" duration="214000" />
+      <workItem from="1761584775667" duration="2020000" />
     </task>
     <servers />
   </component>
