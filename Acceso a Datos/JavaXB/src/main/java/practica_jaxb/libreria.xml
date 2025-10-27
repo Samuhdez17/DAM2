@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<libreria>
+    <libros>
+        <libro>
+            <autor>George Orwell</autor>
+            <titulo>1984</titulo>
+            <editorial>Debate</editorial>
+            <precio>13.50</precio>
+            <isbn>978-8499920820</isbn>
+        </libro>
+        <libro>
+            <autor>Veronica Roth</autor>
+            <titulo>Divergente</titulo>
+            <editorial>Roca Editorial</editorial>
+            <precio>12.50</precio>
+            <isbn>978-8499185934</isbn>
+        </libro>
+        <libro>
+            <autor>Javier Castillo</autor>
+            <titulo>El día que se perdió la cordura</titulo>
+            <editorial>DeBolsillo</editorial>
+            <precio>19.95</precio>
+            <isbn>978-8466352741</isbn>
+        </libro>
+        <libro>
+            <autor>Julia Navarro</autor>
+            <titulo>El niño que perdió la guerra</titulo>
+            <editorial>Plaza &amp; Janés</editorial>
+            <precio>24.90</precio>
+            <isbn>978-8401027970</isbn>
+        </libro>
+        <libro>
+            <autor>Joanne K. Rowling</autor>
+            <titulo>Harry Potter y la piedra filosofal</titulo>
+            <editorial>Salamandra</editorial>
+            <precio>16.95</precio>
+            <isbn>978-8439717075</isbn>
+        </libro>
+        <libro>
+            <autor>Isabel Allende</autor>
+            <titulo>La casa de los espíritus</titulo>
+            <editorial>Debolsillo</editorial>
+            <precio>11.95</precio>
+            <isbn>978-8466347895</isbn>
+        </libro>
+        <libro>
+            <autor>Suzanne Collins</autor>
+            <titulo>Los juegos del hambre</titulo>
+            <editorial>Molino</editorial>
+            <precio>9.95</precio>
+            <isbn>978-8492966806</isbn>
+        </libro>
+        <libro>
+            <autor>Freida McFadden</autor>
+            <titulo>Nunca mientas</titulo>
+            <editorial>Suma de Letras</editorial>
+            <precio>20.90</precio>
+            <isbn>978-8410257818</isbn>
+        </libro>
+        <libro>
+            <autor>Andrea Longarela</autor>
+            <titulo>Te espero en el fin del mundo</titulo>
+            <editorial>Crossbooks</editorial>
+            <precio>21.95</precio>
+            <isbn>978-9566145325</isbn>
+        </libro>
+        <libro>
+            <autor>Javier Castillo</autor>
+            <titulo>baiaca te amo</titulo>
+            <editorial>mi wapa te amo</editorial>
+            <precio>10000.00</precio>
+            <isbn>1234</isbn>
+        </libro>
+    </libros>
+    <lugar>Getafe</lugar>
+    <nombre>Las Hojas</nombre>
+</libreria>

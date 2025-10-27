@@ -5,6 +5,8 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(name = "libreria")
@@ -12,7 +14,7 @@ import java.util.List;
 public class Libreria {
     private String nombre;
     private String lugar;
-    private List<Libro> libros = new ArrayList<>();
+    private final List<Libro> libros = new ArrayList<>();
 
     public Libreria(String nombre, String lugar) {
         this.nombre = nombre;
@@ -46,27 +48,47 @@ public class Libreria {
     }
 
     public void setLibros(List<Libro> libros) {
-        this.libros = libros;
+        this.libros.addAll(libros);
+        for (Libro libro : libros) libro.setComparacion('t');
+        ordenarLibros();
+    }
+
+    public void setLibro(Libro libroNuevo) {
+        libros.add(libroNuevo);
+        for (Libro libro : libros) libro.setComparacion('t');
+        ordenarLibros();
     }
 
     public String titulosLibros() {
         StringBuilder sb = new StringBuilder();
+        for (Libro libro : libros) libro.setComparacion('t');
+        ordenarLibros();
 
-        sb.append("Librería: ").append(nombre).append(" Lugar: ").append(lugar).append("\n");
-        sb.append("Título de libros: ").append("\n");
-        for (Libro libro : libros) {
-            sb.append(libro.getTitulo()).append("\n");
+        sb.append(String.format("""
+                Libreria: %s ; Lugar: %s
+                Titulos de libros:
+                
+                """, nombre, lugar));
+        for (int i = 0; i < libros.size(); i++) {
+            sb.append(String.format("Libro %d. ", i + 1)).append(libros.get(i).getTitulo()).append("\n");
         }
 
         return sb.toString();
+    }
+
+    public void ordenarLibros() {
+        Collections.sort(this.libros);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Librería: ").append(nombre).append(" Lugar: ").append(lugar).append("\n");
-        sb.append("Libros: ").append("\n");
+        sb.append(String.format("""
+                Libreria: %s ; Lugar: %s
+                Libros:
+                
+                """, nombre, lugar));
         for (Libro libro : libros) {
             sb.append(libro).append("\n");
         }
