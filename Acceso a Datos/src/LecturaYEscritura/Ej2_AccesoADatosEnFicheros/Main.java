@@ -54,12 +54,10 @@ public class Main {
             System.out.print("Este fichero no existe, quieres crearlo? (s/n): ");
             char respuesta = entrada.next().charAt(0);
 
-            if (respuesta != 's' && respuesta != 'n') {
-                while (respuesta != 's' && respuesta != 'n') {
-                    System.out.print("Respuesta inválida, responda de nuevo (s/n): ");
-                    respuesta = entrada.next().charAt(0);
-                    System.out.println();
-                }
+            while (respuesta != 's' && respuesta != 'n') {
+                System.out.print("Respuesta inválida, responda de nuevo (s/n): ");
+                respuesta = entrada.next().charAt(0);
+                System.out.println();
             }
 
             if (respuesta == 'n') {
@@ -79,12 +77,10 @@ public class Main {
                         System.out.print("No existe el fichero, quieres crearlo o introducir nuevo nombre? (c/i): ");
                         respuesta = entrada.next().charAt(0);
 
-                        if (respuesta != 'c' && respuesta != 'i') {
-                            while (respuesta != 'c' && respuesta != 'i') {
-                                System.out.print("Respuesta inválida, responda de nuevo (c/i): ");
-                                respuesta = entrada.next().charAt(0);
-                                System.out.println();
-                            }
+                        while (respuesta != 'c' && respuesta != 'i') {
+                            System.out.print("Respuesta inválida, responda de nuevo (c/i): ");
+                            respuesta = entrada.next().charAt(0);
+                            System.out.println();
                         }
 
                         if (respuesta == 'c') {
@@ -106,13 +102,11 @@ public class Main {
         String aficiones = entrada.nextLine().toUpperCase();
         String[] aficionesArray = aficiones.split(",");
 
-        if (aficionesArray.length == 0) {
-            while (aficionesArray.length == 0) {
-                System.out.print("No se ha indicado ninguna afición, ingrese como mínimo una afición (o más separado por comas): ");
-                entrada.nextLine();
-                aficiones = entrada.nextLine().toUpperCase();
-                aficionesArray = aficiones.split(",");
-            }
+        while (aficionesArray.length == 0) {
+            System.out.print("No se ha indicado ninguna afición, ingrese como mínimo una afición (o más separado por comas): ");
+            entrada.nextLine();
+            aficiones = entrada.nextLine().toUpperCase();
+            aficionesArray = aficiones.split(",");
         }
 
         GenerarCodUsuario genCod = new GenerarCodUsuario(fichero);
@@ -168,13 +162,12 @@ public class Main {
         int numConcorMin = entrada.nextInt();
         System.out.println();
 
-        if (numConcorMin < 1) {
-            while (numConcorMin < 1) {
-                System.out.print("El número es demasiado pequeño, introduce un número mayor o igual a 1: ");
-                numConcorMin = entrada.nextInt();
-                System.out.println();
-            }
+        while (numConcorMin < 1) {
+            System.out.print("El número es demasiado pequeño, introduce un número mayor o igual a 1: ");
+            numConcorMin = entrada.nextInt();
+            System.out.println();
         }
+
         return numConcorMin;
     }
 

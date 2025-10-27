@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws SAXException, IOException {
-        String rutaFichero = "practica_libros_xml/pedidos.xml";
+        String rutaFichero = "src/practica_libros_xml/pedidos.xml";
 
         XMLReader procesador = XMLReaderFactory.createXMLReader();
         GestionSax gSax = new GestionSax();

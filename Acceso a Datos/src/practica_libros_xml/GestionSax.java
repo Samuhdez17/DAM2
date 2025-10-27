@@ -30,22 +30,22 @@ public class GestionSax extends DefaultHandler {
         double precioFinal = 0.0;
         for (Double precio : precios) precioFinal += precio;
 
-        System.out.println("\t+-------------------------------+-------------------------------+-------------+");
-        System.out.println("\t|            LIBRO              |             AUTOR             |   PRECIO    |");
-        System.out.println("\t+-------------------------------+-------------------------------+-------------+");
+        System.out.println("\t+-------------------------------+-------------------------------+----------------+");
+        System.out.println("\t|            LIBRO              |             AUTOR             |      PRECIO    |");
+        System.out.println("\t+-------------------------------+-------------------------------+----------------+");
 
         for (int i = 0; i < nombres.size(); i++) {
-            System.out.printf("\t| %-29s | %-29s | %10.2f  |\n", nombres.get(i), autores.get(i), precios.get(i));
-            System.out.println("\t+-------------------------------+-------------------------------+-------------+");
+            System.out.printf("\t| %-29s | %-29s | %10.2feur  |\n", nombres.get(i), autores.get(i), precios.get(i));
+            System.out.println("\t+-------------------------------+-------------------------------+----------------+");
 
             if (i == nombres.size() - 1) {
-                System.out.printf("\t| %-59s   | %10.2f  |\n", "Precio total del pedido:", precioFinal);
-                System.out.println("\t+---------------------------------------------------------------+-------------+");
+                System.out.printf("\t| %-59s   | %10.2feur  |\n", "Precio total del pedido (IVA incluido):", precioFinal);
+                System.out.println("\t+---------------------------------------------------------------+----------------+");
             }
         }
     }
 
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) {
         String contenido = new String(ch, start, length);
         contenido = contenido.replaceAll("[\t\n]", "");
 

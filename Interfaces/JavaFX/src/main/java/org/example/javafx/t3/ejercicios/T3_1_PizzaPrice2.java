@@ -69,7 +69,9 @@ public class T3_1_PizzaPrice2 extends Application {
         stage.setScene(scene);
         stage.setTitle("T2_ChekBox_1");
         stage.show();
+        stage.setResizable(false);
 
+        // SET ON ACTION
         boton1.setOnAction(e -> {
             int precioPizza = 10;
             precios[6] = Integer.parseInt(textField.getText());

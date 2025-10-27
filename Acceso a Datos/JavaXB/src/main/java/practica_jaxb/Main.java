@@ -21,9 +21,7 @@ public class Main {
         JAXBContext context = JAXBContext.newInstance(Libreria.class);
 
         int opcion = -1;
-
-        while (opcion != 0) {
-            System.out.println("""
+        String menu = """
                     ===============================
                                  MENU
                     ===============================
@@ -34,7 +32,10 @@ public class Main {
                     5. Borrar libro
                     6. Leer XML
                     0. Salir
-                    """);
+                    """;
+
+        while (opcion != 0) {
+            System.out.println(menu);
             opcion = ENTRADA.nextInt();
 
             switch (opcion) {
@@ -48,6 +49,13 @@ public class Main {
                 case 5 -> borrarLibro(context);
                 case 6 -> leerXml(context);
                 case 0 -> System.out.println("Saliendo...");
+                default -> {
+                    while (opcion > 6 || opcion < 0) {
+                        System.out.println("ERROR, indica una opción válida");
+                        System.out.println(menu);
+                        opcion = ENTRADA.nextInt();
+                    }
+                }
             }
         }
     }
@@ -69,8 +77,7 @@ public class Main {
 
     private static Libreria leerFichero(JAXBContext context) throws JAXBException {
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Libreria libXml = (Libreria) unmarshaller.unmarshal(XML);
-        return libXml;
+        return (Libreria) unmarshaller.unmarshal(XML);
     }
 
     private static void escribirFichero(JAXBContext context) throws JAXBException {
