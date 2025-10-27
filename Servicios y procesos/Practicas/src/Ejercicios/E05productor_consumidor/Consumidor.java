@@ -1,29 +1,40 @@
 package Ejercicios.E05productor_consumidor;
 
-public class Consumidor implements  Runnable {
-    private final ColaMensajes colaMensajes;
-    private final int id;
+/**
+ * Clase Consumidor
+ * Esta clase recibe el mensaje que se tiene en la cola para sacarlo por consola mediante el método FIFO
+ * Contiene su ID y la cola a compartir con Productor
+ */
+public class Consumidor implements Runnable {
+    private Cola cola;
+    private int id;
 
-    public Consumidor(ColaMensajes colaMensajes, int id) {
-        this.colaMensajes = colaMensajes;
+    /**
+     * Constructor
+     * Se establece el ID del consumidor y la cola a compartir con Productor
+     * @param cola Memoria compartida con Productor
+     * @param id ID del consumidor
+     */
+    public Consumidor(Cola cola, int id) {
+        this.cola = cola;
         this.id = id;
     }
 
-    @Override
+    /**
+     * Run
+     * Este método se ejecuta al iniciar el hilo de la clase Consumidor
+     * Este recibe el primer mensaje que haya en la memoria compartida de la cola para sacarlo por consola
+     * @see Cola#sacarDeCola()
+     */
     public void run() {
-        try {
-            int i = 0;
-            while (i < 5) {
-                Mensaje mensaje = colaMensajes.getMensaje();
-                if (mensaje.getEstado().equals("Listo")) {
-                    System.out.printf("Consumidor %d consumió mensaje %d: %s\n", id, mensaje.getId(), mensaje.getDescripcion());
-                    mensaje.setEstado("Consumido");
-                }
-                Thread.sleep(200);
-                i++;
+        while (true) {
+            try {
+                Mensaje mensaje = cola.sacarDeCola();
+                System.out.printf("[C] Consumidor %d, consumió mensaje: %s\n", id, mensaje);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Se marca a sí mismo como interrumpido para poder terminar el proceso
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }
