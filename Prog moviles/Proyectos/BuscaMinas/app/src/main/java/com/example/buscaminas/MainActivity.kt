@@ -1,6 +1,7 @@
 package com.example.buscaminas
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -59,16 +60,30 @@ fun Mapa() {
                     Button(
                         onClick = {},
                         modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
+                        contentPadding = PaddingValues(0.dp),
                         shape = RectangleShape,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(255, 255, 255)
                         )
                     ) {
-                        if (bombasCerca > 0) {
-                            Text(
+                        when(bombasCerca) {
+                            1 -> Text(
                                 text = bombasCerca.toString(),
-                                color = Color(0, 0, 128)
+                                color = Color(0, 0, 0)
                             )
+                            2 -> Text(
+                                text = bombasCerca.toString(),
+                                color = Color(20, 200, 30)
+                            )
+                            3 -> Text(
+                                text = bombasCerca.toString(),
+                                color = Color(250, 0, 0)
+                            )
+                            4 -> Text(
+                                text = bombasCerca.toString(),
+                                color = Color(50, 0, 140)
+                            )
+                            0 -> {}
                         }
                     }
                 }
