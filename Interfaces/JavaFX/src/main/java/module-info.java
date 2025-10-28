@@ -16,6 +16,4 @@ module org.example.javafx {
     opens org.example.javafx.t3.enseñanzas to javafx.fxml;
     exports org.example.javafx.t3.ejercicios;
     opens org.example.javafx.t3.ejercicios to javafx.fxml;
-    exports org.example.javafx.t3.ejercicios.T3_2_Raices;
-    opens org.example.javafx.t3.ejercicios.T3_2_Raices to javafx.fxml;
 }
