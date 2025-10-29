@@ -277,7 +277,7 @@ public class Main {
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         LIB_1 = leerFichero(context);
         marshaller.marshal(LIB_1, System.out);
-        System.out.println();// Se imprime en el XML
+        System.out.println();
         LIB_1.getLibros().clear();
     }
 }

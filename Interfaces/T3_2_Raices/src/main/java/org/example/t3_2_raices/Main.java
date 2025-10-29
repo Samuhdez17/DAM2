@@ -70,7 +70,6 @@ public class Main extends Application {
 
         HBox botonesHbox = new HBox();
         botonesHbox.getChildren().addAll(aceptar, borrar, cerrar);
-        botonesHbox.setAlignment(Pos.CENTER);
         botonesHbox.setSpacing(10);
         botonesHbox.setStyle("-fx-padding: 20");
 
@@ -91,10 +90,10 @@ public class Main extends Application {
 
         AnchorPane.setRightAnchor(botonesHbox, 10.0);
 
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(anchorPane, scrollPane);
+        VBox raiz1 = new VBox();
+        raiz1.getChildren().addAll(anchorPane, scrollPane);
 
-        Scene faltasAlumnos = new Scene(vBox, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
+        Scene faltasAlumnos = new Scene(raiz1, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
 
         stage.setScene(faltasAlumnos);
         stage.setTitle("Raices");
@@ -104,26 +103,34 @@ public class Main extends Application {
             // SCENE 2
             LinkedList<HBox> elementosListView = new LinkedList<>();
             for (VBox alumno : alumnos) {
-                HBox hBox = new HBox();
                 Label nombreAlumno = new Label();
                 Label fecha = new Label();
                 Label tipoFalta = new Label();
 
-                Label labelAlumno = (Label) alumno.getChildren().get(0);
+                Label labelAlumno = (Label) alumno.getChildren().getFirst();
                 nombreAlumno.setText(labelAlumno.getText());
                 fecha.setText(String.valueOf(datePicker.getValue()));
 
                 HBox botones = (HBox) alumno.getChildren().get(1);
                 for (Node nodo : botones.getChildren()) {
-                    if (nodo instanceof RadioButton radio) {
-                        if (radio.isSelected()) tipoFalta.setText(radio.getText());
+                    if (nodo instanceof RadioButton radio && radio.isSelected()) {
+                        tipoFalta.setText(radio.getText());
                     }
                 }
 
-                hBox.getChildren().addAll(nombreAlumno, fecha, tipoFalta);
-                hBox.setSpacing(20);
-                elementosListView.add(hBox);
+                nombreAlumno.setPrefWidth(300);
+                fecha.setPrefWidth(150);
+                tipoFalta.setPrefWidth(100);
+
+                fecha.setStyle("-fx-text-fill: gray;");
+                tipoFalta.setStyle("-fx-text-fill: darkred; -fx-font-weight: bold");
+
+                HBox fila = new HBox(nombreAlumno, fecha, tipoFalta);
+                fila.setSpacing(30);
+                fila.setStyle("-fx-padding: 10; -fx-alignment: CENTER_LEFT;");
+                elementosListView.add(fila);
             }
+
 
             ListView listView = new ListView();
             listView.getItems().addAll(elementosListView);
@@ -133,8 +140,8 @@ public class Main extends Application {
             boton.setCenter(botonRegresar);
             botonRegresar.setAlignment(Pos.CENTER);
 
-            SplitPane splitPane = new SplitPane(listView, boton);
-            Scene registroFaltas = new Scene(splitPane, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
+            SplitPane raiz2 = new SplitPane(listView, boton);
+            Scene registroFaltas = new Scene(raiz2, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
 
             stage.setScene(registroFaltas);
             stage.setTitle("Registro faltas");

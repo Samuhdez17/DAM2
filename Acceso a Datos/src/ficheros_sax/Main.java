@@ -13,7 +13,7 @@ public class Main {
         GestionSax gSax = new GestionSax();
         procesadorXML.setContentHandler(gSax);
 
-        InputSource fileXml = new InputSource("practica_libros_xml/pedidos.xml");
+        InputSource fileXml = new InputSource("src/ficheros_sax/fichero.xml");
         procesadorXML.parse(fileXml);
     }
 }

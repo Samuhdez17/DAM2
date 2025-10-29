@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<videoclub>
+    <nombre>MovieWorld</nombre>
+    <ciudad>Madrid</ciudad>
+    <peliculas>
+        <pelicula>
+            <titulo>Inception</titulo>
+            <director>Christopher Nolan</director>
+            <año>2010</año>
+            <genero>Ciencia Ficción</genero>
+            <duracion>148</duracion>
+        </pelicula>
+        <pelicula>
+            <titulo>Avatar</titulo>
+            <director>James Cameron</director>
+            <año>2009</año>
+            <genero>Aventura</genero>
+            <duracion>162</duracion>
+        </pelicula>
+        <pelicula>
+            <titulo>Dune</titulo>
+            <director>Denis Villeneuve</director>
+            <año>2021</año>
+            <genero>Ciencia Ficción</genero>
+            <duracion>155</duracion>
+        </pelicula>
+    </peliculas>
+</videoclub>

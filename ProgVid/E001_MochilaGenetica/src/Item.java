@@ -1,6 +1,6 @@
 public class Item {
-    private int volumen;
-    private int valor;
+    private final int volumen;
+    private final int valor;
 
     public Item(int volumen, int valor) {
         this.volumen = volumen;

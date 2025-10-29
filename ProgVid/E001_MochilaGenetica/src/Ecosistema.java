@@ -22,9 +22,27 @@ public class Ecosistema {
         individuos.remove(menosIdoneo);
     }
 
-    public double calcularIdoneidadMedia() {}
+    public double calcularIdoneidadMedia() {
+        double suma = 0;
+        for (Individuo individuo : individuos) {
+            suma += individuo.getIdoneidad();
+        }
+        return suma / individuos.size();
+    }
 
-    public double calcularIdoneidadMinima() {}
+    public double calcularIdoneidadMinima() {
+        Individuo individuo = individuos.getFirst();
+        for (Individuo individuo1 : individuos) {
+            if (individuo1.getIdoneidad() < individuo.getIdoneidad()) individuo = individuo1;
+        }
+        return individuo.getIdoneidad();
+    }
 
-    public double calcularIdoneidadMaxima() {}
+    public double calcularIdoneidadMaxima() {
+        Individuo individuo = individuos.getFirst();
+        for (Individuo individuo1 : individuos) {
+            if (individuo1.getIdoneidad() > individuo.getIdoneidad()) individuo = individuo1;
+        }
+        return individuo.getIdoneidad();
+    }
 }
