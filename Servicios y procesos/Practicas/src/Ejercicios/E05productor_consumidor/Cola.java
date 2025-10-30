@@ -20,11 +20,13 @@ public class Cola {
      * @param mensaje Mensaje generado por el Productor.
      * @see Productor#run() línea 41
      */
-    public synchronized void aniadirACola(Mensaje mensaje) throws InterruptedException {
-        while (cola.size() >= capacidad) wait();
+    public void aniadirACola(Mensaje mensaje) throws InterruptedException {
+        synchronized (this) {
+            while (cola.size() >= capacidad) wait();
+            cola.add(mensaje);
+            notifyAll();
+        }
 
-        cola.add(mensaje);
-        notifyAll();
     }
 
     /**
@@ -33,11 +35,13 @@ public class Cola {
      * @see Consumidor#run() línea 32
      * @return Mensaje generado por el Productor.
      */
-    public synchronized Mensaje sacarDeCola() throws InterruptedException {
-        while (cola.isEmpty()) wait();
+    public Mensaje sacarDeCola() throws InterruptedException {
+        synchronized (this) {
+            while (cola.isEmpty()) wait();
 
-        Mensaje mensaje = cola.poll(); //Método de la clase Queue para borrar el primer elemento de la cola
-        notifyAll();
-        return mensaje;
+            Mensaje mensaje = cola.poll(); //Método de la clase Queue para borrar el primer elemento de la cola
+            notifyAll();
+            return mensaje;
+        }
     }
 }

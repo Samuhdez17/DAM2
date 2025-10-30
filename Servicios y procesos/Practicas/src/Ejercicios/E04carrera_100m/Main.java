@@ -22,7 +22,7 @@ public class Main {
         carrera.darSalida();
 
         try {
-            atletas[atletas.length - 1].join();
+            for (Thread atleta : atletas) atleta.join();
             System.out.println("Fin de la carrera");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);

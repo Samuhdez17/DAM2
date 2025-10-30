@@ -10,11 +10,12 @@ public class Contador implements Runnable {
     public void run() {
         for (int i = 0; i < 1000; i++) {
             contador++;
-            try {
-                Thread.sleep(10);
-                System.out.printf("Hilo %c: valor contador -> %d\n", Thread.currentThread().getName().charAt(7), contador);
-            } catch (InterruptedException e) {
-        }
+//            try {
+//                Thread.sleep(10);
+//                System.out.printf("Hilo %c: valor contador -> %d\n", Thread.currentThread().getName().charAt(7), contador);
+//            } catch (InterruptedException e) {
+//
+//            }
     }
         System.out.printf("Hilo %c: valor contador final -> %d\n", Thread.currentThread().getName().charAt(7), contador);
     }

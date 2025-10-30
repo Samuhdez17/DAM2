@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/ColaMensajes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/ColaMensajes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Consumidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Consumidor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Mensaje.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Productor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E05productor_consumidor/Productor.java" afterDir="false" />
-    </list>
+    <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,7 +61,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/ejercicio_mostrar_nums_retardo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/Ejercicios/2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -81,6 +75,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\2" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\ejercicio_mostrar_nums_retardo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -127,7 +123,8 @@
       <workItem from="1761292957630" duration="84000" />
       <workItem from="1761293053726" duration="388000" />
       <workItem from="1761293458377" duration="214000" />
-      <workItem from="1761584775667" duration="2020000" />
+      <workItem from="1761584775667" duration="7118000" />
+      <workItem from="1761722524953" duration="184000" />
     </task>
     <servers />
   </component>

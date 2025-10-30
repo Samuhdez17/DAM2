@@ -11,5 +11,11 @@ public class Main {
 
         hiloA.start();
         hiloB.start();
+        try {
+            hiloA.join();
+            hiloB.join();
+        } catch (InterruptedException e) {
+
+        }
     }
 }

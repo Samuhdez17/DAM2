@@ -1,8 +1,11 @@
 package Ejercicios.E04carrera_100m;
 
+import java.util.Random;
+
 public class Atleta implements Runnable {
     private final int dorsal;
     private final Carrera carrera;
+    private final Random random = new Random();
 
     public Atleta(int dorsal, Carrera carrera) {
         this.dorsal = dorsal;
@@ -14,7 +17,7 @@ public class Atleta implements Runnable {
         try {
             carrera.esperarSalida();
 
-            Thread.sleep(8000 + (int) (Math.random() * 2000));
+            Thread.sleep(random.nextInt(3000) + 8000);
 
             carrera.notificarLlegada(dorsal);
         } catch (InterruptedException e) {
