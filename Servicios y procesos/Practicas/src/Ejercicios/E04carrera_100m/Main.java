@@ -13,10 +13,7 @@ public class Main {
 
         for (int i = 0; i < atletas.length; i++) {
             atletas[i] = new Thread(new Atleta(dorsales[i], carrera));
-        }
-
-        for (Thread atleta : atletas) {
-            atleta.start();
+            atletas[i].start();
         }
 
         carrera.darSalida();
@@ -31,10 +28,10 @@ public class Main {
 
     private static void asignarDorsales(int[] dorsales) {
         for (int i = 0; i < dorsales.length; i++) {
-            int dorsalFinal = (RANDOM.nextInt(50) + 50);
+            int dorsalFinal = (RANDOM.nextInt(50) + 150);
 
             while (dorsalFinal == dorsales[i]) {
-                dorsalFinal = (RANDOM.nextInt(50) + 50);
+                dorsalFinal = (RANDOM.nextInt(50) + 150);
             }
 
             dorsales[i] = dorsalFinal;

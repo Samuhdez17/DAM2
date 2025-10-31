@@ -2,33 +2,36 @@ package Ejercicios.E04carrera_100m;
 
 public class Carrera {
     private boolean salidaDada = false;
-    private int inicioCarrera;
 
-    public synchronized void esperarSalida() {
-        while (!salidaDada) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public void esperarSalida() {
+        synchronized (this) {
+            while (!salidaDada) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    public synchronized void darSalida() {
-        System.out.println("Preparados...");
-        try { Thread.sleep(1000); } catch (InterruptedException e) {}
+    public void darSalida() {
+        synchronized (this) {
+            System.out.println("Preparados");
+            try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace(); }
 
-        System.out.println("Listos...");
-        try { Thread.sleep(1000); } catch (InterruptedException e) {}
+            System.out.println("Listos");
+            try { Thread.sleep(1000); } catch (InterruptedException e) { e.printStackTrace();}
 
-        System.out.println("¡YA!");
-        salidaDada = true;
-        inicioCarrera = (int) (System.currentTimeMillis() / 1000);
-        notifyAll();
+            System.out.println("YA!");
+            salidaDada = true;
+            notifyAll();
+        }
     }
 
-    public synchronized void notificarLlegada(int dorsal) {
-        int tiempo = (int) (System.currentTimeMillis() / 1000) - inicioCarrera;
-        System.out.println("Atleta " + dorsal + " tarda " + tiempo);
+    public void notificarLlegada(int dorsal, int tiempo) {
+        synchronized (this) {
+            System.out.printf("Atleta %d ha llegado en %d.%d segundos\n", dorsal, tiempo / 1000, tiempo % 1000); // Segundos y milisegundos del atleta
+        }
     }
 }

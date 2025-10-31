@@ -17,9 +17,10 @@ public class Atleta implements Runnable {
         try {
             carrera.esperarSalida();
 
-            Thread.sleep(random.nextInt(3000) + 8000);
+            int tiempo = random.nextInt(2000) + 9000;
+            Thread.sleep(tiempo);
 
-            carrera.notificarLlegada(dorsal);
+            carrera.notificarLlegada(dorsal, tiempo);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.out.println("Atleta " + dorsal + " fue interrumpido.");
