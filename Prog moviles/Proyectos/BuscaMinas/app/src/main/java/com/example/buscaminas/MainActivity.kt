@@ -54,13 +54,6 @@ fun Mapa() {
             fontSize = (24.sp),
         )
 
-        var textoEstado by remember { mutableStateOf("Pulsa una casilla para empezar") }
-
-        Text(
-            textoEstado,
-            modifier = Modifier.padding(3.dp).align(Alignment.CenterHorizontally),
-        )
-
         Button(
             onClick = {
                 juegoTerminado = false
@@ -100,7 +93,6 @@ fun Mapa() {
                                 if (posBombas[pos]) botonesPulsados[pos] = true
                             }
 
-                            textoEstado = "Has perdido"
 
                         } else {
                             val bombasCerca = mirarAlrededor(posBombas, index, columnas)
@@ -149,7 +141,6 @@ fun Mapa() {
                                             index
                                         )
 
-                                        textoEstado = "Pulsa una casilla para descubrir"
                                     }
                                     botonesPulsados[index] = true
                                 }
