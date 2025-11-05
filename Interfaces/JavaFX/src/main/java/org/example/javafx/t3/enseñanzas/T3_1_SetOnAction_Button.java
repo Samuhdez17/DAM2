@@ -21,11 +21,11 @@ public class T3_1_SetOnAction_Button extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        button1.setOnAction(event -> label.setText("Hiciste Click"));
+        button1.setOnAction(e -> label.setText("Hiciste Click"));
 
 
         /* Código sustituido por la expresion LAMBDA
-        button1.setOnAction(new  EventHandler<ActionEvent>() {
+        button1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 label.setText("Hiciste Click");
