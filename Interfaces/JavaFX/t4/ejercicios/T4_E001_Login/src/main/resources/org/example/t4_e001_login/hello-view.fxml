@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.t4_e001_login.HelloController">
+   <children>
+      <Label fx:id="welkome" text="Welkome! Please sign in.">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="gridPane" alignment="CENTER" prefHeight="181.0" prefWidth="502.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.6000122070312" minWidth="10.0" prefWidth="181.60001220703126" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="468.00002136230466" minWidth="10.0" prefWidth="418.3999877929688" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="87.80002441406249" minHeight="10.0" prefHeight="36.60001220703125" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="91.79999580383301" minHeight="10.0" prefHeight="32.79997863769532" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="95.20001220703125" minHeight="10.0" prefHeight="83.20001220703125" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="29.20001831054688" minHeight="0.0" prefHeight="20.79998779296875" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="logIn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="Log in" translateX="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <PasswordField fx:id="pssFiled" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtFiled" prefHeight="26.0" prefWidth="310.0" GridPane.columnIndex="1" />
+            <Label fx:id="userName" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="190.0" text="Username:" />
+            <Label fx:id="passwrd" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="285.0" text="Password:" GridPane.rowIndex="1" />
+            <HBox fx:id="hBox" alignment="CENTER_RIGHT" prefHeight="86.0" prefWidth="204.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="checkContent" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="143.0" text="Show password charecters?" translateX="-133.0">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="cb1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showPassword" prefHeight="25.0" prefWidth="17.0" translateX="-133.0" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </children>
+</VBox>
