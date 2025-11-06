@@ -18,7 +18,7 @@ public class Main {
             0. Salir
             """;
 
-    public static void main(String[] args) throws  SQLException {
+    public static void main(String[] args) throws SQLException {
         Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/empleadosdb", USER, CONTRA);
 
         int opcionMenu = -1;
@@ -50,7 +50,7 @@ public class Main {
             String nombre = resultado.getString("nombre");
             String apellido = resultado.getString("apellido");
             String telefono = resultado.getString("telefono");
-            Double salario = resultado.getDouble("salario");
+            String salario = resultado.getString("salario");
             String nombreDepartamento = resultado.getString("d.nombre");
 
             if (contador == 0) {
@@ -187,7 +187,8 @@ public class Main {
         LinkedList<Integer> ids = new LinkedList<>();
 
         while (resultado.next()) {
-            ids.add(resultado.getInt("e.id"));
+            int id = resultado.getInt("e.id");
+            ids.add(Integer.valueOf(id));
         }
 
         int respuesta = ENTRADA.nextInt();
