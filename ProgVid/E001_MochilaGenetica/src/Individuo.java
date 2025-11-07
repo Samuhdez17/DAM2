@@ -7,12 +7,12 @@ public class Individuo {
     private double idoneidad;
     private boolean[] genoma;
     private Inventario inventario;
-    private Random random = new Random();
+    private final Random random = new Random();
 
-    public Individuo(Inventario inventario) {
+    public Individuo(int volumenMochila, Inventario inventario) {
         this.inventario = inventario;
 
-        volumenMochila = Integer.MIN_VALUE;
+        this.volumenMochila = volumenMochila;
         volumenTotal = Integer.MIN_VALUE;
         valorTotal = Integer.MIN_VALUE;
         idoneidad = Double.MIN_VALUE;

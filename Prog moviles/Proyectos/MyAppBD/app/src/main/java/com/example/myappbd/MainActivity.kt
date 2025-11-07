@@ -1,3 +1,5 @@
+package com.example.myappbd
+
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
@@ -33,8 +35,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myappbd.DBHandler
-import com.example.myappbd.ProductModal
 import com.example.myappbd.ui.theme.MyAppBDTheme
 
 
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyAppBDTheme {
                 Column {
-                    //AddDataToDatabase(LocalContext.current)
+//                    AddDataToDatabase(LocalContext.current)
                     ReadDataFromDatabase(LocalContext.current)
                 }
             }
@@ -56,38 +56,52 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ReadDataFromDatabase(context: Context) {
     // initialize array list
+//    val productList: List<ProductModal>
     val productList: List<ProductModal>
 
     val dbHandler = DBHandler(context)
     productList = dbHandler.readProducts()
 
-    // create a lazy column for displaying a list view.
-    LazyColumn {
-        // set data for each item of listview
-        itemsIndexed(productList) { index, _ ->
-            // create card for each item
-            Card(
-                modifier = Modifier.padding(8.dp),
-                elevation = CardDefaults.cardElevation(6.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(8.dp).fillMaxWidth(),
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = productList[index].productName,
-                        //modifier = Modifier.padding(4.dp),
-                        color = Color.Black, textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.width(5.dp))
+    Column() {
+        Spacer(modifier = Modifier.height(50.dp))
 
-                    Text(
-                        text = "Product price : " + productList[index].productPrice,
-                        modifier = Modifier.padding(4.dp),
-                        color = Color.Black, textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.width(5.dp))
+        // create a lazy column for displaying a list view.
+        LazyColumn {
+            // set data for each item of listview
+            itemsIndexed(productList) { index, _ ->
+                // create card for each item
+                Card(
+                    modifier = Modifier.padding(8.dp),
+                    elevation = CardDefaults.cardElevation(6.dp)
+                ) {
+                    Column(
+                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+
+                        Text(
+                            text = productList[index].productName,
+                            //modifier = Modifier.padding(4.dp),
+                            color = Color.Black, textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+
+                        Text(
+                            text = "Product price : " + productList[index].productPrice,
+                            modifier = Modifier.padding(4.dp),
+                            color = Color.Black, textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+
+                        Button(
+                            onClick = {dbHandler.deleteProduct(productList[index].productName)}
+                        ) {
+                            Text(text = "Delete")
+                        }
+
+                        Spacer(modifier = Modifier.width(5.dp))
+                    }
                 }
             }
         }
@@ -98,7 +112,6 @@ fun ReadDataFromDatabase(context: Context) {
 fun AddDataToDatabase(
     context: Context
 ) {
-
     // variables for text field
     val productName = remember {
         mutableStateOf(TextFieldValue())
@@ -117,7 +130,7 @@ fun AddDataToDatabase(
         verticalArrangement = Arrangement.Center,
     ) {
         // initialize database handler
-        //val dbHandler: DBHandler = DBHandler(context)
+//        val dbHandler: DBHandler = DBHandler(context)
         val dbHandler = DBHandler(context)
         Text(
             text = "SQLite Database in Android",

@@ -1,8 +1,8 @@
 public class Inventario {
-    private Item[] items;
+    private final Item[] items;
 
     public Inventario(Item[] items) {
-        setItems(items);
+        this.items = items;
     }
 
     public int getVolumenItem(int pos) {
@@ -15,9 +15,5 @@ public class Inventario {
 
     public int getTamanio() {
         return items.length;
-    }
-
-    public void setItems(Item[] items) {
-        this.items = items;
     }
 }

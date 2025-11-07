@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-// creating a constructor
 // for our database handler
 class DBHandler
     (context: Context?) :
@@ -88,6 +87,16 @@ class DBHandler
         // and returning our array list.
         cursorProducts.close()
         return courseModalArrayList
+    }
+
+    fun deleteProduct(
+        productName: String?,
+    ) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(NAME_COL, productName)
+        db.delete(TABLE_NAME, "name=?", arrayOf(productName))
+        db.close()
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
