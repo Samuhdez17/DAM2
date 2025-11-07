@@ -24,6 +24,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -55,14 +56,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ReadDataFromDatabase(context: Context) {
-    // initialize array list
-//    val productList: List<ProductModal>
-    val productList: List<ProductModal>
-
     val dbHandler = DBHandler(context)
-    productList = dbHandler.readProducts()
+    // initialize array list
+    val productList = remember { dbHandler.readProducts().toMutableStateList() }
 
-    Column() {
+    Column {
         Spacer(modifier = Modifier.height(50.dp))
 
         // create a lazy column for displaying a list view.
@@ -82,7 +80,6 @@ fun ReadDataFromDatabase(context: Context) {
 
                         Text(
                             text = productList[index].productName,
-                            //modifier = Modifier.padding(4.dp),
                             color = Color.Black, textAlign = TextAlign.Center
                         )
                         Spacer(modifier = Modifier.width(5.dp))
@@ -95,7 +92,11 @@ fun ReadDataFromDatabase(context: Context) {
                         Spacer(modifier = Modifier.width(5.dp))
 
                         Button(
-                            onClick = {dbHandler.deleteProduct(productList[index].productName)}
+                            onClick = {
+                                dbHandler.deleteProduct(productList[index].productId)
+                                productList.removeAt(index)
+                                Toast.makeText(context, "Product Deleted", Toast.LENGTH_SHORT).show()
+                            }
                         ) {
                             Text(text = "Delete")
                         }
@@ -172,6 +173,8 @@ fun AddDataToDatabase(
                 productPrice.value.text.toDoubleOrNull() ?: 0.0
             )
             Toast.makeText(context, "Product Added to Database", Toast.LENGTH_SHORT).show()
+            productName.value = TextFieldValue()
+            productPrice.value = TextFieldValue()
         }) {
             Text(text = "Add Product to Database", color = Color.White)
         }

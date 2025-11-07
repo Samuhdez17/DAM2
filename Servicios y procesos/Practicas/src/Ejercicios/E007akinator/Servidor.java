@@ -52,34 +52,31 @@ public class Servidor {
                             for (int i = 0 ; i < numerosDescartados.length ; i++) if (i % 2 == 0) numerosDescartados[i] = true;
                         }
 
-                        int numero = generarDeduccion(numerosDescartados, random);
+                        int numero;
 
-                        decirDeduccion(numero, salida);
+                        for (int i = 0; i < 7; i++) {
+                            if (seHaGanado) break;
 
-                        mensajeJugador = entrada.readLine();
-
-                        while (!mensajeJugador.equals("M") && !mensajeJugador.equals("m") && !mensajeJugador.equals("s")) {
-                            mensajeErrorM_m(salida, numero);
+                            numero = generarDeduccion(numerosDescartados, random);
+                            decirDeduccion(numero, salida);
                             mensajeJugador = entrada.readLine();
-                        }
 
-                        switch (mensajeJugador) {
-                            case "M" -> {
-                                for (int i = 0 ; i < numero ; i++) numerosDescartados[i] = true;
+                            while (!mensajeJugador.equals("M") && !mensajeJugador.equals("m") && !mensajeJugador.equals("s")) {
+                                mensajeErrorM_m(salida, numero);
+                                mensajeJugador = entrada.readLine();
+                            }
 
-                                for (int i = 0 ; i < 5 ; i++) {
-                                    numero = generarDeduccion(numerosDescartados, random);
-                                    decirDeduccion(numero, salida);
-
-                                    mensajeJugador = entrada.readLine();
+                            switch (mensajeJugador) {
+                                case "M" -> {
+                                    for (int M = 0; M <= numero; M++) numerosDescartados[M] = true;
                                 }
-                            }
 
-                            case "m" -> {
-                                for (int i = numero ; i < numerosDescartados.length ; i++) numerosDescartados[i] = true;
-                            }
+                                case "m" -> {
+                                    for (int m = numero; m < numerosDescartados.length; m++) numerosDescartados[m] = true;
+                                }
 
-                            case "s" -> seHaGanado = true;
+                                case "s" -> seHaGanado = true;
+                            }
                         }
 
                         if (!seHaGanado) {
