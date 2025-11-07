@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="ultimo intento de push">
-      <change afterPath="$PROJECT_DIR$/../../../Ingles/libro.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E04carrera_100m.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Practicas/telnet/Cliente.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Practicas/telnet/Servidor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/telnet/Cliente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/telnet/Servidor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/BBDD/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/BBDD/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/BBDD/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/BBDD/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/LecturaYEscritura/Ej2_AccesoADatosEnFicheros/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/LecturaYEscritura/Ej2_AccesoADatosEnFicheros/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/ficheros_sax/GestionSax.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/ficheros_sax/GestionSax.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/ficheros_sax/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/ficheros_sax/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/ficheros_xml/LeerXml.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/ficheros_xml/LeerXml.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/practica_libros_xml/GestionSax.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/practica_libros_xml/GestionSax.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/practica_libros_xml/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Acceso a Datos/src/out/production/Acceso a Datos/practica_libros_xml/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practicas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E04carrera_100m/Carrera.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E04carrera_100m/Carrera.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E04carrera_100m/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E04carrera_100m/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E05productor_consumidor.zip" beforeDir="false" />
-    </list>
+    <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="ultimo intento de push" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,7 +139,7 @@
       <workItem from="1762195815555" duration="17000" />
       <workItem from="1762428247747" duration="633000" />
       <workItem from="1762430551670" duration="2238000" />
-      <workItem from="1762432907153" duration="604000" />
+      <workItem from="1762432907153" duration="1187000" />
     </task>
     <task id="LOCAL-00001" summary="ultimo intento de push">
       <option name="closed" value="true" />

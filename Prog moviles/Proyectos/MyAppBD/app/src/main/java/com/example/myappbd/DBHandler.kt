@@ -76,6 +76,7 @@ class DBHandler
                 // data from cursor to our array list.
                 courseModalArrayList.add(
                     ProductModal(
+                        cursorProducts.getInt(0),
                         cursorProducts.getString(1),
                         cursorProducts.getDouble(2)
                     )
@@ -90,12 +91,12 @@ class DBHandler
     }
 
     fun deleteProduct(
-        productName: String?,
+        productId: Int?,
     ) {
         val db = this.writableDatabase
         val values = ContentValues()
-        values.put(NAME_COL, productName)
-        db.delete(TABLE_NAME, "name=?", arrayOf(productName))
+        values.put(NAME_COL, productId)
+        db.delete(TABLE_NAME, "id=?", arrayOf(productId.toString()))
         db.close()
     }
 
