@@ -94,9 +94,20 @@ class DBHandler
         productId: Int?,
     ) {
         val db = this.writableDatabase
-        val values = ContentValues()
-        values.put(NAME_COL, productId)
         db.delete(TABLE_NAME, "id=?", arrayOf(productId.toString()))
+        db.close()
+    }
+
+    fun updateProduct(
+        productId: Int?,
+        productName: String?,
+        productPrice: Double?,
+    ) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(NAME_COL, productName)
+        values.put(PRICE_COL, productPrice)
+        db.update(TABLE_NAME, values, "id=?", arrayOf(productId.toString()))
         db.close()
     }
 
@@ -125,7 +136,5 @@ class DBHandler
 
         // below variable id for our product price column.
         private const val PRICE_COL = "precio"
-
-
     }
 }
