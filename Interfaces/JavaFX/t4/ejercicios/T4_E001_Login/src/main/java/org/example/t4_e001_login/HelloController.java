@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class HelloController {
+
     @FXML
     private CheckBox cb1;
 
@@ -26,6 +27,9 @@ public class HelloController {
 
     @FXML
     private Button logIn;
+
+    @FXML
+    private TextField passVisible;
 
     @FXML
     private Label passwrd;
@@ -47,6 +51,16 @@ public class HelloController {
 
     @FXML
     void showPassword(ActionEvent event) {
+        if (cb1.isSelected()) {
+            passVisible.setText(pssFiled.getText());
+            passVisible.setVisible(true);
+            pssFiled.setVisible(false);
+        } else {
+            pssFiled.setText(passVisible.getText());
+            pssFiled.setVisible(true);
+            passVisible.setVisible(false);
+        }
 
     }
+
 }

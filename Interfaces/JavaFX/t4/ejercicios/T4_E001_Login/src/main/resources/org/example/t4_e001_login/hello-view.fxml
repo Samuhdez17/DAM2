@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.t4_e001_login.HelloController">
    <children>
       <Label fx:id="welkome" text="Welkome! Please sign in.">
@@ -33,6 +32,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="logIn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" text="Log in" translateX="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="passVisible" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="pssFiled" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtFiled" prefHeight="26.0" prefWidth="310.0" GridPane.columnIndex="1" />
             <Label fx:id="userName" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="190.0" text="Username:" />
