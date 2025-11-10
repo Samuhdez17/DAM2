@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
@@ -23,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,15 +40,19 @@ fun Mapa() {
         casillas += 1
         }
     }
+    val numBombas = 99
 
     var juegoTerminado by remember { mutableStateOf(false) }
     val botonesPulsados = (0 until casillas).map { false }.toMutableStateList()
     val posBombas = (0 until casillas).map { false }.toMutableStateList()
+    var casillasPulsadas = 0
 
-    Column() {
+    Column {
         Text(
             "BUSCAMINAS",
-            modifier = Modifier.padding(3.dp).align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .padding(3.dp)
+                .align(Alignment.CenterHorizontally),
             fontSize = (24.sp),
         )
 
@@ -69,96 +71,133 @@ fun Mapa() {
         ) {
             Text("Reiniciar", color = Color.White)
         }
-
-            LazyVerticalGrid(
-                GridCells.Fixed(columnas),
-                modifier = Modifier.padding(3.dp),
-                horizontalArrangement = Arrangement.spacedBy(1.dp),
-                verticalArrangement = Arrangement.spacedBy(1.dp)
-            ) {
-                items(casillas) { index ->
-                    if (botonesPulsados[index]) {
-                        if (posBombas[index]) {
-                            Button(
-                                onClick = {},
-                                modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
-                                shape = RectangleShape,
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(255, 0, 0)
-                                )
-                            ) { }
-
-                            juegoTerminado = true
-                            for (pos in 0 until posBombas.size) {
-                                if (posBombas[pos]) botonesPulsados[pos] = true
-                            }
-
-
-                        } else {
-                            val bombasCerca = mirarAlrededor(posBombas, index, columnas)
-
-                            Button(
-                                onClick = {},
-                                modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
-                                contentPadding = PaddingValues(0.dp),
-                                shape = RectangleShape,
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(255, 255, 255)
-                                )
-                            ) {
-                                when (bombasCerca) {
-                                    1 -> Text(
-                                        text = bombasCerca.toString(),
-                                        color = Color(0, 0, 0)
-                                    )
-
-                                    2 -> Text(
-                                        text = bombasCerca.toString(),
-                                        color = Color(20, 200, 30)
-                                    )
-
-                                    3 -> Text(
-                                        text = bombasCerca.toString(),
-                                        color = Color(250, 0, 0)
-                                    )
-
-                                    4 -> Text(
-                                        text = bombasCerca.toString(),
-                                        color = Color(50, 0, 140)
-                                    )
-
-                                    0 -> {}
-                                }
-                            }
-                        }
-                    } else {
+        LazyVerticalGrid(
+            GridCells.Fixed(columnas),
+            modifier = Modifier.padding(3.dp),
+            horizontalArrangement = Arrangement.spacedBy(1.dp),
+            verticalArrangement = Arrangement.spacedBy(1.dp)
+        ) {
+            items(casillas) { index ->
+                if (botonesPulsados[index]) {
+                    if (posBombas[index]) {
                         Button(
-                            onClick = {
-                                if (!juegoTerminado) {
-                                    if (partidaSinEmpezar(botonesPulsados)) {
-                                        colocarBombas(
-                                            posBombas,
-                                            index
-                                        )
-
-                                    }
-                                    botonesPulsados[index] = true
-                                }
-                            },
-                            modifier = Modifier.aspectRatio(1f).fillMaxWidth(),
+                            onClick = {},
+                            modifier = Modifier
+                                .aspectRatio(1f)
+                                .fillMaxWidth(),
                             shape = RectangleShape,
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(53, 104, 45)
+                                containerColor = Color(255, 0, 0)
                             )
                         ) { }
+
+                        juegoTerminado = true
+                        for (pos in 0 until posBombas.size) {
+                            if (posBombas[pos]) botonesPulsados[pos] = true
+                        }
+
+
+                    } else {
+                        val bombasCerca = mirarAlrededor(posBombas, index, columnas)
+
+                        Button(
+                            onClick = {},
+                            modifier = Modifier
+                                .aspectRatio(1f)
+                                .fillMaxWidth(),
+                            contentPadding = PaddingValues(0.dp),
+                            shape = RectangleShape,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(255, 255, 255)
+                            )
+                        ) {
+                            when (bombasCerca) {
+                                1 -> Text(
+                                    text = bombasCerca.toString(),
+                                    color = Color(0, 0, 0)
+                                )
+
+                                2 -> Text(
+                                    text = bombasCerca.toString(),
+                                    color = Color(20, 200, 30)
+                                )
+
+                                3 -> Text(
+                                    text = bombasCerca.toString(),
+                                    color = Color(250, 0, 0)
+                                )
+
+                                4 -> Text(
+                                    text = bombasCerca.toString(),
+                                    color = Color(50, 0, 140)
+                                )
+
+                                0 -> {}
+                            }
+                        }
                     }
+                } else {
+                    Button(
+                        onClick = {
+                            if (!juegoTerminado) {
+                                if (partidaSinEmpezar(botonesPulsados)) {
+                                    colocarBombas(
+                                        posBombas,
+                                        numBombas,
+                                        index
+                                    )
 
-
+                                }
+                                botonesPulsados[index] = true
+                                casillasPulsadas++
+                            }
+                        },
+                        modifier = Modifier
+                            .aspectRatio(1f)
+                            .fillMaxWidth(),
+                        shape = RectangleShape,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(53, 104, 45)
+                        )
+                    ) { }
                 }
+
+
             }
+        }
+
+        if (casillasPulsadas == casillas - numBombas) {
+            juegoTerminado = true
+            Text(text = "HAS GANADO!!")
+        }
     }
 }
 
+private fun partidaSinEmpezar(
+    botonesPulsados: SnapshotStateList<Boolean>,
+): Boolean {
+    for (pos in 0 until botonesPulsados.size) {
+        if (botonesPulsados[pos]) return false
+    }
+
+    return true
+}
+
+private fun colocarBombas(
+    posBombas: SnapshotStateList<Boolean>,
+    numBombas: Int,
+    index: Int
+) {
+    var numBombasV = numBombas
+    while (numBombasV != 0) {
+        var posRandom: Int
+        do {
+            posRandom = Random.nextInt(posBombas.size)
+        } while (posBombas[posRandom] || posRandom == index)
+        posBombas[posRandom] = true
+        numBombasV--
+    }
+}
 private fun mirarAlrededor(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
@@ -282,32 +321,6 @@ private fun mirarArriba(
 
     val arriba = index - columnas
     return arriba >= 0 && posBombas[arriba]
-}
-
-private fun partidaSinEmpezar(
-    botonesPulsados: SnapshotStateList<Boolean>,
-): Boolean {
-    for (pos in 0 until botonesPulsados.size) {
-        if (botonesPulsados[pos]) return false
-    }
-
-    return true
-}
-
-private fun colocarBombas(
-    posBombas: SnapshotStateList<Boolean>,
-    index: Int
-) {
-    var numBombas = 10
-
-    while (numBombas != 0) {
-        var posRandom: Int
-        do {
-            posRandom = Random.nextInt(posBombas.size)
-        } while (posBombas[posRandom] && posRandom != index)
-        posBombas[posRandom] = true
-        numBombas--
-    }
 }
 
 @Preview(showBackground = true)
