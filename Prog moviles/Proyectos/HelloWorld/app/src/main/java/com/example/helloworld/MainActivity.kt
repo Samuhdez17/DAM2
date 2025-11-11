@@ -25,42 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.helloworld.ui.theme.HelloWorldTheme
-
-class Calculadora : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            HelloWorldTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "samu",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-
-                    Calculadora()
-                }
-            }
-        }
-    }
-}
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(
-        color = Color.DarkGray,
-        contentColor = Color.White,
-        modifier = modifier
-
-    ) {
-//        Text(
-//            text = "Hello $name!",
-//            modifier = Modifier.padding(10.dp)
-//        )
-    }
-}
-
 @Composable
 fun Calculadora(modifier: Modifier = Modifier) {
     var texto1 by remember { mutableStateOf("") }
