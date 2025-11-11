@@ -1,16 +1,20 @@
 package org.example.calculadora;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Controlador {
     boolean[] botonesPulsados =  new boolean[4]; // suma, resta, multi, div
+    double valorA = 0;
+    double valorB = 0;
+    char operacion = ' ';
+    boolean reescribir = false;
 
     @FXML
     private Button borrar;
@@ -80,50 +84,97 @@ public class Controlador {
 
     @FXML
     void cerrarApp(ActionEvent event) {
-        Platform.exit();
+        Button boton = (Button) event.getSource();
+        Stage stage = (Stage) boton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     void darResultado(ActionEvent event) {
+        valorB = Double.parseDouble(pantalla.getText());
+
+        switch (operacion) {
+            case  '+' -> {
+                pantalla.setText(String.format("%.0f",valorA + valorB));
+                pulsarBoton(suma, 0);
+            }
+            case  '-' -> {
+                pantalla.setText(String.format("%.0f",valorA - valorB));
+                pulsarBoton(resta, 1);
+            }
+            case  '*' -> {
+                pantalla.setText(String.format("%.0f",valorA * valorB));
+                pulsarBoton(multi, 2);
+            }
+            case  '/' -> {
+                pantalla.setText(String.format("%.4f",valorA / valorB));
+                pulsarBoton(division, 3);
+            }
+        }
     }
 
     @FXML
     void dividir(ActionEvent event) {
-        pulsado(division, 4);
+        pulsarBoton(division, 3);
+        operacion = '/';
+    }
 
+    @FXML
+    void escribirNumero(ActionEvent event) {
+        Button boton = (Button) event.getSource();
+        if (pantalla.getText().equals("0") || reescribir) {
+            pantalla.setText(boton.getText());
+            reescribir = false;
+        }
+        else pantalla.setText(pantalla.getText() + boton.getText());
     }
 
     @FXML
     void limpiarPantalla(ActionEvent event) {
-
+        pantalla.setText("0");
     }
 
     @FXML
     void multiplicar(ActionEvent event) {
-        pulsado(multi, 3);
+        pulsarBoton(multi, 2);
+        operacion = '*';
     }
 
     @FXML
     void restar(ActionEvent event) {
-        pulsado(resta, 1);
-
+        pulsarBoton(resta, 1);
+        operacion = '-';
     }
 
     @FXML
     void sumar(ActionEvent event) {
-        pulsado(suma, 0);
+        pulsarBoton(suma, 0);
+        operacion = '+';
     }
 
+    private void pulsarBoton(Button boton, int id) {
+        cambiarEstado(id);
+        cambiarColor(boton, id);
+        valorA = Double.parseDouble(pantalla.getText());
+        reescribir = true;
+    }
 
-    void pulsado(Button boton, int id) {
-        int contador = 0;
-
-        for (int i = 0; i < botonesPulsados.length; i++) {
-
-
-            if (botonesPulsados[i] && i == id) boton.setStyle("-fx-background-color: orange;");
-            else boton.setStyle("-fx-background-color: red;");
-
+    private void cambiarColor(Button boton, int id) {
+        if (!botonesPulsados[id]) {
+            if (id != 3) boton.setStyle("-fx-background-color: orange; -fx-background-radius: 6");
+            else boton.setStyle("-fx-background-color: orange; -fx-background-radius: 0 0 20 0");
         }
+        else {
+            if (id != 3) boton.setStyle("-fx-background-color: red; -fx-background-radius: 6");
+            else boton.setStyle("-fx-background-color: red; -fx-background-radius: 0 0 20 0");
+        }
+    }
+
+    void cambiarEstado(int id) {
+        int numBotonesPulsados = 0;
+        for (Boolean b : botonesPulsados) if (b) numBotonesPulsados++;
+
+        if (numBotonesPulsados == 0) botonesPulsados[id] = !botonesPulsados[id];
+        else if (botonesPulsados[id]) botonesPulsados[id] = false;
     }
 }

@@ -7,22 +7,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="214.0" style="-fx-background-color: black; -fx-background-radius: 25;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.calculadora.Controlador">
    <children>
       <HBox fx:id="primeraFila" layoutX="7.0" layoutY="90.0" prefHeight="60.0" prefWidth="200.0" spacing="5.0">
          <children>
-            <Button fx:id="siete" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="7">
+            <Button fx:id="siete" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="7">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="ocho" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="8">
+            <Button fx:id="ocho" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="8">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="nueve" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="9">
+            <Button fx:id="nueve" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="9">
                <font>
                   <Font size="20.0" />
                </font>
@@ -36,17 +35,17 @@
       </HBox>
       <HBox fx:id="segundaFila" layoutX="7.0" layoutY="157.0" prefHeight="60.0" prefWidth="200.0" spacing="5.0">
          <children>
-            <Button fx:id="cuatro" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="4">
+            <Button fx:id="cuatro" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="4">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="cinco" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="5">
+            <Button fx:id="cinco" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="5">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="seis" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="6">
+            <Button fx:id="seis" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="6">
                <font>
                   <Font size="20.0" />
                </font>
@@ -60,17 +59,17 @@
       </HBox>
       <HBox fx:id="terceraFila" layoutX="7.0" layoutY="224.0" prefHeight="60.0" prefWidth="200.0" spacing="5.0">
          <children>
-            <Button fx:id="uno" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="1">
+            <Button fx:id="uno" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="1">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="dos" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="2">
+            <Button fx:id="dos" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="2">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="tres" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="3">
+            <Button fx:id="tres" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="3">
                <font>
                   <Font size="20.0" />
                </font>
@@ -89,7 +88,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="cero" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="0">
+            <Button fx:id="cero" mnemonicParsing="false" onAction="#escribirNumero" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 6;" text="0">
                <font>
                   <Font size="20.0" />
                </font>

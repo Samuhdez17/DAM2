@@ -13,6 +13,7 @@ public class Aplicacion extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("calculadora.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), Color.TRANSPARENT);
+        stage.setResizable(false);
         stage.setTitle("Calculadora");
         stage.setScene(scene);
         stage.show();
