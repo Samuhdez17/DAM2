@@ -11,7 +11,7 @@ public class LibroDAOImpl implements LibroDAO {
     public void addLibro(Libro libro) throws Exception {
         String sql = "INSERT INTO libro (titulo) VALUES (?)";
         try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, libro.getTitulo());
             ps.executeUpdate();
 

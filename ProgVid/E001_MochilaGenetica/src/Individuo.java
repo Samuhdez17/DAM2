@@ -9,10 +9,10 @@ public class Individuo {
     private Inventario inventario;
     private final Random random = new Random();
 
-    public Individuo(int volumenMochila, Inventario inventario) {
+    public Individuo(Inventario inventario) {
         this.inventario = inventario;
 
-        this.volumenMochila = volumenMochila;
+        this.volumenMochila = inventario.getTamanio();
         volumenTotal = Integer.MIN_VALUE;
         valorTotal = Integer.MIN_VALUE;
         idoneidad = Double.MIN_VALUE;
@@ -20,7 +20,7 @@ public class Individuo {
 
         for (int i = 0; i < genoma.length; i++) genoma[i] = random.nextBoolean();
     }
-    public Individuo(Individuo padre, Individuo madre) {
+    public Individuo(Individuo padre, Individuo madre, Inventario inventario) {
         combinar(padre, madre);
     }
 
