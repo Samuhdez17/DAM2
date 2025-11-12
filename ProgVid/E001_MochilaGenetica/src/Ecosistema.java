@@ -2,15 +2,57 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ecosistema {
-    ArrayList<Individuo> individuos = new ArrayList<>();
+    private final ArrayList<Individuo> individuos = new ArrayList<>();
+    private final Inventario inventario;
+    private final Random random = new Random();
 
-    private Individuo individuo = obtenerIndividuoAleatoriamente(); // Ponderará por idoneidad, más probable cuanto más idóneo sea
+    public Ecosistema(Inventario inventario) {
+        this.inventario = inventario;
+    }
+
+    public Ecosistema(Inventario inventario, int cantidad) {
+        this.inventario = inventario;
+        for  (int i = 0; i < cantidad; i++) {
+            Individuo individuo = new Individuo(inventario);
+            individuos.add(individuo);
+        }
+    }
 
     private Individuo obtenerIndividuoAleatoriamente() {
-        Random random = new Random();
         return individuos.get(random.nextInt(individuos.size()));
     }
-    public void reproducirIndividuoNuevo() {}
+    public void reproducirIndividuoNuevo() {
+        // Si es menor a 2 o sc diciendo que no hay suficientes o añadir?
+        if (individuos.size() < 2) {
+            individuos.add(new Individuo(inventario));
+        } else {
+            Individuo padre = obtenerIndividuoPorIdoneidad();
+            Individuo madre = obtenerIndividuoPorIdoneidad();
+            individuos.add(new Individuo(padre, madre, inventario));
+        }
+    }
+
+    private Individuo obtenerIndividuoPorIdoneidad() {
+        double sumaTotal = 0;
+        for (Individuo ind : individuos) {
+            sumaTotal += ind.getIdoneidad();
+        }
+
+        double randomValue = random.nextDouble() * sumaTotal;
+        double acumulador = 0;
+
+        for (Individuo ind : individuos) {
+            acumulador += ind.getIdoneidad();
+            if (randomValue <= acumulador) {
+                return ind;
+            }
+        }
+        return individuos.getLast();
+    }
+
+    public void aniadirIndividuo(Individuo individuo) {
+        individuos.add(individuo);
+    }
 
     public void eliminarIndividuoMenosIdoneo() {
         Individuo menosIdoneo = individuos.getFirst();
