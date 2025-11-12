@@ -13,6 +13,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import kotlin.math.sqrt
 import kotlin.random.Random
 
-
 @Composable
 fun Mapa() {
     // Se indican las casillas que se quieren y se hace una una figura cuadrada mediante la raíz
@@ -40,12 +40,12 @@ fun Mapa() {
         casillas += 1
         }
     }
-    val numBombas = 99
+    val numBombas = 2
+    val casillasRestantes = casillas - numBombas
 
     var juegoTerminado by remember { mutableStateOf(false) }
-    val botonesPulsados = (0 until casillas).map { false }.toMutableStateList()
-    val posBombas = (0 until casillas).map { false }.toMutableStateList()
-    var casillasPulsadas = 0
+    val botonesPulsados = remember { (0 until casillas).map { false }.toMutableStateList() }
+    val posBombas = remember { (0 until casillas).map { false }.toMutableStateList() }
 
     Column {
         Text(
@@ -71,9 +71,32 @@ fun Mapa() {
         ) {
             Text("Reiniciar", color = Color.White)
         }
+
+        var casillasPulsadas = 0
+        for (pos in 0 until botonesPulsados.size) {
+            if (botonesPulsados[pos]) casillasPulsadas++
+        }
+        val seHaGanado = casillasPulsadas == casillasRestantes
+        if (seHaGanado) juegoTerminado = true
+
+        Text(
+            text = when {
+                seHaGanado -> "¡Has ganado!"
+                juegoTerminado -> "Has perdido"
+                casillasPulsadas == 0 -> "Pulsa una casilla para empezar"
+                else -> "Casillas restantes: ${casillasRestantes - casillasPulsadas}        Bombas: $numBombas"
+            },
+            modifier = Modifier
+                .padding(3.dp)
+                .align(Alignment.CenterHorizontally),
+            fontSize = (12.sp),
+        )
+
+
         LazyVerticalGrid(
             GridCells.Fixed(columnas),
-            modifier = Modifier.padding(3.dp),
+            modifier = Modifier
+                .padding(3.dp),
             horizontalArrangement = Arrangement.spacedBy(1.dp),
             verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
@@ -131,8 +154,6 @@ fun Mapa() {
                                     text = bombasCerca.toString(),
                                     color = Color(50, 0, 140)
                                 )
-
-                                0 -> {}
                             }
                         }
                     }
@@ -151,6 +172,11 @@ fun Mapa() {
                                 botonesPulsados[index] = true
                                 casillasPulsadas++
                             }
+
+                            val bombasCerca = mirarAlrededor(posBombas, index, columnas)
+                            if (bombasCerca == 0 && !posBombas[index]) {
+                                desbloquearCeros(index, columnas, posBombas, botonesPulsados)
+                            }
                         },
                         modifier = Modifier
                             .aspectRatio(1f)
@@ -161,14 +187,7 @@ fun Mapa() {
                         )
                     ) { }
                 }
-
-
             }
-        }
-
-        if (casillasPulsadas == casillas - numBombas) {
-            juegoTerminado = true
-            Text(text = "HAS GANADO!!")
         }
     }
 }
@@ -198,6 +217,33 @@ private fun colocarBombas(
         numBombasV--
     }
 }
+
+private fun desbloquearCeros(
+    index: Int,
+    columnas: Int,
+    posBombas: SnapshotStateList<Boolean>,
+    botonesPulsados: SnapshotStateList<Boolean>,
+) {
+    val numFilas = posBombas.size / columnas
+    val fila = index / columnas
+    val col = index % columnas
+
+    for (f in (fila - 1)..(fila + 1)) {
+        for (c in (col - 1)..(col + 1)) {
+            if (f in 0 until numFilas && c in 0 until columnas) {
+                val vecino = f * columnas + c
+                if (!posBombas[vecino] && !botonesPulsados[vecino]) {
+                    botonesPulsados[vecino] = true
+                    val bombasCerca = mirarAlrededor(posBombas, vecino, columnas)
+                    if (bombasCerca == 0) {
+                        desbloquearCeros(vecino, columnas, posBombas, botonesPulsados)
+                    }
+                }
+            }
+        }
+    }
+}
+
 private fun mirarAlrededor(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
