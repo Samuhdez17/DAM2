@@ -40,7 +40,7 @@ fun Mapa() {
         casillas += 1
         }
     }
-    val numBombas = 2
+    val numBombas = 10
     val casillasRestantes = casillas - numBombas
 
     var juegoTerminado by remember { mutableStateOf(false) }
