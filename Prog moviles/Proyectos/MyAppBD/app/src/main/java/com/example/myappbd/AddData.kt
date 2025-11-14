@@ -28,7 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -46,7 +45,7 @@ class AddData : ComponentActivity(){
                     navController = navController,
                     startDestination = "add"
                 ) {
-                    composable("add") { AddDataToDatabase(LocalContext.current, navController) }
+                    composable("add") { AddDataToDatabase(LocalContext.current, navController.navigate("read")) }
 
                     composable("read") { ReadDataFromDatabase(LocalContext.current, navController) }
 
@@ -71,7 +70,7 @@ class AddData : ComponentActivity(){
 @Composable
 fun AddDataToDatabase(
     context: Context,
-    navController: NavController
+    leerProductos:() -> Unit = {}
 ) {
     // variables for text field
     val productName = remember {
@@ -137,7 +136,7 @@ fun AddDataToDatabase(
         }
 
         Button(
-            onClick = { navController.navigate("read") },
+            onClick = { leerProductos() },
             modifier = Modifier.padding(top = 24.dp)
         ) {
             Text("Veiw list products")

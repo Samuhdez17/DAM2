@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="ultimo intento de push" />
+    <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="ultimo intento de push">
+      <change afterPath="$PROJECT_DIR$/Ejercicios/E008Chat/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ejercicios/E008Chat/Servidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E007akinator.zip" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,41 +52,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Carrera.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Cliente.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ContarLineas.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Multiplicar.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ProcesoPipeLine.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Servidor.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/Ejercicios/2&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Carrera.executor": "Run",
+    "Application.Cliente.executor": "Run",
+    "Application.ContarLineas.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Multiplicar.executor": "Run",
+    "Application.ProcesoPipeLine.executor": "Run",
+    "Application.Servidor.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/Ejercicios/E008Chat",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
+    "show.migrate.to.gradle.popup": "false",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E008Chat" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E06fecha_y_hora" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\2" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\ejercicio_mostrar_nums_retardo" />
@@ -140,6 +146,11 @@
       <workItem from="1762428247747" duration="633000" />
       <workItem from="1762430551670" duration="2238000" />
       <workItem from="1762432907153" duration="1187000" />
+      <workItem from="1762499841857" duration="8657000" />
+      <workItem from="1763021374794" duration="647000" />
+      <workItem from="1763029993904" duration="18000" />
+      <workItem from="1763064338070" duration="86000" />
+      <workItem from="1763105180082" duration="662000" />
     </task>
     <task id="LOCAL-00001" summary="ultimo intento de push">
       <option name="closed" value="true" />

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/E001_MochilaGenetica/E001_MochilaGenetica.iml" filepath="$PROJECT_DIR$/E001_MochilaGenetica/E001_MochilaGenetica.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ProgVid.iml" filepath="$PROJECT_DIR$/.idea/ProgVid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Recursividad/Recursividad.iml" filepath="$PROJECT_DIR$/Recursividad/Recursividad.iml" />
     </modules>
   </component>
 </project>

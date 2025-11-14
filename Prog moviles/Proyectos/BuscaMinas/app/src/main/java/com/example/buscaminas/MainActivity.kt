@@ -3,6 +3,7 @@ package com.example.buscaminas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -42,9 +43,11 @@ fun Mapa() {
     }
     val numBombas = 10
     val casillasRestantes = casillas - numBombas
+    var modoMarcar by remember { mutableStateOf(false) }
 
     var juegoTerminado by remember { mutableStateOf(false) }
     val botonesPulsados = remember { (0 until casillas).map { false }.toMutableStateList() }
+    val botonesMarcados = remember { (0 until casillas).map { false }.toMutableStateList() }
     val posBombas = remember { (0 until casillas).map { false }.toMutableStateList() }
 
     Column {
@@ -56,20 +59,38 @@ fun Mapa() {
             fontSize = (24.sp),
         )
 
-        Button(
-            onClick = {
-                juegoTerminado = false
-                for (i in 0 until casillas) {
-                    botonesPulsados[i] = false
-                    posBombas[i] = false
-                }
-            },
+        Row(
             modifier = Modifier
-                .padding(6.dp)
+                .padding(3.dp)
                 .align(Alignment.CenterHorizontally),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
         ) {
-            Text("Reiniciar", color = Color.White)
+            Button(
+                onClick = {
+                    juegoTerminado = false
+                    for (i in 0 until casillas) {
+                        botonesPulsados[i] = false
+                        posBombas[i] = false
+                    }
+                },
+                modifier = Modifier
+                    .padding(6.dp)
+                    .align(Alignment.CenterVertically),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
+            ) {
+                Text("Reiniciar", color = Color.White)
+            }
+
+            Button(
+                onClick = {
+                    if (!juegoTerminado) modoMarcar = !modoMarcar
+                },
+                modifier = Modifier
+                    .padding(6.dp)
+                    .align(Alignment.CenterVertically),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
+            ) {
+                Text((if (modoMarcar) "Cambiar a normal" else "Cambiar a marcar"), color = Color.White)
+            }
         }
 
         var casillasPulsadas = 0
@@ -160,6 +181,9 @@ fun Mapa() {
                 } else {
                     Button(
                         onClick = {
+                            if (modoMarcar) {
+                                botonesMarcados[index] = !botonesMarcados[index]
+                            }
                             if (!juegoTerminado) {
                                 if (partidaSinEmpezar(botonesPulsados)) {
                                     colocarBombas(
