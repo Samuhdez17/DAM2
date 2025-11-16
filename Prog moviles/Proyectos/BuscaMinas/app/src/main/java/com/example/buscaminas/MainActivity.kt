@@ -1,5 +1,9 @@
 package com.example.buscaminas
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,21 +31,56 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.buscaminas.ui.theme.BuscaMinasTheme
 import kotlin.math.sqrt
 import kotlin.random.Random
 
+class PantallaMapa : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            BuscaMinasTheme {
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "inicio"
+                ) {
+                    composable("inicio") { Inicio ({ navController.navigate("final") }) }
+                    composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
+                        val casillas = backStackEntry.arguments!!.getInt("numCasillas")
+                        val bombas = backStackEntry.arguments!!.getInt("numBombas")
+
+                        Mapa(
+                            numCasillas = casillas,
+                            numBombas = bombas,
+                            { navController.navigate("inicio") }
+                        )
+                }
+            }
+        }
+    }
+}
+
 @Composable
-fun Mapa() {
+fun Mapa(
+    numCasillas: Int,
+    numBombas: Int,
+    volver: () -> Unit
+) {
     // Se indican las casillas que se quieren y se hace una una figura cuadrada mediante la raíz
     // cuadrada del número de casillas, si no cuadra se añaden casillas hasta que cuadre
-    var casillas = 100
+    var casillas = numCasillas
     val columnas:Int = sqrt(casillas.toDouble()).toInt()
     if (casillas % columnas != 0) {
         while (casillas % columnas != 0) {
         casillas += 1
         }
     }
-    val numBombas = 10
+    var numBombasVariable by remember { mutableIntStateOf(numBombas) }
     val casillasRestantes = casillas - numBombas
     var modoMarcar by remember { mutableStateOf(false) }
 
@@ -70,6 +109,8 @@ fun Mapa() {
                     for (i in 0 until casillas) {
                         botonesPulsados[i] = false
                         posBombas[i] = false
+                        botonesMarcados[i] = false
+                        modoMarcar = false
                     }
                 },
                 modifier = Modifier
@@ -82,14 +123,14 @@ fun Mapa() {
 
             Button(
                 onClick = {
-                    if (!juegoTerminado) modoMarcar = !modoMarcar
+                        if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar = !modoMarcar
                 },
                 modifier = Modifier
                     .padding(6.dp)
                     .align(Alignment.CenterVertically),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
             ) {
-                Text((if (modoMarcar) "Cambiar a normal" else "Cambiar a marcar"), color = Color.White)
+                Text((if (modoMarcar) "Cambiar a normal 👆" else "Cambiar a marcar 🚩"), color = Color.White)
             }
         }
 
@@ -105,7 +146,7 @@ fun Mapa() {
                 seHaGanado -> "¡Has ganado!"
                 juegoTerminado -> "Has perdido"
                 casillasPulsadas == 0 -> "Pulsa una casilla para empezar"
-                else -> "Casillas restantes: ${casillasRestantes - casillasPulsadas}        Bombas: $numBombas"
+                else -> "Casillas restantes: ${casillasRestantes - casillasPulsadas}        Bombas: $numBombasVariable"
             },
             modifier = Modifier
                 .padding(3.dp)
@@ -182,34 +223,48 @@ fun Mapa() {
                     Button(
                         onClick = {
                             if (modoMarcar) {
-                                botonesMarcados[index] = !botonesMarcados[index]
-                            }
-                            if (!juegoTerminado) {
-                                if (partidaSinEmpezar(botonesPulsados)) {
-                                    colocarBombas(
-                                        posBombas,
-                                        numBombas,
-                                        index
-                                    )
+                                if (!botonesMarcados[index]) {
+                                    if (numBombasVariable > 0) {
+                                        botonesMarcados[index] = true
+                                        numBombasVariable--
+                                    }
 
+                                } else {
+                                    botonesMarcados[index] = false
+                                    numBombasVariable++
                                 }
-                                botonesPulsados[index] = true
-                                casillasPulsadas++
-                            }
 
-                            val bombasCerca = mirarAlrededor(posBombas, index, columnas)
-                            if (bombasCerca == 0 && !posBombas[index]) {
-                                desbloquearCeros(index, columnas, posBombas, botonesPulsados)
+                            } else {
+                                if (!juegoTerminado) {
+                                    if (partidaSinEmpezar(botonesPulsados)) {
+                                        colocarBombas(
+                                            posBombas,
+                                            numBombas,
+                                            index
+                                        )
+                                    }
+                                    if (!botonesMarcados[index]) botonesPulsados[index] = true
+                                    casillasPulsadas++
+                                }
+
+                                val bombasCerca = mirarAlrededor(posBombas, index, columnas)
+                                if (bombasCerca == 0 && !posBombas[index]) {
+                                    desbloquearCeros(index, columnas, posBombas, botonesPulsados, botonesMarcados)
+                                }
                             }
                         },
                         modifier = Modifier
                             .aspectRatio(1f)
                             .fillMaxWidth(),
+                        contentPadding = PaddingValues(0.dp),
                         shape = RectangleShape,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(53, 104, 45)
                         )
-                    ) { }
+                    ) {
+                        if (botonesMarcados[index]) Text("🚩")
+                        else Text("")
+                    }
                 }
             }
         }
@@ -247,6 +302,7 @@ private fun desbloquearCeros(
     columnas: Int,
     posBombas: SnapshotStateList<Boolean>,
     botonesPulsados: SnapshotStateList<Boolean>,
+    botonesMarcados: SnapshotStateList<Boolean>
 ) {
     val numFilas = posBombas.size / columnas
     val fila = index / columnas
@@ -256,11 +312,11 @@ private fun desbloquearCeros(
         for (c in (col - 1)..(col + 1)) {
             if (f in 0 until numFilas && c in 0 until columnas) {
                 val vecino = f * columnas + c
-                if (!posBombas[vecino] && !botonesPulsados[vecino]) {
+                if (!posBombas[vecino] && !botonesPulsados[vecino] && !botonesMarcados[vecino]) {
                     botonesPulsados[vecino] = true
                     val bombasCerca = mirarAlrededor(posBombas, vecino, columnas)
                     if (bombasCerca == 0) {
-                        desbloquearCeros(vecino, columnas, posBombas, botonesPulsados)
+                        desbloquearCeros(vecino, columnas, posBombas, botonesPulsados, botonesMarcados)
                     }
                 }
             }

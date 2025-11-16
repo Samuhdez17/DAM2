@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -29,7 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -41,29 +39,27 @@ class UpdateData : ComponentActivity(){
         enableEdgeToEdge()
         setContent {
             MyAppBDTheme {
-                Scaffold {
-                    val navController = rememberNavController() // NavController
+                val navController = rememberNavController() // NavController
 
-                    NavHost(
-                        navController = navController,
-                        startDestination = "update"
-                    ) {
-                        composable("add") { AddDataToDatabase(LocalContext.current, navController) }
+                NavHost(
+                    navController = navController,
+                    startDestination = "update"
+                ) {
+                    composable("add") { AddDataToDatabase(LocalContext.current, { navController.navigate("read") }) }
 
-                        composable("read") { ReadDataFromDatabase(LocalContext.current, navController) }
+                    composable("read") { ReadDataFromDatabase(LocalContext.current, { navController.navigate("add") }) }
 
-                        composable("update/{id}/{name}/{price}") { backStackEntry ->
-                            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
-                            val name = backStackEntry.arguments?.getString("name")
-                            val price = backStackEntry.arguments?.getString("price")?.toDoubleOrNull()
-                            UpdateDataOnDatabase(
-                                context = LocalContext.current,
-                                navController = navController,
-                                id = id,
-                                name = name,
-                                price = price
-                            )
-                        }
+                    composable("update/{id}/{name}/{price}") { backStackEntry ->
+                        val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+                        val name = backStackEntry.arguments?.getString("name")
+                        val price = backStackEntry.arguments?.getString("price")?.toDoubleOrNull()
+                        UpdateDataOnDatabase(
+                            context = LocalContext.current,
+                            id = id,
+                            name = name,
+                            price = price,
+                            { navController.navigate("read") }
+                        )
                     }
                 }
             }
@@ -74,10 +70,10 @@ class UpdateData : ComponentActivity(){
 @Composable
 fun UpdateDataOnDatabase(
     context: Context,
-    navController: NavController,
     id: Int? = null,
     name: String? = null,
-    price: Double? = null
+    price: Double? = null,
+    readProducts:() -> Unit = {}
 ) {
     // variables for text field
     val productName = remember {
@@ -110,7 +106,7 @@ fun UpdateDataOnDatabase(
             placeholder = { Text(text = "Enter your product name") },
             modifier = Modifier
                 .fillMaxWidth(),
-            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
+            textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
             singleLine = true,
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -122,7 +118,7 @@ fun UpdateDataOnDatabase(
             placeholder = { Text(text = "Enter your product price") },
             modifier = Modifier
                 .fillMaxWidth(),
-            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
+            textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
             singleLine = true,
         )
 
@@ -136,7 +132,7 @@ fun UpdateDataOnDatabase(
                 productName.value.text,
                 productPrice.value.text.toDoubleOrNull() ?: 0.0)
             Toast.makeText(context, "Product Updated on Database", Toast.LENGTH_SHORT).show()
-            navController.navigate("read")
+            readProducts()
         }) {
             Text(text = "Update Product on Database", color = Color.White)
         }
