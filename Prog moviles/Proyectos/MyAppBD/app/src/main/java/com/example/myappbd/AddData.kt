@@ -45,9 +45,9 @@ class AddData : ComponentActivity(){
                     navController = navController,
                     startDestination = "add"
                 ) {
-                    composable("add") { AddDataToDatabase(LocalContext.current, navController.navigate("read")) }
+                    composable("add") { AddDataToDatabase(LocalContext.current, { navController.navigate("read") }) }
 
-                    composable("read") { ReadDataFromDatabase(LocalContext.current, navController) }
+                    composable("read") { ReadDataFromDatabase(LocalContext.current, { navController.navigate("add") }) }
 
                     composable("update/{id}/{name}/{price}") { backStackEntry ->
                         val id = backStackEntry.arguments?.getString("id")?.toIntOrNull()
@@ -55,10 +55,10 @@ class AddData : ComponentActivity(){
                         val price = backStackEntry.arguments?.getString("price")?.toDoubleOrNull()
                         UpdateDataOnDatabase(
                             context = LocalContext.current,
-                            navController = navController,
                             id = id,
                             name = name,
-                            price = price
+                            price = price,
+                            { navController.navigate("read") }
                         )
                     }
                 }
@@ -70,7 +70,7 @@ class AddData : ComponentActivity(){
 @Composable
 fun AddDataToDatabase(
     context: Context,
-    leerProductos:() -> Unit = {}
+    readProducts:() -> Unit = {}
 ) {
     // variables for text field
     val productName = remember {
@@ -103,7 +103,7 @@ fun AddDataToDatabase(
             placeholder = { Text(text = "Enter your product name") },
             modifier = Modifier
                 .fillMaxWidth(),
-            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
+            textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
             singleLine = true,
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -115,7 +115,7 @@ fun AddDataToDatabase(
             placeholder = { Text(text = "Enter your product price") },
             modifier = Modifier
                 .fillMaxWidth(),
-            textStyle = TextStyle(color = Color.Black, fontSize = 15.sp),
+            textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
             singleLine = true,
         )
 

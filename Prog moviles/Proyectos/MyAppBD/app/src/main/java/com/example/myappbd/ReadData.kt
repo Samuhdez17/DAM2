@@ -55,7 +55,6 @@ class ReadData : ComponentActivity() {
                         val price = backStackEntry.arguments?.getString("price")?.toDoubleOrNull()
                         UpdateDataOnDatabase(
                             context = LocalContext.current,
-                            navController = navController,
                             id = id,
                             name = name,
                             price = price
@@ -70,7 +69,7 @@ class ReadData : ComponentActivity() {
 @Composable
 fun ReadDataFromDatabase(
     context: Context,
-    navController: NavController
+    addProduct:() -> Unit = {}
 ) {
     val dbHandler = DBHandler(context)
     val productList = remember { dbHandler.readProducts().toMutableStateList() }
@@ -118,7 +117,7 @@ fun ReadDataFromDatabase(
                             Spacer(modifier = Modifier.width(10.dp))
 
                             Button(
-                                onClick = { navController.navigate("update/${product.productId}/${product.productName}/${product.productPrice}") }
+                                onClick = { updateProduct(product.productId, product.productName, product.productPrice) }
                             ) {
                                 Text(text = "Update")
                             }
@@ -129,7 +128,7 @@ fun ReadDataFromDatabase(
         }
 
         Button(
-            onClick = { navController.navigate("add") },
+            onClick = { addProduct() },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)
