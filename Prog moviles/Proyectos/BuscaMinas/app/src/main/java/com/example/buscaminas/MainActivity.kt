@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
@@ -49,16 +48,17 @@ class PantallaMapa : ComponentActivity() {
                     navController = navController,
                     startDestination = "inicio"
                 ) {
-                    composable("inicio") { Inicio ({ navController.navigate("final") }) }
+                    composable("inicio") { Inicio({ navController.navigate("mapa") }) }
                     composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
-                        val casillas = backStackEntry.arguments!!.getInt("numCasillas")
-                        val bombas = backStackEntry.arguments!!.getInt("numBombas")
+                        val casillas = backStackEntry.arguments!!.getString("numCasillas")
+                        val bombas = backStackEntry.arguments!!.getString("numBombas")
 
                         Mapa(
-                            numCasillas = casillas,
-                            numBombas = bombas,
+                            numCasillas = casillas!!.toInt(),
+                            numBombas = bombas!!.toInt(),
                             { navController.navigate("inicio") }
                         )
+                    }
                 }
             }
         }
@@ -74,10 +74,10 @@ fun Mapa(
     // Se indican las casillas que se quieren y se hace una una figura cuadrada mediante la raíz
     // cuadrada del número de casillas, si no cuadra se añaden casillas hasta que cuadre
     var casillas = numCasillas
-    val columnas:Int = sqrt(casillas.toDouble()).toInt()
+    val columnas: Int = sqrt(casillas.toDouble()).toInt()
     if (casillas % columnas != 0) {
         while (casillas % columnas != 0) {
-        casillas += 1
+            casillas += 1
         }
     }
     var numBombasVariable by remember { mutableIntStateOf(numBombas) }
@@ -123,14 +123,18 @@ fun Mapa(
 
             Button(
                 onClick = {
-                        if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar = !modoMarcar
+                    if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar =
+                        !modoMarcar
                 },
                 modifier = Modifier
                     .padding(6.dp)
                     .align(Alignment.CenterVertically),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
             ) {
-                Text((if (modoMarcar) "Cambiar a normal 👆" else "Cambiar a marcar 🚩"), color = Color.White)
+                Text(
+                    (if (modoMarcar) "Cambiar a normal 👆" else "Cambiar a marcar 🚩"),
+                    color = Color.White
+                )
             }
         }
 
@@ -249,7 +253,13 @@ fun Mapa(
 
                                 val bombasCerca = mirarAlrededor(posBombas, index, columnas)
                                 if (bombasCerca == 0 && !posBombas[index]) {
-                                    desbloquearCeros(index, columnas, posBombas, botonesPulsados, botonesMarcados)
+                                    desbloquearCeros(
+                                        index,
+                                        columnas,
+                                        posBombas,
+                                        botonesPulsados,
+                                        botonesMarcados
+                                    )
                                 }
                             }
                         },
@@ -316,7 +326,13 @@ private fun desbloquearCeros(
                     botonesPulsados[vecino] = true
                     val bombasCerca = mirarAlrededor(posBombas, vecino, columnas)
                     if (bombasCerca == 0) {
-                        desbloquearCeros(vecino, columnas, posBombas, botonesPulsados, botonesMarcados)
+                        desbloquearCeros(
+                            vecino,
+                            columnas,
+                            posBombas,
+                            botonesPulsados,
+                            botonesMarcados
+                        )
                     }
                 }
             }
@@ -331,14 +347,14 @@ private fun mirarAlrededor(
 ): Int {
     var numMinas = 0
 
-    if (mirarArriba    (posBombas, index, columnas)) numMinas++
-    if (mirarAbajo     (posBombas, index, columnas)) numMinas++
-    if (mirarIzquierda (posBombas, index, columnas)) numMinas++
-    if (mirarDerecha   (posBombas, index, columnas)) numMinas++
-    if (mirarArribaIzq (posBombas, index, columnas)) numMinas++
-    if (mirarArribaDer (posBombas, index, columnas)) numMinas++
-    if (mirarAbajoIzq  (posBombas, index, columnas)) numMinas++
-    if (mirarAbajoDer  (posBombas, index, columnas)) numMinas++
+    if (mirarArriba(posBombas, index, columnas)) numMinas++
+    if (mirarAbajo(posBombas, index, columnas)) numMinas++
+    if (mirarIzquierda(posBombas, index, columnas)) numMinas++
+    if (mirarDerecha(posBombas, index, columnas)) numMinas++
+    if (mirarArribaIzq(posBombas, index, columnas)) numMinas++
+    if (mirarArribaDer(posBombas, index, columnas)) numMinas++
+    if (mirarAbajoIzq(posBombas, index, columnas)) numMinas++
+    if (mirarAbajoDer(posBombas, index, columnas)) numMinas++
 
     return numMinas
 }
@@ -346,7 +362,8 @@ private fun mirarAlrededor(
 private fun mirarAbajoDer(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
-    columnas: Int): Boolean {
+    columnas: Int
+): Boolean {
 
     val fila = index / columnas
     val numFilas = posBombas.size / columnas
@@ -363,7 +380,8 @@ private fun mirarAbajoDer(
 private fun mirarAbajoIzq(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
-    columnas: Int): Boolean {
+    columnas: Int
+): Boolean {
 
     val fila = index / columnas
     val numFilas = posBombas.size / columnas
@@ -380,7 +398,8 @@ private fun mirarAbajoIzq(
 private fun mirarArribaDer(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
-    columnas: Int): Boolean {
+    columnas: Int
+): Boolean {
 
     val fila = index / columnas
     val col = index % columnas
@@ -396,7 +415,8 @@ private fun mirarArribaDer(
 private fun mirarArribaIzq(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
-    columnas: Int): Boolean {
+    columnas: Int
+): Boolean {
 
     val fila = index / columnas
     val col = index % columnas
@@ -413,7 +433,7 @@ private fun mirarDerecha(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
     columnas: Int
-    ): Boolean {
+): Boolean {
 
     if ((index + 1) % columnas == 0) return false
     val derecha = index + 1
@@ -424,7 +444,7 @@ private fun mirarIzquierda(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
     columnas: Int
-    ): Boolean {
+): Boolean {
 
     if (index % columnas == 0) return false
     val izquierda = index - 1
@@ -434,7 +454,8 @@ private fun mirarIzquierda(
 private fun mirarAbajo(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
-    columnas: Int): Boolean {
+    columnas: Int
+): Boolean {
 
     val abajo = index + columnas
     return abajo < posBombas.size && posBombas[abajo]
@@ -443,14 +464,10 @@ private fun mirarAbajo(
 private fun mirarArriba(
     posBombas: SnapshotStateList<Boolean>,
     index: Int,
-    columnas: Int): Boolean {
+    columnas: Int
+): Boolean {
 
     val arriba = index - columnas
     return arriba >= 0 && posBombas[arriba]
-}
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Mapa()
-}
