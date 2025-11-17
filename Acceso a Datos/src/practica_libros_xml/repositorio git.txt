@@ -1,3 +1,0 @@
-enlace repositorio: https://github.com/Samuhdez17/DAM2/tree/main/Acceso%20a%20Datos/src/practica_libros_xml
-
-si no funciona el enlace, mi usuario es Samuhdez17 y la ruta dentro del repositorio DAM2 es: Acceso a Datos/src/practica_libros_xml
