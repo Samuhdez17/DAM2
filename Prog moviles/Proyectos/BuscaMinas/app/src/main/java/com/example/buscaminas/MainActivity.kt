@@ -46,7 +46,7 @@ class PantallaMapa : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "inicio"
+                    startDestination = "mapa"
                 ) {
                     composable("inicio") { Inicio({ navController.navigate("mapa") }) }
                     composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
@@ -54,8 +54,8 @@ class PantallaMapa : ComponentActivity() {
                         val bombas = backStackEntry.arguments!!.getString("numBombas")
 
                         Mapa(
-                            numCasillas = casillas!!.toInt(),
-                            numBombas = bombas!!.toInt(),
+                            numCasillas = 100,
+                            numBombas = 10,
                             { navController.navigate("inicio") }
                         )
                     }

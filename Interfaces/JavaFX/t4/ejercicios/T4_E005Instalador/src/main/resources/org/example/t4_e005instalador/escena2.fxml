@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.t4_e005instalador.Controlador">
+   <children>
+      <ImageView fitHeight="363.0" fitWidth="182.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/lateral.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="220.0" layoutY="-15.0" prefHeight="138.0" prefWidth="359.0" text="Bienvenido al Asistente de Instalación de Bandicam" wrapText="true">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="220.0" layoutY="105.0" text="Este programa instalará Bandicam en su ordenador.">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="220.0" layoutY="146.0" prefHeight="68.0" prefWidth="301.0" text="Se recomienda que cierre todas las demás aplicaciones antes de iniciar la instalación. Esto hará posible actualzar archivos relacionados con el sistema sin tener que reiniciar su ordenador." wrapText="true">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="220.0" layoutY="237.0" text="Presione Siguiente para continuar.">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_RIGHT" layoutY="356.0" prefHeight="68.0" prefWidth="634.0" spacing="10.0" style="-fx-background-color: lightgrey;">
+         <children>
+            <Button fx:id="botonSiguienteE2" mnemonicParsing="false" onAction="#ir23" text="Siguiente &gt;" />
+            <Button fx:id="botonCancelarE2" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+         </children>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
