@@ -17,11 +17,6 @@ public class Controlador {
     // ELEMENTOS ESCENA 1
     static String idioma = "";
     @FXML
-    private Button boton1;
-    @FXML
-    private Button boton2;
-
-    @FXML
     private Button botonCancelarE1;
 
     @FXML
@@ -38,9 +33,19 @@ public class Controlador {
     @FXML
     private Button botonSiguienteE2;
 
+    // ELEMENTOS ESCENA 3
+    @FXML
+    private Button botonAceptoE3;
+
+    @FXML
+    private Button botonAtrasE3;
+
+    @FXML
+    private Button botonCancelarE3;
+
     // MÉTODOS ESCENA 1
     @FXML
-    void cancelar(ActionEvent event) { // También se usa en escena 2
+    void cancelar(ActionEvent event) { // También se usa en las escenas con boton de cancelar
         setStage(event);
         stage.close();
     }
@@ -54,8 +59,18 @@ public class Controlador {
     // MÉTODOS ESCENA 2
     @FXML
     void ir23(ActionEvent event) throws IOException {
-        setStage(event);
         cargarStage(event, 2);
+    }
+
+    // MÉTODOS ESCENA 3
+    @FXML
+    void ir34(ActionEvent event) throws IOException { // Acepto
+        cargarStage(event, 3);
+    }
+
+    @FXML
+    void ir32(ActionEvent event) throws IOException { // Atrás
+        cargarStage(event, 1);
     }
 
     // MÉTODOS AUXILIARES
@@ -71,8 +86,14 @@ public class Controlador {
         FXMLLoader fxmlLoader = null;
         Scene scene =  null;
 
-        if (escena == 1) fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena2.fxml"));
-        else if (escena == 2) fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena3.fxml"));
+        switch (escena) {
+            case 1 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena1.fxml"));
+            case 2 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena2.fxml"));
+            case 3 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena3.fxml"));
+            case 4 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena4.fxml"));
+            case 5 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena5.fxml"));
+            case 6 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena6.fxml"));
+        }
 
         if (fxmlLoader != null) scene = new Scene(fxmlLoader.load());
 
