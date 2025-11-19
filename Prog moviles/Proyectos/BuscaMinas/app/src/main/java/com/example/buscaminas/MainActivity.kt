@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -36,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.buscaminas.ui.theme.BuscaMinasTheme
 import kotlin.math.sqrt
 import kotlin.random.Random
+import kotlin.text.toInt
 
 class PantallaMapa : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,16 +49,18 @@ class PantallaMapa : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "mapa"
+                    startDestination = "inicio"
                 ) {
-                    composable("inicio") { Inicio({ navController.navigate("mapa") }) }
+                    composable("inicio") {
+                        Inicio(irMapa = { casillas, minas -> navController.navigate("mapa/$casillas/$minas") })
+                    }
                     composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
                         val casillas = backStackEntry.arguments!!.getString("numCasillas")
                         val bombas = backStackEntry.arguments!!.getString("numBombas")
 
                         Mapa(
-                            numCasillas = 100,
-                            numBombas = 10,
+                            numCasillas = casillas!!.toInt(),
+                            numBombas = bombas!!.toInt(),
                             { navController.navigate("inicio") }
                         )
                     }
@@ -90,6 +95,8 @@ fun Mapa(
     val posBombas = remember { (0 until casillas).map { false }.toMutableStateList() }
 
     Column {
+        Spacer(modifier = Modifier.height(40.dp))
+
         Text(
             "BUSCAMINAS",
             modifier = Modifier
@@ -98,10 +105,63 @@ fun Mapa(
             fontSize = (24.sp),
         )
 
+//        Row(
+//            modifier = Modifier
+//                .padding(3.dp)
+//                .align(Alignment.CenterHorizontally),
+//        ) {
+//            Button(
+//                onClick = {
+//                    juegoTerminado = false
+//                    for (i in 0 until casillas) {
+//                        botonesPulsados[i] = false
+//                        posBombas[i] = false
+//                        botonesMarcados[i] = false
+//                        modoMarcar = false
+//                    }
+//                },
+//                modifier = Modifier
+//                    .padding(6.dp)
+//                    .align(Alignment.CenterVertically),
+//                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
+//            ) {
+//                Text("Reiniciar", color = Color.White)
+//            }
+//
+//            Button(
+//                onClick = {
+//                    if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar =
+//                        !modoMarcar
+//                },
+//                modifier = Modifier
+//                    .padding(6.dp)
+//                    .align(Alignment.CenterVertically),
+//                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
+//            ) {
+//                Text(
+//                    (if (modoMarcar) "Cambiar a normal 👆" else "Cambiar a marcar 🚩"),
+//                    color = Color.White
+//                )
+//            }
+//
+//            Button(
+//                onClick = {
+//                    volver()
+//                },
+//                modifier = Modifier
+//                    .padding(6.dp)
+//                    .align(Alignment.CenterVertically),
+//                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
+//            ) {
+//                Text("Cambiar valores", color = Color.White)
+//            }
+//        }
         Row(
             modifier = Modifier
-                .padding(3.dp)
-                .align(Alignment.CenterHorizontally),
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Button(
                 onClick = {
@@ -110,33 +170,39 @@ fun Mapa(
                         botonesPulsados[i] = false
                         posBombas[i] = false
                         botonesMarcados[i] = false
-                        modoMarcar = false
                     }
+                    modoMarcar = false
+                    numBombasVariable = numBombas
                 },
-                modifier = Modifier
-                    .padding(6.dp)
-                    .align(Alignment.CenterVertically),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(75, 75, 75))
             ) {
                 Text("Reiniciar", color = Color.White)
             }
 
             Button(
                 onClick = {
-                    if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar =
-                        !modoMarcar
+                    if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar = !modoMarcar
                 },
-                modifier = Modifier
-                    .padding(6.dp)
-                    .align(Alignment.CenterVertically),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (modoMarcar) Color(0xFF3F51B5) else Color(75, 75, 75)
+                )
             ) {
                 Text(
-                    (if (modoMarcar) "Cambiar a normal 👆" else "Cambiar a marcar 🚩"),
+                    (if (modoMarcar) "Marcar 🚩" else "Pulsar 👆"),
                     color = Color.White
                 )
             }
+
+            Button(
+                onClick = { volver() },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(75, 75, 75))
+            ) {
+                Text("⚙️", color = Color.White)
+            }
         }
+
 
         var casillasPulsadas = 0
         for (pos in 0 until botonesPulsados.size) {
@@ -219,6 +285,13 @@ fun Mapa(
                                 4 -> Text(
                                     text = bombasCerca.toString(),
                                     color = Color(50, 0, 140)
+                                )
+
+                                0 -> {}
+
+                                else -> Text(
+                                    text = bombasCerca.toString(),
+                                    color = Color(255, 255, 38)
                                 )
                             }
                         }
