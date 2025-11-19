@@ -38,14 +38,16 @@ class PantallaInicio : ComponentActivity() {
                     navController = navController,
                     startDestination = "inicio"
                 ) {
-                    composable("inicio") { Inicio({ navController.navigate("mapa") }) }
+                    composable("inicio") {
+                        Inicio(irMapa = { casillas, minas -> navController.navigate("mapa/$casillas/$minas") })
+                    }
                     composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
-                        val casillas = backStackEntry.arguments!!.getInt("numCasillas")
-                        val bombas = backStackEntry.arguments!!.getInt("numBombas")
+                        val casillas = backStackEntry.arguments!!.getString("numCasillas")
+                        val bombas = backStackEntry.arguments!!.getString("numBombas")
 
                         Mapa(
-                            numCasillas = casillas,
-                            numBombas = bombas,
+                            numCasillas = casillas!!.toInt(),
+                            numBombas = bombas!!.toInt(),
                             { navController.navigate("inicio") }
                         )
                     }
@@ -56,20 +58,23 @@ class PantallaInicio : ComponentActivity() {
 }
 @Composable
 fun Inicio (
-    irMapa: (() -> Unit),
+    irMapa: ((String, String) -> Unit),
 ) {
     var numCasillas by remember { mutableStateOf("") }
     var numMinas by remember { mutableStateOf("") }
 
     Column {
-        Card(
-        ) {
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Card {
             Row(
                 modifier = Modifier.padding(16.dp)
             ) {
                 Text(
                     text = "Número de casillas",
-                    modifier = Modifier.padding(8.dp).align(Alignment.Bottom)
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.Bottom)
                 )
                 TextField(
                     value = numCasillas,
@@ -86,7 +91,9 @@ fun Inicio (
             ) {
                 Text(
                     text = "Número de minas",
-                    modifier = Modifier.padding(8.dp).align(Alignment.Bottom)
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.Bottom)
                 )
                 TextField(
                     value = numMinas,
@@ -108,7 +115,7 @@ fun Inicio (
             )
             Button(
                 onClick = {
-                    numCasillas = "100"
+                    numCasillas = "81"
                     numMinas = "10"
                 },
             ) {
@@ -119,8 +126,8 @@ fun Inicio (
 
             Button(
                 onClick = {
-                    numCasillas = "100"
-                    numMinas = "20"
+                    numCasillas = "256"
+                    numMinas = "40"
                 },
             ) {
                 Text("Medio")
@@ -130,8 +137,8 @@ fun Inicio (
 
             Button(
                 onClick = {
-                    numCasillas = "100"
-                    numMinas = "40"
+                    numCasillas = "480"
+                    numMinas = "99"
                 },
             ) {
                 Text("Difícil")
@@ -141,7 +148,7 @@ fun Inicio (
         Spacer(modifier = Modifier.height(6.dp))
 
         Button(
-            onClick = { irMapa() },
+            onClick = { irMapa(numCasillas, numMinas) },
             enabled = numCasillas.isNotEmpty() && numMinas.isNotEmpty()
         ) {
             Text("Comenzar")
