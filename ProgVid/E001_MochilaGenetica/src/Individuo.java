@@ -1,69 +1,108 @@
 import java.util.Random;
 
 public class Individuo {
+    private static Inventario inventario;
     private int volumenMochila;
+    private final boolean[] genoma;
     private int volumenTotal;
     private int valorTotal;
     private double idoneidad;
-    private boolean[] genoma;
-    private Inventario inventario;
-    private final Random random = new Random();
 
-    public Individuo(Inventario inventario) {
-        this.inventario = inventario;
+    public Individuo(int volumenMochila) {
+        this.volumenMochila = volumenMochila;
+        Random r = new Random();
+        this.genoma = new boolean[inventario.getNumItems()];
 
-        this.volumenMochila = inventario.getTamanio();
-        volumenTotal = Integer.MIN_VALUE;
-        valorTotal = Integer.MIN_VALUE;
-        idoneidad = Double.MIN_VALUE;
-        genoma = new boolean[inventario.getTamanio()];
+        for(int i = 0; i < this.genoma.length; ++i) {
+            this.genoma[i] = r.nextBoolean();
+        }
 
-        for (int i = 0; i < genoma.length; i++) genoma[i] = random.nextBoolean();
-    }
-    public Individuo(Individuo padre, Individuo madre, Inventario inventario) {
-        combinar(padre, madre);
+        this.evaluar();
     }
 
-    int getVolumenTotal(){
-        return volumenTotal;
+    public Individuo(Individuo padre, Individuo madre) {
+        this.volumenMochila = padre.volumenMochila;
+        Random r = new Random();
+        this.genoma = new boolean[inventario.getNumItems()];
+        int punto = r.nextInt(this.genoma.length);
+
+        for(int i = 0; i < this.genoma.length; ++i) {
+            this.genoma[i] = i < punto ? padre.genoma[i] : madre.genoma[i];
+        }
+
+        this.mutar();
+        this.evaluar();
     }
 
-    int getValorTotal() {
-        return valorTotal;
+    public static Inventario getInventario() {
+        return inventario;
     }
 
-    boolean[] getGenoma() {
+    public static void setInventario(Inventario inventario) {
+        Individuo.inventario = inventario;
+    }
+
+    public int getVolumenMochila() {
+        return volumenMochila;
+    }
+
+    public void setVolumenMochila(int volumenMochila) {
+        this.volumenMochila = volumenMochila;
+    }
+
+    public boolean[] getGenoma() {
         return genoma;
     }
 
-    boolean esViable() {
-        return volumenTotal <= volumenMochila;
+    public int getVolumenTotal() {
+        return volumenTotal;
+    }
+
+    public void setVolumenTotal(int volumenTotal) {
+        this.volumenTotal = volumenTotal;
+    }
+
+    public int getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(int valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public double getIdoneidad() {
-        volumenTotal = getVolumenTotal();
-        valorTotal = getValorTotal();
-
-        if (esViable()) idoneidad = valorTotal;
-        else            idoneidad = 0.0;
-
         return idoneidad;
     }
 
-    void combinar(Individuo ind1, Individuo ind2) {
-        boolean[] gen1 = ind1.getGenoma();
-        boolean[] gen2 = ind2.getGenoma();
-        this.genoma = new boolean[inventario.getTamanio()];
-
-        for (int i = 0; i < gen1.length; i++) {
-            this.genoma[i] = random.nextBoolean() ? gen1[i] : gen2[i];
-            if (random.nextInt(5) == 0) this.genoma[i] = !this.genoma[i];
-        }
+    public void setIdoneidad(double idoneidad) {
+        this.idoneidad = idoneidad;
     }
 
-    void mutar() {
-        for (int i = 0; i < genoma.length; i++) {
-            if (random.nextInt(5) == 0) this.genoma[i] = !this.genoma[i];
+    public boolean esViable() {
+        return this.volumenTotal <= this.volumenMochila;
+    }
+
+    public void evaluar() {
+        this.volumenTotal = 0;
+        this.valorTotal = 0;
+
+        for(int i = 0; i < this.genoma.length; ++i) {
+            if (this.genoma[i]) {
+                this.volumenTotal += inventario.volumenesItems[i];
+                this.valorTotal += inventario.valoresItems[i];
+            }
         }
+
+        this.idoneidad = this.esViable() ? (double)this.valorTotal : (double)0.0F;
+    }
+
+    public void mutar() {
+        Random random = new Random();
+        int pos = random.nextInt(this.genoma.length);
+        this.genoma[pos] = !this.genoma[pos];
+    }
+
+    public String toString() {
+        return "Valor=" + this.valorTotal + " Volumen=" + this.volumenTotal + " Idoneidad=" + this.idoneidad;
     }
 }

@@ -1,19 +1,13 @@
 public class Inventario {
-    private final Item[] items;
+    int[] volumenesItems;
+    int[] valoresItems;
 
-    public Inventario(Item[] items) {
-        this.items = items;
+    public Inventario(int[] volumenes, int[] valores) {
+        this.volumenesItems = volumenes;
+        this.valoresItems = valores;
     }
 
-    public int getVolumenItem(int pos) {
-        return items[pos].getVolumen();
-    }
-
-    public int getValorItem(int pos) {
-        return items[pos].getValor();
-    }
-
-    public int getTamanio() {
-        return items.length;
+    public int getNumItems() {
+        return this.volumenesItems.length;
     }
 }
