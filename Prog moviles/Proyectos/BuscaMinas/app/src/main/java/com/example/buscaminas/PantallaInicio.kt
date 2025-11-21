@@ -41,6 +41,7 @@ class PantallaInicio : ComponentActivity() {
                     composable("inicio") {
                         Inicio(irMapa = { casillas, minas -> navController.navigate("mapa/$casillas/$minas") })
                     }
+
                     composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
                         val casillas = backStackEntry.arguments!!.getString("numCasillas")
                         val bombas = backStackEntry.arguments!!.getString("numBombas")
@@ -48,7 +49,22 @@ class PantallaInicio : ComponentActivity() {
                         Mapa(
                             numCasillas = casillas!!.toInt(),
                             numBombas = bombas!!.toInt(),
-                            { navController.navigate("inicio") }
+                            { navController.navigate("inicio") },
+                            { haGanado,casillas, minas -> navController.navigate("final/$haGanado/$casillas/$minas") }
+                        )
+                    }
+
+                    composable("final/{haGanado}/{numCasillas}/{numBombas}") { backStackEntry ->
+                        val haGanado = backStackEntry.arguments!!.getBoolean("haGanado")
+                        val casillas = backStackEntry.arguments!!.getInt("numCasillas")
+                        val bombas = backStackEntry.arguments!!.getInt("numBombas")
+
+                        Final(
+                            haGanado = haGanado,
+                            numCasillas = casillas,
+                            numBombas = bombas,
+                            { navController.navigate("inicio") },
+                            { casillas, minas -> navController.navigate("mapa/$casillas/$minas") }
                         )
                     }
                 }

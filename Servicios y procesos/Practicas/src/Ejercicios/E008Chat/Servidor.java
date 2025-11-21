@@ -31,7 +31,8 @@ public class Servidor {
                     comunicacionThread.start();
 
                     respuesta = entrada.readLine();  // Leer respuesta del servidor
-                    if (!respuesta.isBlank()) System.out.println("\nOtro: " + respuesta);
+                    System.out.println();
+                    if (!respuesta.isBlank()) System.out.println(respuesta);
                 } while (!respuesta.equals("salir") /*&& !respuesta.equals("salir -f")*/);
 
                 // Cierre

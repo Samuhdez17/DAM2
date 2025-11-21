@@ -17,17 +17,15 @@ public class Cliente {
 
             do {
                 // Flujos de entrada/salida
-                BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-                PrintWriter salida = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                System.out.print("Tú: ");
-                mensaje = teclado.readLine();
-                salida.println(mensaje);  // Enviar mensaje al servido
-                System.out.println();
+                Comunicacion comunicacion = new Comunicacion(socket);
+                Thread comunicacionThread = new Thread(comunicacion);
+                comunicacionThread.start();
 
-                String respuesta = entrada.readLine();  // Leer respuesta del servidor
-                if (!respuesta.isBlank()) System.out.println("Otro: " + respuesta);
+                mensaje = entrada.readLine();  // Leer respuesta del servidor
+                if (!mensaje.isBlank()) System.out.println(mensaje);
+                System.out.println();
             } while (!mensaje.equals("salir"));
 
         } catch (IOException e) {

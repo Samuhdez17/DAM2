@@ -54,6 +54,7 @@ class PantallaMapa : ComponentActivity() {
                     composable("inicio") {
                         Inicio(irMapa = { casillas, minas -> navController.navigate("mapa/$casillas/$minas") })
                     }
+
                     composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
                         val casillas = backStackEntry.arguments!!.getString("numCasillas")
                         val bombas = backStackEntry.arguments!!.getString("numBombas")
@@ -61,7 +62,22 @@ class PantallaMapa : ComponentActivity() {
                         Mapa(
                             numCasillas = casillas!!.toInt(),
                             numBombas = bombas!!.toInt(),
-                            { navController.navigate("inicio") }
+                            { navController.navigate("inicio") },
+                            { haGanado,casillas, minas -> navController.navigate("final/$haGanado/$casillas/$minas") }
+                        )
+                    }
+
+                    composable("final/{haGanado}/{numCasillas}/{numBombas}") { backStackEntry ->
+                        val haGanado = backStackEntry.arguments!!.getBoolean("haGanado")
+                        val casillas = backStackEntry.arguments!!.getInt("numCasillas")
+                        val bombas = backStackEntry.arguments!!.getInt("numBombas")
+
+                        Final(
+                            haGanado = haGanado,
+                            numCasillas = casillas,
+                            numBombas = bombas,
+                            { navController.navigate("inicio") },
+                            { casillas, minas -> navController.navigate("mapa/$casillas/$minas") }
                         )
                     }
                 }
@@ -74,7 +90,8 @@ class PantallaMapa : ComponentActivity() {
 fun Mapa(
     numCasillas: Int,
     numBombas: Int,
-    volver: () -> Unit
+    volverInicio: () -> Unit,
+    pantallaFinal: (Boolean, Int, Int) -> Unit
 ) {
     // Se indican las casillas que se quieren y se hace una una figura cuadrada mediante la raíz
     // cuadrada del número de casillas, si no cuadra se añaden casillas hasta que cuadre
@@ -105,57 +122,6 @@ fun Mapa(
             fontSize = (24.sp),
         )
 
-//        Row(
-//            modifier = Modifier
-//                .padding(3.dp)
-//                .align(Alignment.CenterHorizontally),
-//        ) {
-//            Button(
-//                onClick = {
-//                    juegoTerminado = false
-//                    for (i in 0 until casillas) {
-//                        botonesPulsados[i] = false
-//                        posBombas[i] = false
-//                        botonesMarcados[i] = false
-//                        modoMarcar = false
-//                    }
-//                },
-//                modifier = Modifier
-//                    .padding(6.dp)
-//                    .align(Alignment.CenterVertically),
-//                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
-//            ) {
-//                Text("Reiniciar", color = Color.White)
-//            }
-//
-//            Button(
-//                onClick = {
-//                    if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar =
-//                        !modoMarcar
-//                },
-//                modifier = Modifier
-//                    .padding(6.dp)
-//                    .align(Alignment.CenterVertically),
-//                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
-//            ) {
-//                Text(
-//                    (if (modoMarcar) "Cambiar a normal 👆" else "Cambiar a marcar 🚩"),
-//                    color = Color.White
-//                )
-//            }
-//
-//            Button(
-//                onClick = {
-//                    volver()
-//                },
-//                modifier = Modifier
-//                    .padding(6.dp)
-//                    .align(Alignment.CenterVertically),
-//                colors = ButtonDefaults.buttonColors(containerColor = Color(100, 100, 100))
-//            ) {
-//                Text("Cambiar valores", color = Color.White)
-//            }
-//        }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -196,20 +162,23 @@ fun Mapa(
             }
 
             Button(
-                onClick = { volver() },
+                onClick = { volverInicio() },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(75, 75, 75))
             ) {
                 Text("⚙️", color = Color.White)
             }
         }
 
-
         var casillasPulsadas = 0
         for (pos in 0 until botonesPulsados.size) {
             if (botonesPulsados[pos]) casillasPulsadas++
         }
         val seHaGanado = casillasPulsadas == casillasRestantes
-        if (seHaGanado) juegoTerminado = true
+        if (seHaGanado) {
+            juegoTerminado = true
+            Thread.sleep(500)
+            pantallaFinal(true, casillas, numBombas)
+        }
 
         Text(
             text = when {
@@ -251,6 +220,8 @@ fun Mapa(
                             if (posBombas[pos]) botonesPulsados[pos] = true
                         }
 
+                        Thread.sleep(500)
+                        pantallaFinal(false, casillas, numBombas)
 
                     } else {
                         val bombasCerca = mirarAlrededor(posBombas, index, columnas)

@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="ultimo intento de push">
-      <change afterPath="$PROJECT_DIR$/Ejercicios/E008Chat/Cliente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Ejercicios/E008Chat/Servidor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ejercicios/E007akinator.zip" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ejercicios/E008Chat2/ChatServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ejercicios/E008Chat2/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ejercicios/E008Chat2/Comunicacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E008Chat/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E008Chat/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E008Chat/Comunicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E008Chat/Comunicacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ejercicios/E008Chat/Servidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicios/E008Chat/Servidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E008Chat/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E008Chat/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E008Chat/Comunicacion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E008Chat/Comunicacion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E008Chat/Servidor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Practicas/Ejercicios/E008Chat/Servidor.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +71,7 @@
     "Application.Servidor.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
@@ -73,7 +81,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/Ejercicios/E008Chat",
+    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/Ejercicios/E008Chat2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,11 +95,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E008Chat2" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E008Chat" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E06fecha_y_hora" />
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\2" />
-      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios" />
-      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\ejercicio_mostrar_nums_retardo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\telnet" />
@@ -108,8 +116,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
       </set>
     </attachedChunks>
   </component>
@@ -150,7 +158,9 @@
       <workItem from="1763021374794" duration="647000" />
       <workItem from="1763029993904" duration="18000" />
       <workItem from="1763064338070" duration="86000" />
-      <workItem from="1763105180082" duration="662000" />
+      <workItem from="1763105180082" duration="6222000" />
+      <workItem from="1763709957679" duration="922000" />
+      <workItem from="1763710957953" duration="419000" />
     </task>
     <task id="LOCAL-00001" summary="ultimo intento de push">
       <option name="closed" value="true" />
