@@ -21,7 +21,7 @@ public class Comunicacion implements Runnable {
             System.out.print("Tú: ");
             String mensaje = teclado.readLine();
             System.out.println();
-            salida.println("Otro: " + mensaje);
+            if (!mensaje.isBlank()) salida.println("Otro: " + mensaje);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
