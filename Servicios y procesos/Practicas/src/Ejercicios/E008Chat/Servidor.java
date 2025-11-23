@@ -3,7 +3,6 @@ package Ejercicios.E008Chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,38 +11,23 @@ public class Servidor {
         int puerto = 5000;
 
         try (ServerSocket servidor = new ServerSocket(puerto)) {
-            Socket cliente = null;
-            String respuesta = "";
+            System.out.println("Servidor iniciado. Esperando conexión...");
 
-            while (true) {
-                System.out.println("Servidor iniciado. Esperando conexión en el puerto " + puerto + "...");
+            Socket cliente = servidor.accept();
+            System.out.println("Cliente conectado desde: " + cliente.getInetAddress());
 
-                // Espera hasta que un cliente se conecte
-                cliente = servidor.accept();
-                System.out.println("Cliente conectado desde: " + cliente.getInetAddress().getHostAddress());
+            Thread envio = new Thread(new Comunicacion(cliente));
+            envio.start();
 
-                do {
-                    // Flujos de entrada/salida
-                    BufferedReader entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-
-                    Comunicacion comunicacion = new Comunicacion(cliente);
-                    Thread comunicacionThread = new Thread(comunicacion);
-                    comunicacionThread.start();
-
-                    respuesta = entrada.readLine();  // Leer respuesta del servidor
-                    System.out.println();
-                    if (!respuesta.isBlank()) System.out.println(respuesta);
-                } while (!respuesta.equals("salir") /*&& !respuesta.equals("salir -f")*/);
-
-                // Cierre
-                cliente.close();
-
-                if (respuesta.equals("salir")) System.out.println("Saliendo del chat...");
-//                if (respuesta.equals("salir -f")) {
-//                    servidor.close();
-//                    System.out.println("Servidor cerrado.");
-//                    break;
-//                }
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()))) {
+                String mensaje;
+                while ((mensaje = entrada.readLine()) != null) {
+                    System.out.println("\nCliente: " + mensaje);
+                    if (mensaje.equals("salir")) {
+                        cliente.close();
+                        break;
+                    }
+                }
             }
 
         } catch (IOException e) {
@@ -51,4 +35,3 @@ public class Servidor {
         }
     }
 }
-

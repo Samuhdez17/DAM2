@@ -39,32 +39,38 @@ class PantallaInicio : ComponentActivity() {
                     startDestination = "inicio"
                 ) {
                     composable("inicio") {
-                        Inicio(irMapa = { casillas, minas -> navController.navigate("mapa/$casillas/$minas") })
+                        Inicio(irMapa = { casillas, minas, nombre -> navController.navigate("mapa/$casillas/$minas/$nombre") })
                     }
 
-                    composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
-                        val casillas = backStackEntry.arguments!!.getString("numCasillas")
-                        val bombas = backStackEntry.arguments!!.getString("numBombas")
+                    composable("mapa/{numCasillas}/{numBombas}/{nombre}") { backStackEntry ->
+                        val casillas = backStackEntry.arguments!!.getString("numCasillas")!!.toInt()
+                        val bombas = backStackEntry.arguments!!.getString("numBombas")!!.toInt()
+                        val nombre = backStackEntry.arguments!!.getString("nombre").toString()
 
                         Mapa(
-                            numCasillas = casillas!!.toInt(),
-                            numBombas = bombas!!.toInt(),
+                            numCasillas = casillas,
+                            numBombas = bombas,
+                            nombreUsuario = nombre,
                             { navController.navigate("inicio") },
-                            { haGanado,casillas, minas -> navController.navigate("final/$haGanado/$casillas/$minas") }
+                            { haGanado,casillas, minas, nombre -> navController.navigate("final/$haGanado/$casillas/$minas/$nombre") }
                         )
                     }
 
-                    composable("final/{haGanado}/{numCasillas}/{numBombas}") { backStackEntry ->
-                        val haGanado = backStackEntry.arguments!!.getBoolean("haGanado")
-                        val casillas = backStackEntry.arguments!!.getInt("numCasillas")
-                        val bombas = backStackEntry.arguments!!.getInt("numBombas")
+                    composable("final/{haGanado}/{numCasillas}/{numBombas}/{nombre}") { backStackEntry ->
+                        val haGanado = backStackEntry.arguments?.getString("haGanado")!!.toBoolean()
+                        val casillas = backStackEntry.arguments?.getString("numCasillas")!!.toInt()
+                        val bombas = backStackEntry.arguments?.getString("numBombas")!!.toInt()
+                        val nombre = backStackEntry.arguments?.getString("nombre").toString()
 
                         Final(
                             haGanado = haGanado,
                             numCasillas = casillas,
                             numBombas = bombas,
-                            { navController.navigate("inicio") },
-                            { casillas, minas -> navController.navigate("mapa/$casillas/$minas") }
+                            nombre = nombre,
+                            volverInicio = { navController.navigate("inicio") },
+                            volverMapa = { casillas, minas, nombre ->
+                                navController.navigate("mapa/$casillas/$minas/$nombre")
+                            }
                         )
                     }
                 }
@@ -74,8 +80,9 @@ class PantallaInicio : ComponentActivity() {
 }
 @Composable
 fun Inicio (
-    irMapa: ((String, String) -> Unit),
+    irMapa: ((String, String, String) -> Unit),
 ) {
+    var nombre by remember { mutableStateOf("") }
     var numCasillas by remember { mutableStateOf("") }
     var numMinas by remember { mutableStateOf("") }
 
@@ -83,6 +90,25 @@ fun Inicio (
         Spacer(modifier = Modifier.height(40.dp))
 
         Card {
+            Row(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "Nombre",
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.Bottom)
+                )
+                TextField(
+                    value = nombre,
+                    onValueChange = { nombre = it },
+                    placeholder = { Text("Indica tu nombre") },
+                    modifier = Modifier.align(Alignment.CenterVertically),
+                    label = { },
+                    singleLine = true,
+                )
+            }
+
             Row(
                 modifier = Modifier.padding(16.dp)
             ) {
@@ -164,8 +190,8 @@ fun Inicio (
         Spacer(modifier = Modifier.height(6.dp))
 
         Button(
-            onClick = { irMapa(numCasillas, numMinas) },
-            enabled = numCasillas.isNotEmpty() && numMinas.isNotEmpty()
+            onClick = { irMapa(numCasillas, numMinas, nombre) },
+            enabled = nombre.isNotEmpty() && numCasillas.isNotEmpty() && numMinas.isNotEmpty()
         ) {
             Text("Comenzar")
         }
