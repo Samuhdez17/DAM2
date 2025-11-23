@@ -3,7 +3,6 @@ package Ejercicios.E008Chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Cliente {
@@ -13,24 +12,23 @@ public class Cliente {
 
         try (Socket socket = new Socket(host, puerto)) {
             System.out.println("Conectado al servidor.");
-            String mensaje = "";
 
-            do {
-                // Flujos de entrada/salida
-                BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            Thread envio = new Thread(new Comunicacion(socket));
+            envio.start();
 
-                Comunicacion comunicacion = new Comunicacion(socket);
-                Thread comunicacionThread = new Thread(comunicacion);
-                comunicacionThread.start();
-
-                mensaje = entrada.readLine();  // Leer respuesta del servidor
-                if (!mensaje.isBlank()) System.out.println(mensaje);
-                System.out.println();
-            } while (!mensaje.equals("salir"));
+            try (BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+                String mensaje;
+                while ((mensaje = entrada.readLine()) != null) {
+                    System.out.println("\nServidor: " + mensaje);
+                    if (mensaje.equals("salir")) {
+                        socket.close();
+                        break;
+                    }
+                }
+            }
 
         } catch (IOException e) {
             System.out.println("Error en el cliente: " + e.getMessage());
         }
     }
 }
-

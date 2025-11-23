@@ -19,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -30,13 +31,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.buscaminas.ui.theme.BuscaMinasTheme
+import kotlinx.coroutines.delay
 import kotlin.math.sqrt
 import kotlin.random.Random
 import kotlin.text.toInt
@@ -53,32 +54,38 @@ class PantallaMapa : ComponentActivity() {
                     startDestination = "inicio"
                 ) {
                     composable("inicio") {
-                        Inicio(irMapa = { casillas, minas -> navController.navigate("mapa/$casillas/$minas") })
+                        Inicio(irMapa = { casillas, minas, nombre -> navController.navigate("mapa/$casillas/$minas/$nombre") })
                     }
 
-                    composable("mapa/{numCasillas}/{numBombas}") { backStackEntry ->
-                        val casillas = backStackEntry.arguments!!.getString("numCasillas")
-                        val bombas = backStackEntry.arguments!!.getString("numBombas")
+                    composable("mapa/{numCasillas}/{numBombas}/{nombre}") { backStackEntry ->
+                        val casillas = backStackEntry.arguments!!.getString("numCasillas")!!.toInt()
+                        val bombas = backStackEntry.arguments!!.getString("numBombas")!!.toInt()
+                        val nombre = backStackEntry.arguments!!.getString("nombre").toString()
 
                         Mapa(
-                            numCasillas = casillas!!.toInt(),
-                            numBombas = bombas!!.toInt(),
+                            numCasillas = casillas,
+                            numBombas = bombas,
+                            nombreUsuario = nombre,
                             { navController.navigate("inicio") },
-                            { haGanado,casillas, minas -> navController.navigate("final/$haGanado/$casillas/$minas") }
+                            { haGanado,casillas, minas, nombre -> navController.navigate("final/$haGanado/$casillas/$minas/$nombre") }
                         )
                     }
 
-                    composable("final/{haGanado}/{numCasillas}/{numBombas}") { backStackEntry ->
-                        val haGanado = backStackEntry.arguments!!.getBoolean("haGanado")
-                        val casillas = backStackEntry.arguments!!.getInt("numCasillas")
-                        val bombas = backStackEntry.arguments!!.getInt("numBombas")
+                    composable("final/{haGanado}/{numCasillas}/{numBombas}/{nombre}") { backStackEntry ->
+                        val haGanado = backStackEntry.arguments?.getString("haGanado")!!.toBoolean()
+                        val casillas = backStackEntry.arguments?.getString("numCasillas")!!.toInt()
+                        val bombas = backStackEntry.arguments?.getString("numBombas")!!.toInt()
+                        val nombre = backStackEntry.arguments?.getString("nombre").toString()
 
                         Final(
                             haGanado = haGanado,
                             numCasillas = casillas,
                             numBombas = bombas,
-                            { navController.navigate("inicio") },
-                            { casillas, minas -> navController.navigate("mapa/$casillas/$minas") }
+                            nombre = nombre,
+                            volverInicio = { navController.navigate("inicio") },
+                            volverMapa = { casillas, minas, nombre ->
+                                navController.navigate("mapa/$casillas/$minas/$nombre")
+                            }
                         )
                     }
                 }
@@ -91,8 +98,9 @@ class PantallaMapa : ComponentActivity() {
 fun Mapa(
     numCasillas: Int,
     numBombas: Int,
+    nombreUsuario: String,
     volverInicio: () -> Unit,
-    pantallaFinal: (Boolean, Int, Int) -> Unit
+    pantallaFinal: (Boolean, Int, Int, String) -> Unit
 ) {
     // Se indican las casillas que se quieren y se hace una una figura cuadrada mediante la raíz
     // cuadrada del número de casillas, si no cuadra se añaden casillas hasta que cuadre
@@ -132,23 +140,6 @@ fun Mapa(
         ) {
             Button(
                 onClick = {
-                    juegoTerminado = false
-                    for (i in 0 until casillas) {
-                        botonesPulsados[i] = false
-                        posBombas[i] = false
-                        botonesMarcados[i] = false
-                    }
-                    modoMarcar = false
-                    numBombasVariable = numBombas
-                },
-                modifier = Modifier.weight(1f),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(75, 75, 75))
-            ) {
-                Text("Reiniciar", color = Color.White)
-            }
-
-            Button(
-                onClick = {
                     if (!juegoTerminado && !partidaSinEmpezar(botonesPulsados)) modoMarcar = !modoMarcar
                 },
                 modifier = Modifier.weight(1f),
@@ -178,7 +169,7 @@ fun Mapa(
         if (seHaGanado) {
             juegoTerminado = true
             Thread.sleep(500)
-            pantallaFinal(true, casillas, numBombas)
+            pantallaFinal(true, casillas, numBombas, nombreUsuario)
         }
 
         Text(
@@ -221,8 +212,10 @@ fun Mapa(
                             if (posBombas[pos]) botonesPulsados[pos] = true
                         }
 
-                        Thread.sleep(500)
-                        pantallaFinal(false, casillas, numBombas)
+                        LaunchedEffect(Unit) {
+                            delay(500)
+                            pantallaFinal(false, casillas, numBombas, nombreUsuario)
+                        }
 
                     } else {
                         val bombasCerca = mirarAlrededor(posBombas, index, columnas)
