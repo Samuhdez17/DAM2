@@ -95,13 +95,13 @@ public class Controlador {
 
     // MÉTODOS ESCENA 4
     @FXML
-    void ir43(ActionEvent event) {
-
+    void ir43(ActionEvent event) throws IOException {
+        cargarStage(event, 2);
     }
 
     @FXML
-    void ir45(ActionEvent event) {
-
+    void ir45(ActionEvent event) throws IOException {
+        cargarStage(event, 4);
     }
 
     @FXML
@@ -152,7 +152,6 @@ public class Controlador {
             case 3 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena4.fxml"));
             case 4 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena5.fxml"));
             case 5 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena6.fxml"));
-//            case 6 -> fxmlLoader = new FXMLLoader(Aplicacion.class.getResource("escena7.fxml"));
         }
 
         if (fxmlLoader != null) scene = new Scene(fxmlLoader.load());
