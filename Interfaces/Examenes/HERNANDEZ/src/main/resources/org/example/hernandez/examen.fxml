@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="276.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.hernandez.Controlador">
+   <children>
+      <VBox alignment="CENTER_LEFT" layoutX="28.0" layoutY="101.0" prefHeight="86.0" prefWidth="61.0" spacing="10.0" style="-fx-background-color: ;">
+         <children>
+            <RadioButton fx:id="rbRojo" mnemonicParsing="false" onAction="#cambiarARojo" text="Rojo" />
+            <RadioButton fx:id="rbVerde" mnemonicParsing="false" onAction="#cambiarAVerde" text="Verde" />
+            <RadioButton fx:id="rbAzul" mnemonicParsing="false" onAction="#cambiarAAzul" text="Azul" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" layoutX="575.0" layoutY="101.0" prefHeight="86.0" prefWidth="62.0" spacing="10.0" style="-fx-background-color: ;">
+         <children>
+            <CheckBox fx:id="cbNegrita" mnemonicParsing="false" onAction="#cambiarANegrita" text="Negrita" />
+            <CheckBox fx:id="cbCursiva" mnemonicParsing="false" onAction="#cambiarACursiva" text="Cursiva" />
+         </children>
+      </VBox>
+      <HBox layoutX="209.0" layoutY="221.0" prefHeight="26.0" prefWidth="270.0" spacing="40.0" style="-fx-background-color: ;">
+         <children>
+            <Button fx:id="alIzq" mnemonicParsing="false" onAction="#alinearIzq" text="&lt; Alinear izquierda" />
+            <Button fx:id="alDer" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#alinearDere" text="Alinear derecha &gt;" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="213.0" layoutY="29.0" prefHeight="34.0" prefWidth="262.0" spacing="10.0" style="-fx-background-color: ;">
+         <children>
+            <Label alignment="CENTER" prefHeight="18.0" prefWidth="92.0" text="Escribe un texto:" />
+            <TextField fx:id="txtFiled" onKeyPressed="#enviarTexto" />
+         </children>
+      </HBox>
+      <Label fx:id="contenidoFinal" alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="135.0" prefHeight="18.0" prefWidth="422.0" />
+   </children>
+</AnchorPane>
