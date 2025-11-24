@@ -157,19 +157,19 @@ fun Inicio (
             )
             Button(
                 onClick = {
-                    numCasillas = "81"
-                    numMinas = "10"
+                    numCasillas = "9"
+                    numMinas = "3"
                 },
             ) {
-                Text("Fácil")
+                Text("Pequeño")
             }
 
             Spacer(modifier = Modifier.width(6.dp))
 
             Button(
                 onClick = {
-                    numCasillas = "256"
-                    numMinas = "40"
+                    numCasillas = "25"
+                    numMinas = "5"
                 },
             ) {
                 Text("Medio")
@@ -179,11 +179,11 @@ fun Inicio (
 
             Button(
                 onClick = {
-                    numCasillas = "480"
-                    numMinas = "99"
+                    numCasillas = "100"
+                    numMinas = "10"
                 },
             ) {
-                Text("Difícil")
+                Text("Grande")
             }
         }
 
