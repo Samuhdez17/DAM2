@@ -5,12 +5,13 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Controlador {
     Stage stage;
@@ -45,6 +46,9 @@ public class Controlador {
     private Button botonCancelarE3;
 
     // ELEMENTOS ESCENA 4
+    static String tipoInstalacion = "";
+    static ArrayList<String> componentes = new ArrayList<>();
+
     @FXML
     private Button botonAtrasE4;
 
@@ -62,6 +66,46 @@ public class Controlador {
 
     @FXML
     private ComboBox comboBoxE4;
+
+    //ELEMENTOS ESCENA 5
+    static String ruta = "";
+
+    @FXML
+    private Label almacenamiento;
+
+    @FXML
+    private Button botonAtrasE5;
+
+    @FXML
+    private Button botonCancelarE5;
+
+    @FXML
+    private Button botonInstalarE5;
+
+    @FXML
+    private Button examinar;
+
+    @FXML
+    private TextField rutaDescarga;
+
+    // ELEMENTOS ESCENA 6
+    @FXML
+    private Button botonAtrasE6;
+
+    @FXML
+    private Button botonCancelarE6;
+
+    @FXML
+    private Label componentesFinalE6;
+
+    @FXML
+    private Label idiomaFinalE6;
+
+    @FXML
+    private Label rutaFinalFinalE6;
+
+    @FXML
+    private Label tipoInstalacionFinalE6;
 
     // MÉTODOS ESCENA 1
     @FXML
@@ -101,20 +145,49 @@ public class Controlador {
 
     @FXML
     void ir45(ActionEvent event) throws IOException {
+        componentes.clear();
+        tipoInstalacion = comboBoxE4.getSelectionModel().getSelectedItem().toString();
+        if (checkBox1E4.isSelected()) componentes.add(checkBox1E4.getText());
+        if (checkBox2E4.isSelected()) componentes.add(checkBox2E4.getText());
         cargarStage(event, 4);
     }
 
     @FXML
     void instalacionGeneral(ActionEvent event) {
         if (comboBoxE4.getValue().equals("General")) cargarValoresGenerales();
+        else if (comboBoxE4.getValue().equals("Personalizado")) cargarValoresPersonalizados();
     }
-
-
 
     @FXML
     void valoresInstalacion(ActionEvent event) {
         if (checkBox1E4.isSelected() && checkBox2E4.isSelected()) comboBoxE4.setValue("General");
         else                                                      comboBoxE4.setValue("Personalizado");
+    }
+
+    //MÉTODOS ESCENA 5
+    @FXML
+    void cambiarRuta(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File file = directoryChooser.showDialog(null);
+
+        ruta = file.getAbsolutePath();
+        rutaDescarga.setText(file.getAbsolutePath());
+    }
+
+    @FXML
+    void ir54(ActionEvent event) throws IOException {
+        cargarStage(event, 3);
+    }
+
+    @FXML
+    void irInstalacion(ActionEvent event) throws IOException {
+        cargarStage(event, 5);
+    }
+
+    // MÉTODOS ESCENA 6
+    @FXML
+    void ir65(ActionEvent event) throws IOException {
+        cargarStage(event, 4);
     }
 
     // MÉTODOS AUXILIARES
@@ -129,6 +202,32 @@ public class Controlador {
             comboBoxE4.getItems().addAll("General", "Personalizado");
             comboBoxE4.setValue("General");
             cargarValoresGenerales();
+        }
+
+        if (almacenamiento != null && rutaDescarga != null) {
+            File disco = new File("C:\\");
+            long espacioLibre = disco.getFreeSpace();
+
+            double espacio = (double) espacioLibre / (1024 * 1024 * 1024);
+
+            almacenamiento.setText(String.format("%.2fGB", espacio));
+
+            rutaDescarga.setText("C:\\Program Files (x86)\\Bandicam");
+            ruta = rutaDescarga.getText();
+        }
+
+        if (idiomaFinalE6 != null && tipoInstalacionFinalE6 != null && componentesFinalE6 != null && rutaFinalFinalE6 != null) {
+            idiomaFinalE6.setText(idioma);
+            tipoInstalacionFinalE6.setText(tipoInstalacion);
+
+            StringBuilder componentesFinales = new StringBuilder();
+            for (int i = 0; i < componentes.size(); i++) {
+                if (i == componentes.size() - 1) componentesFinales.append(componentes.get(i));
+                else componentesFinales.append(componentes.get(i) + ", ");
+            }
+            componentesFinalE6.setText(componentesFinales.toString());
+
+            rutaFinalFinalE6.setText(ruta);
         }
     }
 
