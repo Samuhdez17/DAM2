@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.t4_e005instalador.Controlador">
+   <children>
+      <Label layoutX="189.0" layoutY="15.0" text="Verificación de insatalación">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="200.0" layoutY="33.0" prefHeight="34.0" prefWidth="330.0" text="Por favor revise que está todo en orden" wrapText="true" />
+      <ImageView fitHeight="80.0" fitWidth="184.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/baner.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutY="72.0" prefHeight="346.0" prefWidth="574.0" style="-fx-background-color: lightgrey;">
+         <children>
+            <Label layoutX="27.0" layoutY="35.0" text="Revise que todo está correcto" />
+            <VBox layoutX="27.0" layoutY="73.0" prefHeight="200.0" prefWidth="514.0" spacing="5.0" style="-fx-background-color: white;">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="504.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="22.0" prefWidth="46.0" text="Idioma: " wrapText="true" />
+                        <Label fx:id="idiomaFinalE6" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="504.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="90.0" text="Tipo instalación: " wrapText="true" />
+                        <Label fx:id="tipoInstalacionFinalE6" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="504.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="81.0" text="Componentes: " wrapText="true" />
+                        <Label fx:id="componentesFinalE6" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="504.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="98.0" text="Ruta de descarga: " wrapText="true" />
+                        <Label fx:id="rutaFinalFinalE6" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <Button fx:id="botonAtrasE6" layoutX="409.0" layoutY="307.0" mnemonicParsing="false" onAction="#ir65" text="&lt; Atrás" />
+            <Button fx:id="botonCancelarE6" layoutX="479.0" layoutY="307.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
