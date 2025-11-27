@@ -57,7 +57,7 @@ public class PrestamoImpl implements PrestamoDAO {
         ) {
             ps.setInt(1, prestamo);
             ps.executeUpdate();
-            System.out.printf("DAO: Préstamo eliminado -> id = %d\n", prestamo);
+            System.out.println("DAO: Préstamo eliminado -> " + prestamo);
         }
     }
 

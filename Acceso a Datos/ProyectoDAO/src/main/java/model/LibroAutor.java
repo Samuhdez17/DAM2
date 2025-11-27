@@ -20,4 +20,9 @@ public class LibroAutor {
     public void setIdAutor(int idAutor) {
         this.idAutor = idAutor;
     }
+
+    @Override
+    public String toString() {
+        return "Libro = " + idLibro + ", Autor = " + idAutor;
+    }
 }

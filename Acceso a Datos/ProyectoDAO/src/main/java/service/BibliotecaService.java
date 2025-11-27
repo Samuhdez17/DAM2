@@ -7,6 +7,7 @@ import dao.prestamo.PrestamoDAO;
 import dao.usuario.UsuarioDAO;
 import model.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class BibliotecaService {
@@ -111,6 +112,15 @@ public class BibliotecaService {
         }
     }
 
+    public String getNombreLibro(int idLibro) {
+        try {
+            Libro libro = libroDAO.getLibroById(idLibro);
+            return libro.getTitulo();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // LIBRO_AUTOR
     public List<Libro> listarLibrosPorAutor(int id) {
         try {
@@ -189,6 +199,15 @@ public class BibliotecaService {
             usuarioDAO.deleteUsuario(id);
         } catch (Exception e) {
             System.err.println("Error al eliminar usuario: " + e.getMessage());
+        }
+    }
+
+    public String getNombreUsuario(int idUsuario) {
+        try {
+            Usuario usuario = usuarioDAO.getUsuarioById(idUsuario);
+            return usuario.getNombre();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

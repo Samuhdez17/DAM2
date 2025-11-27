@@ -14,7 +14,7 @@ import java.util.List;
 public class LibroAutorImpl implements LibroAutorDAO {
     @Override
     public void addLibroAutor(LibroAutor libroAutor) throws SQLException {
-        String sql = "INSERT INTO libroAutor (idLibro, idAutor) VALUES (?,?)";
+        String sql = "INSERT INTO libro_autor (idLibro, idAutor) VALUES (?,?)";
         try (
                 Connection conn = ConexionBD.getConexion();
                 PreparedStatement ps = conn.prepareStatement(sql)
@@ -47,7 +47,7 @@ public class LibroAutorImpl implements LibroAutorDAO {
 
     @Override
     public void deleteAutor(int id) throws SQLException {
-        String sql = "DELETE FROM libroAutor WHERE idAutor = ?";
+        String sql = "DELETE FROM libro_autor WHERE idAutor = ?";
 
         try (
                 Connection conn = ConexionBD.getConexion();
@@ -55,7 +55,7 @@ public class LibroAutorImpl implements LibroAutorDAO {
         ) {
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.printf("DAO: Autor eliminado -> id = %d\n", id);
+            System.out.println("DAO: Libros del autor eliminado -> " + id);
         }
     }
 }

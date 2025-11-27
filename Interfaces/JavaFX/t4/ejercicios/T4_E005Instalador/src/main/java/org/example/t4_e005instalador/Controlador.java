@@ -155,7 +155,6 @@ public class Controlador {
     @FXML
     void instalacionGeneral(ActionEvent event) {
         if (comboBoxE4.getValue().equals("General")) cargarValoresGenerales();
-        else if (comboBoxE4.getValue().equals("Personalizado")) cargarValoresPersonalizados();
     }
 
     @FXML
@@ -234,11 +233,6 @@ public class Controlador {
     private void cargarValoresGenerales() {
         checkBox1E4.setSelected(true);
         checkBox2E4.setSelected(true);
-    }
-
-    private void cargarValoresPersonalizados() {
-        checkBox1E4.setSelected(false);
-        checkBox2E4.setSelected(false);
     }
 
     private void cargarStage(ActionEvent event, int escena) throws IOException {
