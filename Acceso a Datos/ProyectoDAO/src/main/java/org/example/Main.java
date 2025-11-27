@@ -60,14 +60,16 @@ public class Main {
             4. Borrar usuario
             0. Salir al menu principal
             """;
+
     private static final Scanner ENTRADA = new Scanner(System.in);
     public static void main(String[] args) {
-        AutorDAO autorDAO = new AutorImpl();
-        LibroDAO libroDAO = new LibroImpl();
+        AutorDAO autorDAO           = new AutorImpl();
+        LibroDAO libroDAO           = new LibroImpl();
         LibroAutorDAO libroAutorDAO = new LibroAutorImpl();
-        PrestamoDAO prestamoDAO = new PrestamoImpl();
-        UsuarioDAO usuarioDAO = new UsuarioImpl();
-        BibliotecaService servicio = new BibliotecaService(libroDAO, autorDAO, libroAutorDAO, prestamoDAO, usuarioDAO);
+        PrestamoDAO prestamoDAO     = new PrestamoImpl();
+        UsuarioDAO usuarioDAO       = new UsuarioImpl();
+        BibliotecaService servicio  = new BibliotecaService(libroDAO, autorDAO, libroAutorDAO, prestamoDAO, usuarioDAO);
+
         int opcion = -1;
         while (opcion != 0) {
             System.out.println(MENU_PRINCIPAL);
@@ -79,116 +81,75 @@ public class Main {
                         System.out.println(MENU_AUTOR);
                         opcion = ENTRADA.nextInt();
                         switch (opcion) {
-                            case 1 -> {
-                                registrarAutor(servicio);
-                                opcion = -1;
-                            }
-                            case 2 -> {
-                                listarAutores(servicio);
-                                opcion = -1;
-                            }
-                            case 3 -> {
-                                actualizarAutor(servicio);
-                                opcion = -1;
-                            }
-                            case 4 -> {
-                                eliminarAutor(servicio);
-                                opcion = -1;
-                            }
+                            case 1 -> registrarAutor(servicio);
+
+                            case 2 -> listarAutores(servicio);
+
+                            case 3 -> actualizarAutor(servicio);
+
+                            case 4 -> eliminarAutor(servicio);
+
                             case 0 -> System.out.println("Volviendo al menú principal...");
-                            default -> {
-                                System.out.println("Opción no válida.");
-                                opcion = -1;
-                            }
+
+                            default -> System.out.println("Opción no válida.");
                         }
+
+                        System.out.println();
                     }
+
                     opcion = -1;
                 }
+
                 case 2 -> {
                     opcion = -1;
                     while (opcion != 0) {
                         System.out.println(MENU_LIBRO);
                         opcion = ENTRADA.nextInt();
                         switch (opcion) {
-                            case 1 -> {
-                                registrarLibro(servicio);
-                                opcion = -1;
-                            }
-                            case 2 -> {
-                                listarLibros(servicio);
-                                opcion = -1;
-                            }
-                            case 3 -> {
-                                listarLibrosPorAutor(servicio);
-                                opcion = -1;
-                            }
-                            case 4 -> {
-                                cambiarTitulo(servicio);
-                                opcion = -1;
-                            }
-                            case 5 -> {
-                                eliminarLibro(servicio);
-                                opcion = -1;
-                            }
+                            case 1 -> registrarLibro(servicio);
+
+                            case 2 -> listarLibros(servicio);
+
+                            case 3 -> listarLibrosPorAutor(servicio);
+
+                            case 4 -> cambiarTitulo(servicio);
+
+                            case 5 -> eliminarLibro(servicio);
+
                             case 0 -> System.out.println("Volviendo al menú principal...");
 
-                            default -> {
-                                System.out.println("Opción no válida.");
-                                opcion = -1;
-                            }
+                            default -> System.out.println("Opción no válida.");
                         }
+
+                        System.out.println();
                     }
+
                     opcion = -1;
                 }
+
                 case 3 -> {
                     opcion = -1;
                     while (opcion != 0) {
                         System.out.println(MENU_PRESTAMO);
                         opcion = ENTRADA.nextInt();
                         switch (opcion) {
-                            case 1 -> {
-                                ENTRADA.nextLine();
-                                System.out.print("Fecha inicio (YYYY-MM-DD): ");
-                                String fechaInicio = ENTRADA.nextLine();
-                                System.out.print("Fecha fin (YYYY-MM-DD): ");
-                                String fechaFin = ENTRADA.nextLine();
-                                System.out.print("ID del libro: ");
-                                int libroId = ENTRADA.nextInt();
-                                System.out.print("ID del usuario: ");
-                                int usuarioId = ENTRADA.nextInt();
-                                servicio.registrarPrestamo(fechaInicio, fechaFin, libroId, usuarioId);
-                                opcion = -1;
-                            }
-                            case 2 -> {
-                                List<Prestamo> prestamos = servicio.listarPrestamos();
-                                System.out.println("Préstamos:");
-                                for (Prestamo p : prestamos) {
-                                    System.out.println("id=" + p.getId() + " | inicio=" + p.getFechaInicio() + " | fin=" + p.getFechaFin() + " | libroId=" + p.getIdLibro() + " | usuarioId=" + p.getIdUsuario());
-                                }
-                                opcion = -1;
-                            }
-                            case 3 -> {
-                                List<Prestamo> retrasos = servicio.listarRetrasos();
-                                System.out.println("Préstamos atrasados:");
-                                for (Prestamo p : retrasos) {
-                                    System.out.println("id=" + p.getId() + " | inicio=" + p.getFechaInicio() + " | fin=" + p.getFechaFin() + " | libroId=" + p.getIdLibro() + " | usuarioId=" + p.getIdUsuario());
-                                }
-                                opcion = -1;
-                            }
-                            case 4 -> {
-                                System.out.print("ID del préstamo a borrar: ");
-                                int idPrestamo = ENTRADA.nextInt();
-                                servicio.eliminarPrestamo(idPrestamo);
-                                opcion = -1;
-                            }
+                            case 1 -> registrarPrestamo(servicio);
+
+                            case 2 -> listarPrestamos(servicio);
+
+                            case 3 -> listarPrestamosAtrasados(servicio);
+
+                            case 4 -> borrarPrestamo(servicio);
+
                             case 0 -> System.out.println("Volviendo al menú principal...");
 
-                            default -> {
-                                System.out.println("Opción no válida.");
-                                opcion = -1;
-                            }
+                            default -> System.out.println("Opción no válida.");
+
                         }
+
+                        System.out.println();
                     }
+
                     opcion = -1;
                 }
 
@@ -198,104 +159,30 @@ public class Main {
                         System.out.println(MENU_USUARIO);
                         opcion = ENTRADA.nextInt();
                         switch (opcion) {
-                            case 1 -> {
-                                ENTRADA.nextLine();
-                                System.out.print("Nombre del usuario: ");
-                                String nombreUsuario = ENTRADA.nextLine();
-                                servicio.agregarUsuario(nombreUsuario);
-                                opcion = -1;
-                            }
-                            case 2 -> {
-                                List<Usuario> usuarios = servicio.listarUsuarios();
-                                System.out.println("Usuarios:");
-                                for (Usuario u : usuarios) {
-                                    System.out.println("id=" + u.getId() + " | nombre=" + u.getNombre());
-                                }
-                                opcion = -1;
-                            }
-                            case 3 -> {
-                                System.out.print("ID del usuario a actualizar: ");
-                                int idUsuarioAct = ENTRADA.nextInt();
-                                ENTRADA.nextLine();
-                                System.out.print("Nuevo nombre: ");
-                                String nuevoNomUsuario = ENTRADA.nextLine();
-                                servicio.actualizarUsuario(idUsuarioAct, nuevoNomUsuario);
-                                opcion = -1;
-                            }
-                            case 4 -> {
-                                System.out.print("ID del usuario a borrar: ");
-                                int idUsuarioDel = ENTRADA.nextInt();
-                                servicio.eliminarUsuario(idUsuarioDel);
-                                opcion = -1;
-                            }
+                            case 1 -> registrarUsuario(servicio);
+
+                            case 2 -> listarUsuarios(servicio);
+
+                            case 3 -> actualizarUsuario(servicio);
+
+                            case 4 -> borrarUsuario(servicio);
+
                             case 0 -> System.out.println("Volviendo al menú principal...");
 
-                            default -> {
-                                System.out.println("Opción no válida.");
-                                opcion = -1;
-                            }
+                            default -> System.out.println("Opción no válida.");
                         }
+
+                        System.out.println();
                     }
+
                     opcion = -1;
                 }
+
                 case 0 -> System.out.println("Saliendo...");
+
                 default -> System.out.println("Opción no válida en menú principal.");
             }
         }
-    }
-
-    private static void eliminarLibro(BibliotecaService servicio) {
-        preguntarSiListarLibros(servicio);
-        System.out.print("ID del libro a borrar: ");
-        int idLibroDel = ENTRADA.nextInt();
-        servicio.eliminarLibro(idLibroDel);
-    }
-
-    private static void cambiarTitulo(BibliotecaService servicio) {
-        preguntarSiListarLibros(servicio);
-        System.out.print("ID del libro a actualizar: ");
-        int idLibro = ENTRADA.nextInt();
-        ENTRADA.nextLine();
-        System.out.print("Nuevo título: ");
-        String nuevoTitulo = ENTRADA.nextLine();
-        servicio.cambiarTitulo(idLibro, nuevoTitulo);
-    }
-
-    private static void listarLibrosPorAutor(BibliotecaService servicio) {
-        preguntarSiListarAutores(servicio);
-        System.out.print("ID del autor: ");
-        int idAutor = ENTRADA.nextInt();
-        List<Libro> librosAutor = servicio.listarLibrosPorAutor(idAutor);
-        System.out.println("Libros del autor:");
-        for (Libro l : librosAutor) {
-            System.out.printf("ID = %d| título = %s | isbn = %s\n", l.getId(), l.getTitulo(), l.getIsbn());
-        }
-    }
-
-    private static void listarLibros(BibliotecaService servicio) {
-        List<Libro> libros = servicio.listarLibros();
-        System.out.println("Libros:");
-        for (Libro l : libros) {
-            System.out.println("id=" + l.getId() + " | titulo=" + l.getTitulo() + " | isbn=" + l.getIsbn());
-        }
-    }
-
-    private static void registrarLibro(BibliotecaService servicio) {
-        ENTRADA.nextLine();
-        System.out.print("Nombre del autor: ");
-        String autorNombre = ENTRADA.nextLine();
-        System.out.print("Título del libro: ");
-        String titulo = ENTRADA.nextLine();
-        System.out.print("ISBN: ");
-        String isbn = ENTRADA.nextLine();
-        servicio.registrarLibro(autorNombre, titulo, isbn);
-    }
-
-    private static void preguntarSiListarLibros(BibliotecaService servicio) {
-        System.out.println("Desea ver los libros antes?: s/n");
-        char respuesta = verificarSN();
-        System.out.println();
-        if (respuesta == 's') listarLibros(servicio);
     }
 
     // GENÉRICOS
@@ -320,9 +207,14 @@ public class Main {
 
     private static void listarAutores(BibliotecaService servicio) {
         List<Autor> autores = servicio.listarAutores();
-        System.out.println("Autores:");
+        System.out.print("""
+        ================= AUTORES ================
+        | ID   |            NOMBRE               |
+        +------+---------------------------------+
+        """);
         for (Autor a : autores) {
-            System.out.printf("ID = %d| %s\n", a.getId(), a.getNombre());
+            System.out.printf("| %4d | %-30s  |\n", a.getId(), a.getNombre());
+            System.out.println("+------+---------------------------------+");
         }
     }
 
@@ -341,17 +233,152 @@ public class Main {
         preguntarSiListarAutores(servicio);
         System.out.print("ID del autor a borrar: ");
         int idDel = ENTRADA.nextInt();
+        System.out.println();
         servicio.eliminarAutor(idDel);
     }
 
     private static void preguntarSiListarAutores(BibliotecaService servicio) {
-        System.out.println("Desea ver los autores antes?: s/n");
+        System.out.print("Desea ver los autores antes? s/n: ");
         char respuesta = verificarSN();
         System.out.println();
         if (respuesta == 's') listarAutores(servicio);
     }
 
     // MENU LIBRO
+    private static void registrarLibro(BibliotecaService servicio) {
+        ENTRADA.nextLine();
+        System.out.print("Nombre del autor: ");
+        String autorNombre = ENTRADA.nextLine();
+        System.out.print("Título del libro: ");
+        String titulo = ENTRADA.nextLine();
+        System.out.print("ISBN: ");
+        String isbn = ENTRADA.nextLine();
+        servicio.registrarLibro(autorNombre, titulo, isbn);
+    }
+
+    private static void listarLibros(BibliotecaService servicio) {
+        mostrarLibros(servicio.listarLibros());
+    }
+
+    private static void listarLibrosPorAutor(BibliotecaService servicio) {
+        preguntarSiListarAutores(servicio);
+        System.out.print("ID del autor: ");
+        int idAutor = ENTRADA.nextInt();
+        mostrarLibros(servicio.listarLibrosPorAutor(idAutor));
+    }
+
+    private static void mostrarLibros(List<Libro> libros) {
+        System.out.print("""
+        =========================== LIBROS =======================
+        | ID   |              TÍTULO            |     ISBN       |
+        +------+--------------------------------+----------------+
+        """);
+        for (Libro l : libros) {
+            System.out.printf("| %04d | %-30s | %-14s |\n", l.getId(), l.getTitulo(), l.getIsbn());
+            System.out.println("+------+--------------------------------+----------------+");
+        }
+    }
+
+    private static void cambiarTitulo(BibliotecaService servicio) {
+        preguntarSiListarLibros(servicio);
+        System.out.print("ID del libro a actualizar: ");
+        int idLibro = ENTRADA.nextInt();
+        ENTRADA.nextLine();
+        System.out.print("Nuevo título: ");
+        String nuevoTitulo = ENTRADA.nextLine();
+        servicio.cambiarTitulo(idLibro, nuevoTitulo);
+    }
+
+    private static void eliminarLibro(BibliotecaService servicio) {
+        preguntarSiListarLibros(servicio);
+        System.out.print("ID del libro a borrar: ");
+        int idLibroDel = ENTRADA.nextInt();
+        servicio.eliminarLibro(idLibroDel);
+    }
+
+    private static void preguntarSiListarLibros(BibliotecaService servicio) {
+        System.out.println("Desea ver los libros antes? s/n: ");
+        char respuesta = verificarSN();
+        System.out.println();
+        if (respuesta == 's') listarLibros(servicio);
+    }
+
     // MENU PRESTAMO
+    private static void registrarPrestamo(BibliotecaService servicio) {
+        ENTRADA.nextLine();
+        System.out.print("Fecha inicio (dd/mm/aaaa): ");
+        String fechaInicio = ENTRADA.nextLine();
+        System.out.print("Fecha fin (dd/mm/aaaa): ");
+        String fechaFin = ENTRADA.nextLine();
+        System.out.print("ID del libro: ");
+        int libroId = ENTRADA.nextInt();
+        System.out.print("ID del usuario: ");
+        int usuarioId = ENTRADA.nextInt();
+        servicio.registrarPrestamo(fechaInicio, fechaFin, libroId, usuarioId);
+    }
+
+    private static void listarPrestamos(BibliotecaService servicio) {
+        mostrarPrestamos(servicio, servicio.listarPrestamos());
+    }
+
+    private static void listarPrestamosAtrasados(BibliotecaService servicio) {
+        mostrarPrestamos(servicio, servicio.listarRetrasos());
+    }
+
+    private static void mostrarPrestamos(BibliotecaService servicio, List<Prestamo> prestamos) {
+        System.out.print("""
+        ================================================= PRÉSTAMOS ======================================================
+        |  ID  |   INICIO (dd/mm/aaaa)  |     FIN (dd/mm/aaaa)   |         LIBRO PRESTADO         |         USUARIO      |
+        +------+------------------------+------------------------+--------------------------------+----------------------+
+        """);
+
+        for (Prestamo p : prestamos) {
+            System.out.printf("| %04d | %-22s | %-22s | %-30s | %-20s |\n", p.getId(), p.getFechaInicio(), p.getFechaFin(), servicio.getNombreLibro(p.getIdLibro()), servicio.getNombreUsuario(p.getIdUsuario()));
+            System.out.println("+------+------------------------+------------------------+--------------------------------+----------------------+");
+        }
+    }
+
+    private static void borrarPrestamo(BibliotecaService servicio) {
+        System.out.print("ID del préstamo a borrar: ");
+        int idPrestamo = ENTRADA.nextInt();
+        servicio.eliminarPrestamo(idPrestamo);
+    }
+
     // MENU USUARIO
+    private static void registrarUsuario(BibliotecaService servicio) {
+        ENTRADA.nextLine();
+        System.out.print("Nombre del usuario: ");
+        String nombreUsuario = ENTRADA.nextLine();
+        servicio.agregarUsuario(nombreUsuario);
+    }
+
+    private static void listarUsuarios(BibliotecaService servicio) {
+        List<Usuario> usuarios = servicio.listarUsuarios();
+
+        System.out.print("""
+        ================ USUARIOS ================
+        |  ID  |            NOMBRE               |
+        +------+---------------------------------+
+        """);
+
+        for (Usuario u : usuarios) {
+            System.out.printf("| %4d | %-30s  |\n", u.getId(), u.getNombre());
+            System.out.println("+------+---------------------------------+");
+        }
+    }
+
+    private static void actualizarUsuario(BibliotecaService servicio) {
+        System.out.print("ID del usuario a actualizar: ");
+        int idUsuarioAct = ENTRADA.nextInt();
+        ENTRADA.nextLine();
+        System.out.print("Nuevo nombre: ");
+        String nuevoNombre = ENTRADA.nextLine();
+        servicio.actualizarUsuario(idUsuarioAct, nuevoNombre);
+    }
+
+    private static void borrarUsuario(BibliotecaService servicio) {
+        System.out.print("ID del usuario a borrar: ");
+        int idUsuarioDel = ENTRADA.nextInt();
+        servicio.eliminarUsuario(idUsuarioDel);
+    }
 }

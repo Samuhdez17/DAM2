@@ -82,7 +82,7 @@ public class UsuarioImpl implements  UsuarioDAO {
         ) {
             ps.setInt(1, usuario);
             ps.executeUpdate();
-            System.out.printf("DAO: Usuario eliminado -> id = %d\n", usuario);
+            System.out.println("DAO: Usuario eliminado -> " + usuario);
         }
     }
 }

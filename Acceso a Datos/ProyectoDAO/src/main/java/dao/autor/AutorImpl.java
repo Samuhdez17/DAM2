@@ -99,7 +99,7 @@ public class AutorImpl implements AutorDAO {
         ) {
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.printf("DAO: Autor eliminado -> id = %d\n", id);
+            System.out.println("DAO: Autor eliminado -> id = " + id);
         }
     }
 }
