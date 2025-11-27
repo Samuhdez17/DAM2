@@ -274,7 +274,7 @@ public class Main {
         +------+--------------------------------+----------------+
         """);
         for (Libro l : libros) {
-            System.out.printf("| %04d | %-30s | %-14s |\n", l.getId(), l.getTitulo(), l.getIsbn());
+            System.out.printf("| %4d | %-30s | %-14s |\n", l.getId(), l.getTitulo(), l.getIsbn());
             System.out.println("+------+--------------------------------+----------------+");
         }
     }
@@ -306,9 +306,9 @@ public class Main {
     // MENU PRESTAMO
     private static void registrarPrestamo(BibliotecaService servicio) {
         ENTRADA.nextLine();
-        System.out.print("Fecha inicio (dd/mm/aaaa): ");
+        System.out.print("Fecha inicio (aaaa-mm-dd): ");
         String fechaInicio = ENTRADA.nextLine();
-        System.out.print("Fecha fin (dd/mm/aaaa): ");
+        System.out.print("Fecha fin (aaaa-mm-dd): ");
         String fechaFin = ENTRADA.nextLine();
         System.out.print("ID del libro: ");
         int libroId = ENTRADA.nextInt();
@@ -333,16 +333,25 @@ public class Main {
         """);
 
         for (Prestamo p : prestamos) {
-            System.out.printf("| %04d | %-22s | %-22s | %-30s | %-20s |\n", p.getId(), p.getFechaInicio(), p.getFechaFin(), servicio.getNombreLibro(p.getIdLibro()), servicio.getNombreUsuario(p.getIdUsuario()));
+            System.out.printf("| %4d | %-22s | %-22s | %-30s | %-20s |\n", p.getId(), p.getFechaInicio(), p.getFechaFin(), servicio.getNombreLibro(p.getIdLibro()), servicio.getNombreUsuario(p.getIdUsuario()));
             System.out.println("+------+------------------------+------------------------+--------------------------------+----------------------+");
         }
     }
 
     private static void borrarPrestamo(BibliotecaService servicio) {
+        preguntarSiListarPrestamos(servicio);
         System.out.print("ID del préstamo a borrar: ");
         int idPrestamo = ENTRADA.nextInt();
         servicio.eliminarPrestamo(idPrestamo);
     }
+
+    private static void preguntarSiListarPrestamos(BibliotecaService servicio) {
+        System.out.println("Desea ver los préstamos antes? s/n: ");
+        char respuesta = verificarSN();
+        System.out.println();
+        if (respuesta == 's') listarPrestamos(servicio);
+    }
+
 
     // MENU USUARIO
     private static void registrarUsuario(BibliotecaService servicio) {
@@ -368,6 +377,7 @@ public class Main {
     }
 
     private static void actualizarUsuario(BibliotecaService servicio) {
+        preguntarSiListarUsuarios(servicio);
         System.out.print("ID del usuario a actualizar: ");
         int idUsuarioAct = ENTRADA.nextInt();
         ENTRADA.nextLine();
@@ -380,5 +390,12 @@ public class Main {
         System.out.print("ID del usuario a borrar: ");
         int idUsuarioDel = ENTRADA.nextInt();
         servicio.eliminarUsuario(idUsuarioDel);
+    }
+
+    private static void preguntarSiListarUsuarios(BibliotecaService servicio) {
+        System.out.println("Desea ver los usuarios antes? s/n: ");
+        char respuesta = verificarSN();
+        System.out.println();
+        if (respuesta == 's') listarUsuarios(servicio);
     }
 }
