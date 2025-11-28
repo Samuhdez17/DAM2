@@ -34,9 +34,9 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        ServerSocket serverSocket = new ServerSocket(PUERTO);
-        System.out.println("Servidor iniciado en el puerto " + PUERTO);
-        Socket socket = serverSocket.accept();
+//        ServerSocket serverSocket = new ServerSocket(PUERTO);
+//        System.out.println("Servidor iniciado en el puerto " + PUERTO);
+//        Socket socket = serverSocket.accept();
 
         ArrayList<Registro> prueba = registros.get("google.com");
         for (Registro r : prueba) {
