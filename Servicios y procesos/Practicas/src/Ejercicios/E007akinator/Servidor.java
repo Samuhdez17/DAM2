@@ -91,13 +91,11 @@ public class Servidor {
                 }
 
                 if (seHaGanado) {
-                    mensajeAkinator = "Akinator te ha ganado! Vuelve a conectarte si quieres jugar de nuevo.";
-                    salida.println(mensajeAkinator);
+                    salida.println("Akinator te ha ganado! Vuelve a conectarte si quieres jugar de nuevo.");
                     seHaGanado = false;
 
                 } else  {
-                    mensajeAkinator = "Cerrando servidor...";
-                    salida.println(mensajeAkinator);
+                    salida.println("Cerrando servidor...");
                 }
 
                 // Cierre
