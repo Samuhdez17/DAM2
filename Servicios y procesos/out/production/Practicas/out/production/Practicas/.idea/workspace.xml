@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="ultimo intento de push">
+      <change beforePath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/DBHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/DBHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/PantallaFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/PantallaFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/PantallaInicio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/app/src/main/java/com/example/buscaminas/PantallaInicio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/BuscaMinas/gradle/libs.versions.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Prog moviles/Proyectos/Calculadora.zip" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../../.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Samuhdez17&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Samuhdez17/DAM2.git&quot;,
+    &quot;accountId&quot;: &quot;98cf7ad5-aadf-4948-9136-0775850b1587&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="33gIycLl4WAWgwjt2KBX6bTc1dP" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Carrera.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ChatServer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Cliente.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ContarLineas.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Multiplicar.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ProcesoPipeLine.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Servidor.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/Ejercicios/E008Chat2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E008Chat2" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E008Chat" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\E06fecha_y_hora" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\Ejercicios\2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\telnet" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\padre_hijo" />
+      <recent name="C:\Users\samuh\Desktop\git\DAM2\Servicios y procesos\Practicas\src\CrearPipeLine" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Ejercicios.ejercicio_sumar_pares_impares" />
+      <recent name="ejercicio_contador_compartido" />
+      <recent name="ejercicio_mostrar_nums_retardo" />
+      <recent name="CrearPipeLine" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cb75bc2d-5fc5-4c86-8e16-7d97ad5aaf9e" name="Changes" comment="" />
+      <created>1759732544168</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759732544168</updated>
+      <workItem from="1759732545568" duration="322000" />
+      <workItem from="1759738486158" duration="14000" />
+      <workItem from="1760006488899" duration="3586000" />
+      <workItem from="1760076938824" duration="402000" />
+      <workItem from="1760077823629" duration="604000" />
+      <workItem from="1760081608004" duration="2128000" />
+      <workItem from="1760092125097" duration="172000" />
+      <workItem from="1760422368152" duration="78000" />
+      <workItem from="1760426459931" duration="5000" />
+      <workItem from="1760607210249" duration="20000" />
+      <workItem from="1760610297499" duration="4831000" />
+      <workItem from="1760687217401" duration="2117000" />
+      <workItem from="1761217259246" duration="3555000" />
+      <workItem from="1761287603816" duration="4412000" />
+      <workItem from="1761292343984" duration="596000" />
+      <workItem from="1761292957630" duration="84000" />
+      <workItem from="1761293053726" duration="388000" />
+      <workItem from="1761293458377" duration="214000" />
+      <workItem from="1761584775667" duration="7118000" />
+      <workItem from="1761722524953" duration="184000" />
+      <workItem from="1761825405136" duration="3986000" />
+      <workItem from="1761895672612" duration="3363000" />
+      <workItem from="1762195815555" duration="17000" />
+      <workItem from="1762428247747" duration="633000" />
+      <workItem from="1762430551670" duration="2238000" />
+      <workItem from="1762432907153" duration="1187000" />
+      <workItem from="1762499841857" duration="8657000" />
+      <workItem from="1763021374794" duration="647000" />
+      <workItem from="1763029993904" duration="18000" />
+      <workItem from="1763064338070" duration="86000" />
+      <workItem from="1763105180082" duration="6222000" />
+      <workItem from="1763709957679" duration="922000" />
+      <workItem from="1763710957953" duration="5146000" />
+      <workItem from="1763928154084" duration="931000" />
+    </task>
+    <task id="LOCAL-00001" summary="ultimo intento de push">
+      <option name="closed" value="true" />
+      <created>1761828394544</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761828394544</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="segundo intento de push" />
+    <MESSAGE value="ultimo intento de push" />
+    <option name="LAST_COMMIT_MESSAGE" value="ultimo intento de push" />
+  </component>
+</project>
