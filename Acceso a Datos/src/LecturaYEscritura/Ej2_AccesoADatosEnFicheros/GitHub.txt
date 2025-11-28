@@ -1,0 +1,4 @@
+https://github.com/Samuhdez17/DAM2/blob/main/Acceso%20a%20Datos/out/production/Acceso%20a%20Datos/LecturaYEscritura/Ej2_AccesoADatosEnFicheros/Main.class
+
+si no te funciona este es el repositorio: https://github.com/Samuhdez17/DAM2.git 
+directorio del ejercicio: Acceso a Datos/src/LecturaYEscritura/Ej2_AccesoADatosEnFicheros

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <equiposDeFutbol>
+        <!-- Elemento equiposDeFutbol, para la lista de equipos -->
+        <equipo>
+            <!-- Elemento equipo, esta define un equipo -->
+            <nombre>Real Madrid</nombre>
+            <!-- Elemento nombre, este elemento indica el nombre del equipo -->
+            <ciudad>Madrid</ciudad>
+            <!-- Elemento ciudad, este elemento indica la ciudad del equipo -->
+            <entrenador/>
+            <!-- Elemento entrenador, este elemento indica el entrenador del equipo -->
+            <jugador posicion="Portero">
+                <nombre>Thibaut Courtois</nombre>
+                <!-- Elemento nombre, este elemento indica el nombre del jugador -->
+                <nacionalidad>Belga</nacionalidad>
+                <!-- Elemento nacionalidad, este elemento indica la nacionalidad del jugador -->
+            </jugador>
+            <jugador posicion="Delantero">
+                <nombre>Kylian Mbappé</nombre>
+                <nacionalidad>Francés</nacionalidad>
+            </jugador>
+        </equipo>
+        <equipo>
+            <nombre>Atlético de Madrid</nombre>
+            <ciudad>Madrid</ciudad>
+            <entrenador/>
+            <jugador posicion="Portero">
+                <nombre>Antoine Griezmann</nombre>
+                <nacionalidad>Francés</nacionalidad>
+            </jugador>
+            <jugador posicion="Portero">
+                <nombre>Jan Oblak</nombre>
+                <nacionalidad>Esloveno</nacionalidad>
+            </jugador>
+        </equipo>
+    </equiposDeFutbol>
+</root>

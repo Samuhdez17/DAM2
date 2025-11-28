@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="06f6c31c-1900-496f-a239-e01909f20b46" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Multiplicador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EjercicioPipelines.java" beforeDir="false" afterPath="$PROJECT_DIR$/EjercicioPipelines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sumador.java" beforeDir="false" afterPath="$PROJECT_DIR$/Sumador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/erroresPipelineNumeros.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PipeLine/PipeLine/EjercicioPipelines.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PipeLine/PipeLine/EjercicioPipelines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PipeLine/PipeLine/Sumador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PipeLine/PipeLine/Sumador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PipeLine/PipeLine/erroresPipelineNumeros.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Samuhdez17&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Samuhdez17/DAM2.git&quot;,
+    &quot;accountId&quot;: &quot;98cf7ad5-aadf-4948-9136-0775850b1587&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="33EF1zeOIm5osZ67qs7Dko4fTpp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.EjercicioPipelines.executor": "Run",
+    "Application.Multiplicador.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Servicios y procesos/Practicas/src/PipeLine",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "show.migrate.to.gradle.popup": "false",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="06f6c31c-1900-496f-a239-e01909f20b46" name="Changes" comment="" />
+      <created>1758874113300</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758874113300</updated>
+      <workItem from="1758874114503" duration="130000" />
+      <workItem from="1759127447615" duration="23000" />
+      <workItem from="1759134079567" duration="3000" />
+      <workItem from="1759473430327" duration="2144000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
