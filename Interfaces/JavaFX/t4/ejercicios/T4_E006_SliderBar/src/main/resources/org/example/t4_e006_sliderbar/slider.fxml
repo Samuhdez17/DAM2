@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.t4_e006_sliderbar.Controlador">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.t4_e006_sliderbar.Controlador">
+   <children>
+      <Label fx:id="labelRed" layoutX="30.0" layoutY="27.0" prefHeight="38.0" prefWidth="50.0" text="Red">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Slider fx:id="sliderRed" blockIncrement="1.0" layoutX="116.0" layoutY="39.0" max="255.0" onMouseClicked="#cambioSlider" onMouseDragged="#cambioSlider" prefHeight="14.0" prefWidth="380.0" />
+      <TextField fx:id="valueRed" alignment="CENTER_RIGHT" layoutX="520.0" layoutY="33.0" onAction="#cambioValor" prefHeight="26.0" prefWidth="50.0" text="0" />
+      <Label fx:id="labelGreen" layoutX="30.0" layoutY="92.0" prefHeight="38.0" prefWidth="50.0" text="Green">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Slider fx:id="sliderGreen" blockIncrement="1.0" layoutX="116.0" layoutY="104.0" max="255.0" onMouseClicked="#cambioSlider" onMouseDragged="#cambioSlider" prefHeight="14.0" prefWidth="380.0" />
+      <TextField fx:id="valueGreen" alignment="CENTER_RIGHT" layoutX="520.0" layoutY="98.0" onAction="#cambioValor" prefHeight="26.0" prefWidth="50.0" text="0" />
+      <Label fx:id="labelBlue" layoutX="30.0" layoutY="159.0" prefHeight="38.0" prefWidth="50.0" text="Blue">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Slider fx:id="sliderBlue" blockIncrement="1.0" layoutX="116.0" layoutY="171.0" max="255.0" onMouseClicked="#cambioSlider" onMouseDragged="#cambioSlider" prefHeight="14.0" prefWidth="380.0" />
+      <TextField fx:id="valueBlue" alignment="CENTER_RIGHT" layoutX="520.0" layoutY="165.0" onAction="#cambioValor" prefHeight="26.0" prefWidth="50.0" text="0" />
+      <Slider fx:id="sliderOpacity" blockIncrement="0.01" layoutX="116.0" layoutY="233.0" max="1.0" onMouseClicked="#cambioSlider" onMouseDragged="#cambioSlider" prefHeight="14.0" prefWidth="380.0" value="1.0" />
+      <TextField fx:id="valueOpacity" alignment="CENTER_RIGHT" layoutX="520.0" layoutY="227.0" onAction="#cambioValor" prefHeight="26.0" prefWidth="50.0" text="1" />
+      <Label fx:id="labelOpacity" layoutX="23.0" layoutY="221.0" prefHeight="38.0" prefWidth="64.0" text="Opacity">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Pane fx:id="paneColor" layoutX="167.0" layoutY="259.0" prefHeight="111.0" prefWidth="266.0" style="-fx-background-color: black;" />
+   </children>
+</AnchorPane>
