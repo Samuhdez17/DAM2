@@ -56,6 +56,9 @@ public class Controlador {
     @FXML
     private MenuItem saveItem;
 
+    @FXML
+    private MenuItem cerrarItem;
+
     // EDIT
     @FXML
     private MenuItem resetItem;
@@ -112,6 +115,13 @@ public class Controlador {
             brownItem.setAccelerator(KeyCombination.keyCombination("Ctrl+Alt+4"));
             pinkItem.setAccelerator(KeyCombination.keyCombination("Ctrl+Alt+5"));
         }
+    }
+
+    @FXML
+    void cerrarVentana(ActionEvent event) {
+        Button boton = (Button) event.getSource();
+        Stage stage = (Stage) boton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -228,7 +238,7 @@ public class Controlador {
         vBox.getChildren().addAll(contenido, boton);
         vBox.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(vBox, 150, 100);
+        Scene scene = new Scene(vBox, 200, 100);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
