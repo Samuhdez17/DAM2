@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -16,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.t4_e006_sliderbar.Controlador">
    <center>
-      <VBox alignment="TOP_CENTER" prefHeight="375.0" prefWidth="522.0" spacing="20.0" BorderPane.alignment="TOP_CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="375.0" prefWidth="522.0" spacing="20.0" style="-fx-alignment: center;" BorderPane.alignment="TOP_CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="35.0" prefWidth="428.0" spacing="50.0">
                <children>
@@ -48,9 +47,6 @@
             </HBox>
             <Pane fx:id="paneColor" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="105.0" prefWidth="268.0" style="-fx-background-color: black;" />
          </children>
-         <padding>
-            <Insets top="30.0" />
-         </padding>
       </VBox>
    </center>
    <top>
@@ -75,7 +71,7 @@
                         </ImageView>
                      </graphic>
                   </MenuItem>
-                  <MenuItem mnemonicParsing="false" text="Exit" />
+                  <MenuItem fx:id="cerrarItem" mnemonicParsing="false" onAction="#cerrarVentana" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -120,27 +116,27 @@
                     <items>
                       <MenuItem fx:id="blackItem" mnemonicParsing="false" onAction="#ponerColor" text="BLACK">
                            <graphic>
-                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: yellow;" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: black;" />
                            </graphic>
                         </MenuItem>
                         <MenuItem fx:id="whiteItem" mnemonicParsing="false" onAction="#ponerColor" text="WHITE">
                            <graphic>
-                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: yellow;" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-border-color: black;" />
                            </graphic>
                         </MenuItem>
                         <MenuItem fx:id="orangeItem" mnemonicParsing="false" onAction="#ponerColor" text="ORANGE">
                            <graphic>
-                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: yellow;" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: orange;" />
                            </graphic>
                         </MenuItem>
                         <MenuItem fx:id="brownItem" mnemonicParsing="false" onAction="#ponerColor" text="BROWN">
                            <graphic>
-                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: yellow;" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: brown;" />
                            </graphic>
                         </MenuItem>
                         <MenuItem fx:id="pinkItem" mnemonicParsing="false" onAction="#ponerColor" text="PINK">
                            <graphic>
-                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: yellow;" />
+                              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" prefWidth="12.0" style="-fx-background-color: pink;" />
                            </graphic>
                         </MenuItem>
                     </items>
