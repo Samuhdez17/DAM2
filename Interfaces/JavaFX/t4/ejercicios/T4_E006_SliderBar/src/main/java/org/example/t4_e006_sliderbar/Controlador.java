@@ -10,9 +10,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import javafx.stage.*;
 
+import java.io.*;
 import java.util.Random;
 
 public class Controlador {
@@ -118,10 +118,60 @@ public class Controlador {
     }
 
     @FXML
+    void guardarColor(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar color");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivo de texto", "*.txt"));
+
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try (PrintWriter salida = new PrintWriter(file)) {
+                String a = valorOpacidad.getText();
+                a = a.replace(',', '.');
+
+                salida.printf("%s,%s,%s,%s\n", valorRojo.getText(), valorVerde.getText(), valorAzul.getText(), a);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    void cargarColor(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Cargar color");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivo de texto", "*.txt"));
+
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            try (BufferedReader entrada = new BufferedReader(new FileReader(file))) {
+                String linea = entrada.readLine();
+                if (linea != null) {
+                    String[] partes = linea.split(",");
+                    if (partes.length == 4) {
+                        int r = Integer.parseInt(partes[0].trim());
+                        int g = Integer.parseInt(partes[1].trim());
+                        int b = Integer.parseInt(partes[2].trim());
+                        double a = Double.parseDouble(partes[3].trim());
+
+                        setValores(r, g, b, a);
+                        actualizarColor(r, g, b, a);
+                    }
+                }
+            } catch (IOException | NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    @FXML
     void cerrarVentana(ActionEvent event) {
-        Button boton = (Button) event.getSource();
-        Stage stage = (Stage) boton.getScene().getWindow();
-        stage.close();
+        System.exit(0);
     }
 
     @FXML
@@ -237,9 +287,12 @@ public class Controlador {
         VBox vBox = new VBox(10);
         vBox.getChildren().addAll(contenido, boton);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setStyle("-fx-background-color: lightgrey;");
 
         Scene scene = new Scene(vBox, 200, 100);
         Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.show();
 

@@ -42,7 +42,7 @@
                <children>
                   <Label prefHeight="17.0" prefWidth="50.0" text="Opacity" />
                   <Slider fx:id="barraOpacidad" blockIncrement="0.01" max="1.0" onMouseClicked="#cambioSlider" onMouseDragged="#cambioSlider" prefHeight="14.0" prefWidth="203.0" value="1.0" />
-                  <TextField fx:id="valorOpacidad" alignment="CENTER_RIGHT" onAction="#cambioValor" prefHeight="25.0" prefWidth="41.0" text="1" />
+                  <TextField fx:id="valorOpacidad" alignment="CENTER_RIGHT" onAction="#cambioValor" prefHeight="25.0" prefWidth="41.0" text="1,00" />
                </children>
             </HBox>
             <Pane fx:id="paneColor" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="105.0" prefWidth="268.0" style="-fx-background-color: black;" />
@@ -54,7 +54,7 @@
         <menus>
           <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="loadItem" mnemonicParsing="false" text="Load">
+              <MenuItem fx:id="loadItem" mnemonicParsing="false" onAction="#cargarColor" text="Load">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -62,7 +62,7 @@
                            </image>
                         </ImageView>
                      </graphic></MenuItem>
-                  <MenuItem fx:id="saveItem" mnemonicParsing="false" text="Save">
+                  <MenuItem fx:id="saveItem" mnemonicParsing="false" onAction="#guardarColor" text="Save">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
