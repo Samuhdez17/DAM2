@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
     private final static String RUTA_TXT = "dominios";
@@ -22,7 +23,6 @@ public class Main {
 
             while ((linea = br.readLine()) != null) {
                 String[] contenidoRegistro = linea.split(" ");
-
                 agregarADiccionario(registros, contenidoRegistro);
             }
 
@@ -59,60 +59,16 @@ public class Main {
                     try {
                         String[] comando = mensaje.split(" ");
 
-                        if (comando[0].equalsIgnoreCase("lookup")) {
-                            if (comando.length != 3)
-                                throw new ComandoLookupErroneo();
+                        if (comando[0].equalsIgnoreCase("lookup"))
+                            comandoLookup(comando, registros, salida);
 
-                            ArrayList<Registro> registro = registros.get(comando[2]);
-                            if (registro == null)
-                                throw new ComandoLookupErroneo();
+                        else if (comando[0].equalsIgnoreCase("list"))
+                            comandoList(comando, salida, registros);
 
-                            int contador = 0;
-                            for (Registro r : registro) {
-                                if (comando[1].equalsIgnoreCase(r.getTipo()))
-                                    salida.println("200 " + r.getValor());
-                                else
-                                    contador++;
-                            }
+                        else if (comando[0].equalsIgnoreCase("register"))
+                            comandoRegister(comando, registros, salida);
 
-                            if (contador == registro.size())
-                                throw new ResultadoNoEncontrado();
-
-                        } else if (comando[0].equalsIgnoreCase("list")) {
-                            if (comando.length > 1)
-                                throw new ComandoListErroneo();
-
-                            else {
-                                salida.println("150 Inicio listado");
-
-                                for (String clave : registros.keySet()) {
-                                    ArrayList<Registro> registro = registros.get(clave);
-                                    Collections.sort(registro);
-
-                                    for (Registro r : registro)
-                                        salida.println(r);
-                                }
-
-                                salida.println("226 Fin listado");
-                            }
-
-                        } else if (comando[0].equalsIgnoreCase("register")) {
-                            if (comando.length != 4)
-                                throw new ComandoRegisterIncorrecto();
-
-                            if (
-                                    comando[2].equalsIgnoreCase("A") ||
-                                    comando[2].equalsIgnoreCase("MX") ||
-                                    comando[2].equalsIgnoreCase("CNAME")
-                            ) {
-                                String[] registro = { comando[1], comando[2], comando[3] };
-                                guardarRegistro(registro);
-                                agregarADiccionario(registros, registro);
-                                salida.println("200 Registro añadido");
-
-                            } else throw new ComandoRegisterIncorrecto();
-
-                        } else
+                        else
                             throw new ComandoIncorrectoEx();
 
                     } catch (ComandoIncorrectoEx | ResultadoNoEncontrado | ComandoLookupErroneo | ComandoListErroneo | ComandoRegisterIncorrecto e) {
@@ -135,6 +91,65 @@ public class Main {
         }  catch (IOException e) {
             System.err.println("Error al cerrar servidor");
         }
+    }
+
+    private static void comandoLookup(String[] comando, HashMap<String, ArrayList<Registro>> registros, PrintWriter salida) {
+        if (comando.length != 3)
+            throw new ComandoLookupErroneo();
+
+        ArrayList<Registro> registro = registros.get(comando[2]);
+        if (registro == null)
+            throw new ComandoLookupErroneo();
+
+        int contador = 0;
+        for (Registro r : registro) {
+            if (comando[1].equalsIgnoreCase(r.getTipo()))
+                salida.println("200 " + r.getValor());
+            else
+                contador++;
+        }
+
+        if (contador == registro.size())
+            throw new ResultadoNoEncontrado();
+    }
+
+    private static void comandoList(String[] comando, PrintWriter salida, HashMap<String, ArrayList<Registro>> registros) {
+        if (comando.length > 1)
+            throw new ComandoListErroneo();
+
+        else {
+            salida.println("150 Inicio listado");
+
+            List<String> clavesOrdenadas = new ArrayList<>(registros.keySet());
+            Collections.sort(clavesOrdenadas);
+
+            for (String clave : clavesOrdenadas) {
+                ArrayList<Registro> registro = registros.get(clave);
+                Collections.sort(registro);
+
+                for (Registro r : registro)
+                    salida.println(r);
+            }
+
+            salida.println("226 Fin listado");
+        }
+    }
+
+    private static void comandoRegister(String[] comando, HashMap<String, ArrayList<Registro>> registros, PrintWriter salida) throws IOException {
+        if (comando.length != 4)
+            throw new ComandoRegisterIncorrecto();
+
+        if (
+                comando[2].equalsIgnoreCase("A") ||
+                        comando[2].equalsIgnoreCase("MX") ||
+                        comando[2].equalsIgnoreCase("CNAME")
+        ) {
+            String[] registro = { comando[1], comando[2], comando[3] };
+            guardarRegistro(registro);
+            agregarADiccionario(registros, registro);
+            salida.println("200 Registro añadido");
+
+        } else throw new ComandoRegisterIncorrecto();
     }
 
     private static void guardarRegistro(String[] registro) throws IOException {
