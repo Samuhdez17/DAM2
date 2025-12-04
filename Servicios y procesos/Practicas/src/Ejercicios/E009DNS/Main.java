@@ -1,9 +1,6 @@
 package Ejercicios.E009DNS;
 
-import Ejercicios.E009DNS.excepciones.ComandoIncorrectoEx;
-import Ejercicios.E009DNS.excepciones.ComandoListErroneo;
-import Ejercicios.E009DNS.excepciones.ComandoLookupErroneo;
-import Ejercicios.E009DNS.excepciones.ResultadoNoEncontrado;
+import Ejercicios.E009DNS.excepciones.*;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -26,10 +23,7 @@ public class Main {
             while ((linea = br.readLine()) != null) {
                 String[] contenidoRegistro = linea.split(" ");
 
-                registros.putIfAbsent(contenidoRegistro[0], new ArrayList<>());
-
-                ArrayList<Registro> registrosDelMismoDominio = registros.get(contenidoRegistro[0]);
-                registrosDelMismoDominio.add(new Registro(contenidoRegistro));
+                agregarADiccionario(registros, contenidoRegistro);
             }
 
         } catch (IOException e) {
@@ -71,7 +65,7 @@ public class Main {
 
                             ArrayList<Registro> registro = registros.get(comando[2]);
                             if (registro == null)
-                                throw new ResultadoNoEncontrado();
+                                throw new ComandoLookupErroneo();
 
                             int contador = 0;
                             for (Registro r : registro) {
@@ -101,10 +95,27 @@ public class Main {
 
                                 salida.println("226 Fin listado");
                             }
+
+                        } else if (comando[0].equalsIgnoreCase("register")) {
+                            if (comando.length != 4)
+                                throw new ComandoRegisterIncorrecto();
+
+                            if (
+                                    comando[2].equalsIgnoreCase("A") ||
+                                    comando[2].equalsIgnoreCase("MX") ||
+                                    comando[2].equalsIgnoreCase("CNAME")
+                            ) {
+                                String[] registro = { comando[1], comando[2], comando[3] };
+                                guardarRegistro(registro);
+                                agregarADiccionario(registros, registro);
+                                salida.println("200 Registro añadido");
+
+                            } else throw new ComandoRegisterIncorrecto();
+
                         } else
                             throw new ComandoIncorrectoEx();
 
-                    } catch (ComandoIncorrectoEx | ResultadoNoEncontrado | ComandoLookupErroneo | ComandoListErroneo e) {
+                    } catch (ComandoIncorrectoEx | ResultadoNoEncontrado | ComandoLookupErroneo | ComandoListErroneo | ComandoRegisterIncorrecto e) {
                         salida.println(e.getMessage());
                     }
 
@@ -124,5 +135,18 @@ public class Main {
         }  catch (IOException e) {
             System.err.println("Error al cerrar servidor");
         }
+    }
+
+    private static void guardarRegistro(String[] registro) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(RUTA_TXT, true));
+        bw.write(registro[0] + " " + registro[1] + " " + registro[2] + "\n");
+        bw.close();
+    }
+
+    private static void agregarADiccionario(HashMap<String, ArrayList<Registro>> registros, String[] contenidoRegistro) {
+        registros.putIfAbsent(contenidoRegistro[0], new ArrayList<>());
+
+        ArrayList<Registro> registrosDelMismoDominio = registros.get(contenidoRegistro[0]);
+        registrosDelMismoDominio.add(new Registro(contenidoRegistro));
     }
 }

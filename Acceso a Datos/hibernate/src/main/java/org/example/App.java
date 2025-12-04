@@ -31,7 +31,7 @@ public class App {
     }
 
     private static void buscarJugadoresPorPos(String posicion, int limite, EntityManager em) {
-        Query q = em.createQuery("SELECT j.nombre, j.nombreEquipo.nombre, j.posicion FROM Jugadore j WHERE posicion = :posicion LIMIT :limite");
+        Query q = em.createQuery("SELECT j.nombre, j.nombreEquipo.nombre, j.posicion FROM Jugadore j WHERE j.posicion LIKE CONCAT('%', :posicion) LIMIT :limite");
         q.setParameter("posicion", posicion);
         q.setParameter("limite", limite);
 
