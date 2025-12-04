@@ -6,6 +6,6 @@ public class ComandoLookupErroneo extends RuntimeException {
     }
 
     public ComandoLookupErroneo() {
-        super("400 Comando mal formado: LOOKUP <tipo> <dominio>");
+        super("400 Comando mal formado: LOOKUP <tipo> -> (A, MX, CNAME) <dominio>");
     }
 }
