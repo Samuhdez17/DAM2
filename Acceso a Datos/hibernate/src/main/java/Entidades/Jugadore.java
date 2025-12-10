@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "jugadores")
 public class Jugadore {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo", nullable = false)
     private Integer id;
 
@@ -27,6 +28,28 @@ public class Jugadore {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Nombre_equipo")
     private Equipo nombreEquipo;
+
+    public Jugadore(int id, String nombre, String procedencia, String altura, int peso, String posicion, Equipo nombreEquipo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.procedencia = procedencia;
+        this.altura = altura;
+        this.peso = peso;
+        this.posicion = posicion;
+        this.nombreEquipo = nombreEquipo;
+    }
+
+    public Jugadore(String nombre, String procedencia, String altura, Integer peso, String posicion, Equipo nombreEquipo) {
+        this.nombre = nombre;
+        this.procedencia = procedencia;
+        this.altura = altura;
+        this.peso = peso;
+        this.posicion = posicion;
+        this.nombreEquipo = nombreEquipo;
+    }
+
+    public Jugadore() {
+    }
 
     public Integer getId() {
         return id;
