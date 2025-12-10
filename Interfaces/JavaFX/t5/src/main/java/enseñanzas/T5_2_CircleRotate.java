@@ -72,18 +72,34 @@ public class T5_2_CircleRotate extends Application {
             rotate.setPivotY(circle1.getCenterY());
             circle2.getTransforms().add(rotate);
 
-            KeyValue kvRotate = new KeyValue(rotate.angleProperty(), 360);
+            if (slider.getValue() == 0) {
+                KeyValue kvRotate = new KeyValue(rotate.angleProperty(), 360);
 
-            KeyValue kvSlider = new KeyValue(slider.valueProperty(), 360);
+                KeyValue kvSlider = new KeyValue(slider.valueProperty(), 360);
 
-            KeyFrame kf = new KeyFrame(Duration.seconds(3), kvRotate, kvSlider);
-            Timeline tl = new Timeline(kf);
-            tl.play();
+                KeyFrame kf = new KeyFrame(Duration.seconds(3), kvRotate, kvSlider);
+                Timeline tl = new Timeline(kf);
+                tl.play();
 
-            tl.setOnFinished(e1 -> {
-                slider.setDisable(false);
-                slider.setValue(360);
-            });
+                tl.setOnFinished(e1 -> {
+                    slider.setDisable(false);
+                    slider.setValue(360);
+                });
+
+            } else {
+                KeyValue kvRotate = new KeyValue(rotate.angleProperty(), 0);
+
+                KeyValue kvSlider = new KeyValue(slider.valueProperty(), 0);
+
+                KeyFrame kf = new KeyFrame(Duration.seconds(3), kvRotate, kvSlider);
+                Timeline tl = new Timeline(kf);
+                tl.play();
+
+                tl.setOnFinished(e1 -> {
+                    slider.setDisable(false);
+                    slider.setValue(0);
+                });
+            }
         });
     }
 

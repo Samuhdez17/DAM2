@@ -21,6 +21,20 @@ public class Equipo {
     @Column(name = "Division", length = 9)
     private String division;
 
+    public Equipo(String nombre, String ciudad, String conferencia, String division) {
+        this.nombre = nombre;
+        this.ciudad = ciudad;
+        this.conferencia = conferencia;
+        this.division = division;
+    }
+
+    public Equipo(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Equipo() {
+    }
+
     public String getNombre() {
         return nombre;
     }

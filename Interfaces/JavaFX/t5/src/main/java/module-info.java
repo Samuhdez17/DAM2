@@ -6,6 +6,6 @@ module org.example.t5 {
     opens enseñanzas to javafx.fxml;
     exports enseñanzas;
 
-//    opens ejercicios to javafx.fxml;
-//    exports ejercicios;
+    opens ejercicios.E001SistemaSolar to javafx.fxml;
+    exports ejercicios.E001SistemaSolar;
 }
