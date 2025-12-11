@@ -1,4 +1,4 @@
-package ejercicios.E001SistemaSolar;
+package com.example.e001planetario;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

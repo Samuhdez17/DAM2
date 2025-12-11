@@ -1,4 +1,4 @@
-package org.example.t5;
+package com.example.e001planetario;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
