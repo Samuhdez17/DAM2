@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1147.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.e001planetario.Controlador">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="1147.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.e001planetario.Controlador">
    <children>
-      <Circle fill="#ffe659f3" layoutX="377.0" layoutY="431.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="377.0" layoutY="431.0" radius="90.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="377.0" layoutY="431.0" radius="120.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="377.0" layoutY="431.0" radius="151.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="377.0" layoutY="431.0" radius="182.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="377.0" layoutY="431.0" radius="213.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="377.0" layoutY="431.0" radius="244.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="377.0" layoutY="431.0" radius="275.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="#1f93ff00" layoutX="378.0" layoutY="433.0" radius="306.0" stroke="WHITE" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="287.0" layoutY="433.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="257.0" layoutY="433.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="226.0" layoutY="433.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="195.0" layoutY="433.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="164.0" layoutY="433.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="133.0" layoutY="433.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="102.0" layoutY="433.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="72.0" layoutY="433.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <VBox alignment="TOP_CENTER" layoutX="758.0" layoutY="12.0" prefHeight="840.0" prefWidth="384.0" style="-fx-background-color: lightgrey;">
+      <Circle fill="#ffe659f3" layoutX="377.0" layoutY="372.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="o1" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="90.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="o2" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="120.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="o3" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="151.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="o4" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="182.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="o5" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="213.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="o6" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="244.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="o7" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="275.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="o8" fill="#1f93ff00" layoutX="378.0" layoutY="374.0" radius="306.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fx:id="p1" fill="#868b8d" layoutX="287.0" layoutY="374.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p2" fill="#ff9595" layoutX="257.0" layoutY="374.0" radius="11.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p3" fill="#0058ff" layoutX="226.0" layoutY="374.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p4" fill="#ff1f1f" layoutX="195.0" layoutY="374.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p5" fill="#f59f00" layoutX="164.0" layoutY="374.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p6" fill="#9fc679" layoutX="133.0" layoutY="374.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p7" fill="#b2f2ff" layoutX="102.0" layoutY="375.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="p8" fill="#ae00ff" layoutX="72.0" layoutY="375.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <VBox alignment="TOP_CENTER" layoutX="758.0" layoutY="12.0" maxHeight="1.7976931348623157E308" prefHeight="723.0" prefWidth="384.0">
          <children>
-            <Label alignment="TOP_CENTER" prefHeight="46.0" prefWidth="259.0" text="LOS PLANETAS">
+            <Label alignment="TOP_CENTER" prefHeight="46.0" prefWidth="259.0" text="LOS PLANETAS" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="28.0" />
                </font>
@@ -36,6 +41,149 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
+            <ToggleButton fx:id="b1" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Mercurio">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="b2" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Venus">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="b3" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Tierra">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="b4" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Marte">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="b5" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Júpiter">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="b6" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Saturno">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="b7" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Urano">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <ToggleButton fx:id="b8" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Neptuno">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </ToggleButton>
+            <VBox alignment="CENTER" prefHeight="222.0" prefWidth="384.0">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <children>
+                  <AnchorPane prefHeight="39.0" prefWidth="384.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="3.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="Masa" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="d1" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="39.0" prefWidth="384.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="3.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="Radio" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="d2" layoutX="199.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="39.0" prefWidth="384.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="3.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="Radio orbital" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="d3" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="39.0" prefWidth="384.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="3.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="Periodo orbital" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="d4" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="39.0" prefWidth="384.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="3.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="Periodo de rotación" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="d5" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="39.0" prefWidth="384.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="3.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="Número de satélites" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="d6" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="351.0" spacing="10.0">
+                     <children>
+                        <Slider fx:id="slider" maxWidth="-Infinity" onMouseClicked="#rotar" onMouseDragged="#rotar" prefHeight="14.0" prefWidth="267.0" />
+                        <Button fx:id="botonAuto" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#alternarAuto" prefHeight="34.0" prefWidth="52.0" stylesheets="@estilosBotones.css" text="Auto" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets top="3.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets top="10.0" />
