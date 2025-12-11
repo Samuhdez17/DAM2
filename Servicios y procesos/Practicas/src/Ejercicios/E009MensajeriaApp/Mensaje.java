@@ -5,10 +5,10 @@ public class Mensaje {
     private final String emisor;
     private final String contenido;
 
-    public Mensaje(String destinatario, String emisor, String contenido) {
-        this.destinatario = destinatario;
-        this.emisor = emisor;
-        this.contenido = contenido;
+    public Mensaje(String[] contenido) {
+        this.destinatario = contenido[0];
+        this.emisor = contenido[1];
+        this.contenido = contenido[2];
     }
 
     public String getDestinatario() {
