@@ -4,58 +4,79 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.HashMap;
 
 public class Servidor {
+    private final static File buzon = new File("buzon.txt"); // src/Ejercicios/E009MensajeriaApp/
     private final static int PUERTO = 5000;
-    private final static String RUTA_BUZON = "src/Ejercicios/E009MensajeriaApp/buzon";
+    private static int numClientes = 0;
+    private final static int CLIENTES_MAX = 5;
 
-    public static void main(String[] args) throws IOException {
-        ServerSocket servidor = new ServerSocket(PUERTO);
-        System.out.println("Servidor iniciado en el puerto: " + PUERTO);
+    public static void main(String[] args) {
+        HashMap<String, ArrayList<Mensaje>> diccionario = cargarDiccionario();
 
-        Socket cliente = servidor.accept();
-        System.out.println("Cliente conectado desde: " + cliente.getInetAddress());
+        try (ServerSocket servidor = new ServerSocket(PUERTO)) {
+            System.out.println("Servidor iniciado en el puerto: " + PUERTO);
 
-        BufferedReader entrada = new BufferedReader(new InputStreamReader(cliente.getInputStream()));
-        PrintWriter salida = new PrintWriter(new OutputStreamWriter(cliente.getOutputStream()), true);
+            while (true) {
+                Socket cliente = servidor.accept();
 
-        salida.println("Bienvenido, por favor, indica tu nombre: ");
-        String nombre = entrada.readLine();
+                synchronized (Servidor.class) {
+                    if (numClientes >= CLIENTES_MAX) {
+                        PrintWriter salida = new PrintWriter(cliente.getOutputStream(), true);
 
-        String comandoCliente = entrada.readLine();
-        if (comandoCliente.equals("leer")) {
-            DataInputStream dis = new DataInputStream(new FileInputStream(RUTA_BUZON));
-            List<Mensaje> mensajes = new ArrayList<>();
+                        salida.println("500 Cliente rechazado: maximo alcanzado");
+                        cliente.close();
+                        continue;
+                    }
 
-            try {
-                while (true) {
-                    String[] linea = dis.readUTF().split("``");
-                    if (linea.length <= 3 && linea[0].equals(nombre))
-                        mensajes.add(new Mensaje(linea));
+                    agregarCliente();
                 }
 
-            } catch (EOFException e) {
-
+                System.out.println("Cliente conectado desde: " + cliente.getInetAddress());
+                Thread hiloCliente = new Thread(new MultiCliente(cliente, diccionario, buzon));
+                hiloCliente.start();
             }
-
-            if (mensajes != null && !mensajes.isEmpty()) {
-                salida.println("150 Inicio listado");
-                for (Mensaje m : mensajes)
-                    salida.printf("De: %s ; Mensaje %s\n", m.getEmisor(), m.getContenido());
-
-                salida.println("226 Fin listado");
-
-            } else {
-                salida.println("404 No tienes mensajes");
-            }
-
-        } else if (comandoCliente.equals("enviar")) {
-
-        } else {
-
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
+
+    private static HashMap<String, ArrayList<Mensaje>> cargarDiccionario() {
+        HashMap<String, ArrayList<Mensaje>> diccionario = new HashMap<>();
+
+        if (!buzon.exists()) {
+            try {
+                buzon.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(buzon))) {
+            try {
+                while (true) {
+                    String[] contenidoLinea = dis.readUTF().split("``");
+                    agregarADiccionario(diccionario, contenidoLinea);
+                }
+            } catch (EOFException e) {
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return diccionario;
+    }
+
+    private static void agregarADiccionario(HashMap<String, ArrayList<Mensaje>> diccionario, String[] contenidoLinea) {
+        diccionario.putIfAbsent(contenidoLinea[0], new ArrayList<>());
+
+        ArrayList<Mensaje> mensajesParaMismoDestinatario = diccionario.get(contenidoLinea[0]);
+        mensajesParaMismoDestinatario.add(new Mensaje(contenidoLinea));
+    }
+
+    private static void agregarCliente() { numClientes++; }
+
+    public static void eliminarCliente() { numClientes--; }
 }

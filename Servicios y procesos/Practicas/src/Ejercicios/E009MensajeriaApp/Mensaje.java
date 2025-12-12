@@ -11,6 +11,12 @@ public class Mensaje {
         this.contenido = contenido[2];
     }
 
+    public Mensaje(String destinatario, String emisor, String contenido) {
+        this.destinatario = destinatario;
+        this.emisor = emisor;
+        this.contenido = contenido;
+    }
+
     public String getDestinatario() {
         return destinatario;
     }
@@ -21,5 +27,13 @@ public class Mensaje {
 
     public String getContenido() {
         return contenido;
+    }
+
+    public String mostrarMensaje() {
+        return String.format("De: %s ; Mensaje: %s\n", emisor, contenido);
+    }
+
+    public String escribirEnFichero() {
+        return String.format("%s``%s``%s\n", destinatario, emisor, contenido);
     }
 }
