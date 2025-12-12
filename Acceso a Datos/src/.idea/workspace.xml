@@ -5,12 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccee0145-b13d-4d9d-befd-b60d577a188b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Interfaces/JavaFX/t5/ejercicios/E001Planetario/src/main/resources/com/example/e001planetario/estilosBotones.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Interfaces/JavaFX/t5/ejercicios/E001Planetario/src/main/java/com/example/e001planetario/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Interfaces/JavaFX/t5/ejercicios/E001Planetario/src/main/java/com/example/e001planetario/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Interfaces/JavaFX/t5/ejercicios/E001Planetario/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Interfaces/JavaFX/t5/ejercicios/E001Planetario/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Interfaces/JavaFX/t5/ejercicios/E001Planetario/src/main/resources/com/example/e001planetario/e001.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Interfaces/JavaFX/t5/ejercicios/E001Planetario/src/main/resources/com/example/e001planetario/e001.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009MensajeriaApp/MultiCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources/6d62b0d2-5a1a-49e7-8a20-ad9caf993476.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources/6d62b0d2-5a1a-49e7-8a20-ad9caf993476/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/Ejercicios/E009DNS/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/Ejercicios/E009DNS/out/production/E009DNS/Ejercicios/E009DNS/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/Ejercicios/E009MensajeriaApp/Mensaje.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/Ejercicios/E009MensajeriaApp/Mensaje.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/Ejercicios/E009MensajeriaApp/Servidor.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/Ejercicios/E009MensajeriaApp/Servidor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/Ejercicios/E009MensajeriaApp/buzon" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/PipeLine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/PipeLine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/PipeLine/out/production/PipeLine/PipeLine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/PipeLine/out/production/PipeLine/PipeLine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/out/production/Practicas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/out/production/Practicas/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/out/production/Practicas/PipeLine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/out/production/Practicas/PipeLine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/out/production/Practicas/PipeLine/out/production/PipeLine/PipeLine/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/out/production/Practicas/out/production/Practicas/PipeLine/out/production/PipeLine/PipeLine/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009DNS/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009DNS/out/production/E009DNS/Ejercicios/E009DNS/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009MensajeriaApp/Mensaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009MensajeriaApp/Mensaje.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009MensajeriaApp/Servidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009MensajeriaApp/Servidor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Servicios y procesos/Practicas/src/Ejercicios/E009MensajeriaApp/buzon" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +48,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/Samuhdez17/DAM2.git",
-    "accountId": "730a919f-c7fb-482a-bbfd-b9a9c4055f31"
+    "accountId": "98cf7ad5-aadf-4948-9136-0775850b1587"
   }
 }]]></component>
   <component name="ProjectColorInfo">{
@@ -69,7 +81,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/samuh/Desktop/tuto/git/DAM2/Acceso a Datos/src",
+    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Acceso a Datos/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -133,6 +145,7 @@
       <workItem from="1764317709063" duration="676000" />
       <workItem from="1764848790127" duration="343000" />
       <workItem from="1765483797781" duration="1486000" />
+      <workItem from="1765530847291" duration="39000" />
     </task>
     <servers />
   </component>
