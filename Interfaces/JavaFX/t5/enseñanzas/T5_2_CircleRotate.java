@@ -80,6 +80,7 @@ public class T5_2_CircleRotate extends Application {
                 KeyFrame kf = new KeyFrame(Duration.seconds(3), kvRotate, kvSlider);
                 Timeline tl = new Timeline(kf);
                 tl.play();
+                tl.setCycleCount();
 
                 tl.setOnFinished(e1 -> {
                     slider.setDisable(false);

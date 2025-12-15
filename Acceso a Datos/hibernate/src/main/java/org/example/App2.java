@@ -19,9 +19,19 @@ public class App2 {
                 "F-G",
                 new Equipo("Lakers")
         );
+        
+//        em.getTransaction().begin();
+//        em.persist(jugador); // Para hacer insert
+//        em.getTransaction().commit(); // Para ejecutar el comando
+
+//        em.getTransaction().begin();
+//        Jugadore j1 = em.find(Jugadore.class, 1773); // Select del jugador por ID
+//        em.remove(j1); // Lo eliminamos de la tabla
+//        em.getTransaction().commit();
 
         em.getTransaction().begin();
-        em.persist(jugador); // Para hacer insert
-        em.getTransaction().commit(); // Para ejecutar el comando
+        Jugadore j2 = em.find(Jugadore.class, 1772);
+        j2.setNombre("Lukaku");
+        em.getTransaction().commit();
     }
 }
