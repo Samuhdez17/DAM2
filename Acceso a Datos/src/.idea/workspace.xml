@@ -26,12 +26,12 @@
     &quot;assignee&quot;: &quot;Samuhdez17&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Samuhdez17/DAM2.git",
-    "accountId": "730a919f-c7fb-482a-bbfd-b9a9c4055f31"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Samuhdez17/DAM2.git&quot;,
+    &quot;accountId&quot;: &quot;730a919f-c7fb-482a-bbfd-b9a9c4055f31&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -128,6 +128,7 @@
       <workItem from="1765483797781" duration="1486000" />
       <workItem from="1765530847291" duration="39000" />
       <workItem from="1765720956130" duration="11000" />
+      <workItem from="1765813304732" duration="16000" />
     </task>
     <servers />
   </component>
