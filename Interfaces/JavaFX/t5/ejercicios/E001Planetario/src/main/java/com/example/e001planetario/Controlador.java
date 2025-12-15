@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
@@ -14,7 +15,8 @@ import javafx.util.Duration;
 public class Controlador {
     private Circle[] orbitas;
     private Circle[] planetas;
-    private Timeline[] lineasTemporales = new Timeline[8];
+    private final Rotate[] rotaciones = new Rotate[8];
+    private final Timeline[] lineasTemporales = new Timeline[8];
     private final boolean[] planetaEnAuto = new boolean[8];
     private static final String[][] datos = {
             {"0'055 Tierras","2440 km","57 millones de km","88 días","59 días","0"},
@@ -124,6 +126,9 @@ public class Controlador {
     private Circle p8;
 
     @FXML
+    private Circle sol;
+
+    @FXML
     private Slider slider;
 
     @FXML
@@ -131,15 +136,20 @@ public class Controlador {
         orbitas = new Circle[] {o1, o2, o3, o4, o5, o6, o7, o8};
         planetas = new Circle[] { p1, p2, p3, p4, p5, p6, p7, p8 };
 
-        for (int i = 0 ; i < orbitas.length ; i++) {
-            Rotate rotate = new Rotate();
-            rotate.setPivotX(orbitas[i].getCenterX());
-            rotate.setPivotY(orbitas[i].getCenterY());
+        for (int i = 0; i < orbitas.length; i++) {
+            rotaciones[i] = new Rotate();
+            rotaciones[i].setPivotX(sol.getCenterX());
+            rotaciones[i].setPivotY(sol.getCenterY());
+            planetas[i].getTransforms().add(rotaciones[i]);
 
-            KeyValue kvRotate = new KeyValue(rotate.angleProperty(), 360);
-            KeyFrame kf = new KeyFrame(Duration.seconds(setDuracion(i)), kvRotate);
-            lineasTemporales[i] = new Timeline(kf);
-
+            lineasTemporales[i] = new Timeline(
+                    new KeyFrame(Duration.ZERO,
+                            new KeyValue(rotaciones[i].angleProperty(), 0)
+                    ),
+                    new KeyFrame(Duration.seconds(setDuracion(i)),
+                            new KeyValue(rotaciones[i].angleProperty(), 360)
+                    )
+            );
             lineasTemporales[i].setCycleCount(Timeline.INDEFINITE);
         }
     }
@@ -162,12 +172,26 @@ public class Controlador {
 
     @FXML
     void alternarAuto(ActionEvent event) {
+        if (planetaSeleccionado != -1) {
+            planetaEnAuto[planetaSeleccionado] = !planetaEnAuto[planetaSeleccionado];
 
+            if (planetaEnAuto[planetaSeleccionado]) {
+                lineasTemporales[planetaSeleccionado].play();
+            } else {
+                lineasTemporales[planetaSeleccionado].stop();
+            }
+        }
     }
 
     @FXML
     void rotar(MouseEvent event) {
-
+        if (planetaSeleccionado != -1) {
+            double angulo = slider.getValue() - posAnterior;
+            rotaciones[planetaSeleccionado].setAngle(
+                    rotaciones[planetaSeleccionado].getAngle() + angulo
+            );
+            posAnterior = slider.getValue();
+        }
     }
 
     @FXML
@@ -179,21 +203,35 @@ public class Controlador {
                 String.valueOf(
                         id.charAt(id.length() - 1)
                 )
-        );
+        ) - 1;
 
         if (planetaSeleccionado == -1) {
             planetaSeleccionado = numeroPlaneta;
-
-            orbitas[planetaSeleccionado].setStyle("-fx-border-color: red");
-        }
-
-        else if (planetaSeleccionado == numeroPlaneta) {
-            orbitas[planetaSeleccionado].setStyle("-fx-border-color: white");
-
+            orbitas[planetaSeleccionado].setStroke(Color.RED);
+            posAnterior = slider.getValue();
+            ponerDatos();
+        } else if (planetaSeleccionado == numeroPlaneta) {
+            orbitas[planetaSeleccionado].setStroke(Color.WHITE);
             planetaSeleccionado = -1;
+            reiniciarDatos();
         }
-
-        System.out.println(planetaSeleccionado);
     }
 
+    private void reiniciarDatos() {
+        d1.setText("0 Kg");
+        d2.setText("0 Km");
+        d3.setText("0 Km");
+        d4.setText("0 días");
+        d5.setText("0 días");
+        d6.setText("0 ");
+    }
+
+    private void ponerDatos() {
+        d1.setText(datos[planetaSeleccionado][0]);
+        d2.setText(datos[planetaSeleccionado][1]);
+        d3.setText(datos[planetaSeleccionado][2]);
+        d4.setText(datos[planetaSeleccionado][3]);
+        d5.setText(datos[planetaSeleccionado][4]);
+        d6.setText(datos[planetaSeleccionado][5]);
+    }
 }
