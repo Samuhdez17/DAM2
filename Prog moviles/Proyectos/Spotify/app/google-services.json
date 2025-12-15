@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1019638313392",
+    "project_id": "mi-primer-firebase-371a3",
+    "storage_bucket": "mi-primer-firebase-371a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019638313392:android:520ab11c8cc12dc165a675",
+        "android_client_info": {
+          "package_name": "com.example.mifirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk7kH9Chxu8LGCqMMw_Y3ckOeQC0cwUgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019638313392:android:c22b2a5b4e6a388665a675",
+        "android_client_info": {
+          "package_name": "com.example.spotify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk7kH9Chxu8LGCqMMw_Y3ckOeQC0cwUgw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
