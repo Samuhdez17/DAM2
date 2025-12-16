@@ -1,4 +1,4 @@
-package enseñanzas;
+package org.example.ensenanzas;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -80,7 +80,7 @@ public class T5_2_CircleRotate extends Application {
                 KeyFrame kf = new KeyFrame(Duration.seconds(3), kvRotate, kvSlider);
                 Timeline tl = new Timeline(kf);
                 tl.play();
-                tl.setCycleCount();
+//                tl.setCycleCount();
 
                 tl.setOnFinished(e1 -> {
                     slider.setDisable(false);

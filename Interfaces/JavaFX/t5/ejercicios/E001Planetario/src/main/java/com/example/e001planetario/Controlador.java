@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
@@ -29,6 +30,9 @@ public class Controlador {
 
     private int planetaSeleccionado = -1;
     private double posAnterior = 0;
+
+    @FXML
+    private ToggleGroup Planetas;
 
     @FXML
     private ToggleButton b1;
@@ -124,6 +128,9 @@ public class Controlador {
     private Circle p8;
 
     @FXML
+    private Circle sol;
+
+    @FXML
     private Slider slider;
 
     @FXML
@@ -133,6 +140,8 @@ public class Controlador {
 
         for (int i = 0 ; i < orbitas.length ; i++) {
             Rotate rotate = new Rotate();
+            planetas[i].getTransforms().add(rotate);
+
             rotate.setPivotX(orbitas[i].getCenterX());
             rotate.setPivotY(orbitas[i].getCenterY());
 
@@ -141,6 +150,7 @@ public class Controlador {
             lineasTemporales[i] = new Timeline(kf);
 
             lineasTemporales[i].setCycleCount(Timeline.INDEFINITE);
+            planetaEnAuto[i] = false;
         }
     }
 
@@ -162,12 +172,25 @@ public class Controlador {
 
     @FXML
     void alternarAuto(ActionEvent event) {
+        planetaEnAuto[planetaSeleccionado] = !planetaEnAuto[planetaSeleccionado];
 
+        if (planetaEnAuto[planetaSeleccionado]) {
+            lineasTemporales[planetaSeleccionado].play();
+        }else{
+            lineasTemporales[planetaSeleccionado].stop();
+        }
     }
 
     @FXML
     void rotar(MouseEvent event) {
+        Rotate rotate = new Rotate();
+        rotate.setPivotX(orbitas[planetaSeleccionado].getCenterX());
+        rotate.setPivotY(orbitas[planetaSeleccionado].getCenterY());
 
+        rotate.setAngle(slider.getValue() - posAnterior);
+        posAnterior = slider.getValue();
+
+        planetas[planetaSeleccionado].getTransforms().add(rotate);
     }
 
     @FXML
@@ -179,21 +202,44 @@ public class Controlador {
                 String.valueOf(
                         id.charAt(id.length() - 1)
                 )
-        );
+        ) - 1;
 
         if (planetaSeleccionado == -1) {
             planetaSeleccionado = numeroPlaneta;
-
-            orbitas[planetaSeleccionado].setStyle("-fx-border-color: red");
+            orbitas[planetaSeleccionado].setStroke(Color.RED);
+            ponerDatos(planetaSeleccionado);
+//            slider.setValue();
+            return;
         }
 
-        else if (planetaSeleccionado == numeroPlaneta) {
-            orbitas[planetaSeleccionado].setStyle("-fx-border-color: white");
-
+        if (planetaSeleccionado == numeroPlaneta) {
+            orbitas[planetaSeleccionado].setStroke(Color.WHITE);
             planetaSeleccionado = -1;
+            reiniciarDatos();
+            return;
         }
 
-        System.out.println(planetaSeleccionado);
+        orbitas[planetaSeleccionado].setStroke(Color.WHITE);
+        planetaSeleccionado = numeroPlaneta;
+        orbitas[planetaSeleccionado].setStroke(Color.RED);
+        ponerDatos(planetaSeleccionado);
     }
 
+    private void reiniciarDatos() {
+        d1.setText("0 Kg");
+        d2.setText("0 Km");
+        d3.setText("0 Km");
+        d4.setText("0 días");
+        d5.setText("0 años");
+        d6.setText("0");
+    }
+
+    private void ponerDatos(int numeroPlaneta) {
+        d1.setText(datos[numeroPlaneta][0]);
+        d2.setText(datos[numeroPlaneta][1]);
+        d3.setText(datos[numeroPlaneta][2]);
+        d4.setText(datos[numeroPlaneta][3]);
+        d5.setText(datos[numeroPlaneta][4]);
+        d6.setText(datos[numeroPlaneta][5]);
+    }
 }

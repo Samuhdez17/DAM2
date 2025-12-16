@@ -1,4 +1,4 @@
-package enseñanzas;
+package org.example.ensenanzas;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
