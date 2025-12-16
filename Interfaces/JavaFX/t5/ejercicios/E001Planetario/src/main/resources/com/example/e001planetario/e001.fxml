@@ -4,7 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.ToggleButton?>
+<<<<<<< HEAD
 <?import javafx.scene.control.ToggleGroup?>
+=======
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -14,6 +17,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="1147.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.e001planetario.Controlador">
    <children>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <Circle fx:id="sol" fill="#ffe659f3" centerX="377.0" centerY="372.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="o1" fill="#1f93ff00" centerX="377.0" centerY="372.0" radius="90.0" stroke="WHITE" strokeType="INSIDE" />
@@ -34,6 +38,8 @@
       <Circle fx:id="p8" fill="#ae00ff" centerX="72.0" centerY="375.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <VBox alignment="TOP_CENTER" layoutX="758.0" layoutY="12.0" maxHeight="1.7976931348623157E308" prefHeight="723.0" prefWidth="384.0" spacing="2.0">
 =======
+=======
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
       <Circle fx:id="sol" fill="#ffe659f3" layoutX="377.0" layoutY="372.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="o1" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="90.0" stroke="WHITE" strokeType="INSIDE" />
       <Circle fx:id="o2" fill="#1f93ff00" layoutX="377.0" layoutY="372.0" radius="120.0" stroke="WHITE" strokeType="INSIDE" />
@@ -52,6 +58,9 @@
       <Circle fx:id="p7" fill="#b2f2ff" layoutX="102.0" layoutY="375.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="p8" fill="#ae00ff" layoutX="72.0" layoutY="375.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <VBox alignment="TOP_CENTER" layoutX="758.0" layoutY="12.0" maxHeight="1.7976931348623157E308" prefHeight="723.0" prefWidth="384.0">
+<<<<<<< HEAD
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
+=======
 >>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
          <children>
             <Label alignment="TOP_CENTER" prefHeight="46.0" prefWidth="259.0" text="LOS PLANETAS" textFill="WHITE">
@@ -66,41 +75,70 @@
                <font>
                   <Font size="14.0" />
                </font>
+<<<<<<< HEAD
                <toggleGroup>
                   <ToggleGroup fx:id="Planetas" />
                </toggleGroup>
             </ToggleButton>
             <ToggleButton fx:id="b2" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Venus" toggleGroup="$Planetas">
+=======
+            </ToggleButton>
+            <ToggleButton fx:id="b2" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Venus">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
                <font>
                   <Font size="14.0" />
                </font>
             </ToggleButton>
+<<<<<<< HEAD
             <ToggleButton fx:id="b3" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Tierra" toggleGroup="$Planetas">
+=======
+            <ToggleButton fx:id="b3" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Tierra">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
                <font>
                   <Font size="14.0" />
                </font>
             </ToggleButton>
+<<<<<<< HEAD
             <ToggleButton fx:id="b4" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Marte" toggleGroup="$Planetas">
+=======
+            <ToggleButton fx:id="b4" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Marte">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
                <font>
                   <Font size="14.0" />
                </font>
             </ToggleButton>
+<<<<<<< HEAD
             <ToggleButton fx:id="b5" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Júpiter" toggleGroup="$Planetas">
+=======
+            <ToggleButton fx:id="b5" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Júpiter">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
                <font>
                   <Font size="14.0" />
                </font>
             </ToggleButton>
+<<<<<<< HEAD
             <ToggleButton fx:id="b6" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Saturno" toggleGroup="$Planetas">
+=======
+            <ToggleButton fx:id="b6" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Saturno">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
                <font>
                   <Font size="14.0" />
                </font>
             </ToggleButton>
+<<<<<<< HEAD
             <ToggleButton fx:id="b7" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Urano" toggleGroup="$Planetas">
+=======
+            <ToggleButton fx:id="b7" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Urano">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
                <font>
                   <Font size="14.0" />
                </font>
             </ToggleButton>
+<<<<<<< HEAD
             <ToggleButton fx:id="b8" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Neptuno" toggleGroup="$Planetas">
+=======
+            <ToggleButton fx:id="b8" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#seleccionarPlaneta" prefHeight="43.0" prefWidth="384.0" stylesheets="@estilosBotones.css" text="Neptuno">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
                <font>
                   <Font size="14.0" />
                </font>
@@ -132,7 +170,11 @@
                            </font>
                         </Label>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <Label fx:id="d2" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" text="0 Km" textFill="WHITE">
+=======
+                        <Label fx:id="d2" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="0 Km" textFill="WHITE">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
 =======
                         <Label fx:id="d2" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="171.0" text="0 Km" textFill="WHITE">
 >>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
@@ -178,7 +220,11 @@
                            </font>
                         </Label>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <Label fx:id="d5" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" text="0 años" textFill="WHITE">
+=======
+                        <Label fx:id="d5" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" text="0 días" textFill="WHITE">
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
 =======
                         <Label fx:id="d5" layoutX="192.0" layoutY="11.0" prefHeight="17.0" prefWidth="189.0" text="0 días" textFill="WHITE">
 >>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
@@ -205,7 +251,11 @@
                   <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="100.0" prefWidth="351.0" spacing="10.0">
                      <children>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <Slider fx:id="slider" max="360.0" maxWidth="-Infinity" onMouseClicked="#rotar" onMouseDragged="#rotar" prefHeight="14.0" prefWidth="267.0" />
+=======
+                        <Slider fx:id="slider" max="365.0" maxWidth="-Infinity" onMouseClicked="#rotar" onMouseDragged="#rotar" prefHeight="14.0" prefWidth="267.0" />
+>>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
 =======
                         <Slider fx:id="slider" max="365.0" maxWidth="-Infinity" onMouseClicked="#rotar" onMouseDragged="#rotar" prefHeight="14.0" prefWidth="267.0" />
 >>>>>>> dfbd7b5563cc8e7cbc980392eb58fe6f9b2ee767
