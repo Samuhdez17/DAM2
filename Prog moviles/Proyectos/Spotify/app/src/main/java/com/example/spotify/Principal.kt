@@ -31,11 +31,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.spotify.ui.theme.SpotifyTheme
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeActivity : ComponentActivity() {
+class Principal : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -55,6 +58,10 @@ private lateinit var auth: FirebaseAuth
 
 @Composable
 fun Menu(modifier: Modifier = Modifier) {
+    val circularFont = FontFamily(
+        Font(R.font.circular_std_4)
+    )
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -81,9 +88,12 @@ fun Menu(modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = "Millions of songs.\nFree on Spotify",
-            modifier = Modifier.padding(16.dp),
-            style = MaterialTheme.typography.headlineSmall,
+            text = "Millions of songs.\nFree on Spotify.",
+            modifier = Modifier.padding(20.dp),
+            style = MaterialTheme.typography.headlineSmall.copy(
+                fontFamily = circularFont,
+                fontSize = 32.sp
+            ),
             color = Color.White
         )
 
