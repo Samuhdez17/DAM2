@@ -15,25 +15,34 @@ public class T5_4_Line extends Application {
 
     @Override
     public void start(Stage stage) {
-        Line line = new Line(10, 10, 10, 500);
-        line.setStroke(Color.RED);
-        line.setStrokeWidth(10);
-
-        line.getStrokeDashArray().addAll(50d, line.getStrokeWidth() + 20d); //trazo 1, hueco 1
-
-        Line line2 = new Line(10, 10, 500, 500);
-        line2.setStroke(Color.BLUE);
-        line2.setStrokeWidth(10);
-
-        line2.getStrokeDashArray().addAll(50d, line2.getStrokeWidth() + 20d); //trazo 1, hueco 1
-
-        Line line3 = new Line(250, 10, 500, 500);
-        line3.setStroke(Color.GREEN);
-        line3.setStrokeWidth(10);
-
-        Pane pane = new Pane(line, line2, line3);
-        Scene scene = new Scene(pane);
+        Pane pane = new Pane();
+        Scene scene = new Scene(pane, 200, 200);
         stage.setScene(scene);
+
+        Line lineRojo = new Line(10, 10, 500, 500);
+        lineRojo.endXProperty().bind(pane.widthProperty().subtract(10));
+        lineRojo.endYProperty().bind(pane.heightProperty().subtract(10));
+        lineRojo.setStroke(Color.RED);
+        lineRojo.setStrokeWidth(10);
+
+        lineRojo.getStrokeDashArray().addAll(50d, lineRojo.getStrokeWidth() + 20d); //trazo 1, hueco 1
+
+        Line lineAzul = new Line(500, 10, 10, 500);
+        lineAzul.setStroke(Color.BLUE);
+        lineAzul.setStrokeWidth(10);
+        lineAzul.startXProperty().bind(pane.widthProperty().subtract(10));
+        lineAzul.endYProperty().bind(pane.heightProperty().subtract(10));
+
+        lineAzul.getStrokeDashArray().addAll(50d, lineAzul.getStrokeWidth() + 20d); //trazo 1, hueco 1
+
+        Line lineVerde = new Line(250, 10, 250, 500);
+        lineVerde.startXProperty().bind(pane.widthProperty().divide(2));
+        lineVerde.endXProperty().bind(pane.widthProperty().divide(2));
+        lineVerde.endYProperty().bind(pane.heightProperty().subtract(10));
+        lineVerde.setStroke(Color.GREEN);
+        lineVerde.setStrokeWidth(10);
+
+        pane.getChildren().addAll(lineRojo, lineAzul, lineVerde);
         stage.show();
     }
 }

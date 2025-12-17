@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="89de17de-a055-4334-a668-7ddbad70038d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/E001Planetario/src/main/java/com/example/e001planetario/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/E001Planetario/src/main/java/com/example/e001planetario/Controlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/E001Planetario/src/main/resources/com/example/e001planetario/e001.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/E001Planetario/src/main/resources/com/example/e001planetario/e001.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ensenanzas/ensenanzas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ensenanzas/ensenanzas/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ensenanzas/ensenanzas/src/main/java/org/example/ensenanzas/T5_4_Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ensenanzas/ensenanzas/src/main/java/org/example/ensenanzas/T5_4_Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../enseñanzas/T5_1_Circle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../enseñanzas/T5_2_CircleRotate.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Samuhdez17"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Samuhdez17/DAM2.git",
+    "accountId": "98cf7ad5-aadf-4948-9136-0775850b1587"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="36xpGoCrthceZsK1tSEGZzkR22j" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Interfaces/JavaFX/t5/ejercicios",
+    "show.migrate.to.gradle.popup": "false",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-IU-253.28294.334" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89de17de-a055-4334-a668-7ddbad70038d" name="Changes" comment="" />
+      <created>1765957983379</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765957983379</updated>
+      <workItem from="1765957984506" duration="5000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
