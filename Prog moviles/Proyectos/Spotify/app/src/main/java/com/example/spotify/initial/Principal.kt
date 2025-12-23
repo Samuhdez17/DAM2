@@ -1,4 +1,4 @@
-package com.example.spotify
+package com.example.spotify.initial
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,21 +22,24 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.spotify.R
+import com.example.spotify.login.LogIn
+import com.example.spotify.singup.SingUp
 import com.example.spotify.ui.theme.SpotifyTheme
-import com.google.firebase.auth.FirebaseAuth
 
 class Principal : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,20 +47,39 @@ class Principal : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             SpotifyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Menu(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "inicio"
+                ) {
+                    composable("inicio") {
+                        Menu(
+                            modifier = Modifier,
+                            { navController.navigate("logIn") },
+                            { navController.navigate("singUp") }
+                        )
+                    }
+
+                    composable("logIn") {
+                        LogIn({ navController.navigate("inicio") })
+                    }
+
+                    composable("singUp") {
+                        SingUp({ navController.navigate("inicio") })
+                    }
                 }
             }
         }
     }
 }
 
-private lateinit var auth: FirebaseAuth
 
 @Composable
-fun Menu(modifier: Modifier = Modifier) {
+fun Menu(
+    modifier: Modifier = Modifier,
+    onLogInClick: () -> Unit = {},
+    onSingUpClick: () -> Unit = {}
+) {
     val circularFont = FontFamily(
         Font(R.font.circular_std_4)
     )
@@ -98,7 +120,7 @@ fun Menu(modifier: Modifier = Modifier) {
         )
 
         Button(
-            onClick = { throw RuntimeException("Mi error") },
+            onClick = { onSingUpClick() },
             modifier = Modifier.padding(top = 16.dp).width(250.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF1DB954),
@@ -157,7 +179,7 @@ fun Menu(modifier: Modifier = Modifier) {
             ) {
                 Image(
                     painter = painterResource(R.drawable.logo_facebook),
-                    contentDescription = "google",
+                    contentDescription = "facebook",
                     modifier = Modifier.size(20.dp)
                 )
 
@@ -173,7 +195,7 @@ fun Menu(modifier: Modifier = Modifier) {
         }
 
         Button(
-            onClick = { throw RuntimeException("Mi error") },
+            onClick = { onLogInClick() },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.Transparent,
                 contentColor = Color.White
@@ -181,13 +203,5 @@ fun Menu(modifier: Modifier = Modifier) {
         ) {
             Text(text = "Log in")
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MenuPreview() {
-    SpotifyTheme {
-        Menu()
     }
 }
