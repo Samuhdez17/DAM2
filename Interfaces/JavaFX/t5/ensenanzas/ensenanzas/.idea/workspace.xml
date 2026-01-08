@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0beb0b90-ef8c-4b28-abf9-8dcb026d3fe9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_5_TicTacToe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ejercicios/E001Planetario/src/main/java/com/example/e001planetario/Controlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../ejercicios/E001Planetario/src/main/java/com/example/e001planetario/Controlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ejercicios/E001Planetario/src/main/resources/com/example/e001planetario/e001.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ejercicios/E001Planetario/src/main/resources/com/example/e001planetario/e001.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_4_Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_4_Line.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../enseñanzas/T5_1_Circle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../enseñanzas/T5_2_CircleRotate.java" beforeDir="false" />
-    </list>
+    <list default="true" id="0beb0b90-ef8c-4b28-abf9-8dcb026d3fe9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,31 +50,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.T5_3_Rectangle.executor": "Run",
-    "Application.T5_4_Line.executor": "Run",
-    "Application.T5_5_TicTacToe.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Interfaces/JavaFX/t5/ensenanzas/ensenanzas/src/main/java/org/example/ensenanzas",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "show.migrate.to.gradle.popup": "false",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.T5_3_Rectangle.executor&quot;: &quot;Run&quot;,
+    &quot;Application.T5_4_Line.executor&quot;: &quot;Run&quot;,
+    &quot;Application.T5_5_TicTacToe.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/samuh/Desktop/git/DAM2/Interfaces/JavaFX/t5/ensenanzas/ensenanzas/src/main/java/org/example/ensenanzas&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Interfaces\JavaFX\t5\ensenanzas\ensenanzas\src\main\java\org\example\ensenanzas" />
@@ -107,6 +99,7 @@
       <workItem from="1765887322866" duration="58000" />
       <workItem from="1765956709086" duration="1262000" />
       <workItem from="1765957990898" duration="1362000" />
+      <workItem from="1765963095921" duration="175000" />
     </task>
     <servers />
   </component>

@@ -28,12 +28,12 @@ public class MultiCliente implements Runnable {
             nombreUsuario = entrada.readLine();
             String comandoCliente = " ";
 
-            while (!comandoCliente.equals("exit")) {
+            while (!comandoCliente.equals("salir")) {
                 comandoCliente = entrada.readLine();
                 switch (comandoCliente) {
                     case "leer" -> leerMensajes(salida);
                     case "enviar" -> enviarMensaje(salida, entrada);
-                    case "exit" -> salida.println("Saliendo del servidor...");
+                    case "salir" -> salida.println("Saliendo del servidor...");
                     default -> salida.println("400 Comando mal formado");
                 }
             }
