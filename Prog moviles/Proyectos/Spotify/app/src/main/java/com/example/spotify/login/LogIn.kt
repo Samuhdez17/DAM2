@@ -1,9 +1,5 @@
 package com.example.spotify.login
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -38,48 +34,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.spotify.initial.Menu
 import com.example.spotify.R
-import com.example.spotify.singup.SingUp
 import com.example.spotify.ui.theme.SpotifyTheme
+import com.google.firebase.auth.FirebaseAuth
 
-class InicioSesion : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            SpotifyTheme {
-                val navController = rememberNavController()
-                NavHost(
-                    navController = navController,
-                    startDestination = "inicio"
-                ) {
-                    composable("inicio") {
-                        Menu(
-                            modifier = Modifier,
-                            { navController.navigate("logIn") },
-                            { navController.navigate("singUp") }
-                        )
-                    }
-
-                    composable("logIn") {
-                        LogIn( { navController.navigate("inicio") } )
-                    }
-
-                    composable("singUp") {
-                        SingUp({ navController.navigate("inicio") })
-                    }
-                }
-            }
-        }
-    }
-}
+class LogIn
 
 @Composable
-fun LogIn( onBackClick: () -> Unit = {} ) {
+fun LogIn(auth: FirebaseAuth, onBackClick: () -> Unit = {} ) {
     var emailOrUsername by remember { mutableStateOf("") }
 
     var password by remember { mutableStateOf("") }
@@ -176,7 +138,17 @@ fun LogIn( onBackClick: () -> Unit = {} ) {
         Spacer(Modifier.height(20.dp))
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                auth.signInWithEmailAndPassword(emailOrUsername, password).addOnCompleteListener { task->
+                    if (task.isSuccessful) {
+                        onBackClick()
+                    }
+                    else {
+                        //TODO
+                    }
+
+                }
+            },
             enabled = emailOrUsername.isNotBlank() && password.isNotBlank(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF1DB954),

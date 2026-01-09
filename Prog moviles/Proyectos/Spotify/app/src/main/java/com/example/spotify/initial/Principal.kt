@@ -1,9 +1,5 @@
 package com.example.spotify.initial
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,46 +29,9 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.spotify.R
-import com.example.spotify.login.LogIn
-import com.example.spotify.singup.SingUp
-import com.example.spotify.ui.theme.SpotifyTheme
 
-class Principal : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            SpotifyTheme {
-                val navController = rememberNavController()
-                NavHost(
-                    navController = navController,
-                    startDestination = "inicio"
-                ) {
-                    composable("inicio") {
-                        Menu(
-                            modifier = Modifier,
-                            { navController.navigate("logIn") },
-                            { navController.navigate("singUp") }
-                        )
-                    }
-
-                    composable("logIn") {
-                        LogIn({ navController.navigate("inicio") })
-                    }
-
-                    composable("singUp") {
-                        SingUp({ navController.navigate("inicio") })
-                    }
-                }
-            }
-        }
-    }
-}
-
+class Principal
 
 @Composable
 fun Menu(

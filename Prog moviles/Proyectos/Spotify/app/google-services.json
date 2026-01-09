@@ -1,32 +1,13 @@
 {
   "project_info": {
-    "project_number": "1019638313392",
-    "project_id": "mi-primer-firebase-371a3",
-    "storage_bucket": "mi-primer-firebase-371a3.firebasestorage.app"
+    "project_number": "654722853782",
+    "project_id": "spoty-47257",
+    "storage_bucket": "spoty-47257.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1019638313392:android:520ab11c8cc12dc165a675",
-        "android_client_info": {
-          "package_name": "com.example.mifirebase"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDk7kH9Chxu8LGCqMMw_Y3ckOeQC0cwUgw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1019638313392:android:c22b2a5b4e6a388665a675",
+        "mobilesdk_app_id": "1:654722853782:android:5d563741bb036452da0bb7",
         "android_client_info": {
           "package_name": "com.example.spotify"
         }
@@ -34,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDk7kH9Chxu8LGCqMMw_Y3ckOeQC0cwUgw"
+          "current_key": "AIzaSyCs0bS1pC2FC16GEgGhWeVqwxUIZyNfUcU"
         }
       ],
       "services": {
