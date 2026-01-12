@@ -47,6 +47,8 @@ public class T5_5_TicTacToe extends Application {
         l4.setStrokeWidth(10);
         l4.setStroke(colorTablero);
 
+        
+
         pane.getChildren().setAll(l1, l2, l3, l4);
         stage.show();
     }
