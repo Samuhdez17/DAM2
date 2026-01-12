@@ -30,12 +30,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.spotify.R
+import com.google.firebase.auth.FirebaseAuth
 
 class Principal
 
 @Composable
-fun Menu(
+fun Principal(
     modifier: Modifier = Modifier,
+    auth: FirebaseAuth,
     onLogInClick: () -> Unit = {},
     onSingUpClick: () -> Unit = {}
 ) {

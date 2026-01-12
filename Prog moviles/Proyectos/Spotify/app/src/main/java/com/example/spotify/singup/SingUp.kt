@@ -29,21 +29,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.spotify.R
-import com.example.spotify.ui.theme.SpotifyTheme
+import com.google.firebase.auth.FirebaseAuth
 
 class SingUp
 
 @Composable
-fun SingUp( onBackClick: () -> Unit = {} ) {
+fun SingUp(
+    onBackClick: () -> Unit = {},
+    ) {
     val circularFont = FontFamily(
         Font(R.font.circular_std_4)
     )
 
     var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
 
     val textFieldColors = TextFieldDefaults.colors(
         unfocusedContainerColor = Color(0xFF2A2A2A),
@@ -103,7 +109,6 @@ fun SingUp( onBackClick: () -> Unit = {} ) {
             ),
             modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
         )
-
         TextField(
             value = email,
             onValueChange = { email = it },
@@ -111,6 +116,43 @@ fun SingUp( onBackClick: () -> Unit = {} ) {
             modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 16.dp),
             colors = textFieldColors
         )
+
+        Text(
+            text = "Password",
+            style = MaterialTheme.typography.headlineSmall.copy(
+                fontFamily = circularFont,
+                color = Color.White
+            ),
+            modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
+        )
+        TextField(
+            value = password,
+            onValueChange = {
+                password = it
+            },
+            shape = MaterialTheme.shapes.medium,
+            colors = textFieldColors,
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            trailingIcon = {
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(
+                        painter = painterResource(
+                            id = if (passwordVisible)
+                                R.drawable.mostar_psswrd
+                            else
+                                R.drawable.ocultar_psswrd
+                        ),
+                        modifier = Modifier.size(25.dp),
+                        contentDescription = "Mostrar contraseña",
+                        tint = Color.White
+                    )
+                }
+            },
+            visualTransformation =
+                if (passwordVisible) VisualTransformation.None
+                else PasswordVisualTransformation(),
+
+            )
 
         Text(
             text = "You'll need to confirm this email later.",
@@ -126,7 +168,7 @@ fun SingUp( onBackClick: () -> Unit = {} ) {
 
         Button(
             onClick = { /*TODO*/ },
-            enabled = email.isNotBlank(),
+            enabled = email.isNotBlank() && password.isNotBlank(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF1DB954),
                 contentColor = Color.Black,
@@ -145,12 +187,4 @@ fun SingUp( onBackClick: () -> Unit = {} ) {
         }
     }
     
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SingUpPreview() {
-    SpotifyTheme {
-        SingUp()
-    }
 }

@@ -8,9 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.spotify.initial.Menu
+import com.example.spotify.initial.Principal
 import com.example.spotify.login.LogIn
 import com.example.spotify.singup.SingUp
+import com.example.spotify.app.HomePage
 import com.example.spotify.ui.theme.SpotifyTheme
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -31,19 +32,28 @@ class MainActivity : ComponentActivity() {
                     startDestination = "inicio"
                 ) {
                     composable("inicio") {
-                        Menu(
+                        Principal(
                             modifier = Modifier,
+                            auth,
                             { navController.navigate("logIn") },
                             { navController.navigate("singUp") }
                         )
                     }
 
                     composable("logIn") {
-                        LogIn(auth, {navController.navigate("inicio") })
+                        LogIn(
+                            auth,
+                            { navController.navigate("inicio") },
+                            { navController.navigate("homePage") }
+                        )
                     }
 
                     composable("singUp") {
-                        SingUp({ navController.navigate("inicio") })
+                        SingUp({ navController.navigate("inicio") }, auth)
+                    }
+
+                    composable("homePage") {
+                        HomePage()
                     }
                 }
             }

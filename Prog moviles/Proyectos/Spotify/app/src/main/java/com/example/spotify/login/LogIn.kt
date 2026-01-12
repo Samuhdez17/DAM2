@@ -31,22 +31,24 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.spotify.R
-import com.example.spotify.ui.theme.SpotifyTheme
 import com.google.firebase.auth.FirebaseAuth
 
 class LogIn
 
 @Composable
-fun LogIn(auth: FirebaseAuth, onBackClick: () -> Unit = {} ) {
+fun LogIn(
+    auth: FirebaseAuth,
+    onBackClick: () -> Unit = {},
+    onLogInClick: () -> Unit = {}
+) {
     var emailOrUsername by remember { mutableStateOf("") }
 
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
-
+    var msg by remember { mutableStateOf(" ") }
     val circularFont = FontFamily(
         Font(R.font.circular_std_4)
     )
@@ -91,7 +93,10 @@ fun LogIn(auth: FirebaseAuth, onBackClick: () -> Unit = {} ) {
         )
         TextField(
             value = emailOrUsername,
-            onValueChange = { emailOrUsername = it },
+            onValueChange = {
+                emailOrUsername = it
+                msg = " "
+                            },
             shape = MaterialTheme.shapes.medium,
             colors = textFieldColors,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
@@ -110,7 +115,10 @@ fun LogIn(auth: FirebaseAuth, onBackClick: () -> Unit = {} ) {
         )
         TextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = {
+                password = it
+                msg = " "
+                            },
             shape = MaterialTheme.shapes.medium,
             colors = textFieldColors,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
@@ -135,18 +143,28 @@ fun LogIn(auth: FirebaseAuth, onBackClick: () -> Unit = {} ) {
 
         )
 
+        Text(
+            text = msg,
+            style = MaterialTheme.typography.headlineSmall.copy(
+                fontSize = 17.sp,
+                fontFamily = circularFont,
+                color = Color.Red
+            ),
+            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 10.dp),
+
+        )
+
         Spacer(Modifier.height(20.dp))
 
         Button(
             onClick = {
                 auth.signInWithEmailAndPassword(emailOrUsername, password).addOnCompleteListener { task->
                     if (task.isSuccessful) {
-                        onBackClick()
+                        onLogInClick()
                     }
                     else {
-                        //TODO
+                        msg = "Username or password incorrect"
                     }
-
                 }
             },
             enabled = emailOrUsername.isNotBlank() && password.isNotBlank(),
@@ -192,13 +210,5 @@ fun LogIn(auth: FirebaseAuth, onBackClick: () -> Unit = {} ) {
                 )
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LogInPreview() {
-    SpotifyTheme {
-        LogIn()
     }
 }
