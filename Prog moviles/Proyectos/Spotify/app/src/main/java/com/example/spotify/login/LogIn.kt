@@ -151,7 +151,6 @@ fun LogIn(
                 color = Color.Red
             ),
             modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 10.dp),
-
         )
 
         Spacer(Modifier.height(20.dp))

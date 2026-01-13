@@ -42,6 +42,8 @@ class SingUp
 @Composable
 fun SingUp(
     onBackClick: () -> Unit = {},
+    onSingUpClick: () -> Unit = {},
+    auth: FirebaseAuth
     ) {
     val circularFont = FontFamily(
         Font(R.font.circular_std_4)
@@ -50,6 +52,7 @@ fun SingUp(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var msg by remember { mutableStateOf(" ") }
 
     val textFieldColors = TextFieldDefaults.colors(
         unfocusedContainerColor = Color(0xFF2A2A2A),
@@ -111,7 +114,10 @@ fun SingUp(
         )
         TextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = {
+                email = it
+                msg = " "
+                            },
             shape = MaterialTheme.shapes.medium,
             modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 16.dp),
             colors = textFieldColors
@@ -129,6 +135,7 @@ fun SingUp(
             value = password,
             onValueChange = {
                 password = it
+                msg = " "
             },
             shape = MaterialTheme.shapes.medium,
             colors = textFieldColors,
@@ -164,10 +171,29 @@ fun SingUp(
             modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = msg,
+            style = MaterialTheme.typography.headlineSmall.copy(
+                fontSize = 15.sp,
+                fontFamily = circularFont,
+                color = Color.Red
+            ),
+            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 10.dp),
+        )
+
+        Spacer(modifier = Modifier.height(15.dp))
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            onSingUpClick()
+                        } else {
+                            msg = task.exception?.message.toString()
+                        }
+                    }
+            },
             enabled = email.isNotBlank() && password.isNotBlank(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF1DB954),
@@ -186,5 +212,4 @@ fun SingUp(
             )
         }
     }
-    
 }

@@ -49,7 +49,11 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable("singUp") {
-                        SingUp({ navController.navigate("inicio") }, auth)
+                        SingUp(
+                            { navController.navigate("inicio") },
+                            { navController.navigate("homePage") },
+                            auth
+                        )
                     }
 
                     composable("homePage") {
