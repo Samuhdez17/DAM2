@@ -7,9 +7,20 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class T5_5_TicTacToe extends Application {
+    private final int[][] puntuacion = new int[3][3];
+
+    private final Color COLOR_TABLERO = Color.GREY;
+    private final Color COLOR_ASPAS = Color.GREEN;
+    private final Color COLOR_CIRCULOS = Color.RED;
+
+    private final int GROSOR_X = 7;
+    private final int GROSOR_O = 7;
+
+    private boolean turnoX = true;
 
     public static void main(String[] args) {
         launch(args);
@@ -17,80 +28,178 @@ public class T5_5_TicTacToe extends Application {
 
     @Override
     public void start(Stage stage) {
+        Group tablero = new Group();
+        Group aspas = new Group();
+        Group circulos = new Group();
+        Group celdas = new Group();
 
-        int alto = 300;
-        int ancho = 300;
-
-        Pane pane = new Pane();
-        Scene scene = new Scene(pane, ancho, alto);
+        Pane pane = new Pane(celdas, tablero, aspas, circulos);
+        Scene scene = new Scene(pane, 300,300);
         stage.setScene(scene);
-        stage.setTitle("T5_6_TicTacToe");
+        stage.setTitle("T5_5_TicTacToe");
         stage.show();
+        
+        Line line1 = new Line();
+        line1.startXProperty().bind(pane.widthProperty().divide(3));
+        line1.setStartY(10);
+        line1.endXProperty().bind(pane.widthProperty().divide(3));
+        line1.endYProperty().bind(pane.heightProperty().subtract(10));
+        line1.setStrokeWidth(10);
+        line1.setStroke(COLOR_TABLERO);
 
-        Color colorTablero = Color.GREY;
-        Color colorAspas = Color.GREEN;
-        Color colorCirculos = Color.RED;
+        Line line2 = new Line();
+        line2.setStartX(10);
+        line2.startYProperty().bind(pane.heightProperty().divide(3));
+        line2.endXProperty().bind(pane.widthProperty().subtract(10));
+        line2.endYProperty().bind(pane.heightProperty().divide(3));
+        line2.setStrokeWidth(10);
+        line2.setStroke(COLOR_TABLERO);
 
-        Line v1 = new Line(ancho / 3, 10, ancho / 3, alto - 10);
-        Line v2 = new Line((int)(ancho / 1.5), 10, (int)(ancho / 1.5), alto - 10);
-        Line h1 = new Line(10, alto / 3, ancho - 10, alto / 3);
-        Line h2 = new Line(10, (int)(alto / 1.5), ancho - 10, (int)(alto / 1.5));
+        Line line3 = new Line();
+        line3.setStartY(10);
+        line3.startXProperty().bind(pane.widthProperty().divide(1.5));
+        line3.endYProperty().bind(pane.heightProperty().subtract(10));
+        line3.endXProperty().bind(pane.widthProperty().divide(1.5));
+        line3.setStrokeWidth(10);
+        line3.setStroke(COLOR_TABLERO);
 
-        v1.setStrokeWidth(10);
-        v2.setStrokeWidth(10);
-        h1.setStrokeWidth(10);
-        h2.setStrokeWidth(10);
+        Line line4 = new Line();
+        line4.setStartX(10);
+        line4.startYProperty().bind(pane.heightProperty().divide(1.5));
+        line4.endXProperty().bind(pane.widthProperty().subtract(10));
+        line4.endYProperty().bind(pane.heightProperty().divide(1.5));
+        line4.setStrokeWidth(10);
+        line4.setStroke(COLOR_TABLERO);
 
-        v1.setStroke(colorTablero);
-        v2.setStroke(colorTablero);
-        h1.setStroke(colorTablero);
-        h2.setStroke(colorTablero);
+        tablero.getChildren().addAll(line1, line2, line3, line4);
 
-        // Grupos
-        Group groupX = new Group();
-        Group groupO = new Group();
+        int filas = 3;
+        int columnas = 3;
+        double padding = 20;
 
-        pane.getChildren().addAll(v1, v2, h1, h2, groupX, groupO);
+        for (int x = 0; x < filas; x++) {
+            for (int y = 0; y < columnas; y++) {
+                Line l1 = new Line();
+                Line l2 = new Line();
 
-        // Tamaño de celda
-        int cellW = ancho / 3;
-        int cellH = alto / 3;
+                // Línea \
+                l1.startXProperty().bind(pane.widthProperty().divide(columnas).multiply(y).add(padding));
+                l1.startYProperty().bind(pane.heightProperty().divide(filas).multiply(x).add(padding));
 
-        // División en 6 partes para centrar círculos
-        int stepX = ancho / 6;
-        int stepY = alto / 6;
+                l1.endXProperty().bind(pane.widthProperty().divide(columnas).multiply(y + 1).subtract(padding));
+                l1.endYProperty().bind(pane.heightProperty().divide(filas).multiply(x + 1).subtract(padding));
 
-        // Dibujar X y O
-        for (int fila = 0; fila < 3; fila++) {
-            for (int col = 0; col < 3; col++) {
+                // Línea /
+                l2.startXProperty().bind(pane.widthProperty().divide(columnas).multiply(y + 1).subtract(padding));
+                l2.startYProperty().bind(pane.heightProperty().divide(filas).multiply(x).add(padding));
 
-                // Coordenadas enteras para las X
-                int x1 = col * cellW + 20;
-                int y1 = fila * cellH + 20;
-                int x2 = (col + 1) * cellW - 20;
-                int y2 = (fila + 1) * cellH - 20;
+                l2.endXProperty().bind(pane.widthProperty().divide(columnas).multiply(y).add(padding));
+                l2.endYProperty().bind(pane.heightProperty().divide(filas).multiply(x + 1).subtract(padding));
 
-                Line l1 = new Line(x1, y1, x2, y2);
-                Line l2 = new Line(x2, y1, x1, y2);
+                l1.setStrokeWidth(GROSOR_X);
+                l2.setStrokeWidth(GROSOR_X);
 
-                l1.setStrokeWidth(10);
-                l2.setStrokeWidth(10);
-                l1.setStroke(colorAspas);
-                l2.setStroke(colorAspas);
+                l1.setStroke(COLOR_ASPAS);
+                l2.setStroke(COLOR_ASPAS);
+                l1.setFill(Color.TRANSPARENT);
 
-                groupX.getChildren().addAll(l1, l2);
+                // Circulos
+                Circle circle = new Circle();
+                circle.radiusProperty().bind(pane.widthProperty().divide(10));
 
-                // Círculo rojo centrado
-                int centerX = stepX * (1 + col * 2);
-                int centerY = stepY * (1 + fila * 2);
+                circle.centerXProperty().bind(
+                        pane.widthProperty().divide(6).add(pane.widthProperty().divide(3).multiply(y))
+                );
 
-                Circle circle = new Circle(centerX, centerY, Math.min(cellW, cellH) / 6);
-                circle.setStroke(colorCirculos);
+                circle.centerYProperty().bind(
+                        pane.heightProperty().divide(6).add(pane.heightProperty().divide(3).multiply(x))
+                );
+
+                circle.setStroke(COLOR_CIRCULOS);
                 circle.setFill(Color.TRANSPARENT);
-                circle.setStrokeWidth(8);
+                circle.setStrokeWidth(GROSOR_O);
 
-                groupO.getChildren().add(circle);
+                // Hitbox de celdas
+                Rectangle rect = new Rectangle();
+                rect.xProperty().bind(pane.widthProperty().divide(3).multiply(y));
+                rect.yProperty().bind(pane.heightProperty().divide(3).multiply(x));
+
+                rect.widthProperty().bind(pane.widthProperty().divide(3));
+                rect.heightProperty().bind(pane.heightProperty().divide(3));
+
+                rect.setFill(Color.TRANSPARENT);
+                rect.setStroke(Color.TRANSPARENT);
+
+                int xx = x;
+                int yy = y;
+
+                rect.setOnMouseClicked(e -> {
+                    if (puntuacion[xx][yy] == 0) {
+                        if (turnoX) {
+                            l1.setVisible(true);
+                            l2.setVisible(true);
+
+                            puntuacion[xx][yy] = 1;
+                        } else {
+                            circle.setVisible(true);
+
+                            puntuacion[xx][yy] = -1;
+                        }
+                    }
+
+                    turnoX = !turnoX;
+                    revisarTablero(celdas);
+                });
+
+                l1.setVisible(false);
+                l2.setVisible(false);
+                circle.setVisible(false);
+
+                circulos.getChildren().add(circle);
+                aspas.getChildren().addAll(l1, l2);
+                celdas.getChildren().add(rect);
             }
         }
+    }
+
+    private void revisarTablero(Group celdas) {
+        // Filas
+        for (int x = 0; x < 3; x++) {
+            int suma = puntuacion[x][0] + puntuacion[x][1] + puntuacion[x][2];
+            if (suma == 3 || suma == -3) {
+                marcarGanadoras(celdas, new int[][]{{x,0},{x,1},{x,2}});
+            }
+        }
+
+        // Columnas
+        for (int y = 0; y < 3; y++) {
+            int suma = puntuacion[0][y] + puntuacion[1][y] + puntuacion[2][y];
+            if (suma == 3 || suma == -3) {
+                marcarGanadoras(celdas, new int[][]{{0,y},{1,y},{2,y}});
+            }
+        }
+
+        // Diagonal 1
+        int d1 = puntuacion[0][0] + puntuacion[1][1] + puntuacion[2][2];
+        if (d1 == 3 || d1 == -3) {
+            marcarGanadoras(celdas, new int[][]{{0,0},{1,1},{2,2}});
+        }
+
+        // Diagonal 2
+        int d2 = puntuacion[0][2] + puntuacion[1][1] + puntuacion[2][0];
+        if (d2 == 3 || d2 == -3) {
+            marcarGanadoras(celdas, new int[][]{{0,2},{1,1},{2,0}});
+        }
+    }
+
+    private void marcarGanadoras(Group celdas, int[][] pos) {
+        for (int[] c : pos) {
+            Rectangle r = getRectangulo(celdas, c[0], c[1]);
+            r.setFill(Color.YELLOW);
+        }
+    }
+
+    private Rectangle getRectangulo(Group celdas, int x, int y) {
+        return (Rectangle) celdas.getChildren().get(x * 3 + y);
     }
 }
