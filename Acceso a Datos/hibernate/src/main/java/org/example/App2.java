@@ -25,7 +25,7 @@ public class App2 {
 //        em.getTransaction().commit(); // Para ejecutar el comando
 
 //        em.getTransaction().begin();
-//        Jugadore j1 = em.find(Jugadore.class, 1773); // Select del jugador por ID
+//        Jugadore j1 = em.find(Jugadore.class, 1773); // Select del jugador por la primary key
 //        em.remove(j1); // Lo eliminamos de la tabla
 //        em.getTransaction().commit();
 
