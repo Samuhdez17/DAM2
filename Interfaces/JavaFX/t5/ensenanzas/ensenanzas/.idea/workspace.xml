@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0beb0b90-ef8c-4b28-abf9-8dcb026d3fe9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_6_Drag.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_5_TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_5_TicTacToe.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +62,7 @@
     &quot;Application.T5_3_Rectangle.executor&quot;: &quot;Run&quot;,
     &quot;Application.T5_4_Line.executor&quot;: &quot;Run&quot;,
     &quot;Application.T5_5_TicTacToe.executor&quot;: &quot;Run&quot;,
+    &quot;Application.T5_6_Drag.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -111,6 +112,9 @@
       <workItem from="1768217928156" duration="153000" />
       <workItem from="1768219520005" duration="3348000" />
       <workItem from="1768292370851" duration="5900000" />
+      <workItem from="1768375647619" duration="1555000" />
+      <workItem from="1768378504799" duration="14000" />
+      <workItem from="1768381766643" duration="162000" />
     </task>
     <servers />
   </component>
