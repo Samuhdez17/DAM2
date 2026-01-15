@@ -1,0 +1,6 @@
+print("Indica horas trabajadas:")
+horas = input()
+print("Indica coste por hora:")
+coste = input()
+paga = int(horas) * int(coste)
+print("Tu paga sera de " + str(paga) + "eur")

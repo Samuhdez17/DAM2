@@ -47,93 +47,6 @@ public class App {
         }
     }
 
-    private static void eliminarEmpleado(Scanner entrada, EntityManager em, EmpleadoDAO empDAO) {
-        Empleado empleado = pedirEmpleado(entrada, em);
-        if (empleado == null) return;
-
-        try {
-            empDAO.eliminarEmpleado(empleado.getId());
-
-        } catch (Exception e) {
-            System.err.println("Error al eliminar el empleado " + e);
-            return;
-        }
-
-        System.out.println("Empleado eliminado correctamente");
-    }
-
-    private static void actualizarSalario(Scanner entrada, EntityManager em, EmpleadoDAO empDAO) {
-        Empleado empleado = pedirEmpleado(entrada, em);
-        if (empleado == null) return;
-
-        System.out.println("Indica el nuevo salario:");
-        BigDecimal nuevoSalario = entrada.nextBigDecimal();
-
-        try {
-            empDAO.actualizarSalario(empleado.getId(), nuevoSalario);
-
-        } catch (Exception e) {
-            System.err.println("Error al actualizar el salario " + e);
-            return;
-        }
-
-        System.out.println("Salario actualizado correctamente");
-    }
-
-    private static Empleado pedirEmpleado(Scanner entrada, EntityManager em) {
-        System.out.println("Indica el nombre del empleado:");
-        entrada.nextLine();
-        String nombre = entrada.nextLine();
-
-        Empleado empleado = verificarEmpleado(em, nombre);
-        if (empleado == null) {
-            System.out.println("El empleado no existe");
-            return null;
-        }
-        return empleado;
-    }
-
-    private static Empleado verificarEmpleado(EntityManager em, String nombre) {
-        Query buscarEmpleado = em.createQuery("SELECT e FROM Empleado e WHERE e.nombre = :nombre");
-        buscarEmpleado.setParameter("nombre", nombre);
-
-        Empleado emp;
-
-        try {
-            emp = (Empleado) buscarEmpleado.getSingleResult();
-
-        } catch (Exception e) {
-            return null;
-        }
-
-        return emp;
-    }
-
-    private static void listarEmpleadosPorDept(Scanner entrada, EntityManager em, EmpleadoDAO empDAO) {
-        System.out.println("Indica el nombre del departamento:");
-        entrada.nextLine();
-        String nombreDepartamento = entrada.nextLine();
-
-        Departamento departamento = verificarDepartamento(em, nombreDepartamento);
-
-        if (departamento == null) {
-            System.out.println("El departamento no existe");
-            return;
-        }
-
-        List<Empleado> empleados = empDAO.listarPorDepartamento(departamento.getId());
-        if (empleados.isEmpty()) {
-            System.out.println("No hay empleados en el departamento " + nombreDepartamento);
-            return;
-        }
-
-        System.out.println("    EMPLEADOS DEL DEPARTAMENTO " + nombreDepartamento.toUpperCase());
-        for (Empleado empleado : empleados)
-            System.out.printf("Nombre: %s; Puesto: %s; Salario: %.2f\n", empleado.getNombre(), empleado.getPuesto(), empleado.getSalario());
-
-        System.out.println();
-    }
-
     private static void insertarEmpleado(Scanner entrada, EntityManager em, EmpleadoDAO empDAO) {
         System.out.println("Indica el nombre del empleado:");
         entrada.nextLine();
@@ -166,6 +79,64 @@ public class App {
         System.out.println("Empleado insertado correctamente");
     }
 
+    private static void listarEmpleadosPorDept(Scanner entrada, EntityManager em, EmpleadoDAO empDAO) {
+        System.out.println("Indica el nombre del departamento:");
+        entrada.nextLine();
+        String nombreDepartamento = entrada.nextLine();
+
+        Departamento departamento = verificarDepartamento(em, nombreDepartamento);
+
+        if (departamento == null) {
+            System.out.println("El departamento no existe");
+            return;
+        }
+
+        List<Empleado> empleados = empDAO.listarPorDepartamento(departamento.getId());
+        if (empleados.isEmpty()) {
+            System.out.println("No hay empleados en el departamento " + nombreDepartamento);
+            return;
+        }
+
+        System.out.println("    EMPLEADOS DEL DEPARTAMENTO " + nombreDepartamento.toUpperCase());
+        for (Empleado empleado : empleados)
+            System.out.printf("Nombre: %s; Puesto: %s; Salario: %.2f\n", empleado.getNombre(), empleado.getPuesto(), empleado.getSalario());
+
+        System.out.println();
+    }
+
+    private static void actualizarSalario(Scanner entrada, EntityManager em, EmpleadoDAO empDAO) {
+        Empleado empleado = pedirEmpleado(entrada, em);
+        if (empleado == null) return;
+
+        System.out.println("Indica el nuevo salario:");
+        BigDecimal nuevoSalario = entrada.nextBigDecimal();
+
+        try {
+            empDAO.actualizarSalario(empleado.getId(), nuevoSalario);
+
+        } catch (Exception e) {
+            System.err.println("Error al actualizar el salario " + e);
+            return;
+        }
+
+        System.out.println("Salario actualizado correctamente");
+    }
+
+    private static void eliminarEmpleado(Scanner entrada, EntityManager em, EmpleadoDAO empDAO) {
+        Empleado empleado = pedirEmpleado(entrada, em);
+        if (empleado == null) return;
+
+        try {
+            empDAO.eliminarEmpleado(empleado.getId());
+
+        } catch (Exception e) {
+            System.err.println("Error al eliminar el empleado " + e);
+            return;
+        }
+
+        System.out.println("Empleado eliminado correctamente");
+    }
+
     private static Departamento verificarDepartamento(EntityManager em, String nombreDepartamento ) {
         Query buscarDepartamento = em.createQuery("SELECT d FROM Departamento d WHERE d.nombre LIKE CONCAT('%', :nombre)");
         buscarDepartamento.setParameter("nombre", nombreDepartamento);
@@ -179,5 +150,34 @@ public class App {
         }
 
         return departamento;
+    }
+
+    private static Empleado verificarEmpleado(EntityManager em, String nombre) {
+        Query buscarEmpleado = em.createQuery("SELECT e FROM Empleado e WHERE e.nombre = :nombre");
+        buscarEmpleado.setParameter("nombre", nombre);
+
+        Empleado emp;
+
+        try {
+            emp = (Empleado) buscarEmpleado.getSingleResult();
+
+        } catch (Exception e) {
+            return null;
+        }
+
+        return emp;
+    }
+
+    private static Empleado pedirEmpleado(Scanner entrada, EntityManager em) {
+        System.out.println("Indica el nombre del empleado:");
+        entrada.nextLine();
+        String nombre = entrada.nextLine();
+
+        Empleado empleado = verificarEmpleado(em, nombre);
+        if (empleado == null) {
+            System.out.println("El empleado no existe");
+            return null;
+        }
+        return empleado;
     }
 }
