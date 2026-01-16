@@ -1,5 +1,6 @@
-package com.example.spotify.singup
+package com.example.spotify.signup
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,12 +27,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.spotify.R
@@ -40,7 +41,7 @@ import com.google.firebase.auth.FirebaseAuth
 class SingUp
 
 @Composable
-fun SingUp(
+fun SignUp(
     onBackClick: () -> Unit = {},
     onSingUpClick: () -> Unit = {},
     auth: FirebaseAuth
@@ -48,11 +49,13 @@ fun SingUp(
     val circularFont = FontFamily(
         Font(R.font.circular_std_4)
     )
+    val context = LocalContext.current
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var msg by remember { mutableStateOf(" ") }
+
 
     val textFieldColors = TextFieldDefaults.colors(
         unfocusedContainerColor = Color(0xFF2A2A2A),
@@ -97,7 +100,9 @@ fun SingUp(
                     fontSize = 15.sp
                 ),
                 color = Color.White,
-                modifier = Modifier.padding(bottom = 10.dp).align(Alignment.CenterVertically),
+                modifier = Modifier
+                    .padding(bottom = 10.dp)
+                    .align(Alignment.CenterVertically),
             )
         }
 
@@ -110,7 +115,9 @@ fun SingUp(
                 color = Color.White,
                 fontSize = 28.sp
             ),
-            modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(start = 16.dp),
         )
         TextField(
             value = email,
@@ -119,7 +126,9 @@ fun SingUp(
                 msg = " "
                             },
             shape = MaterialTheme.shapes.medium,
-            modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp, horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp, horizontal = 16.dp),
             colors = textFieldColors
         )
 
@@ -129,7 +138,9 @@ fun SingUp(
                 fontFamily = circularFont,
                 color = Color.White
             ),
-            modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(start = 16.dp),
         )
         TextField(
             value = password,
@@ -139,7 +150,9 @@ fun SingUp(
             },
             shape = MaterialTheme.shapes.medium,
             colors = textFieldColors,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             trailingIcon = {
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
                     Icon(
@@ -168,7 +181,9 @@ fun SingUp(
                 color = Color.Gray,
                 fontSize = 11.sp
             ),
-            modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(start = 16.dp),
         )
 
         Text(
@@ -178,13 +193,16 @@ fun SingUp(
                 fontFamily = circularFont,
                 color = Color.Red
             ),
-            modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 10.dp),
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(top = 10.dp),
         )
 
         Spacer(modifier = Modifier.height(15.dp))
 
         Button(
             onClick = {
+                if (esContraseniaValida(password))
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -193,6 +211,9 @@ fun SingUp(
                             msg = task.exception?.message.toString()
                         }
                     }
+
+                else
+                    Toast.makeText(context, "Contraseña mal formada", Toast.LENGTH_SHORT).show()
             },
             enabled = email.isNotBlank() && password.isNotBlank(),
             colors = ButtonDefaults.buttonColors(
@@ -212,4 +233,17 @@ fun SingUp(
             )
         }
     }
+}
+
+fun esContraseniaValida(contrasenia: String): Boolean {
+    if (contrasenia.length < 8)
+        return false
+
+    if (!Regex("[A-Z]+").containsMatchIn(contrasenia))
+        return false
+
+    if (!Regex("[$?.*]+").containsMatchIn(contrasenia))
+        return false
+
+    return true
 }
