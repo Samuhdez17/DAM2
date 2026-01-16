@@ -7,13 +7,14 @@ public class ServidorFTP {
     private final static int PUERTO = 21;
     private final static int MAX_CLIENTES = 3;
     private static int numClientes = 0;
+    private static final File usuariosBD = new File("src/files/usuariosBD.txt");
+    private static final HashMap<String, String> usuarios = cargarUsuarios();
 
-    private static File usuariosBD = new File("src/files/usuario_contrasenia.txt");
 
     public static void main(String[] args) {
+        String raiz = args[0];
         try (ServerSocket servidor = new ServerSocket(PUERTO)) {
             System.out.println("Servidor iniciado en el puerto " + PUERTO);
-            HashMap<String, String> usuarios = cargarUsuarios();
 
             while (true) {
                 Socket cliente = servidor.accept();
@@ -34,10 +35,8 @@ public class ServidorFTP {
 //                }
 
                 System.out.println("Cliente conectado desde: " + cliente.getInetAddress());
-                Thread hiloCliente = new Thread(new Cliente(cliente));
+                Thread hiloCliente = new Thread(new HiloServidor(cliente, raiz));
                 hiloCliente.start();
-
-
             }
         } catch (IOException e) {
 
@@ -46,19 +45,19 @@ public class ServidorFTP {
     private static HashMap<String, String> cargarUsuarios() {
         HashMap<String, String> usuarios = new HashMap<>();
 
-        if (!ServidorFTP.usuariosBD.exists()) {
+        if (!usuariosBD.exists()) {
             try {
-                ServidorFTP.usuariosBD.createNewFile();
+                usuariosBD.createNewFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        try (DataInputStream dis = new DataInputStream(new FileInputStream(ServidorFTP.usuariosBD))) {
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(usuariosBD))) {
             try {
                 while (true) {
                     String[] contenidoLinea = dis.readUTF().split("``");
-                    agregarAUsuarios(usuarios, contenidoLinea);
+                    agregarAUsuariosBD(usuarios, contenidoLinea);
                 }
             } catch (EOFException e) {
             }
@@ -70,7 +69,7 @@ public class ServidorFTP {
         return usuarios;
     }
 
-    private static void agregarAUsuarios(HashMap<String, String> usuarios, String[] contenidoLinea) {
+    private static void agregarAUsuariosBD(HashMap<String, String> usuarios, String[] contenidoLinea) {
         if (usuarios.containsKey(contenidoLinea[0]))
             System.out.println("El usuario ya existe");
         else
