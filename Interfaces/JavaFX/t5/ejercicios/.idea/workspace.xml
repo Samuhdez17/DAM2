@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89de17de-a055-4334-a668-7ddbad70038d" name="Changes" comment="" />
+    <list default="true" id="89de17de-a055-4334-a668-7ddbad70038d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ensenanzas/ensenanzas/src/main/java/org/example/ensenanzas/T5_7_setRotateCentro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ensenanzas/ensenanzas/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ensenanzas/ensenanzas/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +50,7 @@
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/samuh/Desktop/git/DAM2/Interfaces/JavaFX/t5/ejercicios",
+    "nodejs_package_manager_path": "npm",
     "show.migrate.to.gradle.popup": "false",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
@@ -69,6 +73,7 @@
       <updated>1765957983379</updated>
       <workItem from="1765957984506" duration="5000" />
       <workItem from="1768217840923" duration="51000" />
+      <workItem from="1768824549004" duration="17000" />
     </task>
     <servers />
   </component>
