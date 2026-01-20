@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0beb0b90-ef8c-4b28-abf9-8dcb026d3fe9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_7_Ejercicio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_7_setRotateCentro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ejercicios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ejercicios/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_8_Seleccionar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ensenanzas/T5_9_Transdormaciones.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,6 +67,8 @@
     "Application.T5_6_Drag.executor": "Run",
     "Application.T5_7_Ejercicio.executor": "Run",
     "Application.T5_7_setRotateCentro.executor": "Run",
+    "Application.T5_8_Seleccionar.executor": "Run",
+    "Application.T5_9_Transdormaciones.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -92,6 +93,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\samuh\Desktop\git\DAM2\Interfaces\JavaFX\t5\ensenanzas\ensenanzas\src\main\java\org\example\ensenanzas" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.ensenanzas" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -121,6 +125,7 @@
       <workItem from="1768378504799" duration="14000" />
       <workItem from="1768381766643" duration="162000" />
       <workItem from="1768822299025" duration="5525000" />
+      <workItem from="1768897182046" duration="6219000" />
     </task>
     <servers />
   </component>
