@@ -1,0 +1,2 @@
+numPanes = int(input("Ingrese el numero de panes: "))
+print("El beneficio final hubiese sido de: " + str(numPanes * 3.49) + ". Pero al ser pan de otro dia el beneficio es de: " + str(numPanes * (3.49 * 0.4)))
