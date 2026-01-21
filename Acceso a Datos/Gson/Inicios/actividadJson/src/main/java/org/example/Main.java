@@ -14,16 +14,16 @@ public class Main {
 
         Curso curso = cursoService.cargarCurso();
 
-        for (Alumno alumno : curso.getAlumnos())
-            if (alumno.esRepetidor())
-                System.out.printf("%s, %d años\n", alumno.getNombre(), alumno.getEdad());
-
-        System.out.println("Indica un modulo: ");
-        String modulo = entrada.next().toUpperCase();
-
-        for (Alumno alumno : curso.getAlumnos())
-            if (alumno.getModulos().contains(modulo))
-                System.out.printf("%s, %d años\n", alumno.getNombre(), alumno.getEdad());
+//        for (Alumno alumno : curso.getAlumnos())
+//            if (alumno.esRepetidor())
+//                System.out.printf("%s, %d años\n", alumno.getNombre(), alumno.getEdad());
+//
+//        System.out.println("Indica un modulo: ");
+//        String modulo = entrada.next().toUpperCase();
+//
+//        for (Alumno alumno : curso.getAlumnos())
+//            if (alumno.getModulos().contains(modulo))
+//                System.out.printf("%s, %d años\n", alumno.getNombre(), alumno.getEdad());
 
         Alumno nuevoAlumno = new Alumno(
                 12,
@@ -34,6 +34,11 @@ public class Main {
         );
 
         curso.addAlumno(nuevoAlumno);
+
+        for (Alumno alumno : curso.getAlumnos()) {
+            System.out.println(alumno.getNombre());
+        }
+
         cursoService.actualizarCurso(curso);
     }
 }

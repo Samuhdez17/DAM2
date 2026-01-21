@@ -13,4 +13,8 @@ public class Curso {
     public List<Alumno> getAlumnos() {
         return alumnos;
     }
+
+    public void addAlumno(Alumno nuevoAlumno) {
+        alumnos.add(nuevoAlumno);
+    }
 }

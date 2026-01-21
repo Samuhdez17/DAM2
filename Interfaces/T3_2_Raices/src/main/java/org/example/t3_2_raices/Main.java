@@ -55,6 +55,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
+        VBox raiz1 = new VBox();
+        Scene faltasAlumnos = new Scene(raiz1, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
+
+        ListView listView = new ListView();
+        BorderPane boton = new BorderPane();
+        SplitPane raiz2 = new SplitPane(listView, boton);
+        Scene registroFaltas = new Scene(raiz2, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
+
+        stage.setScene(faltasAlumnos);
+        stage.setTitle("Raices");
+        stage.show();
+
         // SCENE 1
         ImageView[] imagenesAlumnos = setImageViewAlumnos();
 
@@ -90,59 +102,46 @@ public class Main extends Application {
 
         AnchorPane.setRightAnchor(botonesHbox, 10.0);
 
-        VBox raiz1 = new VBox();
         raiz1.getChildren().addAll(anchorPane, scrollPane);
 
-        Scene faltasAlumnos = new Scene(raiz1, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
+        // SCENE 2
+        LinkedList<HBox> elementosListView = new LinkedList<>();
+        for (VBox alumno : alumnos) {
+            Label nombreAlumno = new Label();
+            Label fecha = new Label();
+            Label tipoFalta = new Label();
 
-        stage.setScene(faltasAlumnos);
-        stage.setTitle("Raices");
-        stage.show();
-        
-        aceptar.setOnAction(e -> {
-            // SCENE 2
-            LinkedList<HBox> elementosListView = new LinkedList<>();
-            for (VBox alumno : alumnos) {
-                Label nombreAlumno = new Label();
-                Label fecha = new Label();
-                Label tipoFalta = new Label();
+            Label labelAlumno = (Label) alumno.getChildren().getFirst();
+            nombreAlumno.setText(labelAlumno.getText());
+            fecha.setText(String.valueOf(datePicker.getValue()));
 
-                Label labelAlumno = (Label) alumno.getChildren().getFirst();
-                nombreAlumno.setText(labelAlumno.getText());
-                fecha.setText(String.valueOf(datePicker.getValue()));
-
-                HBox botones = (HBox) alumno.getChildren().get(1);
-                for (Node nodo : botones.getChildren()) {
-                    if (nodo instanceof RadioButton radio && radio.isSelected()) {
-                        tipoFalta.setText(radio.getText());
-                    }
+            HBox botones = (HBox) alumno.getChildren().get(1);
+            for (Node nodo : botones.getChildren()) {
+                if (nodo instanceof RadioButton radio && radio.isSelected()) {
+                    tipoFalta.setText(radio.getText());
                 }
-
-                nombreAlumno.setPrefWidth(300);
-                fecha.setPrefWidth(150);
-                tipoFalta.setPrefWidth(100);
-
-                fecha.setStyle("-fx-text-fill: gray;");
-                tipoFalta.setStyle("-fx-text-fill: darkred; -fx-font-weight: bold");
-
-                HBox fila = new HBox(nombreAlumno, fecha, tipoFalta);
-                fila.setSpacing(30);
-                fila.setStyle("-fx-padding: 10; -fx-alignment: CENTER_LEFT;");
-                elementosListView.add(fila);
             }
 
+            nombreAlumno.setPrefWidth(300);
+            fecha.setPrefWidth(150);
+            tipoFalta.setPrefWidth(100);
 
-            ListView listView = new ListView();
-            listView.getItems().addAll(elementosListView);
+            fecha.setStyle("-fx-text-fill: gray;");
+            tipoFalta.setStyle("-fx-text-fill: darkred; -fx-font-weight: bold");
 
-            BorderPane boton = new BorderPane();
-            Button botonRegresar = crearBoton("_Regresar", "regresar.png");
-            boton.setCenter(botonRegresar);
-            botonRegresar.setAlignment(Pos.CENTER);
+            HBox fila = new HBox(nombreAlumno, fecha, tipoFalta);
+            fila.setSpacing(30);
+            fila.setStyle("-fx-padding: 10; -fx-alignment: CENTER_LEFT;");
+            elementosListView.add(fila);
+        }
 
-            SplitPane raiz2 = new SplitPane(listView, boton);
-            Scene registroFaltas = new Scene(raiz2, TAMANIO_VENTANA[0], TAMANIO_VENTANA[1]);
+        listView.getItems().addAll(elementosListView);
 
+        Button botonRegresar = crearBoton("_Regresar", "regresar.png");
+        boton.setCenter(botonRegresar);
+        botonRegresar.setAlignment(Pos.CENTER);
+
+        aceptar.setOnAction(e -> {
             stage.setScene(registroFaltas);
             stage.setTitle("Registro faltas");
 
