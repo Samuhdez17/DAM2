@@ -18,22 +18,22 @@ public class ServidorFTP {
 
             while (true) {
                 Socket cliente = servidor.accept();
+/*
+                synchronized (ServidorFTP.class) {
+                    try {
+                        while (numClientes >= MAX_CLIENTES) {
+                            PrintWriter salida = new PrintWriter(cliente.getOutputStream(), true);
 
-//                synchronized (ServidorFTP.class) {
-//                    try {
-//                        while (numClientes >= MAX_CLIENTES) {
-//                            PrintWriter salida = new PrintWriter(cliente.getOutputStream(), true);
-//
-//                            salida.println("500 Cliente en espera, maximo alcanzado");
-//                        }
-//                    } catch (IOException e) {
-//                        System.out.println("Cliente desconectado en la espera");
-//                        continue;
-//                    }
-//
-//                    agregarCliente();
-//                }
+                            salida.println("500 Cliente en espera, maximo alcanzado");
+                        }
+                    } catch (IOException e) {
+                        System.out.println("Cliente desconectado en la espera");
+                        continue;
+                    }
 
+                    agregarCliente();
+                }
+*/
                 System.out.println("Cliente conectado desde: " + cliente.getInetAddress());
                 Thread hiloCliente = new Thread(new HiloServidor(cliente, raiz));
                 hiloCliente.start();

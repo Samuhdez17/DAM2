@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteFTP {
     private Socket cliente;
@@ -20,7 +22,7 @@ public class ClienteFTP {
         try {
             this.cliente = new Socket("localhost", 21);
 
-        } catch (IOException ex) {
+        } catch (IOException e) {
             System.out.println("SERVIDOR CERRADO O NO DISPONIBLE");
         }
     }
@@ -41,17 +43,66 @@ public class ClienteFTP {
         }
     }
 
+    public String hacerPing() {
+        String respuesta;
 
-    public void logIn(String usuario, String contrasenia) {
-        salida.printf("LOGIN``%s``%s", usuario, contrasenia);
-        leerRespuesta();
+        salida.println("HELLO");
+        respuesta = leerRespuesta();
+
+        return respuesta;
     }
 
-    private static void leerRespuesta() {
+    public String logIn(String usuario, String contrasenia) {
+        salida.printf("LOGIN``%s``%s", usuario, contrasenia);
+        String respuesta = leerRespuesta();
+
+        if (respuesta.equals("200"))
+            return "Sesion iniciada correctamente";
+
+        else if (respuesta.equals("500"))
+            return "Sesion ya iniciada";
+        else
+            return "Usuario o contraseña invalidos";
+    }
+
+    public List<String> listarArchivos() {
+        salida.println("LS");
+        return leerBucle();
+    }
+
+    public void cargarArchivo(String archivo) {
+
+    }
+
+    private List<String> leerBucle() {
+        List<String> archivos = new ArrayList<>();
+
+        String linea;
         try {
-            System.out.println(entrada.readLine());
+            while (!(linea = entrada.readLine()).equals("226")) {
+                if (linea.equals("500"))
+                    return null;
+
+                if (!linea.equals("150"))
+                    archivos.add(linea);
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        return archivos;
+    }
+
+    private static String leerRespuesta() {
+        String respuesta;
+
+        try {
+            respuesta = entrada.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return respuesta;
     }
 }

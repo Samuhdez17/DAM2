@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -23,17 +24,52 @@ public class Main {
         System.out.println();
 
         switch (opcion) {
-            case 2 -> {
-                System.out.print("Introduce usuario: ");
-                String usuario = teclado.nextLine();
-                System.out.println();
+            case 1 -> System.out.println(clienteFTP.hacerPing());
 
-                System.out.print("Introduce contraseña: ");
-                String contrasenia = teclado.nextLine();
-                System.out.println();
+            case 2 -> iniciarSesion(clienteFTP);
 
-                clienteFTP.logIn(usuario, contrasenia);
+            case 3 -> listarArchivos(clienteFTP);
+
+            case 4 -> {
+                System.out.println("Quieres listar archivos antes? (s/n)");
+                char respuesta = teclado.next().charAt(0);
+
+                if (respuesta == 's') {
+                    listarArchivos(clienteFTP);
+
+                } else {
+                    System.out.println("Indica el nombre del archivo a cargar (con extension)");
+                    String archivo = teclado.nextLine().replace(" ", "_");
+
+                    clienteFTP.cargarArchivo(archivo);
+                }
             }
         }
+    }
+
+    private static void listarArchivos(ClienteFTP clienteFTP) {
+        List<String> archivos = clienteFTP.listarArchivos();
+
+        if (archivos == null) {
+            System.out.println("No se ha iniciado sesion.");
+            iniciarSesion(clienteFTP);
+            return;
+        }
+
+        for  (String archivo : archivos) {
+            System.out.println(archivo);
+        }
+    }
+
+    private static void iniciarSesion(ClienteFTP clienteFTP) {
+        System.out.print("Introduce usuario: ");
+        String usuario = teclado.nextLine();
+        System.out.println();
+
+        System.out.print("Introduce contraseña: ");
+        String contrasenia = teclado.nextLine();
+        System.out.println();
+
+        System.out.println(clienteFTP.logIn(usuario, contrasenia));
     }
 }
