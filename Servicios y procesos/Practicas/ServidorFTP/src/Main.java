@@ -63,6 +63,7 @@ public class Main {
 
     private static void iniciarSesion(ClienteFTP clienteFTP) {
         System.out.print("Introduce usuario: ");
+        teclado.nextLine();
         String usuario = teclado.nextLine();
         System.out.println();
 

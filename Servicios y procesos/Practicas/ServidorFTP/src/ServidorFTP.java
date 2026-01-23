@@ -56,7 +56,7 @@ public class ServidorFTP {
         try (DataInputStream dis = new DataInputStream(new FileInputStream(usuariosBD))) {
             try {
                 while (true) {
-                    String[] contenidoLinea = dis.readUTF().split("``");
+                    String[] contenidoLinea = dis.readUTF().split("´´");
                     agregarAUsuariosBD(usuarios, contenidoLinea);
                 }
             } catch (EOFException e) {
