@@ -1,15 +1,12 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteFTP {
     private Socket cliente;
-    private static PrintWriter salida;
-    private static BufferedReader entrada;
+    private BufferedWriter salida;
+    private BufferedReader entrada;
 
 
     public ClienteFTP() {
@@ -29,7 +26,7 @@ public class ClienteFTP {
 
     private void setSalida() {
         try {
-            salida = new PrintWriter(cliente.getOutputStream(), true);
+            salida = new BufferedWriter(new OutputStreamWriter(cliente.getOutputStream()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,14 +43,28 @@ public class ClienteFTP {
     public String hacerPing() {
         String respuesta;
 
-        salida.println("HELLO");
+        try {
+            salida.write("HELLO\n");
+            salida.flush();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         respuesta = leerRespuesta();
 
         return respuesta;
     }
 
     public String logIn(String usuario, String contrasenia) {
-        salida.printf("LOGIN``%s``%s", usuario, contrasenia);
+        try {
+            salida.write(String.format("LOGIN``%s``%s\n", usuario, contrasenia));
+            salida.flush();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         String respuesta = leerRespuesta();
 
         if (respuesta.equals("200"))
@@ -66,12 +77,101 @@ public class ClienteFTP {
     }
 
     public List<String> listarArchivos() {
-        salida.println("LS");
+        try {
+            salida.write("LS\n");
+            salida.flush();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         return leerBucle();
     }
 
     public void cargarArchivo(String archivo) {
+        try {
+            salida.write(String.format("GET``%s\n", archivo));
+            salida.flush();
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        String respuesta = leerRespuesta();
+        if (!respuesta.equals("150")) {
+            System.out.println("Error al descargar archivo");
+            return;
+        }
+
+        try {
+            DataInputStream dis = new DataInputStream(cliente.getInputStream());
+
+            long tamanio = dis.readLong();
+
+            FileOutputStream fos = new FileOutputStream(archivo, true);
+
+            byte[] buffer = new byte[8192]; // Leemos en bloques de 8KB
+            long restantes = tamanio;
+            int leidos;
+
+            while (restantes > 0 &&
+                    (leidos = dis.read(buffer, 0
+                            , (int)Math.min(buffer.length, restantes))) != -1) {
+
+                fos.write(buffer, 0, leidos);
+                restantes -= leidos;
+            }
+
+            fos.close();
+
+            leerRespuesta(); // Para liberar el ultimo mensaje de la lista (226)
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void subirArchivo(String archivo) {
+        File fichero = new File(archivo);
+        if (!fichero.exists()) {
+            System.out.println("Archivo no encontrado");
+            return;
+        }
+
+        long tamanio = fichero.length();
+        String nombre = fichero.getName();
+
+        try {
+            salida.write(String.format("PUT``%s``%d\n", nombre, tamanio));
+            salida.flush();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        String respuesta = leerRespuesta();
+        if (!respuesta.equals("150")) {
+            System.out.println("Servidor no preparado");
+            return;
+        }
+
+        try {
+            FileInputStream fis = new FileInputStream(fichero);
+            OutputStream os = cliente.getOutputStream();
+
+            byte[] buffer = new byte[8192];
+            int leidos;
+
+            while ((leidos = fis.read(buffer)) != -1) {
+                os.write(buffer, 0, leidos);
+            }
+
+            os.flush();
+            fis.close();
+
+            leerRespuesta();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private List<String> leerBucle() {
@@ -79,7 +179,7 @@ public class ClienteFTP {
 
         String linea;
         try {
-            while (!(linea = entrada.readLine()).equals("226")) {
+            while ((linea = entrada.readLine()) != null && !linea.equals("226")) {
                 if (linea.equals("500"))
                     return null;
 
@@ -94,7 +194,7 @@ public class ClienteFTP {
         return archivos;
     }
 
-    private static String leerRespuesta() {
+    private String leerRespuesta() {
         String respuesta;
 
         try {
@@ -105,4 +205,11 @@ public class ClienteFTP {
 
         return respuesta;
     }
+
+    public void cerrar() throws IOException {
+        salida.close();
+        entrada.close();
+        cliente.close();
+    }
+
 }

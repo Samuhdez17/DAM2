@@ -24,7 +24,7 @@ public class Main {
         System.out.println();
 
         switch (opcion) {
-            case 1 -> System.out.println(clienteFTP.hacerPing());
+            case 1 -> hacerPing(clienteFTP);
 
             case 2 -> iniciarSesion(clienteFTP);
 
@@ -45,6 +45,11 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static void hacerPing(ClienteFTP clienteFTP) {
+        String respuesta = clienteFTP.hacerPing();
+        System.out.println(respuesta == null ? "Servidor no disponible" : respuesta);
     }
 
     private static void listarArchivos(ClienteFTP clienteFTP) {
