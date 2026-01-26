@@ -1,6 +1,5 @@
 package com.example.webservice.libros
 
-import com.example.webservice.edad.Edad
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -5,7 +5,7 @@ data class Libros( //Lo que devuelve entero.
     val items: List<BookItem>?
 )
 
-data class BookItem( //Cada item dentro del arrat items
+data class BookItem( //Cada item dentro del array items
     val volumeInfo: VolumeInfo
 )
 

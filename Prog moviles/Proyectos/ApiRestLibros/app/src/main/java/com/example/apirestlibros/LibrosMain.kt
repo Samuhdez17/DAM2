@@ -79,12 +79,12 @@ fun Screen(modifier: Modifier = Modifier) {
                     scope.launch {
                         try {
                             inicio = 0
-                            val response = jsonPlaceholderApi.getLibros(
+                            val respuesta = jsonPlaceholderApi.getLibros(
                                 busqueda = busqueda,
                                 startIndex = inicio,
                                 maxResults = tamanioMax
                             )
-                            listaLibros = response.items ?: emptyList()
+                            listaLibros = respuesta.items ?: emptyList()
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
