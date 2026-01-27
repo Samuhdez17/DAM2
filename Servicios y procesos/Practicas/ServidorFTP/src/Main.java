@@ -86,6 +86,7 @@ public class Main {
 
         } else {
             System.out.println("Indica el nombre del archivo a cargar (con extension)");
+            teclado.nextLine();
             String archivo = teclado.nextLine();
 
             try {
@@ -100,11 +101,12 @@ public class Main {
 
     private static void subirArchivo(ClienteFTP clienteFTP) {
         System.out.println("Indica el nombre del archivo a subir (con extension)");
+        teclado.nextLine();
         String archivo = teclado.nextLine();
 
         try {
             clienteFTP.subirArchivo(archivo);
-            System.out.println("Archivo cargado correctamente");
+            System.out.println("Archivo subido correctamente");
 
         } catch (Exception e) {
             System.out.println(e.getMessage().substring(4));
