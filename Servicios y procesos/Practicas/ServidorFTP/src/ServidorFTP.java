@@ -18,7 +18,7 @@ public class ServidorFTP {
 
             while (true) {
                 Socket cliente = servidor.accept();
-/*
+
                 synchronized (ServidorFTP.class) {
                     try {
                         while (numClientes >= MAX_CLIENTES) {
@@ -33,7 +33,7 @@ public class ServidorFTP {
 
                     agregarCliente();
                 }
-*/
+
                 System.out.println("Cliente conectado desde: " + cliente.getInetAddress());
                 Thread hiloCliente = new Thread(new HiloServidor(cliente, raiz, usuarios));
                 hiloCliente.start();

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteFTP {
+    private final int puerto = 21;
+    private final String host = "localhost";
     private Socket cliente;
     private BufferedWriter salida;
     private BufferedReader entrada;
@@ -17,7 +19,7 @@ public class ClienteFTP {
 
     private void setCliente() {
         try {
-            this.cliente = new Socket("localhost", 21);
+            this.cliente = new Socket(host, puerto);
 
         } catch (IOException e) {
             System.out.println("SERVIDOR CERRADO O NO DISPONIBLE");
@@ -56,6 +58,7 @@ public class ClienteFTP {
         return respuesta;
     }
 
+    // TODO Corregir inicio de sesion e interfaz
     public String logIn(String usuario, String contrasenia) {
         try {
             salida.write(String.format("LOGIN``%s``%s\n", usuario, contrasenia));
@@ -76,7 +79,7 @@ public class ClienteFTP {
             return "Usuario o contraseña invalidos";
     }
 
-    public List<String> listarArchivos() {
+    public List<String> listarArchivos() throws IOException {
         try {
             salida.write("LS\n");
             salida.flush();
@@ -93,10 +96,12 @@ public class ClienteFTP {
         salida.flush();
 
         String respuesta = leerRespuesta();
-        if (!respuesta.equals("150")) {
-            System.out.println("Error al descargar archivo");
-            return;
-        }
+
+        if (respuesta.startsWith("401"))
+            throw new IOException("No se ha iniciado sesion");
+
+        if (respuesta.startsWith("550"))
+            throw new IOException("Comando mal formado, falta nombre de archivo");
 
         DataInputStream dis = new DataInputStream(cliente.getInputStream());
 
@@ -123,10 +128,8 @@ public class ClienteFTP {
 
     public void subirArchivo(String archivo) throws IOException {
         File fichero = new File(archivo);
-        if (!fichero.exists()) {
-            System.out.println("Archivo no encontrado");
-            return;
-        }
+        if (!fichero.exists())
+            throw new IOException("Fichero inexistente");
 
         long tamanio = fichero.length();
         String nombre = fichero.getName();
@@ -135,10 +138,12 @@ public class ClienteFTP {
         salida.flush();
 
         String respuesta = leerRespuesta();
-        if (!respuesta.equals("150")) {
-            System.out.println("Servidor no preparado");
-            return;
-        }
+
+        if (respuesta.startsWith("401"))
+            throw new IOException("No se ha iniciado sesion");
+
+        if (respuesta.startsWith("550"))
+            throw new IOException("Comando mal formado, falta nombre de archivo");
 
         FileInputStream fis = new FileInputStream(fichero);
         OutputStream os = cliente.getOutputStream();
@@ -156,17 +161,19 @@ public class ClienteFTP {
         leerRespuesta();
     }
 
-    private List<String> leerBucle() {
+    private List<String> leerBucle() throws IOException {
         List<String> archivos = new ArrayList<>();
 
-        String linea;
+        String linea = leerRespuesta();
+        if (linea == null || linea.startsWith("401"))
+            throw new IOException("401 Sesion no iniciada");
+
+        if (linea.startsWith("550"))
+            throw new IOException("550 Error al leer directorio. Directorio incorrecto o vacio");
+
         try {
             while ((linea = entrada.readLine()) != null && !linea.equals("226")) {
-                if (linea.equals("500"))
-                    return null;
-
-                if (!linea.equals("150"))
-                    archivos.add(linea);
+                archivos.add(linea);
             }
 
         } catch (IOException e) {
@@ -190,6 +197,9 @@ public class ClienteFTP {
 
     public void cerrar() {
         try {
+            salida.write("EXIT");
+            salida.flush();
+
             salida.close();
             entrada.close();
             cliente.close();

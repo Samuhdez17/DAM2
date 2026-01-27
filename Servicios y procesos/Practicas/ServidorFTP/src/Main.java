@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,65 +37,16 @@ public class Main {
 
                 case 5 -> subirArchivo(clienteFTP);
 
-                case 0 -> System.out.println("Saliendo....");
+                case 0 -> salir(clienteFTP);
             }
         }
 
         teclado.close();
-        clienteFTP.cerrar();
-    }
-
-    private static void subirArchivo(ClienteFTP clienteFTP) {
-        System.out.println("Indica el nombre del archivo a cargar (con extension)");
-        String archivo = teclado.nextLine().replace(" ", "_");
-
-        try {
-            clienteFTP.subirArchivo(archivo);
-            System.out.println("Archivo cargado correctamente");
-
-        } catch (Exception e) {
-            System.out.println("Error al cargar archivo");
-        }
-    }
-
-    private static void cargarArchivo(ClienteFTP clienteFTP) {
-        System.out.println("Quieres listar archivos antes? (s/n)");
-        char respuesta = teclado.next().charAt(0);
-
-        if (respuesta == 's') {
-            listarArchivos(clienteFTP);
-
-        } else {
-            System.out.println("Indica el nombre del archivo a cargar (con extension)");
-            String archivo = teclado.nextLine().replace(" ", "_");
-
-            try {
-                clienteFTP.cargarArchivo(archivo);
-                System.out.println("Archivo cargado correctamente");
-
-            } catch (Exception e) {
-                System.out.println("Error al cargar archivo");
-            }
-        }
     }
 
     private static void hacerPing(ClienteFTP clienteFTP) {
         String respuesta = clienteFTP.hacerPing();
         System.out.println(respuesta == null ? "Servidor no disponible" : respuesta);
-    }
-
-    private static void listarArchivos(ClienteFTP clienteFTP) {
-        List<String> archivos = clienteFTP.listarArchivos();
-
-        if (archivos == null) {
-            System.out.println("No se ha iniciado sesion.");
-            iniciarSesion(clienteFTP);
-            return;
-        }
-
-        for  (String archivo : archivos) {
-            System.out.println(archivo);
-        }
     }
 
     private static void iniciarSesion(ClienteFTP clienteFTP) {
@@ -108,5 +60,59 @@ public class Main {
         System.out.println();
 
         System.out.println(clienteFTP.logIn(usuario, contrasenia));
+    }
+
+    private static void listarArchivos(ClienteFTP clienteFTP) {
+        List<String> archivos = null;
+
+        try {
+            archivos = clienteFTP.listarArchivos();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage().substring(4));
+        }
+
+        if (archivos != null)
+            for  (String archivo : archivos)
+                System.out.println(archivo);
+    }
+
+    private static void cargarArchivo(ClienteFTP clienteFTP) {
+        System.out.println("Quieres listar archivos antes? (s/n)");
+        char respuesta = teclado.next().charAt(0);
+
+        if (respuesta == 's') {
+            listarArchivos(clienteFTP);
+
+        } else {
+            System.out.println("Indica el nombre del archivo a cargar (con extension)");
+            String archivo = teclado.nextLine();
+
+            try {
+                clienteFTP.cargarArchivo(archivo);
+                System.out.println("Archivo cargado correctamente");
+
+            } catch (IOException e) {
+                System.out.println(e.getMessage().substring(4));
+            }
+        }
+    }
+
+    private static void subirArchivo(ClienteFTP clienteFTP) {
+        System.out.println("Indica el nombre del archivo a subir (con extension)");
+        String archivo = teclado.nextLine();
+
+        try {
+            clienteFTP.subirArchivo(archivo);
+            System.out.println("Archivo cargado correctamente");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage().substring(4));
+        }
+    }
+
+    private static void salir(ClienteFTP clienteFTP) {
+        System.out.println("Saliendo....");
+        clienteFTP.cerrar();
     }
 }

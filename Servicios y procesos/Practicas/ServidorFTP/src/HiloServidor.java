@@ -49,19 +49,113 @@ public class HiloServidor implements Runnable {
                     }
 
                     case "LS" -> {
+                        if (!sesionIniciada) {
+                            salida.println("401");
+                            return;
+                        }
 
+                        File directorio = new File(raiz);
+                        File[] archivos = directorio.listFiles();
+
+                        if (archivos == null) {
+                            salida.println("550");
+
+                        } else {
+                            salida.println("150");
+
+                            for (File archivo : archivos) {
+                                if (archivo.isFile()) {
+                                    salida.println(archivo.getName());
+                                }
+                            }
+
+                            salida.println("226");
+                        }
                     }
 
                     case "GET" -> {
+                        if (!sesionIniciada) {
+                            salida.println("401");
+                            return;
+                        }
 
+                        if (linea.length < 2) {
+                            salida.println("550");
+                            return;
+                        }
+
+                        String nombreArchivo = linea[1];
+                        File archivo = new File(raiz, nombreArchivo);
+
+                        if (!archivo.exists() || !archivo.isFile()) {
+                            salida.println("550");
+
+                        } else {
+                            salida.println("150");
+
+                            // Tamaño del archivo
+                            DataOutputStream dos = new DataOutputStream(cliente.getOutputStream());
+                            dos.writeLong(archivo.length());
+
+                            // Contenido del archivo
+                            FileInputStream fis = new FileInputStream(archivo);
+                            byte[] buffer = new byte[8192];
+                            int leidos;
+
+                            while ((leidos = fis.read(buffer)) != -1) {
+                                dos.write(buffer, 0, leidos);
+                            }
+
+                            fis.close();
+                            dos.flush();
+                            salida.println("226");
+                        }
                     }
 
                     case "PUT" -> {
+                        if (!sesionIniciada) {
+                            salida.println("401");
+                            return;
+                        }
 
+                        if (linea.length < 3) {
+                            salida.println("550");
+                            return;
+                        }
+
+                        String nombreArchivo = linea[1];
+                        long tamanio = Long.parseLong(linea[2]);
+
+                        salida.println("150");
+
+                        // Recibir archivo
+                        DataInputStream dis = new DataInputStream(cliente.getInputStream());
+                        File archivoDestino = new File(raiz, nombreArchivo);
+                        FileOutputStream fos = new FileOutputStream(archivoDestino);
+
+                        byte[] buffer = new byte[8192];
+                        long restantes = tamanio;
+                        int leidos;
+
+                        while (restantes > 0) {
+                            int porLeer = (int) Math.min(buffer.length, restantes);
+                            leidos = dis.read(buffer, 0, porLeer);
+                            if (leidos == -1) break;
+                            fos.write(buffer, 0, leidos);
+                            restantes -= leidos;
+                        }
+
+                        fos.close();
+                        salida.println("226");
                     }
 
                     case "EXIT" -> {
-
+                        salida.println("221 Adios");
+                        entrada.close();
+                        salida.close();
+                        cliente.close();
+                        ServidorFTP.eliminarCliente();
+                        return;
                     }
                 }
             }
