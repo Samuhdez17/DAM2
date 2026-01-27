@@ -67,10 +67,10 @@ public class ClienteFTP {
 
         String respuesta = leerRespuesta();
 
-        if (respuesta.equals("200"))
+        if (respuesta.startsWith("200"))
             return "Sesion iniciada correctamente";
 
-        else if (respuesta.equals("500"))
+        else if (respuesta.startsWith("500"))
             return "Sesion ya iniciada";
         else
             return "Usuario o contraseña invalidos";
@@ -88,14 +88,9 @@ public class ClienteFTP {
         return leerBucle();
     }
 
-    public void cargarArchivo(String archivo) {
-        try {
-            salida.write(String.format("GET``%s\n", archivo));
-            salida.flush();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void cargarArchivo(String archivo) throws IOException {
+        salida.write(String.format("GET``%s\n", archivo));
+        salida.flush();
 
         String respuesta = leerRespuesta();
         if (!respuesta.equals("150")) {
@@ -103,34 +98,30 @@ public class ClienteFTP {
             return;
         }
 
-        try {
-            DataInputStream dis = new DataInputStream(cliente.getInputStream());
+        DataInputStream dis = new DataInputStream(cliente.getInputStream());
 
-            long tamanio = dis.readLong();
+        long tamanio = dis.readLong();
 
-            FileOutputStream fos = new FileOutputStream(archivo, true);
+        FileOutputStream fos = new FileOutputStream(archivo, true);
 
-            byte[] buffer = new byte[8192]; // Leemos en bloques de 8KB
-            long restantes = tamanio;
-            int leidos;
+        byte[] buffer = new byte[8192]; // Leemos en bloques de 8KB
+        long restantes = tamanio;
+        int leidos;
 
-            while (restantes > 0 &&
-                    (leidos = dis.read(buffer, 0
-                            , (int)Math.min(buffer.length, restantes))) != -1) {
+        while (restantes > 0 &&
+                (leidos = dis.read(buffer, 0
+                        , (int)Math.min(buffer.length, restantes))) != -1) {
 
-                fos.write(buffer, 0, leidos);
-                restantes -= leidos;
-            }
-
-            fos.close();
-
-            leerRespuesta(); // Para liberar el ultimo mensaje de la lista (226)
-        } catch (IOException e) {
-            e.printStackTrace();
+            fos.write(buffer, 0, leidos);
+            restantes -= leidos;
         }
+
+        fos.close();
+
+        leerRespuesta(); // Para liberar el ultimo mensaje de la lista (226)
     }
 
-    public void subirArchivo(String archivo) {
+    public void subirArchivo(String archivo) throws IOException {
         File fichero = new File(archivo);
         if (!fichero.exists()) {
             System.out.println("Archivo no encontrado");
@@ -140,13 +131,8 @@ public class ClienteFTP {
         long tamanio = fichero.length();
         String nombre = fichero.getName();
 
-        try {
-            salida.write(String.format("PUT``%s``%d\n", nombre, tamanio));
-            salida.flush();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        salida.write(String.format("PUT``%s``%d\n", nombre, tamanio));
+        salida.flush();
 
         String respuesta = leerRespuesta();
         if (!respuesta.equals("150")) {
@@ -154,24 +140,20 @@ public class ClienteFTP {
             return;
         }
 
-        try {
-            FileInputStream fis = new FileInputStream(fichero);
-            OutputStream os = cliente.getOutputStream();
+        FileInputStream fis = new FileInputStream(fichero);
+        OutputStream os = cliente.getOutputStream();
 
-            byte[] buffer = new byte[8192];
-            int leidos;
+        byte[] buffer = new byte[8192];
+        int leidos;
 
-            while ((leidos = fis.read(buffer)) != -1) {
-                os.write(buffer, 0, leidos);
-            }
-
-            os.flush();
-            fis.close();
-
-            leerRespuesta();
-        } catch (IOException e) {
-            e.printStackTrace();
+        while ((leidos = fis.read(buffer)) != -1) {
+            os.write(buffer, 0, leidos);
         }
+
+        os.flush();
+        fis.close();
+
+        leerRespuesta();
     }
 
     private List<String> leerBucle() {
@@ -206,10 +188,15 @@ public class ClienteFTP {
         return respuesta;
     }
 
-    public void cerrar() throws IOException {
-        salida.close();
-        entrada.close();
-        cliente.close();
+    public void cerrar() {
+        try {
+            salida.close();
+            entrada.close();
+            cliente.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

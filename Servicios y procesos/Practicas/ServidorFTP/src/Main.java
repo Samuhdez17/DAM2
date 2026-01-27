@@ -18,31 +18,62 @@ public class Main {
     public static void main(String[] args) {
         ClienteFTP clienteFTP = new ClienteFTP();
 
-        System.out.println(MENU);
-        System.out.print("Indica una opcion: ");
-        int opcion = teclado.nextInt();
-        System.out.println();
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println(MENU);
+            System.out.print("Indica una opcion: ");
+            opcion = teclado.nextInt();
+            System.out.println();
 
-        switch (opcion) {
-            case 1 -> hacerPing(clienteFTP);
+            switch (opcion) {
+                case 1 -> hacerPing(clienteFTP);
 
-            case 2 -> iniciarSesion(clienteFTP);
+                case 2 -> iniciarSesion(clienteFTP);
 
-            case 3 -> listarArchivos(clienteFTP);
+                case 3 -> listarArchivos(clienteFTP);
 
-            case 4 -> {
-                System.out.println("Quieres listar archivos antes? (s/n)");
-                char respuesta = teclado.next().charAt(0);
+                case 4 -> cargarArchivo(clienteFTP);
 
-                if (respuesta == 's') {
-                    listarArchivos(clienteFTP);
+                case 5 -> subirArchivo(clienteFTP);
 
-                } else {
-                    System.out.println("Indica el nombre del archivo a cargar (con extension)");
-                    String archivo = teclado.nextLine().replace(" ", "_");
+                case 0 -> System.out.println("Saliendo....");
+            }
+        }
 
-                    clienteFTP.cargarArchivo(archivo);
-                }
+        teclado.close();
+        clienteFTP.cerrar();
+    }
+
+    private static void subirArchivo(ClienteFTP clienteFTP) {
+        System.out.println("Indica el nombre del archivo a cargar (con extension)");
+        String archivo = teclado.nextLine().replace(" ", "_");
+
+        try {
+            clienteFTP.subirArchivo(archivo);
+            System.out.println("Archivo cargado correctamente");
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar archivo");
+        }
+    }
+
+    private static void cargarArchivo(ClienteFTP clienteFTP) {
+        System.out.println("Quieres listar archivos antes? (s/n)");
+        char respuesta = teclado.next().charAt(0);
+
+        if (respuesta == 's') {
+            listarArchivos(clienteFTP);
+
+        } else {
+            System.out.println("Indica el nombre del archivo a cargar (con extension)");
+            String archivo = teclado.nextLine().replace(" ", "_");
+
+            try {
+                clienteFTP.cargarArchivo(archivo);
+                System.out.println("Archivo cargado correctamente");
+
+            } catch (Exception e) {
+                System.out.println("Error al cargar archivo");
             }
         }
     }

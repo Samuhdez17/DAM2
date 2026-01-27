@@ -35,7 +35,7 @@ public class ServidorFTP {
                 }
 */
                 System.out.println("Cliente conectado desde: " + cliente.getInetAddress());
-                Thread hiloCliente = new Thread(new HiloServidor(cliente, raiz));
+                Thread hiloCliente = new Thread(new HiloServidor(cliente, raiz, usuarios));
                 hiloCliente.start();
             }
         } catch (IOException e) {
