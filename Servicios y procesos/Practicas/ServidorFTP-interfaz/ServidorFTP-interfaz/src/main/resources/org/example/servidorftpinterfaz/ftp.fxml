@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.servidorftpinterfaz.Controlador">
+
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <TextField fx:id="hostField" promptText="Host" />
+            <TextField fx:id="puertoField" prefWidth="80" promptText="Puerto" />
+            <TextField fx:id="usuarioField" promptText="Usuario" />
+            <PasswordField fx:id="contraField" promptText="Contraseña" />
+            <Button fx:id="conectBt" onAction="#conectar" text="Conectar" />
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+            <!-- Listado de archivos -->
+            <ListView fx:id="listaArchivos" prefWidth="400" HBox.hgrow="ALWAYS" />
+
+            <!-- Mensajes del servidor -->
+            <TextArea fx:id="logs" editable="false" prefWidth="250" promptText="Mensajes del servidor..." wrapText="true" />
+        </HBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+         <Button fx:id="actualizarBt" mnemonicParsing="false" onAction="#actualizarLista" text="Actializar lista">
+            <HBox.margin>
+               <Insets right="430.0" />
+            </HBox.margin>
+         </Button>
+            <Button fx:id="subirBt" onAction="#subir" text="Subir" />
+            <Button fx:id="descargarBt" onAction="#descargar" text="Descargar" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

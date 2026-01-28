@@ -19,12 +19,13 @@ public class T5_4_Line extends Application {
         Scene scene = new Scene(pane, 200, 200);
         stage.setScene(scene);
 
-        Line lineRojo = new Line(10, 10, 500, 500);
-        lineRojo.endXProperty().bind(pane.widthProperty().subtract(10));
-        lineRojo.endYProperty().bind(pane.heightProperty().subtract(10));
+        Line lineRojo = new Line(10, 10, 500, 500); // inicioX, finalX, inicioY, finalY
+        lineRojo.endXProperty().bind(pane.widthProperty().subtract(10));    // |
+        lineRojo.endYProperty().bind(pane.heightProperty().subtract(10));   // |_> Metodos para establecer el final de la linea de forma dinamica
         lineRojo.setStroke(Color.RED);
         lineRojo.setStrokeWidth(10);
 
+        // Metodo para hacer que las lineas sean discontinuas
         lineRojo.getStrokeDashArray().addAll(50d, lineRojo.getStrokeWidth() + 20d); //trazo 1, hueco 1
 
         Line lineAzul = new Line(500, 10, 10, 500);

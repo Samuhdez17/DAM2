@@ -17,13 +17,13 @@ public class T5_1_Circle extends Application {
     @Override
     public void start(Stage stage) {
         Pane pane = new Pane();
-        Circle circle1 = new Circle();
+        Circle circle1 = new Circle(/* centroX, centroY, radio */);
 
-        circle1.setCenterX(100);
-        circle1.setCenterY(100);
-        circle1.setRadius(50);
-        circle1.setStroke(Color.CYAN);
-        circle1.setFill(Color.LIGHTGRAY);
+        circle1.setCenterX(100);            // Establecer el centro en eje x
+        circle1.setCenterY(100);            // Establecer el centro en eje y
+        circle1.setRadius(50);              // Establecer radio
+        circle1.setStroke(Color.CYAN);      // Establecer color del borde
+        circle1.setFill(Color.LIGHTGRAY);   // Establecer relleno del circulo
 
         Button button = new Button("Rojo");
         button.setOnAction(e -> {
@@ -32,8 +32,8 @@ public class T5_1_Circle extends Application {
 
         Circle circle2 = new Circle();
         circle2.setRadius(25);
-        circle2.centerXProperty().bind(pane.widthProperty().divide(2));
-        circle2.centerYProperty().bind(pane.heightProperty().divide(2));
+        circle2.centerXProperty().bind(pane.widthProperty().divide(2));     // |
+        circle2.centerYProperty().bind(pane.heightProperty().divide(2));    // |-> Modificar el centro del circulo de manera dinamica en base al layout
         circle2.setFill(null);
         circle2.setStroke(Color.BLACK);
 

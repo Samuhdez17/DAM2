@@ -1,5 +1,6 @@
 package org.example.ensenanzas;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -73,15 +74,18 @@ public class T5_2_CircleRotate extends Application {
             circle2.getTransforms().add(rotate);
 
             if (slider.getValue() == 0) {
+                // Se establecen los valores finales de la animacion
                 KeyValue kvRotate = new KeyValue(rotate.angleProperty(), 360);
 
                 KeyValue kvSlider = new KeyValue(slider.valueProperty(), 360);
 
+                // Se define la animacion con su respectiva duracion y valores finales
                 KeyFrame kf = new KeyFrame(Duration.seconds(3), kvRotate, kvSlider);
                 Timeline tl = new Timeline(kf);
-                tl.play();
-//                tl.setCycleCount();
+                tl.play(); // Se reproduce
+                tl.setCycleCount(10); // Se dice el numero de ciclos que se quieren hacer
 
+                // Se establecen unos valores para que se establezcan hasta que acabe la animacion
                 tl.setOnFinished(e1 -> {
                     slider.setDisable(false);
                     slider.setValue(360);
@@ -105,11 +109,13 @@ public class T5_2_CircleRotate extends Application {
     }
 
     private void rotarCirculo(double valor, Circle circle1, Circle circle2) {
+        // Se crea un rotate con las indicaciones de cuanto y en qeu punto rotar
         Rotate rotate = new Rotate(); // angulo, pivoteX, pivoteY
         rotate.setAngle(valor - posAnterior);
         rotate.setPivotX(circle1.getCenterX());
         rotate.setPivotY(circle1.getCenterY());
 
+        // Se establece a la figura a la que queremos rotar y se guarda la posicion para que siga por donde esta
         circle2.getTransforms().add(rotate);
         posAnterior = valor;
     }
