@@ -97,24 +97,18 @@ public class HiloServidor implements Runnable {
                             salida.println("550 Archivo no existe");
 
                         } else {
-                            salida.println("150 Inicio lista");
-
-                            // Tamaño del archivo
                             DataOutputStream dos = new DataOutputStream(cliente.getOutputStream());
-                            dos.writeLong(archivo.length());
+                            salida.println("150 " + archivo.length());
 
-                            // Contenido del archivo
                             FileInputStream fis = new FileInputStream(archivo);
                             byte[] buffer = new byte[8192];
                             int leidos;
 
-                            while ((leidos = fis.read(buffer)) != -1) {
+                            while ((leidos = fis.read(buffer)) != -1)
                                 dos.write(buffer, 0, leidos);
-                            }
 
                             fis.close();
                             dos.flush();
-                            salida.println("226 Fin lista");
                         }
                     }
 
@@ -130,29 +124,29 @@ public class HiloServidor implements Runnable {
                         }
 
                         String nombreArchivo = linea[1];
+
+                        salida.println("150 Preparado para recibir archivo");
+
+                        DataInputStream dis = new DataInputStream(cliente.getInputStream());
+
                         long tamanio = Long.parseLong(linea[2]);
 
-                        salida.println("150 Inicio lista");
-
-                        // Recibir archivo
-                        DataInputStream dis = new DataInputStream(cliente.getInputStream());
-                        File archivoDestino = new File(raiz, nombreArchivo);
-                        FileOutputStream fos = new FileOutputStream(archivoDestino);
+                        File archivo = new File(raiz, nombreArchivo);
+                        FileOutputStream fos = new FileOutputStream(archivo);
 
                         byte[] buffer = new byte[8192];
                         long restantes = tamanio;
-                        int leidos;
 
                         while (restantes > 0) {
-                            int porLeer = (int) Math.min(buffer.length, restantes);
-                            leidos = dis.read(buffer, 0, porLeer);
+                            int leidos = dis.read(buffer, 0, (int)Math.min(buffer.length, restantes));
                             if (leidos == -1) break;
                             fos.write(buffer, 0, leidos);
                             restantes -= leidos;
                         }
 
                         fos.close();
-                        salida.println("226 Fin lista");
+
+                        salida.println("226 Archivo recibido correctamente");
                     }
 
                     case "EXIT" -> {
@@ -160,6 +154,8 @@ public class HiloServidor implements Runnable {
                         entrada.close();
                         salida.close();
                         cliente.close();
+                        ClienteFTP.cerrar();
+                        ServidorFTP.eliminarCliente();
                         return;
                     }
                 }
@@ -167,16 +163,6 @@ public class HiloServidor implements Runnable {
         } catch (IOException e) {
             throw new RuntimeException(e);
 
-        } finally {
-            try {
-                cliente.close();
-                ClienteFTP.cerrar();
-                ServidorFTP.eliminarCliente();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
-
-
 }
