@@ -4,8 +4,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiCoordenadas {
-    https://geocode.googleapis.com/v4beta/geocode/
-
     @GET("address")
     suspend fun getCoordenadas(
         @Query("address") address: String,

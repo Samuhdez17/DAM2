@@ -33,5 +33,4 @@ def partida_ajedrez(nombre_fichero):
     f.close()
     return
 
-
 partida_ajedrez('partida4.txt')

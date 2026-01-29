@@ -2,11 +2,7 @@ package com.example.ejercicio4apirest
 
 data class Ciudad(
     val nombre: String,
-    val coordenadas: List<ListaCoordenadas>
-)
-
-data class ListaCoordenadas(
-    val lista: Coordenadas
+    val coordenadas: Coordenadas
 )
 
 data class Coordenadas(

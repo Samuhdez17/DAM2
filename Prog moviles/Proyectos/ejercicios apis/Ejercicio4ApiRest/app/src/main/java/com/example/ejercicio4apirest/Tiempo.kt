@@ -1,11 +1,7 @@
 package com.example.ejercicio4apirest
 
 data class Tiempo(
-    val info: List<ListaDatos>
-)
-
-data class ListaDatos(
-    val lista: Datos
+    val info: Datos
 )
 
 data class Datos(
