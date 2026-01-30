@@ -1,6 +1,7 @@
 package com.example.ejercicio4apirest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -63,10 +64,9 @@ fun BusquedaTiempo(modifier: Modifier = Modifier) {
     var nombreCiudad by remember { mutableStateOf("") }
     val lanzadorApi = rememberCoroutineScope()
 
-    var datos by remember { mutableStateOf(Datos(0.0, 0.0, 0.0)) }
+    var datosCiudad by remember { mutableStateOf(Coordenadas(0.0, 0.0)) }
+    var datosTiempo by remember { mutableStateOf(CurrentWeather(0.0, 0.0, 0.0)) }
 
-    var ciudad by remember { mutableStateOf(Ciudad("", Coordenadas(0.0, 0.0))) }
-    var tiempo by remember { mutableStateOf(Tiempo(Datos(0.0, 0.0, 0.0))) }
 
     Column() {
         Spacer(Modifier.height(30.dp))
@@ -99,12 +99,15 @@ fun BusquedaTiempo(modifier: Modifier = Modifier) {
         Button(
             onClick = {
                 lanzadorApi.launch {
-                    ciudad = apiCoordenadas.getCoordenadas(nombreCiudad)
-                }
+                     try {
+                         val ciudad = apiCoordenadas.getCoordenadas(nombreCiudad)
+                         datosCiudad = ciudad.results[0].location
+                    } catch (e: Exception) {
+                        Log.e("Error en API", "Error al obtener coordenadas ${e.message}")
+                    }
 
-                lanzadorApi.launch {
-                    tiempo = apiTiempo.getTiempo(ciudad.coordenadas.latitud, ciudad.coordenadas.altitud)
-                    datos = tiempo.info
+                    val tiempo = apiTiempo.getTiempo(datosCiudad.latitude, datosCiudad.longitude)
+                    datosTiempo = tiempo.current
                 }
             },
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -115,15 +118,23 @@ fun BusquedaTiempo(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = "Temperatura: " + datos.temperatura.toString() + "ºC",
+            text = "Altitud: " + datosCiudad.longitude.toString(),
         )
 
         Text(
-            text = "Humedad: " + datos.humedad.toString() + "%",
+            text = "Latitud: " + datosCiudad.latitude.toString(),
         )
 
         Text(
-            text = "Presion: " + datos.temperatura.toString() + "hPa",
+            text = "Temperatura: " + datosTiempo.temperature_2m.toString() + "ºC",
+        )
+
+        Text(
+            text = "Humedad: " + datosTiempo.relative_humidity_2m.toString() + "%",
+        )
+
+        Text(
+            text = "Presion: " + datosTiempo.temperature_2m.toString() + "hPa",
         )
     }
 }

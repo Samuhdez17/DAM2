@@ -27,22 +27,22 @@ public class HiloServidor implements Runnable {
 
                     case "LOGIN" -> {
                         if (sesionIniciada) {
-                            salida.println("500");
-                            return;
+                            salida.println("500 Sesion ya iniciada");
+                            continue;
                         }
 
                         String contrasenia = usuarios.get(linea[1]);
 
                         if (contrasenia == null) {
-                            salida.println("401");
+                            salida.println("401 Usuario o contraseña invalidos");
 
                         } else {
                             if (contrasenia.equals(linea[2])) {
                                 sesionIniciada = true;
-                                salida.println("200");
+                                salida.println("200 Sesion iniciada");
 
                             } else {
-                                salida.println("401");
+                                salida.println("401 Usuario o contraseña invalidos");
                             }
                         }
 
@@ -50,7 +50,7 @@ public class HiloServidor implements Runnable {
 
                     case "LS" -> {
                         if (!sesionIniciada) {
-                            salida.println("401");
+                            salida.println("401 Sesion no iniciada");
                             return;
                         }
 
@@ -58,10 +58,10 @@ public class HiloServidor implements Runnable {
                         File[] archivos = directorio.listFiles();
 
                         if (archivos == null) {
-                            salida.println("550");
+                            salida.println("550 El directorio no existe");
 
                         } else {
-                            salida.println("150");
+                            salida.println("150 Inicio lista");
 
                             for (File archivo : archivos) {
                                 if (archivo.isFile()) {
@@ -69,18 +69,18 @@ public class HiloServidor implements Runnable {
                                 }
                             }
 
-                            salida.println("226");
+                            salida.println("226 Fin lista");
                         }
                     }
 
                     case "GET" -> {
                         if (!sesionIniciada) {
-                            salida.println("401");
+                            salida.println("401 Sesion no iniciada");
                             return;
                         }
 
                         if (linea.length < 2) {
-                            salida.println("550");
+                            salida.println("550 Comando mal formado, faltan datos");
                             return;
                         }
 
@@ -88,65 +88,59 @@ public class HiloServidor implements Runnable {
                         File archivo = new File(raiz, nombreArchivo);
 
                         if (!archivo.exists() || !archivo.isFile()) {
-                            salida.println("550");
+                            salida.println("550 Archivo no existe");
 
                         } else {
-                            salida.println("150");
-
-                            // Tamaño del archivo
                             DataOutputStream dos = new DataOutputStream(cliente.getOutputStream());
-                            dos.writeLong(archivo.length());
+                            salida.println("150 " + archivo.length());
 
-                            // Contenido del archivo
                             FileInputStream fis = new FileInputStream(archivo);
                             byte[] buffer = new byte[8192];
                             int leidos;
 
-                            while ((leidos = fis.read(buffer)) != -1) {
+                            while ((leidos = fis.read(buffer)) != -1)
                                 dos.write(buffer, 0, leidos);
-                            }
 
                             fis.close();
                             dos.flush();
-                            salida.println("226");
                         }
                     }
 
                     case "PUT" -> {
                         if (!sesionIniciada) {
-                            salida.println("401");
+                            salida.println("401 Sesion no iniciada");
                             return;
                         }
 
                         if (linea.length < 3) {
-                            salida.println("550");
+                            salida.println("550 Comando mal formado, faltan datos");
                             return;
                         }
 
                         String nombreArchivo = linea[1];
+
+                        salida.println("150 Preparado para recibir archivo");
+
+                        DataInputStream dis = new DataInputStream(cliente.getInputStream());
+
                         long tamanio = Long.parseLong(linea[2]);
 
-                        salida.println("150");
-
-                        // Recibir archivo
-                        DataInputStream dis = new DataInputStream(cliente.getInputStream());
-                        File archivoDestino = new File(raiz, nombreArchivo);
-                        FileOutputStream fos = new FileOutputStream(archivoDestino);
+                        File archivo = new File(raiz, nombreArchivo);
+                        FileOutputStream fos = new FileOutputStream(archivo);
 
                         byte[] buffer = new byte[8192];
                         long restantes = tamanio;
-                        int leidos;
 
                         while (restantes > 0) {
-                            int porLeer = (int) Math.min(buffer.length, restantes);
-                            leidos = dis.read(buffer, 0, porLeer);
+                            int leidos = dis.read(buffer, 0, (int)Math.min(buffer.length, restantes));
                             if (leidos == -1) break;
                             fos.write(buffer, 0, leidos);
                             restantes -= leidos;
                         }
 
                         fos.close();
-                        salida.println("226");
+
+                        salida.println("226 Archivo recibido correctamente");
                     }
 
                     case "EXIT" -> {
@@ -154,6 +148,7 @@ public class HiloServidor implements Runnable {
                         entrada.close();
                         salida.close();
                         cliente.close();
+                        ClienteFTP.cerrar();
                         ServidorFTP.eliminarCliente();
                         return;
                     }

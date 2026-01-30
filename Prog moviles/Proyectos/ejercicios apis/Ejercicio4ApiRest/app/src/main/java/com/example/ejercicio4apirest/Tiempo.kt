@@ -1,12 +1,12 @@
 package com.example.ejercicio4apirest
 
 data class Tiempo(
-    val info: Datos
+    val current: CurrentWeather
 )
 
-data class Datos(
-    val temperatura: Double,
-    val humedad: Double,
-    val presion: Double
+data class CurrentWeather(
+    val temperature_2m: Double,
+    val relative_humidity_2m: Double,
+    val surface_pressure: Double
 )
 

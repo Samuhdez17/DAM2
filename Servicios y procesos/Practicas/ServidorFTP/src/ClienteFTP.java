@@ -6,9 +6,9 @@ import java.util.List;
 public class ClienteFTP {
     private final int puerto = 21;
     private final String host = "localhost";
-    private Socket cliente;
-    private BufferedWriter salida;
-    private BufferedReader entrada;
+    private static Socket cliente;
+    private static BufferedWriter salida;
+    private static BufferedReader entrada;
 
 
     public ClienteFTP() {
@@ -58,7 +58,6 @@ public class ClienteFTP {
         return respuesta;
     }
 
-    // TODO Corregir inicio de sesion e interfaz
     public String logIn(String usuario, String contrasenia) {
         try {
             salida.write(String.format("LOGIN``%s``%s\n", usuario, contrasenia));
@@ -69,6 +68,9 @@ public class ClienteFTP {
         }
 
         String respuesta = leerRespuesta();
+
+        if (respuesta == null)
+            return "Error: No se recibió respuesta del servidor";
 
         if (respuesta.startsWith("200"))
             return "Sesion iniciada correctamente";
@@ -101,29 +103,26 @@ public class ClienteFTP {
             throw new IOException("No se ha iniciado sesion");
 
         if (respuesta.startsWith("550"))
-            throw new IOException("Comando mal formado, falta nombre de archivo");
+            throw new IOException("Archivo no encontrado o error en el servidor");
+
+        if (!respuesta.startsWith("150"))
+            throw new IOException("Error inesperado del servidor: " + respuesta);
 
         DataInputStream dis = new DataInputStream(cliente.getInputStream());
+        long tamanio = Long.parseLong(respuesta.substring(4));
 
-        long tamanio = dis.readLong();
-
-        FileOutputStream fos = new FileOutputStream(archivo, true);
-
-        byte[] buffer = new byte[8192]; // Leemos en bloques de 8KB
+        FileOutputStream fos = new FileOutputStream(archivo);
+        byte[] buffer = new byte[8192];
         long restantes = tamanio;
-        int leidos;
 
-        while (restantes > 0 &&
-                (leidos = dis.read(buffer, 0
-                        , (int)Math.min(buffer.length, restantes))) != -1) {
-
+        while (restantes > 0) {
+            int leidos = dis.read(buffer, 0, (int)Math.min(buffer.length, restantes));
+            if (leidos == -1) break;
             fos.write(buffer, 0, leidos);
             restantes -= leidos;
         }
 
         fos.close();
-
-        leerRespuesta(); // Para liberar el ultimo mensaje de la lista (226)
     }
 
     public void subirArchivo(String archivo) throws IOException {
@@ -131,34 +130,28 @@ public class ClienteFTP {
         if (!fichero.exists())
             throw new IOException("Fichero inexistente");
 
-        long tamanio = fichero.length();
-        String nombre = fichero.getName();
-
-        salida.write(String.format("PUT``%s``%d\n", nombre, tamanio));
+        salida.write(String.format("PUT``%s``%s\n", fichero.getName(), fichero.length()));
         salida.flush();
 
         String respuesta = leerRespuesta();
 
-        if (respuesta.startsWith("401"))
-            throw new IOException("No se ha iniciado sesion");
+        if (!respuesta.startsWith("150"))
+            throw new IOException("Servidor no preparado para recibir: " + respuesta);
 
-        if (respuesta.startsWith("550"))
-            throw new IOException("Comando mal formado, falta nombre de archivo");
-
+        DataOutputStream dos = new DataOutputStream(cliente.getOutputStream());
         FileInputStream fis = new FileInputStream(fichero);
-        OutputStream os = cliente.getOutputStream();
-
         byte[] buffer = new byte[8192];
         int leidos;
 
-        while ((leidos = fis.read(buffer)) != -1) {
-            os.write(buffer, 0, leidos);
-        }
+        while ((leidos = fis.read(buffer)) != -1)
+            dos.write(buffer, 0, leidos);
 
-        os.flush();
         fis.close();
+        dos.flush();
 
-        leerRespuesta();
+        respuesta = leerRespuesta();
+        if (!respuesta.startsWith("226"))
+            throw new IOException("Error al subir archivo: " + respuesta);
     }
 
     private List<String> leerBucle() throws IOException {
@@ -172,7 +165,7 @@ public class ClienteFTP {
             throw new IOException("550 Error al leer directorio. Directorio incorrecto o vacio");
 
         try {
-            while ((linea = entrada.readLine()) != null && !linea.equals("226")) {
+            while ((linea = entrada.readLine()) != null && !linea.contains("226")) {
                 archivos.add(linea);
             }
 
@@ -195,9 +188,9 @@ public class ClienteFTP {
         return respuesta;
     }
 
-    public void cerrar() {
+    public static void cerrar() {
         try {
-            salida.write("EXIT");
+            salida.write("EXIT\n");
             salida.flush();
 
             salida.close();
@@ -208,5 +201,4 @@ public class ClienteFTP {
             throw new RuntimeException(e);
         }
     }
-
 }

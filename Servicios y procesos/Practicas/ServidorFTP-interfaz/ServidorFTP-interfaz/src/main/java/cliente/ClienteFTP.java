@@ -201,5 +201,4 @@ public class ClienteFTP {
             throw new RuntimeException(e);
         }
     }
-
 }
