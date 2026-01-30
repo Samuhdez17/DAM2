@@ -1,8 +1,8 @@
 package com.example.apirest
 
 data class Post(
-    val id: Int?,
-    val title: String,
+    val id: Int,
     val userId: Int,
+    val title: String,
     val body: String
 )
