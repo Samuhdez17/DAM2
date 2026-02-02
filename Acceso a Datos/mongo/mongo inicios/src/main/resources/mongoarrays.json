@@ -1,0 +1,28 @@
+[
+  {
+    "nombre": "Ana",
+    "edad": 21,
+    "hobbies": ["leer", "cine", "senderismo"],
+    "telefonos": ["600123123", "600456456"],
+    "estudios": [
+      { "titulo": "ESO", "centro": "IES Norte", "anio": 2019 },
+      { "titulo": "DAM", "centro": "IES Sur", "anio": 2023 }
+    ]
+  },
+  {
+    "nombre": "Carlos",
+    "edad": 23,
+    "hobbies": ["videojuegos", "cine"],
+    "telefonos": ["611222333"],
+    "estudios": [
+      { "titulo": "Bachillerato", "centro": "IES Centro", "anio": 2020 }
+    ]
+  },
+  {
+    "nombre": "Lucía",
+    "edad": 20,
+    "hobbies": ["deporte", "fotografía"],
+    "telefonos": [],
+    "estudios": []
+  }
+]

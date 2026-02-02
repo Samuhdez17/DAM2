@@ -1,6 +1,7 @@
 package com.example.apirest
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -31,6 +33,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,7 +49,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ApiRestTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PostScreen(
+                    PostCard(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -63,6 +66,72 @@ val jsonPlaceholderApi: JsonPlaceholderApi =
         .create(JsonPlaceholderApi::class.java)
 
 @Composable
+fun PostCard(modifier: Modifier = Modifier) {
+    var posts by remember { mutableStateOf<List<Post>>(emptyList()) }
+
+    val lanzadorApi = rememberCoroutineScope()
+
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        posts = jsonPlaceholderApi.getPosts()
+    }
+
+    LazyVerticalGrid (GridCells.Fixed(1)){
+        items(posts) { post ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        text = post.title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Row {
+                        Text(
+                            text = post.body,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+
+                        Button(
+                            onClick = {
+                                lanzadorApi.launch {
+                                    val response = jsonPlaceholderApi.deletePost(post.id)
+
+                                    if (response.isSuccessful) {
+                                        Toast.makeText(
+                                            context,
+                                            "Post borrado correctamente",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+
+                                        posts = jsonPlaceholderApi.getPosts()
+                                    }
+                                }
+                            }
+                        ) {
+                            Text(
+                                text = "Borrar",
+                                modifier = Modifier.width(50.dp)
+                                )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
 fun PostScreen(modifier: Modifier) {
     var title by remember { mutableStateOf("") }
     var body by remember { mutableStateOf("") }
@@ -72,56 +141,41 @@ fun PostScreen(modifier: Modifier) {
     val lanzadorApi = rememberCoroutineScope()
 
     Column {
-        val modifierRows = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally).padding(20.dp)
+        val modifierRows = Modifier
+            .fillMaxWidth()
+            .align(Alignment.CenterHorizontally)
+            .padding(20.dp)
 
-        Row(
+        TextField(
+            value = title,
+            onValueChange = { title = it },
+            placeholder = { Text("Titulo") },
             modifier = modifierRows
-        ) {
-            Text(
-                text = "Titulo",
-                modifier = Modifier.align(Alignment.CenterVertically).padding(20.dp)
-                )
-            TextField(
-                value = title,
-                onValueChange = { title = it }
-            )
-        }
+        )
 
-        Row(
+        TextField(
+            value = body,
+            onValueChange = { body = it },
+            placeholder = { Text("Mensaje") },
             modifier = modifierRows
-        ) {
-            Text(
-                text = "Mensaje",
-                modifier = Modifier.align(Alignment.CenterVertically).padding(20.dp)
-            )
-            TextField(
-                value = body,
-                onValueChange = { body = it }
-            )
-        }
+        )
 
-        Row(
+        TextField(
+            value = "",
+            onValueChange = { uId = it.toInt() },
+            placeholder = { Text("ID usuario") },
             modifier = modifierRows
-        ) {
-            Text(
-                text = "Id de usuario",
-                modifier = Modifier.align(Alignment.CenterVertically).padding(20.dp)
-            )
-            TextField(
-                value = uId.toString(),
-                onValueChange = { uId = it.toInt() }
-            )
-        }
+        )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = """
                 {
-                title: ${post.title},
-                body: ${post.body},
-                id: ${post.id},
-                userId: ${post.userId}
+                    title: ${post.title}
+                    body: ${post.body}
+                    id: ${post.id}
+                    userId: ${post.userId}
                 }
             """.trimIndent()
         )
@@ -144,6 +198,6 @@ fun PostScreen(modifier: Modifier) {
 @Composable
 fun GreetingPreview() {
     ApiRestTheme {
-        PostScreen(modifier = Modifier)
+        PostCard()
     }
 }
