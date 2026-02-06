@@ -12,17 +12,18 @@ public class CifradoSustitucion {
     private static String descifrarMensaje(String msg) {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i <= msg.length(); i++)
-            sb.append(descifrado.get(msg.charAt(i)));
+        for (int i = 0; i <= msg.length(); i++) {
 
+        }
         return sb.toString();
     }
 
     private static String cifrarMensaje(String msg) {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i <= msg.length(); i++)
-            sb.append(cifrado.get(msg.charAt(i)));
+        for (int i = 0; i <= msg.length(); i++) {
+
+        }
 
         return sb.toString();
     }
