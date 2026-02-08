@@ -10,7 +10,7 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.set;
 
 public class AmigoDAO {
-    private MongoCollection<Document> amigos;
+    private final MongoCollection<Document> amigos;
 
     public AmigoDAO() {
         MongoDatabase db = ConexionMongo.getDataBase();
@@ -20,7 +20,9 @@ public class AmigoDAO {
     public void insertar(Amigos amigo) {
         Document doc = new Document("nombre", amigo.getNombre())
                 .append("edad", amigo.getEdad())
-                .append("telefono", amigo.getTelefono());
+                .append("hobbies", amigo.getHobbies())
+                .append("telefonos", amigo.getTelefonos())
+                .append("estudios", amigo.getEstudios());
 
         amigos.insertOne(doc);
     }
@@ -32,7 +34,7 @@ public class AmigoDAO {
     }
 
     public void actualizar(String nombre, int edad) {
-        amigos.updateMany(eq("nombre", nombre), set("edad", edad));
+        amigos.updateOne(eq("nombre", nombre), set("edad", edad));
     }
 
     public void eliminar(String nombre) {

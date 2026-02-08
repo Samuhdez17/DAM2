@@ -6,7 +6,9 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -22,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.List;
 import java.util.Random;
 
 public class T5_11_Outrun extends Application {
@@ -39,8 +42,11 @@ public class T5_11_Outrun extends Application {
     static double tercioAncho = ancho / 3;
     static double cuartoAncho = ancho / 4;
 
-    static IntegerProperty puntuacion = new SimpleIntegerProperty(0);
+    static int vida = 100;
+    static int puntuacion = 0;
     static boolean corriendo = true;
+
+    static List<Timeline> animaciones;
 
     @Override
     public void start(Stage stage) {
@@ -66,30 +72,83 @@ public class T5_11_Outrun extends Application {
         Circle sol = getSol();
 
         Text txtPuntuacion = getTxtPuntuacion();
+        Button pausa = getBtPausa();
 
-        pane.getChildren().addAll(carretera, division, policia1, policia2, cielo, sol, txtPuntuacion, coche);
+        // VIDA
+        Rectangle fondoVida = getFondoVida();
+        Rectangle barraVida = getVida();
+
+        pane.getChildren().addAll(carretera, division, policia1, policia2, cielo, sol, txtPuntuacion, pausa, fondoVida, barraVida, coche);
         animaciones(carretera, division, policia1, policia2, txtPuntuacion);
 
-        setEventos(scene, coche);
+        setEventos(scene, coche, pausa);
+    }
+
+    private static Rectangle getFondoVida() {
+        Rectangle fondoVida = new Rectangle(20, 55, 200, 15);
+        fondoVida.setLayoutX(ancho - 230);
+        fondoVida.setFill(Color.RED);
+
+        return fondoVida;
+    }
+
+    private static Rectangle getVida() {
+        Rectangle barraVida = new Rectangle(20, 55, 200, 15);
+        barraVida.setLayoutX(ancho - 230);
+        barraVida.setFill(Color.LIMEGREEN);
+
+        return barraVida;
+    }
+
+    private Button getBtPausa() {
+        Button bt = new Button("⏸");
+        bt.setLayoutX(ancho - 210);
+        bt.setLayoutY(80);
+
+        return bt;
     }
 
     private static Text getTxtPuntuacion() {
-        Text txtPuntuacion = new Text(20, 40, "Score: 0");
+        Text txtPuntuacion = new Text((ancho - 210), 40, "Score: 0");
         txtPuntuacion.setFill(Color.WHITE);
         txtPuntuacion.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
         return txtPuntuacion;
     }
 
-    private static void setEventos(Scene scene, ImageView img) {
+    private static void setEventos(Scene scene, ImageView img, Button pausa) {
         scene.setOnKeyPressed(e ->{
-            switch (e.getCode()) {
-                case LEFT, A -> img.setLayoutX(img.getLayoutX() - 20);
-                case RIGHT, D -> img.setLayoutX(img.getLayoutX() + 20);
-                case UP, W -> img.setLayoutY(img.getLayoutY() - 15);
-                case DOWN, S -> img.setLayoutY(img.getLayoutY() + 15);
+            if (corriendo)
+                switch (e.getCode()) {
+                    case LEFT, A -> img.setLayoutX(img.getLayoutX() - 20);
+                    case RIGHT, D -> img.setLayoutX(img.getLayoutX() + 20);
+                    case UP, W -> img.setLayoutY(img.getLayoutY() - 15);
+                    case DOWN, S -> img.setLayoutY(img.getLayoutY() + 15);
+                }
+        });
+
+        pausa.setOnAction(e -> {
+            corriendo = !corriendo;
+
+            if (corriendo) {
+                reanudarAnimaciones();
+                pausa.setText("⏸");
+
+            } else {
+                pausarAnimaciones();
+                pausa.setText("▶");
             }
         });
+    }
+
+    private static void pausarAnimaciones() {
+        for (Timeline tl : animaciones)
+            tl.pause();
+    }
+
+    private static void reanudarAnimaciones() {
+        for (Timeline tl : animaciones)
+            tl.play();
     }
 
     private static Circle getSol() {
@@ -190,7 +249,7 @@ public class T5_11_Outrun extends Application {
         tlPoli2.play();
 
         // PUNTUACION
-        Timeline scoreTl = new Timeline(
+        Timeline tlScore = new Timeline(
                 new KeyFrame(Duration.seconds(0.1), e -> {
                     if (corriendo) {
                         puntuacion++;
@@ -198,7 +257,9 @@ public class T5_11_Outrun extends Application {
                     }
                 })
         );
-        scoreTl.setCycleCount(Timeline.INDEFINITE);
-        scoreTl.play();
+        tlScore.setCycleCount(Timeline.INDEFINITE);
+        tlScore.play();
+
+        animaciones = List.of(tlCol, tlMov, tlPoli1, tlPoli2, tlScore);
     }
 }

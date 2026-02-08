@@ -3,12 +3,16 @@ package org.example.model;
 public class Amigos {
     private String nombre;
     private int edad;
-    private int telefono;
+    private String[] hobbies;
+    private int[] telefonos;
+    private Estudios[] estudios;
 
-    public Amigos(String nombre, int edad, int telefono) {
+    public Amigos(String nombre, int edad, String[] hobbies, int[] telefonos, Estudios[] estudios) {
         this.nombre = nombre;
         this.edad = edad;
-        this.telefono = telefono;
+        this.hobbies = hobbies;
+        this.telefonos = telefonos;
+        this.estudios = estudios;
     }
 
     public String getNombre() {
@@ -27,11 +31,27 @@ public class Amigos {
         this.edad = edad;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public String[] getHobbies() {
+        return hobbies;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setHobbies(String[] hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public int[] getTelefonos() {
+        return telefonos;
+    }
+
+    public void setTelefonos(int[] telefonos) {
+        this.telefonos = telefonos;
+    }
+
+    public Estudios[] getEstudios() {
+        return estudios;
+    }
+
+    public void setEstudios(Estudios[] estudios) {
+        this.estudios = estudios;
     }
 }
