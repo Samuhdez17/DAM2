@@ -4,11 +4,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.Group;
+import javafx.event.Event;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -25,7 +24,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.List;
-import java.util.Random;
 
 public class T5_11_Outrun extends Application {
 
@@ -44,7 +42,7 @@ public class T5_11_Outrun extends Application {
 
     static int vida = 100;
     static int puntuacion = 0;
-    static boolean corriendo = true;
+    static boolean corriendo = false;
 
     static List<Timeline> animaciones;
 
@@ -63,8 +61,8 @@ public class T5_11_Outrun extends Application {
         Line division = getLinea();
 
         ImageView coche = getCoche("coche.png");
-        ImageView policia1 = getCoche("cocheGC.png");
-        ImageView policia2 = getCoche("cocheGC.png");
+        ImageView policia1 = getCocheEnemigo("cocheGC.png", 1);
+        ImageView policia2 = getCocheEnemigo("cocheGC.png", 2);
 
         // CIELO
         Rectangle cielo = getCielo();
@@ -74,28 +72,54 @@ public class T5_11_Outrun extends Application {
         Text txtPuntuacion = getTxtPuntuacion();
         Button pausa = getBtPausa();
 
-        // VIDA
-        Rectangle fondoVida = getFondoVida();
-        Rectangle barraVida = getVida();
+        Text cuentaAtras = getCuentaAtras();
+        Text gameOver = getGameOver();
 
-        pane.getChildren().addAll(carretera, division, policia1, policia2, cielo, sol, txtPuntuacion, pausa, fondoVida, barraVida, coche);
-        animaciones(carretera, division, policia1, policia2, txtPuntuacion);
+        // VIDA
+        ProgressBar barraVida = getVida();
+
+        pane.getChildren().addAll(
+                carretera, division, policia1, policia2, cielo, sol,
+                txtPuntuacion, pausa, barraVida, cuentaAtras, gameOver, coche
+        );
+        animaciones(division, coche, policia1, policia2, txtPuntuacion, barraVida, gameOver, cuentaAtras);
 
         setEventos(scene, coche, pausa);
     }
 
-    private static Rectangle getFondoVida() {
-        Rectangle fondoVida = new Rectangle(20, 55, 200, 15);
-        fondoVida.setLayoutX(ancho - 230);
-        fondoVida.setFill(Color.RED);
+    private static Text getCuentaAtras() {
+        Text t = new Text("3");
 
-        return fondoVida;
+        t.setFill(Color.WHITE);
+        t.setStyle("-fx-font-size: 100px; -fx-font-weight: bold;");
+        t.setVisible(false);
+        t.setLayoutX((ancho / 2) - 30);
+        t.setLayoutY((mitadAlto / 1.3));
+
+        return t;
     }
 
-    private static Rectangle getVida() {
-        Rectangle barraVida = new Rectangle(20, 55, 200, 15);
+    private static Text getGameOver() {
+        Text t = new Text("GAME OVER");
+        t.setFill(Color.RED);
+        t.setStyle("-fx-font-size: 80px; -fx-font-weight: bold;");
+
+        t.setLayoutX((ancho - 400) / 2);
+        t.setLayoutY(mitadAlto / 1.5);
+
+        t.setVisible(false);
+
+        return t;
+    }
+
+    private static ProgressBar getVida() {
+        ProgressBar barraVida = new ProgressBar(150);
         barraVida.setLayoutX(ancho - 230);
-        barraVida.setFill(Color.LIMEGREEN);
+        barraVida.setLayoutY(55);
+        barraVida.setPrefWidth(200);
+        barraVida.setPrefHeight(15);
+
+        barraVida.setStyle("-fx-accent: limegreen;");
 
         return barraVida;
     }
@@ -114,6 +138,73 @@ public class T5_11_Outrun extends Application {
         txtPuntuacion.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
         return txtPuntuacion;
+    }
+
+    private static Circle getSol() {
+        Circle sol = new Circle(60);
+        sol.setCenterX(cuartoAncho);
+        sol.setCenterY(cuartoAlto);
+        sol.setFill(Color.YELLOW);
+
+        return sol;
+    }
+
+    private static Rectangle getCielo() {
+        Rectangle cielo = new Rectangle(0,0, ancho, mitadAlto);
+        Stop[] stops = new Stop[] { new Stop(0, Color.BLUE), new Stop(1, Color.LIGHTBLUE)};
+        LinearGradient lg1 = new LinearGradient(1, 0, 0, 0, true, CycleMethod.NO_CYCLE, stops);
+        cielo.setFill(lg1);
+
+        return cielo;
+    }
+
+    private static ImageView getCoche(String imagen) {
+        ImageView img = new ImageView(new Image(imagen));
+        img.setFitWidth(100);
+        img.setFitHeight(120);
+        img.setPreserveRatio(true);
+        img.setLayoutX(ancho / 1.8);
+        img.setLayoutY((alto / 10) * 7);
+
+        return img;
+    }
+
+    private static ImageView getCocheEnemigo(String imagen, int num) {
+        ImageView img = new ImageView(new Image(imagen));
+
+        img.setFitWidth(90);
+        img.setFitHeight(110);
+        img.setPreserveRatio(true);
+
+        if (num == 1) {
+            img.setLayoutX(ancho / 1.8);
+            img.setLayoutY(-200);
+
+        } else {
+            img.setLayoutX(ancho / 2.8);
+            img.setLayoutY(alto);
+        }
+
+        return img;
+    }
+
+    private static Line getLinea() {
+        Line division = new Line(mitadAncho, alto, mitadAncho, mitadAlto);
+        division.setStroke(Color.WHITE);
+        division.setFill(Color.WHITE);
+        division.setStrokeWidth(8);
+        division.getStrokeDashArray().addAll(50d, 30d);
+
+        return division;
+    }
+
+    private static Polygon getCarretera() {
+        return new Polygon(
+                tercioAncho, mitadAlto,
+                (tercioAncho * 2), mitadAlto,
+                ((ancho * 5) / 6), alto,
+                ((ancho * 1) / 6), alto
+        );
     }
 
     private static void setEventos(Scene scene, ImageView img, Button pausa) {
@@ -151,102 +242,71 @@ public class T5_11_Outrun extends Application {
             tl.play();
     }
 
-    private static Circle getSol() {
-        Circle sol = new Circle(60);
-        sol.setCenterX(cuartoAncho);
-        sol.setCenterY(cuartoAlto);
-        sol.setFill(Color.YELLOW);
+    private static void actualizarColision(
+            ImageView coche, ImageView pol1,
+            ImageView pol2, ProgressBar barraVida,
+            Text gameOver
+    ) {
+        if (
+                coche.getBoundsInParent().intersects(pol1.getBoundsInParent())
+             || coche.getBoundsInParent().intersects(pol2.getBoundsInParent())
+        ) {
+            coche.setOpacity(.5);
+            vida -= 5;
+            barraVida.setProgress(vida / 100.0);
 
-        return sol;
-    }
+            if (vida <= 0) {
+                gameOver.setVisible(true);
+                vida = 0;
+                barraVida.setProgress(0);
+                pausarAnimaciones();
+                corriendo = false;
+            }
 
-    private static Rectangle getCielo() {
-        Rectangle cielo = new Rectangle(0,0, ancho, mitadAlto);
-        Stop[] stops = new Stop[] { new Stop(0, Color.BLUE), new Stop(1, Color.LIGHTBLUE)};
-        LinearGradient lg1 = new LinearGradient(1, 0, 0, 0, true, CycleMethod.NO_CYCLE, stops);
-        cielo.setFill(lg1);
-
-        return cielo;
-    }
-
-    private static ImageView getCoche(String imagen) {
-        ImageView img = new ImageView(new Image(imagen));
-        img.setFitWidth(130);
-        img.setFitHeight(150);
-        img.setPreserveRatio(true);
-        img.setLayoutX(ancho / 1.8);
-        img.setLayoutY((alto / 10) * 7);
-
-        return img;
-    }
-
-    private static Line getLinea() {
-        Line division = new Line(mitadAncho, alto, mitadAncho, mitadAlto);
-        division.setStroke(Color.WHITE);
-        division.setFill(Color.WHITE);
-        division.setStrokeWidth(8);
-        division.getStrokeDashArray().addAll(50d, 30d);
-
-        return division;
-    }
-
-    private static Polygon getCarretera() {
-        return new Polygon(
-                tercioAncho, mitadAlto,
-                (tercioAncho * 2), mitadAlto,
-                ((ancho * 5) / 6), alto,
-                ((ancho * 1) / 6), alto
-        );
+        } else {
+            coche.setOpacity(1);
+        }
     }
 
     private static void animaciones(
-            Polygon carretera, Line division,
+            Line division, ImageView coche,
             ImageView p1, ImageView p2,
-            Text txtPuntuacion
-            ) {
-        // COLOR CARRETERA
-        Color[] colores = new Color[]{
-                Color.PINK,
-                Color.WHITE,
-                Color.CYAN,
-                Color.RED,
-                Color.YELLOW,
-                Color.LIGHTCYAN,
-                Color.LIGHTGREEN,
-                Color.LIGHTPINK,
-                Color.LIGHTGREY
-        };
+            Text txtPuntuacion, ProgressBar barraVida,
+            Text gameOver, Text cuentaAtras
+    ) {
+        // CUENTA ATRAS
+        cuentaAtras.setVisible(true);
 
-        Random ran = new Random();
-
-        Timeline tlCol = new Timeline(
-                new KeyFrame(Duration.seconds(0.1), e -> {
-                    Color colorNuevo = colores[ran.nextInt(colores.length)];
-                    carretera.setFill(colorNuevo);
+        Timeline tlCuenta = new Timeline(
+                new KeyFrame(Duration.seconds(0), e -> cuentaAtras.setText("3")),
+                new KeyFrame(Duration.seconds(1), e -> cuentaAtras.setText("2")),
+                new KeyFrame(Duration.seconds(2), e -> cuentaAtras.setText("1")),
+                new KeyFrame(Duration.seconds(3), e -> cuentaAtras.setText("GO!")),
+                new KeyFrame(Duration.seconds(4), e -> {
+                    cuentaAtras.setVisible(false);
+                    corriendo = true;
                 })
         );
-        tlCol.setCycleCount(Timeline.INDEFINITE);
-        tlCol.play();
 
         // CARRETERA
-        KeyValue kvMov = new KeyValue(division.strokeDashOffsetProperty(), 80);
-        KeyFrame kfMov = new KeyFrame(Duration.seconds(0.200), kvMov);
+        KeyValue kvMov = new KeyValue(division.strokeDashOffsetProperty(), 800);
+        KeyFrame kfMov = new KeyFrame(Duration.seconds(1), kvMov);
         Timeline tlMov = new Timeline(kfMov);
         tlMov.setCycleCount(Timeline.INDEFINITE);
-        tlMov.play();
 
         // POLICIAS
-        KeyValue kvPoli1 = new KeyValue(p1.layoutYProperty(), 80);
-        KeyFrame kfPoli1 = new KeyFrame(Duration.seconds(2), kvPoli1);
+        KeyValue kvPoli1 = new KeyValue(p1.layoutYProperty(), alto + 150);
+        KeyFrame kfPoli1 = new KeyFrame(Duration.seconds(5), e -> {
+            p1.setLayoutY(-150);
+        }, kvPoli1);
+
         Timeline tlPoli1 = new Timeline(kfPoli1);
         tlPoli1.setCycleCount(Timeline.INDEFINITE);
-        tlPoli1.play();
 
         KeyValue kvPoli2 = new KeyValue(p2.layoutYProperty(), 80);
-        KeyFrame kfPoli2 = new KeyFrame(Duration.seconds(1), kvPoli2);
+        KeyFrame kfPoli2 = new KeyFrame(Duration.seconds(3), kvPoli2);
         Timeline tlPoli2 = new Timeline(kfPoli2);
         tlPoli2.setCycleCount(Timeline.INDEFINITE);
-        tlPoli2.play();
 
         // PUNTUACION
         Timeline tlScore = new Timeline(
@@ -254,12 +314,21 @@ public class T5_11_Outrun extends Application {
                     if (corriendo) {
                         puntuacion++;
                         txtPuntuacion.setText("Score: " + puntuacion);
+
+                        actualizarColision(coche, p1, p2, barraVida, gameOver);
                     }
                 })
         );
         tlScore.setCycleCount(Timeline.INDEFINITE);
-        tlScore.play();
 
-        animaciones = List.of(tlCol, tlMov, tlPoli1, tlPoli2, tlScore);
+        tlCuenta.play();
+        tlCuenta.setOnFinished( e -> {
+            tlMov.play();
+            tlPoli1.play();
+            tlPoli2.play();
+            tlScore.play();
+                });
+        
+        animaciones = List.of(tlMov, tlPoli1, tlPoli2, tlScore);
     }
 }

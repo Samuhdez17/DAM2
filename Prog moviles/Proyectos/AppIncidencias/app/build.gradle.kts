@@ -58,8 +58,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     // FIREBASE & NAV
-    implementation(platform("com.google.firebase:firebase-bom:34.8.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
     implementation(libs.androidx.navigation.compose)

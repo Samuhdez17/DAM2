@@ -9,10 +9,10 @@ import org.example.model.Amigos;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.set;
 
-public class AmigoDAO {
+public class AmigosDAO {
     private final MongoCollection<Document> amigos;
 
-    public AmigoDAO() {
+    public AmigosDAO() {
         MongoDatabase db = ConexionMongo.getDataBase();
         amigos = db.getCollection("amigos");
     }

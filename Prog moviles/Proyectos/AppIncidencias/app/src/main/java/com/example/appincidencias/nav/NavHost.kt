@@ -1,4 +1,4 @@
-package com.example.appincidencias.ui.nav
+package com.example.appincidencias.nav
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,15 +9,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.appincidencias.ui.theme.AppIncidenciasTheme
-import com.example.spotify.initial.Principal
-import com.example.spotify.login.LogIn
-import com.example.spotify.signup.SignUp
-import com.example.spotify.app.HomePage
-import com.example.spotify.ui.theme.SpotifyTheme
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import com.example.appincidencias.ui.login.LogIn
+import com.example.appincidencias.ui.signup.SignUp
 
 class NavHost : ComponentActivity() {
     private lateinit var auth: FirebaseAuth
@@ -33,32 +30,25 @@ class NavHost : ComponentActivity() {
                     startDestination = "inicio"
                 ) {
                     composable("inicio") {
-                        Principal(
-                            modifier = Modifier,
+                        LogIn(
                             auth,
-                            { navController.navigate("logIn") },
+                            { navController.navigate("homePage") },
                             { navController.navigate("signUp") }
                         )
                     }
 
-                    composable("logIn") {
-                        LogIn(
+                    composable("signUp") {
+                        SignUp(
                             auth,
                             { navController.navigate("inicio") },
                             { navController.navigate("homePage") }
                         )
                     }
 
-                    composable("signUp") {
-                        SignUp(
-                            { navController.navigate("inicio") },
-                            { navController.navigate("homePage") },
-                            auth
-                        )
+                    composable("logIn") {
                     }
 
                     composable("homePage") {
-                        HomePage()
                     }
                 }
             }

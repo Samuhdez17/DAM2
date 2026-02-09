@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.DAO.AmigoDAO;
+import org.example.DAO.AmigosDAO;
 import org.example.model.Amigos;
 import org.example.model.Estudios;
 
@@ -8,24 +8,23 @@ import java.util.Scanner;
 
 public class Main {
     public static final String MENU = """
-                    ===== MENÚ DE AMIGOS ====="
-                    "1. Agregar amigo"
-                    "2. Listar amigos"
-                    "3. Actualizar amigo"
-                    "4. Eliminar amigo"
-                    "0. Salir"
-                    "=========================="
-                    "Seleccione una opción: """;
+                    ===== MENÚ DE AMIGOS =====
+                    1. Agregar amigo
+                    2. Listar amigos
+                    3. Actualizar amigo
+                    4. Eliminar amigo
+                    0. Salir
+                    ==========================
+                    Seleccione una opción:""";
 
     static void main() {
         Scanner entrada = new Scanner(System.in);
-        AmigoDAO amigos = new AmigoDAO();
+        AmigosDAO amigos = new AmigosDAO();
 
         int opcion = -1;
         while (opcion != 0) {
             System.out.println(MENU);
             opcion = entrada.nextInt();
-            System.out.println();
 
             switch (opcion) {
                 case 1 -> agregarAmigo(entrada, amigos);
@@ -43,72 +42,79 @@ public class Main {
         }
     }
 
-    private static void actualizarAmigo(Scanner entrada, AmigoDAO amigos) {
-        System.out.println("Nombre a eliminar:");
+    private static void actualizarAmigo(Scanner entrada, AmigosDAO amigos) {
+        System.out.println("Nombre a actualizar:");
+        entrada.nextLine();
         String nombre = entrada.nextLine();
 
         System.out.println("Nueva edad:");
         int nuevaEdad = entrada.nextInt();
+        entrada.nextLine();
 
         amigos.actualizar(nombre, nuevaEdad);
+        System.out.println("Amigo actualizado");
     }
 
-    private static void eliminarAmigo(Scanner entrada, AmigoDAO amigos) {
+    private static void eliminarAmigo(Scanner entrada, AmigosDAO amigos) {
         System.out.println("Nombre a eliminar:");
+        entrada.nextLine();
         String nombre = entrada.nextLine();
 
         amigos.eliminar(nombre);
     }
 
-    private static void agregarAmigo(Scanner entrada, AmigoDAO amigos) {
+    private static void agregarAmigo(Scanner entrada, AmigosDAO amigos) {
         System.out.println("Nombre:");
         entrada.nextLine();
         String nombre = entrada.nextLine();
 
         System.out.println("Edad:");
         int edad = entrada.nextInt();
+        entrada.nextLine();
 
         System.out.println("Num hobbies:");
         int numHobbies = entrada.nextInt();
-        String[] hobbies = new String[numHobbies];
         entrada.nextLine();
+        String[] hobbies = new String[numHobbies];
 
         for (int i = 0; i < numHobbies; i++) {
-            System.out.println("Hobbie:");
+            System.out.println("Hobbie " + (i + 1) + ":");
             hobbies[i] = entrada.nextLine();
         }
 
         System.out.println("Num telefonos:");
         int numTelfs = entrada.nextInt();
-        int[] telfs = new int[numTelfs];
         entrada.nextLine();
+        int[] telfs = new int[numTelfs];
 
         for (int i = 0; i < numTelfs; i++) {
-            System.out.println("Telefono:");
+            System.out.println("Telefono " + (i + 1) + ":");
             telfs[i] = entrada.nextInt();
+            entrada.nextLine();
         }
 
         System.out.println("Num estudios:");
         int numEstudios = entrada.nextInt();
-        Estudios[] estudios = new Estudios[numEstudios];
         entrada.nextLine();
+        Estudios[] estudios = new Estudios[numEstudios];
 
         for (int i = 0; i < numEstudios; i++) {
+            System.out.println("Estudio " + (i + 1) + ":");
+
             System.out.println("Titulo:");
             String titulo = entrada.nextLine();
-            System.out.println();
 
             System.out.println("Centro:");
             String centro = entrada.nextLine();
-            System.out.println();
 
             System.out.println("Año:");
             int anio = entrada.nextInt();
-            System.out.println();
+            entrada.nextLine();
 
             estudios[i] = new Estudios(titulo, centro, anio);
         }
 
         amigos.insertar(new Amigos(nombre, edad, hobbies, telfs, estudios));
+        System.out.println("Amigo agregado");
     }
 }
