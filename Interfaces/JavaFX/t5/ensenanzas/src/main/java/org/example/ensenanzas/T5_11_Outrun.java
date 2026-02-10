@@ -328,7 +328,7 @@ public class T5_11_Outrun extends Application {
             tlPoli2.play();
             tlScore.play();
                 });
-        
+
         animaciones = List.of(tlMov, tlPoli1, tlPoli2, tlScore);
     }
 }
