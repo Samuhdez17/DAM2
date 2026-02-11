@@ -4,6 +4,8 @@ import org.example.DAO.AmigosDAO;
 import org.example.model.Amigos;
 import org.example.model.Estudios;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -75,28 +77,27 @@ public class Main {
         System.out.println("Num hobbies:");
         int numHobbies = entrada.nextInt();
         entrada.nextLine();
-        String[] hobbies = new String[numHobbies];
+        ArrayList<String> hobbies = new ArrayList<>();
 
         for (int i = 0; i < numHobbies; i++) {
             System.out.println("Hobbie " + (i + 1) + ":");
-            hobbies[i] = entrada.nextLine();
+            hobbies.add(entrada.nextLine());
         }
 
         System.out.println("Num telefonos:");
         int numTelfs = entrada.nextInt();
         entrada.nextLine();
-        int[] telfs = new int[numTelfs];
+        ArrayList<String> telfs = new ArrayList<>();
 
         for (int i = 0; i < numTelfs; i++) {
             System.out.println("Telefono " + (i + 1) + ":");
-            telfs[i] = entrada.nextInt();
-            entrada.nextLine();
+            telfs.add(entrada.nextLine());
         }
 
         System.out.println("Num estudios:");
         int numEstudios = entrada.nextInt();
         entrada.nextLine();
-        Estudios[] estudios = new Estudios[numEstudios];
+        ArrayList<Estudios> estudios = new ArrayList<>();
 
         for (int i = 0; i < numEstudios; i++) {
             System.out.println("Estudio " + (i + 1) + ":");
@@ -111,7 +112,7 @@ public class Main {
             int anio = entrada.nextInt();
             entrada.nextLine();
 
-            estudios[i] = new Estudios(titulo, centro, anio);
+            estudios.add(new Estudios(titulo, centro, anio));
         }
 
         amigos.insertar(new Amigos(nombre, edad, hobbies, telfs, estudios));
