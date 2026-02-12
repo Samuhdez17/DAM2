@@ -1,11 +1,14 @@
 package org.example.inicios.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 @Document(collection = "amigos")
 public class Amigo {
+    @Id
+    private String id;
     private String nombre;
     private int edad;
     private List<String> hobbies;
@@ -15,12 +18,21 @@ public class Amigo {
     public Amigo() {
     }
 
-    public Amigo(String nombre, int edad, List<String> hobbies, List<String> telefonos, List<Estudio> estudios) {
+    public Amigo(String id, String nombre, int edad, List<String> hobbies, List<String> telefonos, List<Estudio> estudios) {
+        this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.hobbies = hobbies;
         this.telefonos = telefonos;
         this.estudios = estudios;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
