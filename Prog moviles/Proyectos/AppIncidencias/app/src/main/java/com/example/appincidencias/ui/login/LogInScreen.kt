@@ -165,7 +165,7 @@ fun LogIn(
             modifier = Modifier.padding(top = 16.dp)
         ) {
             Text(
-                text = "Log in",
+                text = "Iniciar sesión",
                 style = MaterialTheme.typography.headlineSmall.copy(
                     color = Color.DarkGray,
                     fontSize = 16.sp
