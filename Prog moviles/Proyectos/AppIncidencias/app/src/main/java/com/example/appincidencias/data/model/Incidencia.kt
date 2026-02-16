@@ -5,4 +5,5 @@ data class Incidencia(
     val titulo: String,
     val descripcion: String,
     val estado: String,
+    val fecha: String,
 )

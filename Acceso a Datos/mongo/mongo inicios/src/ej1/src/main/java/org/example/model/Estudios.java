@@ -34,4 +34,8 @@ public class Estudios {
     public void setAnio(int anio) {
         this.anio = anio;
     }
+
+    public String toString() {
+        return titulo + " " + centro + " " + anio;
+    }
 }

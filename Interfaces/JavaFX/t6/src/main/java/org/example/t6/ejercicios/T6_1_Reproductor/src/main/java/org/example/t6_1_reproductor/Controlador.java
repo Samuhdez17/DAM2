@@ -273,7 +273,7 @@ public class Controlador {
 
         } else {
             reproductor.setVolume(volumenAnterior);
-            volumen.setValue(volumenAnterior * 100);
+            volumen.setValue(volumenAnterior * 1000);
             img.setImage(new Image(("/volumen.png")));
         }
 

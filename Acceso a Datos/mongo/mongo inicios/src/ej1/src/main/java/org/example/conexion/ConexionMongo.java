@@ -8,6 +8,6 @@ public class ConexionMongo {
     public static final MongoClient cliente = MongoClients.create("mongodb://localhost:27017");
 
     public static MongoDatabase getDataBase() {
-        return cliente.getDatabase("prueba");
+        return cliente.getDatabase("ejPrueba1");
     }
 }

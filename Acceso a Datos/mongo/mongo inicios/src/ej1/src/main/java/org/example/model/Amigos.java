@@ -56,4 +56,15 @@ public class Amigos {
     public void setEstudios(List<Estudios> estudios) {
         this.estudios = estudios;
     }
+
+    public String toString() {
+        return String.format("""
+                Nombre: %s
+                Edad: %d
+                Hobbies: %s
+                Telefonos: %s
+                Estudios: %s
+                """, nombre, edad, hobbies.toString(), telefonos.toString(), estudios);
+
+    }
 }
