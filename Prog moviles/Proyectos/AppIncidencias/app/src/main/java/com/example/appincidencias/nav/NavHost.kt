@@ -38,6 +38,13 @@ class NavHost : ComponentActivity() {
                 .build()
                 .create(JsonIncidenciasApi::class.java)
 
+        val apiBorrar: JsonIncidenciasApi =
+            Retrofit.Builder()
+                .baseUrl("https://incidencias-api-veppzdntwa-ew.a.run.app/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(JsonIncidenciasApi::class.java)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -45,7 +52,7 @@ class NavHost : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "principal"
+                    startDestination = "logIn"
                 ) {
                     composable("logIn") {
                         LogIn(
@@ -81,6 +88,7 @@ class NavHost : ComponentActivity() {
                         DetalleIncidencia(
                             apiIncidencia,
                             idIncidencia,
+                            apiBorrar,
                             { navController.navigate("principal") },
                         )
                     }

@@ -1,6 +1,7 @@
 package com.example.appincidencias.ui.login
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -59,7 +60,8 @@ fun LogIn(
 
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(Color.Black),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.height(50.dp))
@@ -68,7 +70,8 @@ fun LogIn(
             text = "INICIAR SESIÓN",
             modifier = Modifier.padding(16.dp),
             style = MaterialTheme.typography.headlineSmall.copy(
-                fontSize = 24.sp
+                fontSize = 24.sp,
+                color = Color.White
             )
         )
 
@@ -77,7 +80,7 @@ fun LogIn(
         Text(
             text = "Correo o usuario",
             style = MaterialTheme.typography.headlineSmall.copy(
-                color = Color.Black
+                color = Color.White
             ),
             modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
         )
@@ -98,7 +101,7 @@ fun LogIn(
         Text(
             text = "Contraseña",
             style = MaterialTheme.typography.headlineSmall.copy(
-                color = Color.Black
+                color = Color.White
             ),
             modifier = Modifier.align(Alignment.Start).padding(start = 16.dp),
         )
@@ -142,7 +145,7 @@ fun LogIn(
             modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 10.dp),
         )
 
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(15.dp))
 
         Button(
             onClick = {
@@ -176,7 +179,11 @@ fun LogIn(
         Spacer(Modifier.height(30.dp))
 
         Text(
-            text = "¿Sin cuenta creada?"
+            text = "¿Sin cuenta creada?",
+            style = MaterialTheme.typography.headlineSmall.copy(
+                color = Color.White,
+                fontSize = 16.sp
+            ),
         )
 
         Button(
@@ -196,7 +203,8 @@ fun LogIn(
             Text(
                 text = "Registrarse",
                 style = MaterialTheme.typography.headlineSmall.copy(
-                    fontSize = 16.sp
+                    fontSize = 16.sp,
+                    color = Color.White
                 ),
             )
         }

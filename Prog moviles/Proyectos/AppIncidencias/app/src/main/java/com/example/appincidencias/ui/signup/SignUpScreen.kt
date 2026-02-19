@@ -63,7 +63,8 @@ fun SignUp(
 
     Column(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(Color.Black),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(Modifier.height(40.dp))
@@ -78,7 +79,7 @@ fun SignUp(
                 Icon(
                     painter = painterResource(id = R.drawable.flecha_atras),
                     contentDescription = "flecha atras",
-                    tint = Color.Black,
+                    tint = Color.White,
                     modifier = Modifier.size(20.dp)
                 )
             }
@@ -103,7 +104,7 @@ fun SignUp(
         Text(
             text = "Correo o usuario",
             style = MaterialTheme.typography.headlineSmall.copy(
-                color = Color.Black,
+                color = Color.White,
                 fontSize = 28.sp
             ),
             modifier = Modifier
@@ -126,7 +127,7 @@ fun SignUp(
         Text(
             text = "Contraseña",
             style = MaterialTheme.typography.headlineSmall.copy(
-                color = Color.Black
+                color = Color.White
             ),
             modifier = Modifier
                 .align(Alignment.Start)
