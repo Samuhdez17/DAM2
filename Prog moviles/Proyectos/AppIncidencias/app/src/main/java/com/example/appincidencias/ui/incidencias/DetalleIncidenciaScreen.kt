@@ -40,9 +40,8 @@ class DetalleIncidenciaScreen
 
 @Composable
 fun DetalleIncidencia(
-    apiIncidencia: JsonIncidenciasApi,
+    apiJson: JsonIncidenciasApi,
     idIncidencia: Int,
-    borrarIncidencia: JsonIncidenciasApi,
     onVolverClick: () -> Unit
 ) {
     var incidencia by remember { mutableStateOf<Incidencia?>(null) }
@@ -50,7 +49,7 @@ fun DetalleIncidencia(
 
     LaunchedEffect(Unit) {
         lanzadorApi.launch {
-            incidencia = apiIncidencia.getIncidencia(idIncidencia)
+            incidencia = apiJson.getIncidencia(idIncidencia)
         }
     }
 
@@ -62,7 +61,9 @@ fun DetalleIncidencia(
     ) {
         Spacer(modifier = Modifier.height(48.dp))
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             IconButton(onClick = { onVolverClick() }) {
                 Icon(
                     painter = painterResource(id = R.drawable.flecha_atras),
@@ -121,7 +122,7 @@ fun DetalleIncidencia(
         Button(
             onClick = {
                 lanzadorApi.launch {
-                    borrarIncidencia.borrarIncidencia(idIncidencia)
+                    apiJson.borrarIncidencia(idIncidencia)
                     onVolverClick()
                 }
             },

@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.appincidencias.data.network.JsonIncidenciasApi
 import com.example.appincidencias.ui.incidencias.DetalleIncidencia
+import com.example.appincidencias.ui.incidencias.NuevaIncidencia
 import com.example.appincidencias.ui.incidencias.PantallPrincipal
 import com.example.appincidencias.ui.theme.AppIncidenciasTheme
 import com.google.firebase.Firebase
@@ -24,26 +25,13 @@ class NavHost : ComponentActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val apiIncidencias: JsonIncidenciasApi =
+        val lanzadorApi: JsonIncidenciasApi =
             Retrofit.Builder()
                 .baseUrl("https://incidencias-api-veppzdntwa-ew.a.run.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(JsonIncidenciasApi::class.java)
 
-        val apiIncidencia: JsonIncidenciasApi =
-            Retrofit.Builder()
-                .baseUrl("https://incidencias-api-veppzdntwa-ew.a.run.app/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(JsonIncidenciasApi::class.java)
-
-        val apiBorrar: JsonIncidenciasApi =
-            Retrofit.Builder()
-                .baseUrl("https://incidencias-api-veppzdntwa-ew.a.run.app/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(JsonIncidenciasApi::class.java)
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,7 +40,7 @@ class NavHost : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "logIn"
+                    startDestination = "principal"
                 ) {
                     composable("logIn") {
                         LogIn(
@@ -72,7 +60,7 @@ class NavHost : ComponentActivity() {
 
                     composable("principal") {
                         PantallPrincipal(
-                            apiIncidencias,
+                            lanzadorApi,
                             { navController.navigate("registrarIncidencia") },
                             { idIncidencia -> navController.navigate("verIncidencia/$idIncidencia") },
                             { navController.navigate("logIn") }
@@ -80,15 +68,18 @@ class NavHost : ComponentActivity() {
                     }
 
                     composable("registrarIncidencia") {
+                        NuevaIncidencia(
+                            lanzadorApi,
+                            { navController.navigate("principal") },
+                        )
                     }
 
                     composable("verIncidencia/{idIncidencia}") { backStackEntry ->
                         val idIncidencia = backStackEntry.arguments!!.getString("idIncidencia")!!.toInt()
 
                         DetalleIncidencia(
-                            apiIncidencia,
+                            lanzadorApi,
                             idIncidencia,
-                            apiBorrar,
                             { navController.navigate("principal") },
                         )
                     }

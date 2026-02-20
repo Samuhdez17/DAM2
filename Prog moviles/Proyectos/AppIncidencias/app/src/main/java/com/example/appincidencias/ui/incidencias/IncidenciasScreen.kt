@@ -20,6 +20,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -49,7 +51,7 @@ class IncidenciasScreen
 
 @Composable
 fun PantallPrincipal(
-    apiIncidencias: JsonIncidenciasApi,
+    apiJson: JsonIncidenciasApi,
     onRegistrarIncidenciaClick: () -> Unit = {},
     onVerIncidenciaClick: (incidenciaId: Int) -> Unit = {},
     onLogOut: () -> Unit = {}
@@ -61,7 +63,7 @@ fun PantallPrincipal(
 
     LaunchedEffect(Unit) {
         lanzadorApi.launch {
-            incidencias = apiIncidencias.getIncidencias(busqueda)
+            incidencias = apiJson.getIncidencias(busqueda)
         }
     }
 
@@ -99,6 +101,15 @@ fun PantallPrincipal(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
+            IconButton(
+                onClick = { onRegistrarIncidenciaClick() },
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.nueva),
+                    contentDescription = "Añadir incidencia",
+                )
+            }
+
             TextField(
                 value = busqueda,
                 onValueChange = { busqueda = it },
@@ -117,7 +128,7 @@ fun PantallPrincipal(
                 keyboardActions = KeyboardActions(
                     onSend = {
                         lanzadorApi.launch {
-                            incidencias = apiIncidencias.getIncidencias(busqueda)
+                            incidencias = apiJson.getIncidencias(busqueda)
                         }
                     }
                 ),
@@ -129,7 +140,7 @@ fun PantallPrincipal(
             Button(
                 onClick = {
                     lanzadorApi.launch {
-                        incidencias = apiIncidencias.getIncidencias(busqueda)
+                        incidencias = apiJson.getIncidencias(busqueda)
                     }
                 },
                 shape = RoundedCornerShape(12.dp),

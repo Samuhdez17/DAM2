@@ -1,0 +1,6 @@
+# PREGUNTA 1
+    La simétrica es más rápida pero menos robusta y la asimétrica es algo más lenta pero más robusta
+
+# PREGUNTA 2
+    Antes de cifrar el mensaje se obtiene el hash, y, se cifran y mandan ambos elementos, al obtener los datos se descifra el hash
+    y se compara con el hash del mensaje que hemos recibido, para verificar que nadie lo haya modificado ni leído
