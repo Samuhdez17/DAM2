@@ -20,7 +20,7 @@ interface JsonIncidenciasApi {
         @Path("id") id: Int
     ): Incidencia
 
-    @POST
+    @POST("incidencias")
     suspend fun crearIncidencia(@Body incidencia: Incidencia): Incidencia
 
     @DELETE("incidencias/{id}")

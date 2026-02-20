@@ -40,7 +40,7 @@ class NavHost : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "principal"
+                    startDestination = "logIn"
                 ) {
                     composable("logIn") {
                         LogIn(
@@ -61,13 +61,13 @@ class NavHost : ComponentActivity() {
                     composable("principal") {
                         PantallPrincipal(
                             lanzadorApi,
-                            { navController.navigate("registrarIncidencia") },
+                            { navController.navigate("incidenciaNueva") },
                             { idIncidencia -> navController.navigate("verIncidencia/$idIncidencia") },
                             { navController.navigate("logIn") }
                         )
                     }
 
-                    composable("registrarIncidencia") {
+                    composable("incidenciaNueva") {
                         NuevaIncidencia(
                             lanzadorApi,
                             { navController.navigate("principal") },

@@ -1,5 +1,8 @@
 package com.example.appincidencias.ui.incidencias
 
+import android.icu.util.Calendar
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -40,6 +43,8 @@ import com.example.appincidencias.R
 import com.example.appincidencias.data.model.Incidencia
 import com.example.appincidencias.data.network.JsonIncidenciasApi
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun NuevaIncidencia(
@@ -51,7 +56,6 @@ fun NuevaIncidencia(
     var titulo by remember { mutableStateOf("") }
     var descripcion by remember { mutableStateOf("") }
     var estado by remember { mutableStateOf("") }
-    var fecha by remember { mutableStateOf("") }
     var menuExpandido by remember { mutableStateOf(false) }
 
     val opcionesEstado = listOf("Pendiente", "Bloqueada", "En curso", "Finalizada")
@@ -141,7 +145,7 @@ fun NuevaIncidencia(
                         .padding(horizontal = 16.dp, vertical = 14.dp)
                 ) {
                     Text(
-                        text = if (estado.isBlank()) "Seleccionar estado" else estado,
+                        text = estado.ifBlank { "Seleccionar estado" },
                         color = if (estado.isBlank()) Color(0xFFAAAAAA) else Color.White,
                         fontSize = 16.sp
                     )
@@ -170,17 +174,6 @@ fun NuevaIncidencia(
                     }
                 }
             }
-
-            Spacer(Modifier.height(12.dp))
-
-            TextField(
-                value = fecha,
-                onValueChange = { fecha = it },
-                label = { Text("Fecha") },
-                shape = RoundedCornerShape(12.dp),
-                colors = textFieldColors,
-                modifier = Modifier.fillMaxWidth()
-            )
         }
 
         Spacer(Modifier.height(24.dp))
@@ -194,7 +187,7 @@ fun NuevaIncidencia(
                             titulo = titulo,
                             descripcion = descripcion,
                             estado = estado,
-                            fecha = fecha
+                            fecha = ""
                         )
                     )
                     onVolverClick()

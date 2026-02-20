@@ -1,5 +1,7 @@
 package com.example.appincidencias.ui.incidencias
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,9 +29,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import com.example.appincidencias.R
 import com.example.appincidencias.data.model.Incidencia
@@ -52,6 +56,8 @@ fun DetalleIncidencia(
             incidencia = apiJson.getIncidencia(idIncidencia)
         }
     }
+
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -118,12 +124,22 @@ fun DetalleIncidencia(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Botón borrar
         Button(
             onClick = {
                 lanzadorApi.launch {
-                    apiJson.borrarIncidencia(idIncidencia)
-                    onVolverClick()
+                    val respuesta = apiJson.borrarIncidencia(idIncidencia)
+                    if (respuesta.isSuccessful) {
+                        onVolverClick()
+
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "No se pudo borrar",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        Log.e("Error borrado", respuesta.toString())
+                    }
                 }
             },
             modifier = Modifier

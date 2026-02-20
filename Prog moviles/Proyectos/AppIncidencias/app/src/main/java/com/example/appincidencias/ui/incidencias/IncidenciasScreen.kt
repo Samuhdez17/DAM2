@@ -103,10 +103,12 @@ fun PantallPrincipal(
         ) {
             IconButton(
                 onClick = { onRegistrarIncidenciaClick() },
+                modifier = Modifier.padding(8.dp)
             ) {
-                Image(
+                Icon(
                     painter = painterResource(id = R.drawable.nueva),
                     contentDescription = "Añadir incidencia",
+                    tint = Color(0xFF1DB954)
                 )
             }
 
@@ -149,7 +151,11 @@ fun PantallPrincipal(
                     contentColor = Color.Black
                 )
             ) {
-                Text(text = "Buscar", fontWeight = FontWeight.SemiBold)
+                Text(
+                    text = "Buscar",
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 12.sp
+                )
             }
         }
 
