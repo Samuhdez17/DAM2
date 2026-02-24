@@ -2,14 +2,14 @@ package org.example.model;
 
 import java.util.List;
 
-public class Amigos {
+public class Amigo {
     private String nombre;
     private int edad;
     private List<String> hobbies;
     private List<String> telefonos;
-    private List<Estudios> estudios;
+    private List<Estudio> estudios;
 
-    public Amigos(String nombre, int edad, List<String> hobbies, List<String> telefonos, List<Estudios> estudios) {
+    public Amigo(String nombre, int edad, List<String> hobbies, List<String> telefonos, List<Estudio> estudios) {
         this.nombre = nombre;
         this.edad = edad;
         this.hobbies = hobbies;
@@ -49,11 +49,11 @@ public class Amigos {
         this.telefonos = telefonos;
     }
 
-    public List<Estudios> getEstudios() {
+    public List<Estudio> getEstudios() {
         return estudios;
     }
 
-    public void setEstudios(List<Estudios> estudios) {
+    public void setEstudios(List<Estudio> estudios) {
         this.estudios = estudios;
     }
 
