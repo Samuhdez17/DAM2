@@ -9,6 +9,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/amigos")
 public class VisualController {
+    
     @GetMapping("/status")
     public Map<String, String> status() {
         return Map.of(
