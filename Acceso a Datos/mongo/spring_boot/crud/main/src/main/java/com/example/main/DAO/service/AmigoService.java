@@ -1,12 +1,11 @@
-package com.example.main.service;
+package com.example.main.DAO.service;
 import java.util.List;
-
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.main.model.Amigo;
-import com.example.main.repository.AmigosRepo;
+import com.example.main.DAO.model.Amigo;
+import com.example.main.DAO.repository.AmigosRepo;
 
 
 @Service
@@ -17,7 +16,6 @@ public class AmigoService {
         this.repo = repo;
     }
 
-    @SuppressWarnings("null")
     public Amigo agregarAmigo(Amigo amigo) {
         return repo.save(amigo);
     }

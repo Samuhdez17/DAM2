@@ -1,4 +1,4 @@
-package com.example.main.controller;
+package com.example.main.DAO.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.main.model.Amigo;
-import com.example.main.service.AmigoService;
+import com.example.main.DAO.model.Amigo;
+import com.example.main.DAO.service.AmigoService;
 
 @RestController
 @RequestMapping("/amigos")
