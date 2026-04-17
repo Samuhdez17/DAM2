@@ -1,7 +1,7 @@
 package seguridad.inicios;
 
 public class CifradoSustitucion {
-    String abcdario = "abcdefghijklmnopqrstuvwxy";
+    String abcdario = "abcdefghijklmnopqrstuvwxyz";
     String clave = "klmnoprstuvwxyz0123456789";
 
     public static void main(String[] args) {
