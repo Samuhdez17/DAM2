@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane fx:id="tabAmigos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="925.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.crud_srpingboot.interfaz.Controlador">
+  <tabs>
+    <Tab fx:id="pestaniaAmigos" text="Amigos">
+         <content>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="195.0" prefWidth="487.0">
+               <children>
+                  <VBox prefHeight="80.0" prefWidth="887.0">
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="42.0" prefWidth="889.0" text="Lista de amigos">
+                           <font>
+                              <Font name="Baskerville Old Face" size="31.0" />
+                           </font>
+                        </Label>
+                        <BorderPane prefHeight="40.0" prefWidth="472.0">
+                           <left>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="221.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ComboBox fx:id="cbOrdenacion" onAction="#cambiarOrdenacion" prefHeight="25.0" prefWidth="122.0" promptText="Ordenar por" />
+                                    <Button fx:id="btActualizar" mnemonicParsing="false" onAction="#actualizarLista" prefHeight="25.0" prefWidth="68.0" text="Actualizar">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" />
+                                 </padding>
+                              </HBox>
+                           </left>
+                           <right>
+                              <HBox prefHeight="39.0" prefWidth="173.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="btEditar" disable="true" mnemonicParsing="false" onAction="#editarAmigo" prefHeight="25.0" prefWidth="52.0" text="Editar">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btEliminar" disable="true" mnemonicParsing="false" onAction="#eliminarAmigo" prefHeight="25.0" prefWidth="56.0" text="Borrar" />
+                                 </children>
+                              </HBox>
+                           </right>
+                           <center>
+                              <Label fx:id="mensajeBreve" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                     </children>
+                  </VBox>
+                  <TableView fx:id="tablaAmigos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="601.0" prefWidth="925.0">
+                    <columns>
+                      <TableColumn fx:id="colNombre" editable="false" prefWidth="200.0" sortable="false" text="Nombre" />
+                      <TableColumn fx:id="colEdad" editable="false" prefWidth="51.0" sortable="false" text="Edad" />
+                        <TableColumn fx:id="colHobbies" editable="false" prefWidth="223.0" sortable="false" text="Hobbies" />
+                        <TableColumn fx:id="colTelfs" editable="false" prefWidth="213.0" sortable="false" text="Telefonos" />
+                        <TableColumn fx:id="colEstudios" editable="false" prefWidth="237.0" sortable="false" text="Estudios" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </content>
+    </Tab>
+    <Tab fx:id="pestaniaAgregar" text="Agregar amigo">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+
+                     <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="925.0" BorderPane.alignment="CENTER">
+                  <children>
+                        <Label fx:id="msgErr" alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="55.0" prefWidth="337.0" textFill="RED" />
+                        <Separator prefHeight="2.0" prefWidth="531.0" visible="false" />
+                     <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#guardarAmigo" prefHeight="26.0" prefWidth="62.0" text="Guardar">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin></Button>
+                  </children>
+               </HBox>
+               </bottom>
+               <center>
+                  <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <content>
+                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="565.0" prefWidth="925.0" spacing="15.0">
+                        <padding>
+                              <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+                           </padding>
+                        <children>
+                           <Label alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="69.0" prefWidth="865.0" text="Agregar amigo">
+                              <font>
+                                    <Font name="Baskerville Old Face" size="31.0" />
+                                 </font>
+                           </Label>
+            
+                           <HBox alignment="CENTER_LEFT" spacing="10.0">
+                              <children>
+                                 <Label prefWidth="80.0" text="Nombre:" />
+                                 <TextField fx:id="tfNombre" prefWidth="250.0" promptText="Nombre completo" />
+                              </children>
+                           </HBox>
+            
+                           <HBox alignment="CENTER_LEFT" spacing="10.0">
+                              <children>
+                                 <Label prefWidth="80.0" text="Edad:" />
+                                 <TextField fx:id="tfEdad" prefHeight="25.0" prefWidth="58.0" />
+                              </children>
+                           </HBox>
+            
+                           <VBox spacing="5.0">
+                              <children>
+                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label prefWidth="80.0" text="Hobbies:" />
+                                    <TextField fx:id="tfHobbie" prefHeight="25.0" prefWidth="158.0" promptText="Indica hobbie" />
+                                    <Button onAction="#agregarHobbie" text="Añadir" />
+                                 </children>
+                                 </HBox>
+                                 <VBox fx:id="listaHobbies" spacing="5.0">
+                                 <padding>
+                                          <Insets left="90.0" />
+                                       </padding>
+                                 </VBox>
+                              </children>
+                           </VBox>
+            
+                           <VBox spacing="5.0">
+                              <children>
+                                 <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <Label prefWidth="80.0" text="Teléfonos:" />
+                                    <TextField fx:id="tfTelefono" prefHeight="25.0" prefWidth="157.0" promptText="Indica numero" />
+                                    <Button onAction="#agregarTelefono" text="Añadir" />
+                                 </children>
+                                 </HBox>
+                                 <VBox fx:id="listaTelefonos" spacing="5.0">
+                                 <padding>
+                                          <Insets left="90.0" />
+                                       </padding>
+                                 </VBox>
+                              </children>
+                           </VBox>
+            
+                           <VBox spacing="5.0">
+                              <children>
+                                 <HBox spacing="10.0">
+                                 <children>
+                                    <Label prefWidth="80.0" text="Estudios:" />
+                                          <VBox prefHeight="102.0" prefWidth="361.0" spacing="10.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="191.0" spacing="10.0">
+                                                   <children>
+                                                      <Label prefHeight="17.0" prefWidth="47.0" text="Titulo:" />
+                                                      <TextField fx:id="tfTitulo" prefHeight="25.0" prefWidth="157.0" promptText="Indica titulo" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                   <children>
+                                                      <Label prefHeight="17.0" prefWidth="47.0" text="Centro:" />
+                                                      <TextField fx:id="tfCentro" prefHeight="25.0" prefWidth="157.0" promptText="Indica cento" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                                   <children>
+                                                      <Label prefHeight="17.0" prefWidth="47.0" text="Año:" />
+                                                      <TextField fx:id="tfAnio" prefHeight="25.0" prefWidth="157.0" promptText="Indica año" />
+                                                <Button alignment="CENTER" onAction="#agregarEstudio" prefWidth="94.0" text="Añadir estudio">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="BOTTOM_LEFT" prefHeight="87.0" prefWidth="100.0" />
+                                 </children>
+                                 </HBox>
+                                 <VBox fx:id="listaEstudios" spacing="5.0">
+                                 <padding>
+                                          <Insets left="90.0" />
+                                       </padding>
+                                 </VBox>
+                              </children>
+                           </VBox>
+                        </children>
+                     </VBox>
+                     </content>
+                  </ScrollPane>
+               </center>
+            </BorderPane>
+         </content>
+   </Tab>
+  </tabs>
+</TabPane>
