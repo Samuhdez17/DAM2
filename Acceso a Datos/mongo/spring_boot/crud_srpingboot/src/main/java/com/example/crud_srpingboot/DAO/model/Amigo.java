@@ -27,6 +27,14 @@ public class Amigo {
         this.estudios = estudios;
     }
 
+    public Amigo(String nombre, int edad, List<String> telefonos, List<String> hobbies, List<Estudio> estudios) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.telefonos = telefonos;
+        this.hobbies = hobbies;
+        this.estudios = estudios;
+    }
+
     public String getId() {
         return id;
     }

@@ -13,7 +13,6 @@ import com.example.crud_srpingboot.DAO.network.ApiClient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -27,92 +26,94 @@ import javafx.scene.layout.VBox;
 
 @Component
 public class Controlador {
-    private final ApiClient apiClient = new ApiClient();
+    protected final ApiClient apiClient = new ApiClient();
 
-    private String tipoOrdenacion = "nombremM";
+    protected String tipoOrdenacion = "nombremM";
 
-    private List<Amigo> lista;
+    protected List<Amigo> lista;
 
-    private Amigo amigoEditando = null;
+    protected Amigo amigoEditando = null;
 
-    private boolean editando = false;
+    protected boolean editando = false;
 
-    @FXML
-    private TableView<Amigo> tablaAmigos;
-
-    @FXML
-    private TabPane tabAmigos;
+    protected final Pestania1 pest1 = new Pestania1();
 
     @FXML
-    private Tab pestaniaAgregar;
+    protected TableView<Amigo> tablaAmigos;
 
     @FXML
-    private Tab pestaniaAmigos;
+    protected TabPane tabAmigos;
+
+    @FXML
+    protected Tab pestaniaAgregar;
+
+    @FXML
+    protected Tab pestaniaAmigos;
 
     // PESTANIA 1
     @FXML
-    private Button btActualizar;
+    protected Button btActualizar;
 
     @FXML
-    private Button btEditar;
+    protected Button btEditar;
 
     @FXML
-    private Button btEliminar;
+    protected Button btEliminar;
 
     @FXML
-    private TableColumn<Amigo, String> colEdad;
+    protected TableColumn<Amigo, String> colEdad;
 
     @FXML
-    private TableColumn<Amigo, String> colEstudios;
+    protected TableColumn<Amigo, String> colEstudios;
 
     @FXML
-    private TableColumn<Amigo, String> colNombre;
+    protected TableColumn<Amigo, String> colNombre;
 
     @FXML
-    private TableColumn<Amigo, String> colTelfs;
+    protected TableColumn<Amigo, String> colTelfs;
 
     @FXML
-    private TableColumn<Amigo, String> colHobbies;
+    protected TableColumn<Amigo, String> colHobbies;
 
     @FXML
-    private Label mensajeBreve;
+    protected Label mensajeBreve;
 
     @FXML
-    private ComboBox<String> cbOrdenacion;
+    protected ComboBox<String> cbOrdenacion;
 
     // PESTANIA 2
     @FXML
-    private VBox listaEstudios;
+    protected VBox listaEstudios;
 
     @FXML
-    private VBox listaHobbies;
+    protected VBox listaHobbies;
 
     @FXML
-    private VBox listaTelefonos;
+    protected VBox listaTelefonos;
 
     @FXML
-    private TextField tfEdad;
+    protected TextField tfEdad;
 
     @FXML
-    private TextField tfHobbie;
+    protected TextField tfHobbie;
 
     @FXML
-    private TextField tfNombre;
+    protected TextField tfNombre;
 
     @FXML
-    private TextField tfTelefono;
+    protected TextField tfTelefono;
     
     @FXML
-    private TextField tfTitulo;
+    protected TextField tfTitulo;
     
     @FXML
-    private TextField tfCentro;
+    protected TextField tfCentro;
 
     @FXML
-    private TextField tfAnio;
+    protected TextField tfAnio;
 
     @FXML
-    private Label msgErr;
+    protected Label msgErr;
 
     // METODOS PESTANIA 1
     @FXML
@@ -145,51 +146,12 @@ public class Controlador {
     
     @FXML
     void actualizarLista(ActionEvent event) {
-        System.out.println("Actualizando lista"); // log
-
-        try {
-            lista = apiClient.listarAmigos(tipoOrdenacion);
-            mensajeBreve.setText("Lista actualizada");
-            System.out.println("Tamanio lista: " + lista.size());// log
-            System.out.println("Contenido: " + lista);// log
-            
-        } catch (IOException | InterruptedException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error de conexión");
-            alert.setContentText("No se puede conectar con el servidor.");
-            alert.showAndWait();
-        }
-
-        tablaAmigos.getItems().setAll(lista);
-
-        System.out.printf("""
-        Lista actualziada:
-
-            Value ComboBox: %s
-            Tipo ordenacion: %s
-
-        """, cbOrdenacion.getValue(), tipoOrdenacion);
+        pest1.actualizarLista();
     }
 
     @FXML
     void cambiarOrdenacion(ActionEvent event) {
-        String tipo = cbOrdenacion.getValue();
-
-        switch (tipo) {
-            case "Nombre ASC"      -> { tipoOrdenacion = "nombremM";    }
-            case "Nombre DES"      -> { tipoOrdenacion = "nombreMm";    }
-            case "Edad ASC"        -> { tipoOrdenacion = "edadmM";      }
-            case "Edad DES"        -> { tipoOrdenacion = "edadMm";      }
-            case "Hobbies ASC"     -> { tipoOrdenacion = "hobbiesmM";   }
-            case "Hobbies DES"     -> { tipoOrdenacion = "hobbiesMm";   }
-            case "Telefonos ASC"   -> { tipoOrdenacion = "telefonosmM"; }
-            case "Telefonos DES"   -> { tipoOrdenacion = "telefonosMm"; }
-            case "Estudios ASC"    -> { tipoOrdenacion = "estudiosmM";  }
-            case "Estudios DES"    -> { tipoOrdenacion = "estudiosMm";  }
-            default -> System.out.println("SALTA DEFAULT");
-        }
-
-        actualizarLista(event);
+        pest1.cambiarOrdenacion();
     }
 
     @FXML
@@ -242,11 +204,9 @@ public class Controlador {
         ) {
             int anio = 0;
             try {
-                msgErr.setText("");
-                anio = Integer.parseInt(tfAnio.getText());
+                anio = verificarAnioEstudio();
             } catch (NumberFormatException e) {
-                msgErr.setText("El año de titulacion no es un numero");
-                return;
+                msgErr.setText("El año introducido no es un numero");
             }
 
             listaEstudios.getChildren().add(crearFilaEstudio(
@@ -257,6 +217,11 @@ public class Controlador {
                 ))
             );
         }
+    }
+
+    private int verificarAnioEstudio() {
+        msgErr.setText("");
+        return Integer.parseInt(tfAnio.getText());
     }
 
     @FXML
@@ -290,7 +255,9 @@ public class Controlador {
         } else {
             msgErr.setText("");
             // Se guardan los cambios
-            Amigo amigoNuevo = new Amigo();
+            Amigo amigoNuevo = new Amigo(
+
+            );
 
             if (editando) {
                 // apiClient.actualizarAmigo(amigoEditando.getId());
