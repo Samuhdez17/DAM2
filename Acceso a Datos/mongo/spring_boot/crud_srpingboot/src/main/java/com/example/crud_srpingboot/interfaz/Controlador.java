@@ -13,6 +13,7 @@ import com.example.crud_srpingboot.DAO.network.ApiClient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -35,8 +36,6 @@ public class Controlador {
     protected Amigo amigoEditando = null;
 
     protected boolean editando = false;
-
-    protected final Pestania1 pest1 = new Pestania1();
 
     @FXML
     protected TableView<Amigo> tablaAmigos;
@@ -146,12 +145,53 @@ public class Controlador {
     
     @FXML
     void actualizarLista(ActionEvent event) {
-        pest1.actualizarLista();
+        // pest1.actualizarLista();
+        System.out.println("Actualizando lista"); // log
+
+        try {
+            lista = apiClient.listarAmigos(tipoOrdenacion);
+            mensajeBreve.setText("Lista actualizada");
+            System.out.println("Tamanio lista: " + lista.size());// log
+            System.out.println("Contenido: " + lista);// log
+            
+        } catch (IOException | InterruptedException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error de conexión");
+            alert.setContentText("No se puede conectar con el servidor.");
+            alert.showAndWait();
+        }
+
+        tablaAmigos.getItems().setAll(lista);
+
+        System.out.printf("""
+        Lista actualziada:
+
+            Value ComboBox: %s
+            Tipo ordenacion: %s
+
+        """, cbOrdenacion.getValue(), tipoOrdenacion);
     }
 
     @FXML
     void cambiarOrdenacion(ActionEvent event) {
-        pest1.cambiarOrdenacion();
+        // pest1.cambiarOrdenacion();
+        String tipo = cbOrdenacion.getValue();
+
+        switch (tipo) {
+            case "Nombre ASC"      -> { tipoOrdenacion = "nombremM";    }
+            case "Nombre DES"      -> { tipoOrdenacion = "nombreMm";    }
+            case "Edad ASC"        -> { tipoOrdenacion = "edadmM";      }
+            case "Edad DES"        -> { tipoOrdenacion = "edadMm";      }
+            case "Hobbies ASC"     -> { tipoOrdenacion = "hobbiesmM";   }
+            case "Hobbies DES"     -> { tipoOrdenacion = "hobbiesMm";   }
+            case "Telefonos ASC"   -> { tipoOrdenacion = "telefonosmM"; }
+            case "Telefonos DES"   -> { tipoOrdenacion = "telefonosMm"; }
+            case "Estudios ASC"    -> { tipoOrdenacion = "estudiosmM";  }
+            case "Estudios DES"    -> { tipoOrdenacion = "estudiosMm";  }
+            default -> System.out.println("SALTA DEFAULT");
+        }
+
+        actualizarLista(event);
     }
 
     @FXML
