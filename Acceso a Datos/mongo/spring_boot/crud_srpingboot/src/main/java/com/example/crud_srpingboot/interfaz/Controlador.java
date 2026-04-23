@@ -2,6 +2,8 @@ package com.example.crud_srpingboot.interfaz;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -36,6 +38,12 @@ public class Controlador {
     protected Amigo amigoEditando = null;
 
     protected boolean editando = false;
+
+    ArrayList<String> hobbies = new ArrayList<>();
+
+    ArrayList<String> telefonos = new ArrayList<>();
+
+    ArrayList<Estudio> estudios = new ArrayList<>();
 
     @FXML
     protected TableView<Amigo> tablaAmigos;
@@ -159,6 +167,8 @@ public class Controlador {
             alert.setTitle("Error de conexión");
             alert.setContentText("No se puede conectar con el servidor.");
             alert.showAndWait();
+
+            System.out.println(e.getStackTrace());
         }
 
         tablaAmigos.getItems().setAll(lista);
@@ -168,6 +178,7 @@ public class Controlador {
 
             Value ComboBox: %s
             Tipo ordenacion: %s
+
 
         """, cbOrdenacion.getValue(), tipoOrdenacion);
     }
@@ -203,6 +214,12 @@ public class Controlador {
 
         tfNombre.setText(amigoEditando.getNombre());
         tfEdad.  setText(String.valueOf(amigoEditando.getEdad()));
+
+        hobbies = (ArrayList<String>) amigoEditando.getHobbies();
+
+        telefonos = (ArrayList<String>) amigoEditando.getTelefonos();
+
+        estudios = (ArrayList<Estudio>) amigoEditando.getEstudios();
 
         for (String hobbie : amigoEditando.getHobbies()) {
             listaHobbies.getChildren().add(crearFilaHobbie(hobbie));
@@ -242,20 +259,26 @@ public class Controlador {
             !tfCentro.getText().isEmpty() &&
             !tfAnio.getText().isEmpty()
         ) {
-            int anio = 0;
+            int anio;
+
             try {
                 anio = verificarAnioEstudio();
             } catch (NumberFormatException e) {
                 msgErr.setText("El año introducido no es un numero");
+                return;
             }
 
-            listaEstudios.getChildren().add(crearFilaEstudio(
-                new Estudio(
-                    tfTitulo.getText(), 
-                    tfCentro.getText(),
-                    anio
-                ))
-            );
+            if (anio < 1900 || anio > LocalDate.now().getYear()) {
+                msgErr.setText("El año introducido no es valido");
+                return;
+            }
+
+            Estudio estudio = new Estudio(tfTitulo.getText(), tfCentro.getText(), anio);
+
+            listaEstudios.getChildren().add(crearFilaEstudio(estudio));
+            estudios.add(estudio);
+
+            System.out.println(estudios.size());
         }
     }
 
@@ -266,22 +289,30 @@ public class Controlador {
 
     @FXML
     void agregarHobbie(ActionEvent event) {
-        String valor = tfHobbie.getText();
+        String hobbie = tfHobbie.getText();
 
-        if (!valor.isEmpty()) {
-            listaHobbies.getChildren().add(crearFilaHobbie(valor));
+        if (!hobbie.isEmpty()) {
+            listaHobbies.getChildren().add(crearFilaHobbie(hobbie));
             tfHobbie.clear();
+
+            hobbies.add(hobbie);
         }
+
+        System.out.println(hobbies.size());
     }
 
     @FXML
     void agregarTelefono(ActionEvent event) {
-        String valor = tfTelefono.getText();
+        String telefono = tfTelefono.getText();
         
-        if (!valor.isEmpty()) {
-            listaTelefonos.getChildren().add(crearFilaTelefono(valor));
+        if (!telefono.isEmpty()) {
+            listaTelefonos.getChildren().add(crearFilaTelefono(telefono));
             tfTelefono.clear();
+
+            telefonos.add(telefono);
         }
+
+        System.out.println(telefonos.size());
     }
 
     @FXML
@@ -295,17 +326,35 @@ public class Controlador {
         } else {
             msgErr.setText("");
             // Se guardan los cambios
-            Amigo amigoNuevo = new Amigo(
 
+            Amigo amigoNuevo = new Amigo(
+                tfNombre.getText(),
+                Integer.parseInt(tfEdad.getText()),
+                hobbies,
+                telefonos,
+                estudios
             );
 
-            if (editando) {
-                // apiClient.actualizarAmigo(amigoEditando.getId());
+            try {
+                if (editando) {
+                    apiClient.actualizarAmigo(amigoEditando.getId(), amigoNuevo);
+    
+                } else {
+                    apiClient.insertarAmigo(amigoNuevo);
+                }
 
-            } else {
-                // apiClient.insertarAmigo();
+                mensajeBreve.setText("Amigo agregado correctamente");
+                
+            } catch (IOException | InterruptedException e) {
+                mensajeBreve.setText("Fallo al agregar amigo");
+                // meter en log el error
+
+            } finally {
+                actualizarLista(event);
+                editando = false;
+                // Cambiamos de pestaña
+                tabAmigos.getSelectionModel().select(pestaniaAmigos);
             }
-            editando = false;
         }
     }
 
@@ -316,7 +365,11 @@ public class Controlador {
         Label label = new Label(hobbie);
 
         Button btnBorrar = new Button("X");
-        btnBorrar.setOnAction(e -> listaHobbies.getChildren().remove(fila));
+        btnBorrar.setOnAction(e -> {
+            listaHobbies.getChildren().remove(fila);
+
+            hobbies.remove(hobbie);
+        });
 
         fila.getChildren().addAll(label, btnBorrar);
         return fila;
@@ -329,7 +382,11 @@ public class Controlador {
         Label label = new Label(telefono);
 
         Button btnBorrar = new Button("X");
-        btnBorrar.setOnAction(e -> listaTelefonos.getChildren().remove(fila));
+        btnBorrar.setOnAction(e -> {
+            listaTelefonos.getChildren().remove(fila);
+
+            telefonos.remove(telefono);
+        });
         
         fila.getChildren().addAll(label, btnBorrar);
         return fila;
@@ -344,7 +401,11 @@ public class Controlador {
                 """, estudio.getTitulo(), estudio.getCentro(), estudio.getAnio()));
 
         Button btnBorrar = new Button("X");
-        btnBorrar.setOnAction(e -> listaEstudios.getChildren().remove(fila));
+        btnBorrar.setOnAction(e -> {
+            listaEstudios.getChildren().remove(fila);
+
+            estudios.remove(estudio);
+        });
         
         fila.getChildren().addAll(label, btnBorrar);
         return fila;
@@ -354,5 +415,9 @@ public class Controlador {
         listaEstudios.getChildren().clear();
         listaHobbies.getChildren().clear();
         listaTelefonos.getChildren().clear();
+
+        hobbies.clear();
+        telefonos.clear();
+        estudios.clear();
     }
 }
