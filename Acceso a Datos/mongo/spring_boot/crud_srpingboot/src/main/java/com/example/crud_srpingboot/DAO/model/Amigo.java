@@ -11,27 +11,27 @@ public class Amigo {
     private String id;
     private String nombre;
     private int edad;
-    private List<String> telefonos;
     private List<String> hobbies;
+    private List<String> telefonos;
     private List<Estudio> estudios;
 
     public Amigo() {
     }
 
-    public Amigo(String id, String nombre, int edad, List<String> telefonos, List<String> hobbies, List<Estudio> estudios) {
+    public Amigo(String id, String nombre, int edad, List<String> hobbies, List<String> telefonos, List<Estudio> estudios) {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
-        this.telefonos = telefonos;
         this.hobbies = hobbies;
+        this.telefonos = telefonos;
         this.estudios = estudios;
     }
 
-    public Amigo(String nombre, int edad, List<String> telefonos, List<String> hobbies, List<Estudio> estudios) {
+    public Amigo(String nombre, int edad, List<String> hobbies, List<String> telefonos, List<Estudio> estudios) {
         this.nombre = nombre;
         this.edad = edad;
-        this.telefonos = telefonos;
         this.hobbies = hobbies;
+        this.telefonos = telefonos;
         this.estudios = estudios;
     }
 

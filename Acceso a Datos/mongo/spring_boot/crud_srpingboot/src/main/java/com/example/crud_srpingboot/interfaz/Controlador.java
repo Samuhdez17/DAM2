@@ -15,7 +15,6 @@ import com.example.crud_srpingboot.DAO.network.ApiClient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -29,6 +28,10 @@ import javafx.scene.layout.VBox;
 
 @Component
 public class Controlador {
+    private Pestania1 pest1;
+    
+    private Pestania2 pest2;
+
     protected final ApiClient apiClient = new ApiClient();
 
     protected String tipoOrdenacion = "nombremM";
@@ -122,9 +125,11 @@ public class Controlador {
     @FXML
     protected Label msgErr;
 
-    // METODOS PESTANIA 1
     @FXML
     public void initialize() {
+        pest1 = new Pestania1(this);
+        pest2 = new Pestania2(this, pest1); // Mandamos pest1 ya que el metodo de guardarAmigo() actualiza la lista de amigos
+
         // Listener para saber si hay una fila seleccionada.
         tablaAmigos.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             boolean haySeleccion = newVal != null;
@@ -153,212 +158,47 @@ public class Controlador {
     
     @FXML
     void actualizarLista(ActionEvent event) {
-        // pest1.actualizarLista();
-        System.out.println("Actualizando lista"); // log
-
-        try {
-            lista = apiClient.listarAmigos(tipoOrdenacion);
-            mensajeBreve.setText("Lista actualizada");
-            System.out.println("Tamanio lista: " + lista.size());// log
-            System.out.println("Contenido: " + lista);// log
-            
-        } catch (IOException | InterruptedException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error de conexión");
-            alert.setContentText("No se puede conectar con el servidor.");
-            alert.showAndWait();
-
-            System.out.println(e.getStackTrace());
-        }
-
-        tablaAmigos.getItems().setAll(lista);
-
-        System.out.printf("""
-        Lista actualziada:
-
-            Value ComboBox: %s
-            Tipo ordenacion: %s
-
-
-        """, cbOrdenacion.getValue(), tipoOrdenacion);
+        pest1.actualizarLista();
     }
 
     @FXML
     void cambiarOrdenacion(ActionEvent event) {
-        // pest1.cambiarOrdenacion();
-        String tipo = cbOrdenacion.getValue();
-
-        switch (tipo) {
-            case "Nombre ASC"      -> { tipoOrdenacion = "nombremM";    }
-            case "Nombre DES"      -> { tipoOrdenacion = "nombreMm";    }
-            case "Edad ASC"        -> { tipoOrdenacion = "edadmM";      }
-            case "Edad DES"        -> { tipoOrdenacion = "edadMm";      }
-            case "Hobbies ASC"     -> { tipoOrdenacion = "hobbiesmM";   }
-            case "Hobbies DES"     -> { tipoOrdenacion = "hobbiesMm";   }
-            case "Telefonos ASC"   -> { tipoOrdenacion = "telefonosmM"; }
-            case "Telefonos DES"   -> { tipoOrdenacion = "telefonosMm"; }
-            case "Estudios ASC"    -> { tipoOrdenacion = "estudiosmM";  }
-            case "Estudios DES"    -> { tipoOrdenacion = "estudiosMm";  }
-            default -> System.out.println("SALTA DEFAULT");
-        }
-
-        actualizarLista(event);
+        pest1.cambiarOrdenacion();
     }
 
     @FXML
     void editarAmigo(ActionEvent event) {
-        borrarDatos();
-
-        editando = true;
-        amigoEditando = tablaAmigos.getSelectionModel().getSelectedItem();
-
-        tfNombre.setText(amigoEditando.getNombre());
-        tfEdad.  setText(String.valueOf(amigoEditando.getEdad()));
-
-        hobbies = (ArrayList<String>) amigoEditando.getHobbies();
-
-        telefonos = (ArrayList<String>) amigoEditando.getTelefonos();
-
-        estudios = (ArrayList<Estudio>) amigoEditando.getEstudios();
-
-        for (String hobbie : amigoEditando.getHobbies()) {
-            listaHobbies.getChildren().add(crearFilaHobbie(hobbie));
-        }
-
-        for (String tel : amigoEditando.getTelefonos()) {
-            listaTelefonos.getChildren().add(crearFilaTelefono(tel));
-        }
-
-        for (Estudio est : amigoEditando.getEstudios()) {
-            listaEstudios.getChildren().add(crearFilaEstudio(est));
-        }
-
-        // Cambiamos de pestaña
-        tabAmigos.getSelectionModel().select(pestaniaAgregar);
+        pest1.editarAmigo();
     }
 
     @FXML
     void eliminarAmigo(ActionEvent event) {
-        Amigo seleccionado = tablaAmigos.getSelectionModel().getSelectedItem();
-
-        try {
-            apiClient.borrarAmigo(seleccionado.getId());
-            actualizarLista(event);
-            mensajeBreve.setText("Amigo eliminado");
-
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Error al eliminar el amigo. " + e);
-        }
+        pest1.borrarAmigo();
     }
 
     // METODOS PESTANIA 2
     @FXML
-    void agregarEstudio(ActionEvent event) {
-        if (
-            !tfTitulo.getText().isEmpty() &&
-            !tfCentro.getText().isEmpty() &&
-            !tfAnio.getText().isEmpty()
-        ) {
-            int anio;
-
-            try {
-                anio = verificarAnioEstudio();
-            } catch (NumberFormatException e) {
-                msgErr.setText("El año introducido no es un numero");
-                return;
-            }
-
-            if (anio < 1900 || anio > LocalDate.now().getYear()) {
-                msgErr.setText("El año introducido no es valido");
-                return;
-            }
-
-            Estudio estudio = new Estudio(tfTitulo.getText(), tfCentro.getText(), anio);
-
-            listaEstudios.getChildren().add(crearFilaEstudio(estudio));
-            estudios.add(estudio);
-
-            System.out.println(estudios.size());
-        }
-    }
-
-    private int verificarAnioEstudio() {
-        msgErr.setText("");
-        return Integer.parseInt(tfAnio.getText());
-    }
-
-    @FXML
     void agregarHobbie(ActionEvent event) {
-        String hobbie = tfHobbie.getText();
-
-        if (!hobbie.isEmpty()) {
-            listaHobbies.getChildren().add(crearFilaHobbie(hobbie));
-            tfHobbie.clear();
-
-            hobbies.add(hobbie);
-        }
-
-        System.out.println(hobbies.size());
+        pest2.agregarHobbie();
     }
 
     @FXML
     void agregarTelefono(ActionEvent event) {
-        String telefono = tfTelefono.getText();
-        
-        if (!telefono.isEmpty()) {
-            listaTelefonos.getChildren().add(crearFilaTelefono(telefono));
-            tfTelefono.clear();
+        pest2.agregarTelefono();
+    }
 
-            telefonos.add(telefono);
-        }
-
-        System.out.println(telefonos.size());
+    @FXML
+    void agregarEstudio(ActionEvent event) {
+        pest2.agregarEstudio();
     }
 
     @FXML
     void guardarAmigo(ActionEvent event) {
-        if (tfNombre.getText().isBlank()) {
-            msgErr.setText("Campo de nombre vacio");
-
-        } else if (tfEdad.getText().isBlank()) {
-            msgErr.setText("Campo de edad vacio");
-
-        } else {
-            msgErr.setText("");
-            // Se guardan los cambios
-
-            Amigo amigoNuevo = new Amigo(
-                tfNombre.getText(),
-                Integer.parseInt(tfEdad.getText()),
-                hobbies,
-                telefonos,
-                estudios
-            );
-
-            try {
-                if (editando) {
-                    apiClient.actualizarAmigo(amigoEditando.getId(), amigoNuevo);
-    
-                } else {
-                    apiClient.insertarAmigo(amigoNuevo);
-                }
-
-                mensajeBreve.setText("Amigo agregado correctamente");
-                
-            } catch (IOException | InterruptedException e) {
-                mensajeBreve.setText("Fallo al agregar amigo");
-                // meter en log el error
-
-            } finally {
-                actualizarLista(event);
-                editando = false;
-                // Cambiamos de pestaña
-                tabAmigos.getSelectionModel().select(pestaniaAmigos);
-            }
-        }
+        pest2.guardarAmigo();
     }
 
-    private HBox crearFilaHobbie(String hobbie) {
+    // Metodos que comparten pest1 y pest2
+    protected HBox crearFilaHobbie(String hobbie) {
         HBox fila = new HBox(10);
         fila.setStyle("-fx-alignment: CENTER_LEFT;");
 
@@ -375,7 +215,7 @@ public class Controlador {
         return fila;
     }
 
-    private HBox crearFilaTelefono(String telefono) {
+    protected HBox crearFilaTelefono(String telefono) {
         HBox fila = new HBox(10);
         fila.setStyle("-fx-alignment: CENTER_LEFT;");
 
@@ -392,7 +232,7 @@ public class Controlador {
         return fila;
     }
 
-    private HBox crearFilaEstudio(Estudio estudio) {
+    protected HBox crearFilaEstudio(Estudio estudio) {
         HBox fila = new HBox(10);
         fila.setStyle("-fx-alignment: CENTER_LEFT;");
 
@@ -409,15 +249,5 @@ public class Controlador {
         
         fila.getChildren().addAll(label, btnBorrar);
         return fila;
-    }
-
-    private void borrarDatos() {
-        listaEstudios.getChildren().clear();
-        listaHobbies.getChildren().clear();
-        listaTelefonos.getChildren().clear();
-
-        hobbies.clear();
-        telefonos.clear();
-        estudios.clear();
     }
 }

@@ -1,54 +1,118 @@
 package com.example.crud_srpingboot.interfaz;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import com.example.crud_srpingboot.DAO.model.Amigo;
+import com.example.crud_srpingboot.DAO.model.Estudio;
 
 import javafx.scene.control.Alert;
 
-public class Pestania1 extends Controlador {
-    // public void actualizarLista() {
-    //     System.out.println("Actualizando lista"); // log
+public class Pestania1 {
+    private final Controlador controlador;
 
-    //     try {
-    //         lista = apiClient.listarAmigos(tipoOrdenacion);
-    //         mensajeBreve.setText("Lista actualizada");
-    //         System.out.println("Tamanio lista: " + lista.size());// log
-    //         System.out.println("Contenido: " + lista);// log
+    public Pestania1(Controlador controlador) {
+        this.controlador = controlador;
+    }
+
+    protected void actualizarLista() {
+        System.out.println("Actualizando lista"); // log
+
+        try {
+            controlador.lista = controlador.apiClient.listarAmigos(controlador.tipoOrdenacion);
+            controlador.mensajeBreve.setText("Lista actualizada");
+            System.out.println("Tamanio lista: " + controlador.lista.size());// log
             
-    //     } catch (IOException | InterruptedException e) {
-    //         Alert alert = new Alert(Alert.AlertType.ERROR);
-    //         alert.setTitle("Error de conexión");
-    //         alert.setContentText("No se puede conectar con el servidor.");
-    //         alert.showAndWait();
-    //     }
+        } catch (IOException | InterruptedException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error de conexión");
+            alert.setContentText("No se pudo conectar con el servidor.");
+            alert.showAndWait();
 
-    //     tablaAmigos.getItems().setAll(lista);
+            System.out.println(e);
+        }
 
-    //     System.out.printf("""
-    //     Lista actualziada:
+        controlador.tablaAmigos.getItems().setAll(controlador.lista);
+    }
 
-    //         Value ComboBox: %s
-    //         Tipo ordenacion: %s
+    protected void cambiarOrdenacion() {
+        String tipo = controlador.cbOrdenacion.getValue();
 
-    //     """, cbOrdenacion.getValue(), tipoOrdenacion);
-    // }
+        switch (tipo) {
+            case "Nombre ASC"      -> { controlador.tipoOrdenacion = "nombremM";    }
+            case "Nombre DES"      -> { controlador.tipoOrdenacion = "nombreMm";    }
+            case "Edad ASC"        -> { controlador.tipoOrdenacion = "edadmM";      }
+            case "Edad DES"        -> { controlador.tipoOrdenacion = "edadMm";      }
+            case "Hobbies ASC"     -> { controlador.tipoOrdenacion = "hobbiesmM";   }
+            case "Hobbies DES"     -> { controlador.tipoOrdenacion = "hobbiesMm";   }
+            case "Telefonos ASC"   -> { controlador.tipoOrdenacion = "telefonosmM"; }
+            case "Telefonos DES"   -> { controlador.tipoOrdenacion = "telefonosMm"; }
+            case "Estudios ASC"    -> { controlador.tipoOrdenacion = "estudiosmM";  }
+            case "Estudios DES"    -> { controlador.tipoOrdenacion = "estudiosMm";  }
+            default -> System.out.println("SALTA DEFAULT");
+        }
 
-    // public void cambiarOrdenacion() {
-    //     String tipo = cbOrdenacion.getValue();
+        actualizarLista();
+    }
 
-    //     switch (tipo) {
-    //         case "Nombre ASC"      -> { tipoOrdenacion = "nombremM";    }
-    //         case "Nombre DES"      -> { tipoOrdenacion = "nombreMm";    }
-    //         case "Edad ASC"        -> { tipoOrdenacion = "edadmM";      }
-    //         case "Edad DES"        -> { tipoOrdenacion = "edadMm";      }
-    //         case "Hobbies ASC"     -> { tipoOrdenacion = "hobbiesmM";   }
-    //         case "Hobbies DES"     -> { tipoOrdenacion = "hobbiesMm";   }
-    //         case "Telefonos ASC"   -> { tipoOrdenacion = "telefonosmM"; }
-    //         case "Telefonos DES"   -> { tipoOrdenacion = "telefonosMm"; }
-    //         case "Estudios ASC"    -> { tipoOrdenacion = "estudiosmM";  }
-    //         case "Estudios DES"    -> { tipoOrdenacion = "estudiosMm";  }
-    //         default -> System.out.println("SALTA DEFAULT");
-    //     }
+    protected void editarAmigo() {
+        borrarDatos();
 
-    //     actualizarLista();
-    // }
+        controlador.editando = true;
+        controlador.amigoEditando = controlador.tablaAmigos.getSelectionModel().getSelectedItem();
+        
+        controlador.tfNombre.setText(controlador.amigoEditando.getNombre());
+        controlador.tfEdad.  setText(String.valueOf(controlador.amigoEditando.getEdad()));
+
+        controlador.hobbies = new ArrayList<>(controlador.amigoEditando.getHobbies());
+
+        controlador.telefonos = new ArrayList<>(controlador.amigoEditando.getTelefonos());
+
+        controlador.estudios = new ArrayList<>(controlador.amigoEditando.getEstudios());
+
+        for (String hobbie : controlador.amigoEditando.getHobbies()) {
+            controlador.listaHobbies.getChildren().add(controlador.crearFilaHobbie(hobbie));
+        }
+
+        for (String tel : controlador.amigoEditando.getTelefonos()) {
+            controlador.listaTelefonos.getChildren().add(controlador.crearFilaTelefono(tel));
+        }
+
+        for (Estudio est : controlador.amigoEditando.getEstudios()) {
+            controlador.listaEstudios.getChildren().add(controlador.crearFilaEstudio(est));
+        }
+
+        // Cambiamos de pestaña
+        controlador.tabAmigos.getSelectionModel().select(controlador.pestaniaAgregar);
+    }
+
+    private void borrarDatos() {
+        controlador.tfHobbie.clear();
+        controlador.tfTelefono.clear();
+
+        controlador.tfTitulo.clear();
+        controlador.tfCentro.clear();
+        controlador.tfAnio.clear();
+
+        controlador.listaEstudios.getChildren().clear();
+        controlador.listaHobbies.getChildren().clear();
+        controlador.listaTelefonos.getChildren().clear();
+
+        controlador.hobbies.clear();
+        controlador.telefonos.clear();
+        controlador.estudios.clear();
+    }
+
+    protected void borrarAmigo() {
+        Amigo seleccionado = controlador.tablaAmigos.getSelectionModel().getSelectedItem();
+
+        try {
+            controlador.apiClient.borrarAmigo(seleccionado.getId());
+            actualizarLista();
+            controlador.mensajeBreve.setText("Amigo eliminado");
+
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Error al eliminar el amigo. " + e); // Logerr
+        }
+    }
 }
