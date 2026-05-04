@@ -14,7 +14,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/interfaz.fxml"));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
-        stage.setTitle("Lista de amigos");
+        stage.setTitle("Lista de filamentos");
         stage.setResizable(false);
         stage.show();
     }
