@@ -3,22 +3,20 @@ package com.example.ej_crud_springboot.filamentos.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javafx.scene.paint.Color;
-
 @Document(collection="filamentos")
 public class Filamento {
     @Id
     private String id;
     private String material;
     private String marca;
-    private Color color;
+    private String color;
     private Especs especs;
     private int grDispo;
 
     public Filamento() {
     }
 
-    public Filamento(String id, String material, String marca, Color color, Especs especs, int grDispo) {
+    public Filamento(String id, String material, String marca, String color, Especs especs, int grDispo) {
         this.id = id;
         this.material = material;
         this.marca = marca;
@@ -27,7 +25,7 @@ public class Filamento {
         this.grDispo = grDispo;
     }
 
-    public Filamento(String material, String marca, Color color, Especs especs, int grDispo) {
+    public Filamento(String material, String marca, String color, Especs especs, int grDispo) {
         this.material = material;
         this.marca = marca;
         this.color = color;
@@ -59,11 +57,11 @@ public class Filamento {
         this.marca = marca;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -81,6 +79,19 @@ public class Filamento {
     
     public void setGrDispo(int grDispo) {
         this.grDispo = grDispo;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+            Material: %s    
+            Marca: %s
+            Color: %s
+            TImp: %d
+            TCama: %d
+            VelImp: %d
+            Gr: %d
+                        """, material, marca, color, especs.getTempImp(), especs.getTempCama(), especs.getVelImp(), grDispo);
     }
 }
 

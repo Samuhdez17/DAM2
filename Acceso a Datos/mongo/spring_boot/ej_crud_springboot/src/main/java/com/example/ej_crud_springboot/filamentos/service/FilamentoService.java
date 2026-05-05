@@ -41,11 +41,11 @@ public class FilamentoService {
                 sentencia = Sort.by("marca").reverse();
             }
 
-            case "kilomM" -> {
+            case "pesomM" -> {
                 sentencia = Sort.by("grDispo");
             }
 
-            case "kiloMm" -> {
+            case "pesoMm" -> {
                 sentencia = Sort.by("grDispo").reverse();
             }
 

@@ -1,9 +1,7 @@
 package com.example.ej_crud_springboot.filamentos.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="especs")
 public class Especs {
     @Id
     private String id;
@@ -57,5 +55,14 @@ public class Especs {
 
     public void setVelImp(int velImp) {
         this.velImp = velImp;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+            Temperatura impresion: %d
+            Temperatura cama: %d
+            Velocidad impresion: %d
+                """, tempImp, tempCama, velImp);
     }
 }

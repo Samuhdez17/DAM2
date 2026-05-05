@@ -23,7 +23,7 @@ public class ApiClient {
     public List<Filamento> listarFilamentos(String orden) throws IOException, InterruptedException {
         // Se le hace la peticion a la api con el tipo de orden
         HttpRequest peticion = HttpRequest.newBuilder()
-        .uri(URI.create(urlBase + "/listar?tipo=" + orden))
+        .uri(URI.create(urlBase + "/listar?orden=" + orden))
         .GET()
         .build();
 
