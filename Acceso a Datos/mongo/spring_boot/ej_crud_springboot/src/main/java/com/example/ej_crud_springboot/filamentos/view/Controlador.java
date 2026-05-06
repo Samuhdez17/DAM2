@@ -1,15 +1,28 @@
 package com.example.ej_crud_springboot.filamentos.view;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.example.ej_crud_springboot.filamentos.client.ApiClient;
 import com.example.ej_crud_springboot.filamentos.model.Filamento;
+import com.example.ej_crud_springboot.filamentos.service.MiObjectOutputStream;
 import com.example.ej_crud_springboot.filamentos.view.pestanias.Pestania1;
 import com.example.ej_crud_springboot.filamentos.view.pestanias.Pestania2;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,9 +39,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 @Component
 public class Controlador {
+    private File marcasFile;
+
+    private File materialesFile;
+
+    private File logErr;
+
     public final ApiClient apiClient = new ApiClient();
 
     private final Pestania1 pest1 = new Pestania1(this);
@@ -43,9 +63,9 @@ public class Controlador {
 
     public boolean editando = false;
 
-    public ArrayList<String> listaMateriales = new ArrayList<>();
+    public ArrayList<String> listaMateriales = new ArrayList<>(List.of("ABS", "ASA", "PLA", "PETG", "TPU"));
 
-    public ArrayList<String> listaMarcas = new ArrayList<>();
+    public ArrayList<String> listaMarcas = new ArrayList<>(List.of("BambuLab", "Sataka", "Winkle"));
 
     @FXML
     public Tab pestaniaAgregar;
@@ -101,7 +121,7 @@ public class Controlador {
     public ColorPicker cpColor;
 
     @FXML
-    public Label msgErr;
+    private Label msgErr;
 
     @FXML
     public TextField tfGrDispo;
@@ -126,8 +146,23 @@ public class Controlador {
 
     @FXML
     public void initialize() {
-        rellenarListaMarcasYMateriales();
+        // Creacion de fichero log para errores
+        logErr = new File("src/main/resources/files/logsErr.txt");
+        if (!logErr.exists()) {
+            try {
+                logErr.createNewFile();
+            } catch (IOException e) {
+                System.err.println("Error al crear logsErr.txt");
+            }
+        }
 
+        // Se rellenan los ficheros con las marcas y materiales de manera local
+        try {
+            rellenarFicherosMarcasYMateriales();
+        } catch (IOException e) {
+            registrarError("Error al rellenar ficheros");
+        }
+        
         // Listener para saber si hay una fila seleccionada.
         tablaFilamentos.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             boolean haySeleccion = newVal != null;
@@ -137,13 +172,12 @@ public class Controlador {
 
         // Relleno del combo box de ordenaciones
         String[] ordenaciones = {
-            "Material ASC" , "Material DES",
             "Marca ASC"  , "Marca DES", 
+            "Material ASC" , "Material DES",
             "Peso ASC"   , "Peso DES"
         };
-
         cbOrdenacion.getItems().addAll(ordenaciones);
-        cbOrdenacion.setValue("Material ASC");
+        cbOrdenacion.setValue("Marca ASC");
         
         // Relleno de tabla
         colMaterial.    setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMaterial()));
@@ -207,23 +241,140 @@ public class Controlador {
             }
         });
 
-        // Relleno combo box de material y marca 
-        // (en caso de seleccionar 'Otro' u 'Otra', aparece un text filed para indicar el nuevo material o marca)
-        cbMaterial.getItems().addAll(listaMateriales);
-        cbMaterial.getItems().add("Otro");
+        // (en caso de seleccionar 'Otro' u 'Otra' en los combo box, aparece un text filed para indicar el nuevo material o marca)
         cbMaterial.setOnAction(e -> tfMaterialCustom.setVisible("Otro".equals(cbMaterial.getValue())));
 
-        cbMarca.getItems().addAll(listaMarcas);
-        cbMarca.getItems().add("Otra");
         cbMarca.setOnAction(e -> tfMarcaCustom.setVisible("Otra".equals(cbMarca.getValue())));
 
-        
+        // Fix para Windows: la ventana del color personalizado minimiza la ventana principal al cerrarse
+        cpColor.showingProperty().addListener((obs, wasShowing, isNowShowing) -> {
+            if (!isNowShowing) {
+                Platform.runLater(() -> ((Stage) cpColor.getScene().getWindow()).toFront());
+            }
+        });
+
         this.actualizarLista(null);
     }
 
-    private void rellenarListaMarcasYMateriales() {
-        // // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'rellenarListaMarcasYMateriales'");
+    public void setMsgErr(String msg) {
+        msgErr.setText(msg);
+    }
+
+    private void refrescarCBMaterialesYMarcas() {
+        cbMaterial.getItems().clear();
+        cbMarca.getItems().clear();
+
+        cbMaterial.getItems().addAll(listaMateriales);
+        cbMarca.getItems().addAll(listaMarcas);
+
+        cbMaterial.getItems().add("Otro");
+        cbMarca.getItems().add("Otra");
+    }
+
+    private void rellenarFicherosMarcasYMateriales() throws IOException {
+        marcasFile = new File("src/main/resources/files/marcas.dat");
+        materialesFile = new File("src/main/resources/files/materiales.dat");
+
+        // Si el fichero no existe creamos uno nuevo y asignamos los valores por defecto que viene en el arraylist 
+        // Si existe actializamos el arraylist
+        if (!marcasFile.exists()) {
+            marcasFile.createNewFile();
+            guardarMarcas();
+
+        } else {
+            actualizarListaMarcas();
+        }
+
+        // Si el fichero no existe creamos uno nuevo y asignamos los valores por defecto que viene en el arraylist
+        // Si existe actializamos el arraylist
+        if (!materialesFile.exists()) {
+            materialesFile.createNewFile();
+            guardarMateriales();
+
+        } else {
+            actualizarListaMateriales();
+        }
+
+        refrescarCBMaterialesYMarcas();
+    }
+
+    private void actualizarListaMarcas() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(marcasFile))) {
+            listaMarcas.clear();
+
+            while (true) {
+                String marca = ois.readUTF();
+                listaMarcas.add(marca);
+            }
+
+        } catch (EOFException e) {
+            Collections.sort(listaMarcas);
+
+        } catch (IOException e) {
+            registrarError("Error al rellenar array marcas con lectura de fichero");
+        }
+    }
+
+    private void actualizarListaMateriales() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(materialesFile))) {
+            listaMateriales.clear();
+
+            while (true) {
+                String material = ois.readUTF();
+                listaMateriales.add(material);
+            }
+
+        } catch (EOFException e) {
+            Collections.sort(listaMateriales);
+
+        } catch (IOException e) {
+            registrarError("Error al rellenar array materiales con lectura de fichero");
+        }
+    }
+
+    private void guardarMarcas() {
+        try {
+            FileOutputStream fos = new FileOutputStream(marcasFile, true);
+
+            try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                listaMarcas.remove("Otra");
+                Collections.sort(listaMarcas);
+
+                for (String marca : listaMarcas) {
+                    oos.writeUTF(marca);
+                }
+            }
+
+        } catch (IOException e) {
+            registrarError("Error al escribir marca");
+        }
+    }
+
+    private void guardarMateriales() {
+        try {
+            FileOutputStream fos = new FileOutputStream(materialesFile, true);
+
+            try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                listaMateriales.remove("Otro");
+                Collections.sort(listaMateriales);
+
+                for (String material : listaMateriales) {
+                    oos.writeUTF(material);
+                }
+            }
+
+        } catch (IOException e) {
+            registrarError("Error al escribir material");
+        }
+    }
+
+    public void registrarError(String mensaje) {
+        try (FileWriter fw = new FileWriter(logErr, true)) {
+            fw.write("[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")) + "]" + "  " + mensaje + "\n");
+
+        } catch (IOException e) {
+            System.out.println("Error al escribir en logsErr.txt");
+        }
     }
 
     // METODOS PESTAÑA 1
@@ -268,5 +419,41 @@ public class Controlador {
         tfVelImp.clear();
 
         tfGrDispo.clear();
+    }
+
+    public void guardarMarca(String marca) {
+        try {
+            FileOutputStream fos = new FileOutputStream(marcasFile, true);
+
+            try (ObjectOutputStream oos = new MiObjectOutputStream(fos)) {
+                oos.writeUTF(marca);
+            }
+
+            listaMarcas.add(marca);
+            Collections.sort(listaMarcas);
+
+            refrescarCBMaterialesYMarcas();
+
+        } catch (IOException e) {
+            registrarError("Error al escribir marca");
+        }
+    }
+
+    public void guardarMaterial(String material) {
+        try {
+            FileOutputStream fos = new FileOutputStream(materialesFile, true);
+
+            try (ObjectOutputStream oos = new MiObjectOutputStream(fos)) {
+                oos.writeUTF(material);
+            }
+
+            listaMateriales.add(material);
+            Collections.sort(listaMateriales);
+
+            refrescarCBMaterialesYMarcas();
+
+        } catch (IOException e) {
+            registrarError("Error al escribir material");
+        }
     }
 }

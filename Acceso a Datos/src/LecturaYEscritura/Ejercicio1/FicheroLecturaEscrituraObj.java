@@ -53,8 +53,8 @@ public class FicheroLecturaEscrituraObj {
             ObjectOutputStream oos;
             FileOutputStream fos = new FileOutputStream(fichero,  true);
 
-            if (fichero.exists() && fichero.length() > 0) oos = new MiObjectOutputStream(fos);
-            else                                          oos = new ObjectOutputStream(fos);
+            if (fichero.exists() && fichero.length() > 0) oos = new MiObjectOutputStream(fos); // ya esta creado de antes
+            else                                          oos = new ObjectOutputStream(fos); // se hace de 0
 
             oos.writeObject(persona);
             oos.close();

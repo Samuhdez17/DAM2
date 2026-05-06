@@ -79,7 +79,7 @@ public class Pestania1 {
             ctrldr.mensajeBreve.setText("Filamento eliminado");
 
         } catch (IOException | InterruptedException e) {
-            System.out.println("Error al eliminar el amigo. " + e); // Logerr
+            ctrldr.registrarError("Error al eliminar el amigo. " + e); // Logerr
         }
     }
 
@@ -105,7 +105,7 @@ public class Pestania1 {
             case "Peso DES" -> {
                 ctrldr.tipoOrdenacion = "pesoMm";
             }
-            default -> System.out.println("SALTA DEFAULT"); // Logerr
+            default -> ctrldr.registrarError("SALTA DEFAULT"); // Logerr
         }
 
         actualizarLista();
