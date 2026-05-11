@@ -26,8 +26,6 @@ public class Pestania2 {
         String grDispo      = ctrldr.tfGrDispo.getText();
 
         // Verificaciones de campos rellenos
-
-        
         if (camposRellenos(marca, material, tempImp, tempCama, vel ,grDispo)) {
             if (camposValidos(tempImp, tempCama, vel ,grDispo)) { 
                 // Guardado de filamento
