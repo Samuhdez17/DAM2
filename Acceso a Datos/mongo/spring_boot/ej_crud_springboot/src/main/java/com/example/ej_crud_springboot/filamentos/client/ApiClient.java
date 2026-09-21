@@ -68,7 +68,7 @@ public class ApiClient {
 
     // DELETE - Borrar filamento
     public HttpResponse<String> borrarFilamento(String id) throws IOException, InterruptedException {
-        // Se le pide a la api que lo actualice
+        // Se le pide a la api que lo elimine
         HttpRequest peticion = HttpRequest.newBuilder()
         .uri(URI.create(urlBase + "/eliminar?id=" + id))
         .DELETE()

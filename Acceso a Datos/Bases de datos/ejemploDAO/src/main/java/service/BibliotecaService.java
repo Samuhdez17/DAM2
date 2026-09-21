@@ -1,11 +1,12 @@
 package service;
 
-import dao.LibroDAO;
-import model.Libro;
 import java.util.List;
 
+import dao.LibroDAO;
+import model.Libro;
+
 public class BibliotecaService {
-    private LibroDAO libroDAO;
+    private final LibroDAO libroDAO;
 
     public BibliotecaService(LibroDAO libroDAO) {
         this.libroDAO = libroDAO;

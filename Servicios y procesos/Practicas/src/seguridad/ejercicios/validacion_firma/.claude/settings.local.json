@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Test-Path \"$env:USERPROFILE\\\\.vscode\\\\extensions\"; Test-Path \"C:\\\\Users\\\\samuh\\\\.vscode\\\\extensions\")"
+    ]
+  }
+}

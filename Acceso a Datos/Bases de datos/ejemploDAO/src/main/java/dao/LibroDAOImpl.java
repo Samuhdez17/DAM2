@@ -1,17 +1,23 @@
 package dao;
 
-import model.Libro;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Libro;
 
 public class LibroDAOImpl implements LibroDAO {
 
     @Override
     public void addLibro(Libro libro) throws Exception {
         String sql = "INSERT INTO libro (titulo) VALUES (?)";
-        try (Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)
+        ) {
             ps.setString(1, libro.getTitulo());
             ps.executeUpdate();
 

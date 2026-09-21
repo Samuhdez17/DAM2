@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.example.validacion_firma.view",
+            "vmArgs": "--module-path C:/Users/samuh/Documents/javafx/javafx-sdk-25.0.3/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}

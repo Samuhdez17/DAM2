@@ -1,5 +1,7 @@
 package org.example.t4_e003cambioescena;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class Controller {
     @FXML
@@ -58,7 +58,7 @@ public class Controller {
         FXMLLoader fxmlLoader = null;
         Scene scene =  null;
 
-             if (escena == 1) fxmlLoader = new FXMLLoader(Application.class.getResource("scene2.fxml"));
+             if      (escena == 1) fxmlLoader = new FXMLLoader(Application.class.getResource("scene2.fxml"));
              else if (escena == 2) fxmlLoader = new FXMLLoader(Application.class.getResource("scene1.fxml"));
 
 

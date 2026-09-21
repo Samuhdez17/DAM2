@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.view.servidor.ControladorServidor">
+   <children>
+      <VBox alignment="CENTER" layoutX="-2.0" layoutY="-1.0" prefHeight="445.0" prefWidth="636.0" spacing="20.0">
+         <children>
+            <Label text="Indica mensaje para cliente:" />
+            <TextField fx:id="tfMensaje" prefHeight="25.0" prefWidth="603.0">
+               <VBox.margin>
+                  <Insets left="11.0" right="11.0" />
+               </VBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#enviarMensaje" text="Enviar" />
+         </children>
+      </VBox>
+   </children>
+</Pane>

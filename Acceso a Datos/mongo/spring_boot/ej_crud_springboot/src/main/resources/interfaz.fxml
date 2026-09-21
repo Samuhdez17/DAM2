@@ -70,7 +70,7 @@
       </content>
     </Tab>
 
-    <Tab fx:id="pestaniaAgregar" text="➕ Agregar filamento">
+    <Tab fx:id="pestaniaAgregar" onSelectionChanged="#limpiarCampos" text="➕ Agregar filamento">
       <content>
         <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" style="-fx-background-color: #1e1e2e; -fx-background: #1e1e2e;">
           <content>

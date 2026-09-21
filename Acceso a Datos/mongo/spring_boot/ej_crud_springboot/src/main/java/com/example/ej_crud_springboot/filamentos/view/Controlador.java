@@ -404,6 +404,15 @@ public class Controlador {
         pest2.guardarFilamento();
     }
 
+    @FXML
+    void limpiarCampos() {
+        if (!pestaniaAgregar.isSelected()) {
+            borrarDatos();
+            editando = false;
+            filamentoEditando = null;
+        }
+    }
+    
     // METODOS COMUNES DE LAS PESTAÑAS
     public void borrarDatos() {
         cbMaterial.setValue("");
